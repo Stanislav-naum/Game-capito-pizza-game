@@ -1,0 +1,8811 @@
+<div id="capito-pizza-cut">
+
+
+
+<style>
+
+html,body{
+
+  margin:0!important;
+
+  padding:0!important;
+
+  width:100%!important;
+
+  max-width:100%!important;
+
+  overflow-x:hidden!important;
+
+  background:#fff!important;
+
+  -webkit-text-size-adjust:100%;
+
+}
+
+
+
+#capito-pizza-cut{
+
+  --blue:#1655d8;
+
+  --ink:#111;
+
+  font-family:Arial,Helvetica,sans-serif;
+
+  color:var(--ink);
+
+  width:100%;
+
+  max-width:480px;
+
+  min-height:100vh;
+
+  min-height:100dvh;
+
+  margin:0 auto;
+
+  padding:max(8px,env(safe-area-inset-top)) 10px max(28px,env(safe-area-inset-bottom));
+
+  box-sizing:border-box;
+
+  overflow-x:hidden;
+
+  overscroll-behavior:none;
+
+  -webkit-tap-highlight-color:transparent;
+
+  position:relative;
+
+}
+
+
+
+#capito-pizza-cut *{box-sizing:border-box}
+
+
+
+#cp-mobile-app{display:none;width:100%}
+
+#cp-desktop-block{display:none}
+
+.cp-screen{display:none}
+
+
+
+.cp-screen.active{
+
+  display:block;
+
+  animation:cpScreenIn .34s cubic-bezier(.2,.8,.2,1);
+
+}
+
+
+
+#cp-game.active,
+
+#cp-result.active,
+
+#cp-final.active{
+
+  min-height:calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 20px);
+
+}
+
+
+
+.cp-desktop-inner{
+
+  min-height:70vh;
+
+  display:flex;
+
+  flex-direction:column;
+
+  align-items:center;
+
+  justify-content:center;
+
+  text-align:center;
+
+  padding:35px 20px;
+
+}
+
+
+
+.cp-desktop-brand{
+
+  font-size:11px;
+
+  font-weight:700;
+
+  letter-spacing:2.5px;
+
+  margin-bottom:17px;
+
+}
+
+
+
+.cp-desktop-title{
+
+  font-size:34px;
+
+  line-height:.98;
+
+  font-weight:900;
+
+  letter-spacing:-1.2px;
+
+  margin-bottom:17px;
+
+}
+
+
+
+.cp-desktop-text{
+
+  font-size:15px;
+
+  line-height:1.45;
+
+  max-width:380px;
+
+}
+
+
+
+.cp-brand{
+
+  text-align:center;
+
+  font-size:10px;
+
+  font-weight:700;
+
+  letter-spacing:2.5px;
+
+  margin:2px 0 7px;
+
+}
+
+
+
+.cp-title{
+
+  text-align:center;
+
+  font-size:29px;
+
+  line-height:.98;
+
+  font-weight:900;
+
+  letter-spacing:-1.2px;
+
+  margin:0 0 11px;
+
+}
+
+
+
+.cp-subtitle{
+
+  text-align:center;
+
+  font-size:16px;
+
+  line-height:1.28;
+
+  font-weight:700;
+
+  margin:0 auto 12px;
+
+  max-width:430px;
+
+}
+
+
+
+.cp-description{
+
+  text-align:center;
+
+  font-size:13px;
+
+  line-height:1.4;
+
+  margin:0 auto 15px;
+
+  max-width:420px;
+
+}
+
+
+
+.cp-prizes{
+
+  display:grid;
+
+  grid-template-columns:repeat(3,1fr);
+
+  gap:6px;
+
+  margin:14px 0 17px;
+
+}
+
+
+
+.cp-prize{
+
+  border:2px solid #111;
+
+  border-radius:13px;
+
+  padding:10px 3px 9px;
+
+  text-align:center;
+
+  min-height:72px;
+
+  background:#fff;
+
+}
+
+
+
+.cp-prize.first{
+
+  background:#111;
+
+  color:#fff;
+
+}
+
+
+
+.cp-prize-place{
+
+  font-size:10px;
+
+  font-weight:900;
+
+  letter-spacing:.7px;
+
+  margin-bottom:6px;
+
+}
+
+
+
+.cp-prize-name{
+
+  font-size:13px;
+
+  font-weight:900;
+
+  line-height:1.1;
+
+}
+
+
+
+.cp-form{
+
+  width:100%;
+
+  max-width:440px;
+
+  margin:0 auto;
+
+}
+
+
+
+.cp-label{
+
+  display:block;
+
+  font-size:11px;
+
+  font-weight:900;
+
+  margin:0 0 5px;
+
+}
+
+
+
+.cp-input{
+
+  width:100%;
+
+  height:49px;
+
+  border:2px solid #111;
+
+  border-radius:11px;
+
+  padding:0 13px;
+
+  font-size:16px!important;
+
+  background:#fff;
+
+  color:#111;
+
+  outline:none;
+
+  margin-bottom:11px;
+
+  -webkit-appearance:none;
+
+  appearance:none;
+
+}
+
+
+
+.cp-input:focus{
+
+  border-color:var(--blue);
+
+  box-shadow:0 0 0 3px rgba(22,85,216,.09);
+
+}
+
+
+
+.cp-consent{
+
+  display:flex;
+
+  gap:9px;
+
+  align-items:flex-start;
+
+  font-size:11px;
+
+  line-height:1.32;
+
+  margin:2px 0 14px;
+
+}
+
+
+
+.cp-consent input{
+
+  width:19px;
+
+  height:19px;
+
+  flex:0 0 19px;
+
+  margin:0;
+
+}
+
+
+
+.cp-btn{
+
+  width:100%;
+
+  min-height:56px;
+
+  border:2px solid #111;
+
+  border-radius:13px;
+
+  background:#111;
+
+  color:#fff;
+
+  font-size:14px;
+
+  font-weight:900;
+
+  cursor:pointer;
+
+  padding:11px 12px;
+
+  touch-action:manipulation;
+
+  -webkit-appearance:none;
+
+  appearance:none;
+
+  transition:transform .12s ease,opacity .12s ease,box-shadow .18s ease;
+
+}
+
+
+
+.cp-btn:active{transform:scale(.975)}
+
+
+
+.cp-btn.secondary{
+
+  background:#fff;
+
+  color:#111;
+
+}
+
+
+
+.cp-btn.blue{
+
+  background:var(--blue);
+
+  border-color:var(--blue);
+
+  box-shadow:0 7px 18px rgba(22,85,216,.16);
+
+}
+
+
+
+.cp-btn:disabled{
+
+  opacity:.45;
+
+  cursor:default;
+
+}
+
+
+
+.cp-error{
+
+  display:none;
+
+  text-align:center;
+
+  color:#b00020;
+
+  font-size:12px;
+
+  font-weight:700;
+
+  margin:9px 0;
+
+}
+
+
+
+
+
+/* GAME */
+
+
+
+.cp-game-head{
+
+  text-align:center;
+
+  margin-bottom:8px;
+
+}
+
+
+
+.cp-game-instruction{
+
+  font-size:18px;
+
+  line-height:1.2;
+
+  font-weight:900;
+
+  margin:0 0 4px;
+
+}
+
+
+
+.cp-game-status{
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  gap:10px;
+
+  min-height:29px;
+
+}
+
+
+
+.cp-cut-counter{
+
+  font-size:12px;
+
+  opacity:.65;
+
+  font-weight:700;
+
+  letter-spacing:.4px;
+
+}
+
+
+
+.cp-cut-counter.cp-pulse{
+
+  animation:cpCounterPulse .25s ease;
+
+}
+
+
+
+.cp-timer{
+
+  min-width:69px;
+
+  padding:5px 8px;
+
+  border:2px solid #111;
+
+  border-radius:100px;
+
+  font-size:13px;
+
+  line-height:1;
+
+  font-weight:900;
+
+  background:#fff;
+
+  transition:background .18s ease,color .18s ease,border-color .18s ease,transform .18s ease;
+
+}
+
+
+
+.cp-timer.running{
+
+  border-color:var(--blue);
+
+  color:var(--blue);
+
+}
+
+
+
+.cp-timer.warning{
+
+  background:#111;
+
+  color:#fff;
+
+  border-color:#111;
+
+  animation:cpTimerWarning .55s infinite alternate;
+
+}
+
+
+
+.cp-timer.done{
+
+  background:var(--blue);
+
+  color:#fff;
+
+  border-color:var(--blue);
+
+}
+
+
+
+#cp-board{
+
+  position:relative;
+
+  width:100%;
+
+  overflow:hidden;
+
+  border-radius:14px;
+
+  user-select:none;
+
+  -webkit-user-select:none;
+
+  touch-action:none;
+
+  background:#eee;
+
+  box-shadow:0 6px 22px rgba(0,0,0,.07);
+
+  transition:transform .18s ease;
+
+}
+
+
+
+#cp-board.cp-cut-touch{transform:scale(.997)}
+
+#cp-board.cp-perfect-board{animation:cpPerfectBoard .55s ease}
+
+
+
+#cp-pizza-image{
+
+  display:block;
+
+  width:100%;
+
+  height:auto;
+
+  pointer-events:none;
+
+  user-select:none;
+
+  -webkit-user-select:none;
+
+  -webkit-user-drag:none;
+
+}
+
+
+
+#cp-canvas{
+
+  position:absolute;
+
+  inset:0;
+
+  width:100%;
+
+  height:100%;
+
+  touch-action:none;
+
+}
+
+
+
+#cp-piece-count{
+
+  position:absolute;
+
+  left:50%;
+
+  top:50%;
+
+  transform:translate(-50%,-50%) scale(.65);
+
+  z-index:10;
+
+  display:none;
+
+  align-items:center;
+
+  justify-content:center;
+
+  min-width:112px;
+
+  height:76px;
+
+  padding:0 18px;
+
+  border-radius:20px;
+
+  background:rgba(17,17,17,.9);
+
+  color:#fff;
+
+  font-size:43px;
+
+  line-height:1;
+
+  font-weight:900;
+
+  letter-spacing:-2px;
+
+  pointer-events:none;
+
+  opacity:0;
+
+  box-shadow:0 12px 35px rgba(0,0,0,.22);
+
+}
+
+
+
+#cp-piece-count.show{
+
+  display:flex;
+
+  animation:cpPiecePop .38s cubic-bezier(.2,.9,.25,1.25) forwards;
+
+}
+
+
+
+#cp-piece-count.perfect{
+
+  background:var(--blue);
+
+  box-shadow:0 10px 30px rgba(22,85,216,.35),0 0 0 7px rgba(22,85,216,.10);
+
+}
+
+
+
+.cp-timeout-overlay{
+
+  position:absolute;
+
+  inset:0;
+
+  z-index:20;
+
+  display:none;
+
+  align-items:center;
+
+  justify-content:center;
+
+  flex-direction:column;
+
+  text-align:center;
+
+  padding:20px;
+
+  background:rgba(17,17,17,.88);
+
+  color:#fff;
+
+  pointer-events:none;
+
+}
+
+
+
+.cp-timeout-overlay.show{
+
+  display:flex;
+
+  animation:cpScreenIn .25s ease;
+
+}
+
+
+
+.cp-timeout-big{
+
+  font-size:32px;
+
+  line-height:.95;
+
+  font-weight:900;
+
+  letter-spacing:-1px;
+
+  margin-bottom:9px;
+
+}
+
+
+
+.cp-timeout-small{
+
+  font-size:13px;
+
+  line-height:1.35;
+
+  max-width:260px;
+
+}
+
+
+
+.cp-tip{
+
+  text-align:center;
+
+  font-size:11px;
+
+  line-height:1.3;
+
+  opacity:.62;
+
+  margin:8px auto 0;
+
+  max-width:390px;
+
+}
+
+
+
+
+
+/* RESULT */
+
+
+
+#cp-result.active{padding-top:14px}
+
+
+
+#cp-result .cp-brand{
+
+  display:block;
+
+  text-align:center;
+
+  font-size:10px;
+
+  line-height:1.2;
+
+  font-weight:700;
+
+  letter-spacing:2.5px;
+
+  margin:0 0 7px;
+
+}
+
+
+
+.cp-result-card{text-align:center;padding:0}
+
+
+
+.cp-result-label{
+
+  display:block;
+
+  font-size:11px;
+
+  line-height:1.2;
+
+  font-weight:900;
+
+  letter-spacing:2px;
+
+  margin:0 0 4px;
+
+  text-align:center;
+
+}
+
+
+
+.cp-score{
+
+  font-size:58px;
+
+  line-height:1;
+
+  font-weight:900;
+
+  letter-spacing:-4px;
+
+  margin:2px 0 5px;
+
+  transform-origin:center;
+
+}
+
+
+
+.cp-result-time{
+
+  font-size:14px;
+
+  line-height:1.2;
+
+  font-weight:900;
+
+  letter-spacing:1.1px;
+
+  margin:0 0 8px;
+
+}
+
+
+
+.cp-best-result{
+
+  display:none;
+
+  width:max-content;
+
+  max-width:100%;
+
+  margin:0 auto 9px;
+
+  padding:6px 11px;
+
+  border:1.5px solid #111;
+
+  border-radius:100px;
+
+  font-size:10px;
+
+  line-height:1.1;
+
+  font-weight:900;
+
+  letter-spacing:.7px;
+
+  background:#fff;
+
+}
+
+
+
+.cp-best-result.show{
+
+  display:block;
+
+  animation:cpPop .3s ease-out;
+
+}
+
+
+
+.cp-score.cp-score-finish{animation:cpScoreFinish .48s cubic-bezier(.2,.9,.2,1)}
+
+.cp-score.cp-score-great{animation:cpScoreGreat .65s cubic-bezier(.2,.9,.2,1)}
+
+
+
+.cp-score.cp-score-warrior{
+
+  animation:cpWarriorScore .8s cubic-bezier(.2,.9,.2,1);
+
+}
+
+
+
+.cp-score.cp-score-perfect{
+
+  animation:cpPerfectScore 1s cubic-bezier(.2,.9,.2,1);
+
+}
+
+
+
+.cp-record{
+
+  display:none;
+
+  width:max-content;
+
+  max-width:100%;
+
+  margin:0 auto 9px;
+
+  padding:6px 11px;
+
+  border-radius:100px;
+
+  background:#111;
+
+  color:#fff;
+
+  font-size:10px;
+
+  font-weight:900;
+
+  letter-spacing:1px;
+
+}
+
+
+
+.cp-record.show{
+
+  display:block;
+
+  animation:cpPop .35s ease-out;
+
+}
+
+
+
+.cp-result-message{
+
+  font-size:18px;
+
+  font-weight:900;
+
+  line-height:1.2;
+
+  margin:0 auto 7px;
+
+  max-width:430px;
+
+}
+
+
+
+.cp-result-message.warrior{
+
+  font-size:25px;
+
+  line-height:1;
+
+  letter-spacing:-.7px;
+
+}
+
+
+
+.cp-result-message.perfect{
+
+  font-size:27px;
+
+  line-height:.98;
+
+  color:var(--blue);
+
+  letter-spacing:-1px;
+
+}
+
+
+
+.cp-competition{
+
+  min-height:40px;
+
+  font-size:14px;
+
+  line-height:1.3;
+
+  font-weight:700;
+
+  margin:0 auto 13px;
+
+  max-width:430px;
+
+}
+
+
+
+.cp-top-result{
+
+  font-size:18px;
+
+  font-weight:900;
+
+  animation:cpPop .35s ease-out;
+
+}
+
+
+
+.cp-result-actions{
+
+  display:grid;
+
+  grid-template-columns:1fr;
+
+  gap:7px;
+
+  margin:12px 0 17px;
+
+}
+
+
+
+.cp-final-box{
+
+  border:2px solid #111;
+
+  border-radius:15px;
+
+  padding:16px 12px;
+
+  text-align:center;
+
+  margin:13px 0 17px;
+
+  animation:cpFinalBox .45s cubic-bezier(.2,.8,.2,1);
+
+}
+
+
+
+.cp-final-big{
+
+  font-size:21px;
+
+  line-height:1.2;
+
+  font-weight:900;
+
+  margin-bottom:6px;
+
+}
+
+
+
+.cp-final-small{
+
+  font-size:12px;
+
+  line-height:1.35;
+
+}
+
+
+
+.cp-telegram-box{
+
+  margin:14px 0 18px;
+
+  padding:17px 13px;
+
+  border:2px solid #111;
+
+  border-radius:15px;
+
+  text-align:center;
+
+  background:#fff;
+
+}
+
+
+
+.cp-telegram-title{
+
+  font-size:17px;
+
+  line-height:1.15;
+
+  font-weight:900;
+
+  margin-bottom:7px;
+
+}
+
+
+
+.cp-telegram-text{
+
+  font-size:11px;
+
+  line-height:1.4;
+
+  opacity:.68;
+
+  margin:0 auto 12px;
+
+  max-width:390px;
+
+}
+
+
+
+.cp-telegram-status{
+
+  display:none;
+
+  margin-top:10px;
+
+  font-size:11px;
+
+  line-height:1.35;
+
+  font-weight:700;
+
+}
+
+
+
+.cp-telegram-status.show{display:block}
+
+
+
+.cp-telegram-btn{
+
+  background:var(--blue);
+
+  border-color:var(--blue);
+
+}
+
+
+
+.cp-leaderboard-title{
+
+  text-align:center;
+
+  font-size:23px;
+
+  font-weight:900;
+
+  letter-spacing:-.7px;
+
+  margin:20px 0 5px;
+
+}
+
+
+
+.cp-leaderboard-note{
+
+  text-align:center;
+
+  font-size:10px;
+
+  opacity:.62;
+
+  margin-bottom:11px;
+
+}
+
+
+
+.cp-leaderboard{border-top:2px solid #111}
+
+
+
+.cp-row{
+
+  display:grid;
+
+  grid-template-columns:35px 1fr 112px;
+
+  gap:7px;
+
+  align-items:center;
+
+  min-height:44px;
+
+  border-bottom:1px solid #ddd;
+
+  font-size:13px;
+
+}
+
+
+
+.cp-place{font-weight:900;text-align:center}
+
+
+
+.cp-name{
+
+  font-weight:700;
+
+  overflow:hidden;
+
+  text-overflow:ellipsis;
+
+  white-space:nowrap;
+
+}
+
+
+
+.cp-row-score{
+
+  text-align:right;
+
+  font-weight:900;
+
+  font-size:12px;
+
+}
+
+
+
+.cp-row-time{
+
+  display:block;
+
+  font-size:9px;
+
+  line-height:1.1;
+
+  opacity:.55;
+
+  margin-top:2px;
+
+}
+
+
+
+.cp-empty{
+
+  text-align:center;
+
+  padding:18px 8px;
+
+  font-size:13px;
+
+  opacity:.65;
+
+}
+
+
+
+
+
+/* CONFETTI */
+
+
+
+#cp-confetti{
+
+  position:fixed;
+
+  inset:0;
+
+  z-index:99999;
+
+  pointer-events:none;
+
+  overflow:hidden;
+
+  display:none;
+
+}
+
+
+
+#cp-confetti.show{display:block}
+
+
+
+.cp-confetti-piece{
+
+  position:absolute;
+
+  top:-20px;
+
+  width:9px;
+
+  height:16px;
+
+  border-radius:2px;
+
+  animation:cpConfettiFall linear forwards;
+
+}
+
+
+
+
+
+/* REGISTER */
+
+
+
+#cp-register.active{
+
+  min-height:auto;
+
+  padding-top:0;
+
+  padding-bottom:18px;
+
+}
+
+
+
+#cp-register .cp-brand{
+
+  margin:0 0 5px;
+
+  font-size:9px;
+
+  letter-spacing:2.2px;
+
+}
+
+
+
+#cp-register .cp-title{
+
+  font-size:27px;
+
+  line-height:.94;
+
+  letter-spacing:-1px;
+
+  margin:0 0 9px;
+
+}
+
+
+
+#cp-register .cp-subtitle{
+
+  font-size:15px;
+
+  line-height:1.2;
+
+  margin:0 auto 8px;
+
+}
+
+
+
+#cp-register .cp-description{
+
+  font-size:12px;
+
+  line-height:1.3;
+
+  margin:0 auto 10px;
+
+}
+
+
+
+#cp-register .cp-prizes{
+
+  gap:6px;
+
+  margin:9px 0 11px;
+
+}
+
+
+
+#cp-register .cp-prize{
+
+  min-height:61px;
+
+  padding:7px 3px 6px;
+
+  border-radius:12px;
+
+}
+
+
+
+#cp-register .cp-prize-place{
+
+  font-size:9px;
+
+  margin-bottom:4px;
+
+}
+
+
+
+#cp-register .cp-prize-name{font-size:12px}
+
+
+
+#cp-register .cp-label{
+
+  font-size:10px;
+
+  margin-bottom:4px;
+
+}
+
+
+
+#cp-register .cp-input{
+
+  height:45px;
+
+  margin-bottom:8px;
+
+}
+
+
+
+#cp-register .cp-consent{
+
+  gap:8px;
+
+  margin:1px 0 10px;
+
+  font-size:10px;
+
+  line-height:1.23;
+
+}
+
+
+
+#cp-register .cp-consent input{
+
+  width:18px;
+
+  height:18px;
+
+  flex:0 0 18px;
+
+}
+
+
+
+#cp-register #cp-start{min-height:52px}
+
+
+
+
+
+/* ANIMATIONS */
+
+
+
+@keyframes cpScreenIn{
+
+  from{opacity:0;transform:translateY(7px)}
+
+  to{opacity:1;transform:translateY(0)}
+
+}
+
+
+
+@keyframes cpPop{
+
+  0%{transform:scale(.88);opacity:0}
+
+  70%{transform:scale(1.04);opacity:1}
+
+  100%{transform:scale(1);opacity:1}
+
+}
+
+
+
+@keyframes cpPiecePop{
+
+  0%{transform:translate(-50%,-50%) scale(.55);opacity:0}
+
+  65%{transform:translate(-50%,-50%) scale(1.08);opacity:1}
+
+  100%{transform:translate(-50%,-50%) scale(1);opacity:1}
+
+}
+
+
+
+@keyframes cpCounterPulse{
+
+  0%{transform:scale(1)}
+
+  50%{transform:scale(1.12)}
+
+  100%{transform:scale(1)}
+
+}
+
+
+
+@keyframes cpPerfectBoard{
+
+  0%{transform:scale(1)}
+
+  40%{transform:scale(.985)}
+
+  72%{transform:scale(1.008)}
+
+  100%{transform:scale(1)}
+
+}
+
+
+
+@keyframes cpScoreFinish{
+
+  0%{transform:scale(.94)}
+
+  65%{transform:scale(1.055)}
+
+  100%{transform:scale(1)}
+
+}
+
+
+
+@keyframes cpScoreGreat{
+
+  0%{transform:scale(.93)}
+
+  45%{transform:scale(1.075)}
+
+  70%{transform:scale(.99)}
+
+  100%{transform:scale(1)}
+
+}
+
+
+
+@keyframes cpWarriorScore{
+
+  0%{transform:scale(.85)}
+
+  35%{transform:scale(1.12)}
+
+  55%{transform:rotate(-2deg) scale(1.03)}
+
+  72%{transform:rotate(2deg) scale(1.05)}
+
+  100%{transform:rotate(0) scale(1)}
+
+}
+
+
+
+@keyframes cpPerfectScore{
+
+  0%{transform:scale(.75);opacity:.3}
+
+  35%{transform:scale(1.16)}
+
+  55%{transform:scale(.98)}
+
+  72%{transform:scale(1.08)}
+
+  100%{transform:scale(1);opacity:1}
+
+}
+
+
+
+@keyframes cpFinalBox{
+
+  from{opacity:0;transform:translateY(12px) scale(.98)}
+
+  to{opacity:1;transform:translateY(0) scale(1)}
+
+}
+
+
+
+@keyframes cpTimerWarning{
+
+  from{transform:scale(1)}
+
+  to{transform:scale(1.06)}
+
+}
+
+
+
+@keyframes cpConfettiFall{
+
+  0%{
+
+    transform:translate3d(0,-20px,0) rotate(0deg);
+
+    opacity:1;
+
+  }
+
+  100%{
+
+    transform:translate3d(var(--drift),110vh,0) rotate(var(--spin));
+
+    opacity:.15;
+
+  }
+
+}
+
+
+
+@media(max-width:390px){
+
+  #capito-pizza-cut{padding-left:9px;padding-right:9px}
+
+  #cp-register .cp-title{font-size:25px}
+
+  #cp-register .cp-subtitle{font-size:14px}
+
+  #cp-register .cp-description{font-size:11px}
+
+  #cp-result .cp-score{font-size:54px}
+
+}
+
+
+
+@media(max-width:360px){
+
+  #capito-pizza-cut{padding-left:7px;padding-right:7px}
+
+  #cp-register .cp-title{font-size:24px}
+
+  .cp-prize-name{font-size:12px}
+
+  #cp-piece-count{font-size:38px;min-width:102px;height:70px}
+
+  .cp-row{grid-template-columns:31px 1fr 100px}
+
+}
+
+
+
+@media(max-height:700px){
+
+  #cp-register .cp-title{font-size:24px;margin-bottom:6px}
+
+  #cp-register .cp-subtitle{margin-bottom:6px}
+
+  #cp-register .cp-description{margin-bottom:7px}
+
+  #cp-register .cp-prizes{margin-top:7px;margin-bottom:8px}
+
+  #cp-register .cp-prize{min-height:57px}
+
+}
+
+</style>
+
+
+
+
+
+<div id="cp-desktop-block">
+
+  <div class="cp-desktop-inner">
+
+    <div class="cp-desktop-brand">CAPITO / PIZZA CUT</div>
+
+    <div class="cp-desktop-title">ИГРАЙ<br>С ТЕЛЕФОНА</div>
+
+    <div class="cp-desktop-text">
+
+      PIZZA CUT создана для игры пальцем.<br>
+
+      Открой эту страницу на iPhone или Android.
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+
+
+<div id="cp-mobile-app">
+
+
+
+<div id="cp-register" class="cp-screen active">
+
+
+
+  <div class="cp-brand">CAPITO / PIZZA CUT</div>
+
+
+
+  <div class="cp-title">
+
+    РАЗРЕЖЬ.<br>
+
+    ПОПАДИ В TOP-3.<br>
+
+    ЗАБЕРИ ПРИЗ.
+
+  </div>
+
+
+
+  <div class="cp-subtitle">
+
+    Раздели пиццу на 6 равных частей всего тремя разрезами.
+
+  </div>
+
+
+
+  <div class="cp-description">
+
+    У тебя 10 секунд с первого касания.
+
+    Тренируйся сколько хочешь, а лучший результат
+
+    зафиксируй в недельном рейтинге.
+
+  </div>
+
+
+
+  <div class="cp-prizes">
+
+    <div class="cp-prize first">
+
+      <div class="cp-prize-place">1 МЕСТО</div>
+
+      <div class="cp-prize-name">ПИЦЦА</div>
+
+    </div>
+
+    <div class="cp-prize">
+
+      <div class="cp-prize-place">2 МЕСТО</div>
+
+      <div class="cp-prize-name">ДЕСЕРТ</div>
+
+    </div>
+
+    <div class="cp-prize">
+
+      <div class="cp-prize-place">3 МЕСТО</div>
+
+      <div class="cp-prize-name">КОФЕ</div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="cp-form">
+
+
+
+    <label class="cp-label" for="cp-name">ИМЯ ИЛИ НИК</label>
+
+    <input id="cp-name" class="cp-input" type="text" maxlength="30" autocomplete="name" placeholder="Например, Маша">
+
+
+
+    <label class="cp-label" for="cp-phone">ТЕЛЕФОН</label>
+
+    <input id="cp-phone" class="cp-input" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 999 123-45-67">
+
+
+
+    <label class="cp-consent">
+
+      <input id="cp-consent" type="checkbox">
+
+      <span>
+
+        Согласен на обработку данных для участия в игре и определения победителей.
+
+        Телефон в рейтинге не отображается.
+
+      </span>
+
+    </label>
+
+
+
+    <button id="cp-start" class="cp-btn blue" type="button">
+
+      НАЧАТЬ ИГРУ
+
+    </button>
+
+
+
+    <div id="cp-register-error" class="cp-error"></div>
+
+
+
+  </div>
+
+</div>
+
+
+
+
+
+<div id="cp-game" class="cp-screen">
+
+
+
+  <div class="cp-brand">CAPITO / PIZZA CUT</div>
+
+
+
+  <div class="cp-game-head">
+
+
+
+    <div class="cp-game-instruction">
+
+      Сделай 3 разреза за 10 секунд
+
+    </div>
+
+
+
+    <div class="cp-game-status">
+
+
+
+      <div id="cp-cut-counter" class="cp-cut-counter">
+
+        РАЗРЕЗ 1 ИЗ 3
+
+      </div>
+
+
+
+      <div id="cp-timer" class="cp-timer">
+
+        10.0 С
+
+      </div>
+
+
+
+    </div>
+
+
+
+  </div>
+
+
+
+  <div id="cp-board">
+
+
+
+    <img id="cp-pizza-image"
+
+      src="https://static.tildacdn.com/tild3465-3835-4563-b339-343536626232/6CDC1949-7BCC-4243-B.png"
+
+      alt="Пицца Capito">
+
+
+
+    <canvas id="cp-canvas"></canvas>
+
+
+
+    <div id="cp-piece-count">6/6</div>
+
+
+
+    <div id="cp-timeout-overlay" class="cp-timeout-overlay">
+
+      <div class="cp-timeout-big">ВРЕМЯ<br>ВЫШЛО</div>
+
+      <div class="cp-timeout-small">
+
+        Нужно успеть сделать все 3 разреза за 10 секунд.
+
+      </div>
+
+    </div>
+
+
+
+  </div>
+
+
+
+  <div class="cp-tip">
+
+    Таймер запустится с первого касания пиццы.
+
+  </div>
+
+
+
+</div>
+
+
+
+
+
+<div id="cp-result" class="cp-screen">
+
+
+
+  <div class="cp-brand">CAPITO / PIZZA CUT</div>
+
+
+
+  <div class="cp-result-card">
+
+
+
+    <div class="cp-result-label">ТВОЙ РЕЗУЛЬТАТ</div>
+
+
+
+    <div id="cp-score" class="cp-score">
+
+      0.0%
+
+    </div>
+
+
+
+    <div id="cp-result-time" class="cp-result-time">
+
+      ВРЕМЯ 0.00 СЕК
+
+    </div>
+
+
+
+    <div id="cp-record" class="cp-record">
+
+      🔥 НОВЫЙ ЛИЧНЫЙ РЕКОРД
+
+    </div>
+
+
+
+    <div id="cp-best-result" class="cp-best-result"></div>
+
+
+
+    <div id="cp-result-message" class="cp-result-message"></div>
+
+    <div id="cp-competition" class="cp-competition"></div>
+
+
+
+  </div>
+
+
+
+  <div id="cp-result-actions" class="cp-result-actions">
+
+
+
+    <button id="cp-again" class="cp-btn secondary" type="button">
+
+      ЕЩЁ ПОПЫТКА
+
+    </button>
+
+
+
+    <button id="cp-lock" class="cp-btn blue" type="button">
+
+      ЗАФИКСИРОВАТЬ РЕЗУЛЬТАТ
+
+    </button>
+
+
+
+  </div>
+
+
+
+  <div id="cp-lock-error" class="cp-error"></div>
+
+
+
+  <div class="cp-prizes">
+
+
+
+    <div class="cp-prize first">
+
+      <div class="cp-prize-place">1 МЕСТО</div>
+
+      <div class="cp-prize-name">ПИЦЦА</div>
+
+    </div>
+
+
+
+    <div class="cp-prize">
+
+      <div class="cp-prize-place">2 МЕСТО</div>
+
+      <div class="cp-prize-name">ДЕСЕРТ</div>
+
+    </div>
+
+
+
+    <div class="cp-prize">
+
+      <div class="cp-prize-place">3 МЕСТО</div>
+
+      <div class="cp-prize-name">КОФЕ</div>
+
+    </div>
+
+
+
+  </div>
+
+
+
+  <div class="cp-leaderboard-title">
+
+    TOP-10 НЕДЕЛИ
+
+  </div>
+
+
+
+  <div class="cp-leaderboard-note">
+
+    При одинаковой точности выше тот, кто сделал разрезы быстрее
+
+  </div>
+
+
+
+  <div id="cp-leaderboard" class="cp-leaderboard"></div>
+
+
+
+</div>
+
+
+
+
+
+<div id="cp-final" class="cp-screen">
+
+
+
+  <div class="cp-brand">CAPITO / PIZZA CUT</div>
+
+
+
+  <div class="cp-title">
+
+    РЕЗУЛЬТАТ<br>
+
+    ЗАФИКСИРОВАН
+
+  </div>
+
+
+
+  <div class="cp-final-box">
+
+
+
+    <div id="cp-final-big" class="cp-final-big"></div>
+
+
+
+    <div class="cp-final-small">
+
+      Этот результат участвует в рейтинге текущей недели.
+
+      Новый официальный результат можно будет зафиксировать
+
+      на следующей неделе.
+
+    </div>
+
+
+
+  </div>
+
+
+
+  <div id="cp-telegram-box" class="cp-telegram-box">
+
+
+
+    <div class="cp-telegram-title">
+
+      УЗНАЙ, ЕСЛИ ПОПАДЁШЬ В TOP-3
+
+    </div>
+
+
+
+    <div class="cp-telegram-text">
+
+      Подключи Telegram. Если по итогам недели ты окажешься среди победителей,
+
+      Capito пришлёт сюда результат и персональную ссылку на приз.
+
+    </div>
+
+
+
+    <button id="cp-telegram" class="cp-btn cp-telegram-btn" type="button">
+
+      ✈ ПОДКЛЮЧИТЬ TELEGRAM
+
+    </button>
+
+
+
+    <div id="cp-telegram-status" class="cp-telegram-status"></div>
+
+
+
+  </div>
+
+
+
+  <div class="cp-prizes">
+
+
+
+    <div class="cp-prize first">
+
+      <div class="cp-prize-place">1 МЕСТО</div>
+
+      <div class="cp-prize-name">ПИЦЦА</div>
+
+    </div>
+
+
+
+    <div class="cp-prize">
+
+      <div class="cp-prize-place">2 МЕСТО</div>
+
+      <div class="cp-prize-name">ДЕСЕРТ</div>
+
+    </div>
+
+
+
+    <div class="cp-prize">
+
+      <div class="cp-prize-place">3 МЕСТО</div>
+
+      <div class="cp-prize-name">КОФЕ</div>
+
+    </div>
+
+
+
+  </div>
+
+
+
+  <div class="cp-leaderboard-title">
+
+    TOP-10 НЕДЕЛИ
+
+  </div>
+
+
+
+  <div id="cp-final-leaderboard" class="cp-leaderboard"></div>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+<div id="cp-confetti"></div>
+
+
+
+</div>
+
+
+
+
+
+<script>
+
+(function(){
+
+
+
+"use strict";
+
+
+
+
+
+/* ===== DEVICE ===== */
+
+
+
+function isMobileGameDevice(){
+
+
+
+  var ua=navigator.userAgent||"";
+
+
+
+  var isAndroid=/Android/i.test(ua);
+
+  var isiPhoneOrIPad=/iPhone|iPad|iPod/i.test(ua);
+
+
+
+  var isiPadDesktopMode=
+
+    navigator.platform==="MacIntel" &&
+
+    navigator.maxTouchPoints>1;
+
+
+
+  return isAndroid||isiPhoneOrIPad||isiPadDesktopMode;
+
+}
+
+
+
+
+
+var mobileApp=document.getElementById("cp-mobile-app");
+
+var desktopBlock=document.getElementById("cp-desktop-block");
+
+
+
+if(!isMobileGameDevice()){
+
+  mobileApp.style.display="none";
+
+  desktopBlock.style.display="block";
+
+  return;
+
+}
+
+
+
+desktopBlock.style.display="none";
+
+mobileApp.style.display="block";
+
+
+
+
+
+/* ===== HAPTICS ===== */
+
+
+
+function vibrate(pattern){
+
+  try{
+
+    if(navigator.vibrate){
+
+      navigator.vibrate(pattern);
+
+    }
+
+  }catch(e){}
+
+}
+
+
+
+function hapticTap(){vibrate(15)}
+
+function hapticCut(){vibrate(30)}
+
+function hapticThirdCut(){vibrate([35,35,45])}
+
+function hapticPerfect(){vibrate([45,45,75])}
+
+function hapticResult(){vibrate([25,35,25])}
+
+function hapticLock(){vibrate([35,40,55])}
+
+
+
+
+
+/* ===== SOUND ===== */
+
+
+
+var audioContext=null;
+
+var masterGain=null;
+
+var lastCutSoundTime=0;
+
+var lastCutVibrationTime=0;
+
+
+
+
+
+function initAudio(){
+
+
+
+  try{
+
+
+
+    if(!audioContext){
+
+
+
+      var AC=
+
+        window.AudioContext||
+
+        window.webkitAudioContext;
+
+
+
+      if(!AC){
+
+        return;
+
+      }
+
+
+
+      audioContext=new AC();
+
+
+
+      masterGain=audioContext.createGain();
+
+      masterGain.gain.value=1;
+
+      masterGain.connect(audioContext.destination);
+
+    }
+
+
+
+    if(audioContext.state==="suspended"){
+
+      audioContext.resume().catch(function(){});
+
+    }
+
+
+
+  }catch(e){}
+
+}
+
+
+
+
+
+function audioOutput(){
+
+
+
+  if(masterGain){
+
+    return masterGain;
+
+  }
+
+
+
+  if(audioContext){
+
+    return audioContext.destination;
+
+  }
+
+
+
+  return null;
+
+}
+
+
+
+
+
+function makeTone(frequency,duration,volume,type,delay){
+
+
+
+  if(!audioContext){
+
+    return;
+
+  }
+
+
+
+  try{
+
+
+
+    var output=audioOutput();
+
+
+
+    if(!output){
+
+      return;
+
+    }
+
+
+
+    var now=
+
+      audioContext.currentTime+
+
+      (delay||0);
+
+
+
+    var osc=audioContext.createOscillator();
+
+    var gain=audioContext.createGain();
+
+
+
+    osc.type=type||"sine";
+
+    osc.frequency.setValueAtTime(frequency,now);
+
+
+
+    gain.gain.setValueAtTime(.0001,now);
+
+
+
+    gain.gain.exponentialRampToValueAtTime(
+
+      Math.max(.0001,volume),
+
+      now+.005
+
+    );
+
+
+
+    gain.gain.exponentialRampToValueAtTime(
+
+      .0001,
+
+      now+duration
+
+    );
+
+
+
+    osc.connect(gain);
+
+    gain.connect(output);
+
+
+
+    osc.start(now);
+
+    osc.stop(now+duration+.04);
+
+
+
+  }catch(e){}
+
+}
+
+
+
+
+
+function soundCutMovement(speed){
+
+
+
+  if(!audioContext){
+
+    return;
+
+  }
+
+
+
+  var nowMs=Date.now();
+
+
+
+  if(nowMs-lastCutSoundTime<32){
+
+    return;
+
+  }
+
+
+
+  lastCutSoundTime=nowMs;
+
+
+
+  var speedFactor=
+
+    Math.min(
+
+      1,
+
+      Math.max(.2,speed/14)
+
+    );
+
+
+
+  try{
+
+
+
+    var output=audioOutput();
+
+
+
+    if(!output){
+
+      return;
+
+    }
+
+
+
+    var now=audioContext.currentTime;
+
+
+
+    var osc=audioContext.createOscillator();
+
+    var gain=audioContext.createGain();
+
+    var filter=audioContext.createBiquadFilter();
+
+
+
+    osc.type="sawtooth";
+
+    osc.frequency.setValueAtTime(120+speedFactor*100,now);
+
+
+
+    filter.type="bandpass";
+
+    filter.frequency.setValueAtTime(650+speedFactor*850,now);
+
+    filter.Q.setValueAtTime(1.1,now);
+
+
+
+    gain.gain.setValueAtTime(.0001,now);
+
+    gain.gain.exponentialRampToValueAtTime(.09+speedFactor*.06,now+.003);
+
+    gain.gain.exponentialRampToValueAtTime(.0001,now+.052);
+
+
+
+    osc.connect(filter);
+
+    filter.connect(gain);
+
+    gain.connect(output);
+
+
+
+    osc.start(now);
+
+    osc.stop(now+.06);
+
+
+
+
+
+    var crunch=audioContext.createOscillator();
+
+    var crunchGain=audioContext.createGain();
+
+
+
+    crunch.type="square";
+
+    crunch.frequency.setValueAtTime(900+speedFactor*650,now);
+
+
+
+    crunchGain.gain.setValueAtTime(.0001,now);
+
+    crunchGain.gain.exponentialRampToValueAtTime(.04+speedFactor*.035,now+.002);
+
+    crunchGain.gain.exponentialRampToValueAtTime(.0001,now+.025);
+
+
+
+    crunch.connect(crunchGain);
+
+    crunchGain.connect(output);
+
+
+
+    crunch.start(now);
+
+    crunch.stop(now+.032);
+
+
+
+
+
+    var metal=audioContext.createOscillator();
+
+    var metalGain=audioContext.createGain();
+
+
+
+    metal.type="triangle";
+
+    metal.frequency.setValueAtTime(1450+speedFactor*450,now);
+
+
+
+    metalGain.gain.setValueAtTime(.0001,now);
+
+    metalGain.gain.exponentialRampToValueAtTime(.025+speedFactor*.02,now+.002);
+
+    metalGain.gain.exponentialRampToValueAtTime(.0001,now+.02);
+
+
+
+    metal.connect(metalGain);
+
+    metalGain.connect(output);
+
+
+
+    metal.start(now);
+
+    metal.stop(now+.025);
+
+
+
+  }catch(e){}
+
+}
+
+
+
+
+
+function hapticCutMovement(){
+
+
+
+  var now=Date.now();
+
+
+
+  if(now-lastCutVibrationTime<80){
+
+    return;
+
+  }
+
+
+
+  lastCutVibrationTime=now;
+
+  vibrate(22);
+
+}
+
+
+
+
+
+function soundCutFinish(){
+
+  makeTone(180,.075,.13,"triangle",0);
+
+  makeTone(115,.10,.09,"sine",.025);
+
+  makeTone(700,.04,.05,"square",.005);
+
+}
+
+
+
+function soundThirdCut(){
+
+  makeTone(180,.08,.14,"triangle",0);
+
+  makeTone(260,.10,.13,"triangle",.055);
+
+  makeTone(410,.14,.10,"sine",.12);
+
+}
+
+
+
+function soundResult(){
+
+  makeTone(440,.15,.13,"sine",0);
+
+  makeTone(554,.20,.14,"sine",.10);
+
+}
+
+
+
+function soundGreatResult(){
+
+  makeTone(440,.14,.14,"sine",0);
+
+  makeTone(554,.17,.15,"sine",.09);
+
+  makeTone(659,.27,.17,"sine",.18);
+
+}
+
+
+
+function soundPerfectResult(){
+
+  makeTone(523,.14,.15,"sine",0);
+
+  makeTone(659,.16,.16,"sine",.085);
+
+  makeTone(784,.30,.19,"sine",.17);
+
+  makeTone(1046,.24,.09,"sine",.27);
+
+}
+
+
+
+function soundUltraPerfect(){
+
+  makeTone(523,.13,.17,"sine",0);
+
+  makeTone(659,.14,.18,"sine",.07);
+
+  makeTone(784,.17,.19,"sine",.14);
+
+  makeTone(1046,.24,.18,"sine",.22);
+
+  makeTone(1318,.32,.13,"sine",.32);
+
+}
+
+
+
+function soundLock(){
+
+  makeTone(330,.10,.12,"triangle",0);
+
+  makeTone(494,.17,.14,"sine",.075);
+
+  makeTone(659,.20,.12,"sine",.15);
+
+}
+
+
+
+function soundTimeout(){
+
+  makeTone(260,.18,.14,"triangle",0);
+
+  makeTone(190,.25,.14,"triangle",.15);
+
+}
+
+
+
+
+
+/* ===== APPLAUSE ===== */
+
+
+
+function playApplause(){
+
+
+
+  if(!audioContext){
+
+    return;
+
+  }
+
+
+
+  try{
+
+
+
+    var output=audioOutput();
+
+
+
+    if(!output){
+
+      return;
+
+    }
+
+
+
+    var start=audioContext.currentTime+.18;
+
+    var duration=1.8;
+
+
+
+    var bufferLength=
+
+      Math.floor(audioContext.sampleRate*duration);
+
+
+
+    var buffer=audioContext.createBuffer(
+
+      1,
+
+      bufferLength,
+
+      audioContext.sampleRate
+
+    );
+
+
+
+    var data=buffer.getChannelData(0);
+
+
+
+    for(var i=0;i<bufferLength;i++){
+
+      data[i]=Math.random()*2-1;
+
+    }
+
+
+
+    function createClap(time,volume,frequency){
+
+
+
+      var source=audioContext.createBufferSource();
+
+      var gain=audioContext.createGain();
+
+      var filter=audioContext.createBiquadFilter();
+
+
+
+      source.buffer=buffer;
+
+
+
+      filter.type="bandpass";
+
+      filter.frequency.setValueAtTime(frequency,time);
+
+      filter.Q.setValueAtTime(.7,time);
+
+
+
+      gain.gain.setValueAtTime(.0001,time);
+
+      gain.gain.exponentialRampToValueAtTime(volume,time+.006);
+
+      gain.gain.exponentialRampToValueAtTime(.0001,time+.10);
+
+
+
+      source.connect(filter);
+
+      filter.connect(gain);
+
+      gain.connect(output);
+
+
+
+      source.start(
+
+        time,
+
+        Math.random()*.7,
+
+        .13
+
+      );
+
+    }
+
+
+
+    var clapTimes=[
+
+      0,.09,.18,.27,.37,
+
+      .47,.57,.68,.79,.90,
+
+      1.02,1.14,1.27,1.40,1.54
+
+    ];
+
+
+
+    for(var c=0;c<clapTimes.length;c++){
+
+
+
+      createClap(
+
+        start+clapTimes[c]+Math.random()*.025,
+
+        .14+Math.random()*.08,
+
+        1050+Math.random()*950
+
+      );
+
+    }
+
+
+
+    for(var j=0;j<22;j++){
+
+
+
+      createClap(
+
+        start+Math.random()*1.6,
+
+        .035+Math.random()*.055,
+
+        850+Math.random()*1500
+
+      );
+
+    }
+
+
+
+  }catch(e){}
+
+}
+
+
+
+
+
+/* ===== CONFETTI ===== */
+
+
+
+var confettiContainer=
+
+  document.getElementById("cp-confetti");
+
+
+
+function launchConfetti(){
+
+
+
+  while(confettiContainer.firstChild){
+
+    confettiContainer.removeChild(confettiContainer.firstChild);
+
+  }
+
+
+
+  var colors=[
+
+    "#1655d8",
+
+    "#111111",
+
+    "#ffffff",
+
+    "#f2c94c"
+
+  ];
+
+
+
+  for(var i=0;i<55;i++){
+
+
+
+    var piece=document.createElement("div");
+
+
+
+    piece.className="cp-confetti-piece";
+
+
+
+    piece.style.left=
+
+      (Math.random()*100)+"%";
+
+
+
+    piece.style.background=
+
+      colors[
+
+        Math.floor(Math.random()*colors.length)
+
+      ];
+
+
+
+    piece.style.animationDuration=
+
+      (1.8+Math.random()*1.3)+"s";
+
+
+
+    piece.style.animationDelay=
+
+      (Math.random()*.35)+"s";
+
+
+
+    piece.style.setProperty(
+
+      "--drift",
+
+      ((Math.random()-.5)*180)+"px"
+
+    );
+
+
+
+    piece.style.setProperty(
+
+      "--spin",
+
+      ((Math.random()*900)-450)+"deg"
+
+    );
+
+
+
+    piece.style.width=
+
+      (6+Math.random()*6)+"px";
+
+
+
+    piece.style.height=
+
+      (9+Math.random()*10)+"px";
+
+
+
+    confettiContainer.appendChild(piece);
+
+  }
+
+
+
+  confettiContainer.classList.add("show");
+
+
+
+  window.setTimeout(function(){
+
+
+
+    confettiContainer.classList.remove("show");
+
+
+
+    while(confettiContainer.firstChild){
+
+      confettiContainer.removeChild(confettiContainer.firstChild);
+
+    }
+
+
+
+  },3400);
+
+}
+
+
+
+
+
+/* ===== CONFIG ===== */
+
+
+
+var SUPABASE_URL=
+
+  "https://betbkhvyejtjqfyuxmql.supabase.co";
+
+
+
+var SUPABASE_KEY=
+
+  "sb_publishable_AY3okNvvxefclorginvwZQ_fzRXjrYQ";
+
+
+
+var playerName="";
+
+var playerPhone="";
+
+
+
+var cuts=[];
+
+var drawing=false;
+
+
+
+var startPoint=null;
+
+var currentPoint=null;
+
+var lastPointer=null;
+
+
+
+var currentScore=0;
+
+var currentTime=0;
+
+
+
+var bestTrainingScore=0;
+
+var bestTrainingTime=null;
+
+
+
+var leaderboardData=[];
+
+
+
+var resultStarted=false;
+
+var sliceAnimation=false;
+
+
+
+var cutterAngle=0;
+
+var wheelRotation=0;
+
+
+
+
+
+/* TIMER */
+
+
+
+var GAME_LIMIT=10;
+
+
+
+var timerStarted=false;
+
+var timerFinished=false;
+
+var timerStartTimestamp=0;
+
+var timerAnimationFrame=null;
+
+
+
+
+
+/* ===== ELEMENTS ===== */
+
+
+
+var registerScreen=document.getElementById("cp-register");
+
+var gameScreen=document.getElementById("cp-game");
+
+var resultScreen=document.getElementById("cp-result");
+
+var finalScreen=document.getElementById("cp-final");
+
+
+
+var nameInput=document.getElementById("cp-name");
+
+var phoneInput=document.getElementById("cp-phone");
+
+var consentInput=document.getElementById("cp-consent");
+
+var startButton=document.getElementById("cp-start");
+
+var registerError=document.getElementById("cp-register-error");
+
+
+
+var pizzaImage=document.getElementById("cp-pizza-image");
+
+var board=document.getElementById("cp-board");
+
+var canvas=document.getElementById("cp-canvas");
+
+var ctx=canvas.getContext("2d");
+
+
+
+var cutCounter=document.getElementById("cp-cut-counter");
+
+var timerElement=document.getElementById("cp-timer");
+
+var pieceCount=document.getElementById("cp-piece-count");
+
+var timeoutOverlay=document.getElementById("cp-timeout-overlay");
+
+
+
+var scoreElement=document.getElementById("cp-score");
+
+var resultTimeElement=document.getElementById("cp-result-time");
+
+var recordElement=document.getElementById("cp-record");
+
+var bestResultElement=document.getElementById("cp-best-result");
+
+var resultMessage=document.getElementById("cp-result-message");
+
+var competitionElement=document.getElementById("cp-competition");
+
+
+
+var againButton=document.getElementById("cp-again");
+
+var lockButton=document.getElementById("cp-lock");
+
+var resultActions=document.getElementById("cp-result-actions");
+
+var lockError=document.getElementById("cp-lock-error");
+
+
+
+var leaderboardElement=document.getElementById("cp-leaderboard");
+
+var finalLeaderboardElement=document.getElementById("cp-final-leaderboard");
+
+var finalBig=document.getElementById("cp-final-big");
+
+
+
+var telegramButton=document.getElementById("cp-telegram");
+
+var telegramStatus=document.getElementById("cp-telegram-status");
+
+
+
+
+
+/* ===== SCREEN ===== */
+
+
+
+function showScreen(screen){
+
+
+
+  registerScreen.classList.remove("active");
+
+  gameScreen.classList.remove("active");
+
+  resultScreen.classList.remove("active");
+
+  finalScreen.classList.remove("active");
+
+
+
+  screen.classList.add("active");
+
+
+
+  window.scrollTo({
+
+    top:0,
+
+    behavior:"smooth"
+
+  });
+
+}
+
+
+
+
+
+/* ===== HELPERS ===== */
+
+
+
+function normalizePhone(value){
+
+  return String(value||"").replace(/\D/g,"");
+
+}
+
+
+
+function showRegisterError(message){
+
+  registerError.textContent=message;
+
+  registerError.style.display="block";
+
+}
+
+
+
+function hideRegisterError(){
+
+  registerError.textContent="";
+
+  registerError.style.display="none";
+
+}
+
+
+
+function showLockError(message){
+
+  lockError.textContent=message;
+
+  lockError.style.display="block";
+
+}
+
+
+
+function hideLockError(){
+
+  lockError.textContent="";
+
+  lockError.style.display="none";
+
+}
+
+
+
+function apiHeaders(){
+
+  return {
+
+    "apikey":SUPABASE_KEY,
+
+    "Authorization":"Bearer "+SUPABASE_KEY,
+
+    "Content-Type":"application/json"
+
+  };
+
+}
+
+
+
+async function rpc(functionName,body){
+
+
+
+  var response=await fetch(
+
+    SUPABASE_URL+
+
+    "/rest/v1/rpc/"+
+
+    functionName,
+
+    {
+
+      method:"POST",
+
+      headers:apiHeaders(),
+
+      body:JSON.stringify(body||{})
+
+    }
+
+  );
+
+
+
+  if(!response.ok){
+
+
+
+    var text=await response.text();
+
+
+
+    throw new Error(
+
+      "Supabase "+
+
+      response.status+
+
+      ": "+
+
+      text
+
+    );
+
+  }
+
+
+
+  return await response.json();
+
+}
+
+
+
+
+
+/* ===== TIMER ===== */
+
+
+
+function resetTimer(){
+
+
+
+  if(timerAnimationFrame){
+
+    cancelAnimationFrame(timerAnimationFrame);
+
+  }
+
+
+
+  timerAnimationFrame=null;
+
+  timerStarted=false;
+
+  timerFinished=false;
+
+  timerStartTimestamp=0;
+
+  currentTime=0;
+
+
+
+  timerElement.textContent="10.0 С";
+
+
+
+  timerElement.classList.remove(
+
+    "running",
+
+    "warning",
+
+    "done"
+
+  );
+
+
+
+  timeoutOverlay.classList.remove("show");
+
+}
+
+
+
+
+
+function startTimer(){
+
+
+
+  if(timerStarted||timerFinished||resultStarted){
+
+    return;
+
+  }
+
+
+
+  timerStarted=true;
+
+  timerStartTimestamp=performance.now();
+
+
+
+  timerElement.classList.add("running");
+
+
+
+  updateTimer();
+
+}
+
+
+
+
+
+function updateTimer(){
+
+
+
+  if(!timerStarted||timerFinished){
+
+    return;
+
+  }
+
+
+
+  var elapsed=
+
+    (performance.now()-timerStartTimestamp)/1000;
+
+
+
+  var remaining=
+
+    Math.max(0,GAME_LIMIT-elapsed);
+
+
+
+  timerElement.textContent=
+
+    remaining.toFixed(1)+" С";
+
+
+
+  if(remaining<=3){
+
+    timerElement.classList.add("warning");
+
+  }else{
+
+    timerElement.classList.remove("warning");
+
+  }
+
+
+
+  if(elapsed>=GAME_LIMIT){
+
+    handleTimeout();
+
+    return;
+
+  }
+
+
+
+  timerAnimationFrame=
+
+    requestAnimationFrame(updateTimer);
+
+}
+
+
+
+
+
+function stopTimer(){
+
+
+
+  if(!timerStarted||timerFinished){
+
+    return;
+
+  }
+
+
+
+  var elapsed=
+
+    (performance.now()-timerStartTimestamp)/1000;
+
+
+
+  currentTime=
+
+    Math.min(
+
+      GAME_LIMIT,
+
+      Math.max(.01,elapsed)
+
+    );
+
+
+
+  currentTime=
+
+    Math.round(currentTime*100)/100;
+
+
+
+  timerFinished=true;
+
+  timerStarted=false;
+
+
+
+  if(timerAnimationFrame){
+
+    cancelAnimationFrame(timerAnimationFrame);
+
+  }
+
+
+
+  timerAnimationFrame=null;
+
+
+
+  timerElement.classList.remove(
+
+    "running",
+
+    "warning"
+
+  );
+
+
+
+  timerElement.classList.add("done");
+
+
+
+  timerElement.textContent=
+
+    currentTime.toFixed(2)+" С";
+
+}
+
+
+
+
+
+function handleTimeout(){
+
+
+
+  if(timerFinished||resultStarted){
+
+    return;
+
+  }
+
+
+
+  timerFinished=true;
+
+  timerStarted=false;
+
+  resultStarted=true;
+
+  drawing=false;
+
+
+
+  currentTime=GAME_LIMIT;
+
+
+
+  if(timerAnimationFrame){
+
+    cancelAnimationFrame(timerAnimationFrame);
+
+  }
+
+
+
+  timerAnimationFrame=null;
+
+
+
+  timerElement.classList.remove(
+
+    "running",
+
+    "warning"
+
+  );
+
+
+
+  timerElement.textContent="0.0 С";
+
+
+
+  board.classList.remove("cp-cut-touch");
+
+
+
+  soundTimeout();
+
+  hapticResult();
+
+
+
+  redraw();
+
+
+
+  timeoutOverlay.classList.add("show");
+
+
+
+  window.setTimeout(function(){
+
+    showTimeoutResult();
+
+  },1200);
+
+}
+
+
+
+
+
+function showTimeoutResult(){
+
+
+
+  currentScore=0;
+
+
+
+  scoreElement.textContent="ВРЕМЯ";
+
+  resultTimeElement.textContent="10.00 СЕК";
+
+
+
+  scoreElement.classList.remove(
+
+    "cp-score-finish",
+
+    "cp-score-great",
+
+    "cp-score-warrior",
+
+    "cp-score-perfect"
+
+  );
+
+
+
+  recordElement.classList.remove("show");
+
+  bestResultElement.classList.remove("show");
+
+
+
+  resultMessage.classList.remove(
+
+    "warrior",
+
+    "perfect"
+
+  );
+
+
+
+  resultMessage.textContent=
+
+    "Время вышло. Нужно сделать все 3 разреза за 10 секунд.";
+
+
+
+  competitionElement.textContent=
+
+    "Эта попытка не участвует в рейтинге.";
+
+
+
+  showScreen(resultScreen);
+
+
+
+  resultActions.style.display="grid";
+
+  resultActions.style.opacity="1";
+
+  resultActions.style.transform="translateY(0)";
+
+
+
+  againButton.disabled=false;
+
+
+
+  lockButton.disabled=true;
+
+  lockButton.textContent="РЕЗУЛЬТАТ НЕ ЗАСЧИТАН";
+
+
+
+  loadLeaderboard();
+
+}
+
+
+
+
+
+/* ===== DATABASE ===== */
+
+
+
+async function checkExistingEntry(){
+
+
+
+  try{
+
+
+
+    return await rpc(
+
+      "check_pizza_weekly_entry",
+
+      {p_phone:playerPhone}
+
+    );
+
+
+
+  }catch(error){
+
+
+
+    console.error(error);
+
+    return null;
+
+  }
+
+}
+
+
+
+
+
+async function loadLeaderboard(){
+
+
+
+  try{
+
+
+
+    var data=await rpc(
+
+      "get_pizza_weekly_leaderboard",
+
+      {}
+
+    );
+
+
+
+    leaderboardData=
+
+      Array.isArray(data)?data:[];
+
+
+
+  }catch(error){
+
+
+
+    console.error(error);
+
+    leaderboardData=[];
+
+  }
+
+
+
+  renderLeaderboard(
+
+    leaderboardElement,
+
+    leaderboardData
+
+  );
+
+
+
+  renderLeaderboard(
+
+    finalLeaderboardElement,
+
+    leaderboardData
+
+  );
+
+
+
+  return leaderboardData;
+
+}
+
+
+
+
+
+function renderLeaderboard(element,data){
+
+
+
+  while(element.firstChild){
+
+    element.removeChild(element.firstChild);
+
+  }
+
+
+
+  if(!data||data.length===0){
+
+
+
+    var empty=document.createElement("div");
+
+
+
+    empty.className="cp-empty";
+
+    empty.textContent=
+
+      "Пока рейтинг пуст. Можно стать первым.";
+
+
+
+    element.appendChild(empty);
+
+
+
+    return;
+
+  }
+
+
+
+  data.forEach(function(item,index){
+
+
+
+    var row=document.createElement("div");
+
+    row.className="cp-row";
+
+
+
+    var place=document.createElement("div");
+
+    place.className="cp-place";
+
+    place.textContent=String(item.place||index+1);
+
+
+
+    var name=document.createElement("div");
+
+    name.className="cp-name";
+
+    name.textContent=String(item.player_name||"Игрок");
+
+
+
+    var score=document.createElement("div");
+
+    score.className="cp-row-score";
+
+    score.textContent=
+
+      Number(item.score||0).toFixed(1)+"%";
+
+
+
+    var time=document.createElement("span");
+
+    time.className="cp-row-time";
+
+
+
+    var savedTime=
+
+      Number(item.completion_time);
+
+
+
+    if(
+
+      item.completion_time!==null &&
+
+      isFinite(savedTime) &&
+
+      savedTime>0
+
+    ){
+
+
+
+      time.textContent=
+
+        savedTime.toFixed(2)+" сек";
+
+
+
+    }else{
+
+
+
+      time.textContent="—";
+
+    }
+
+
+
+    score.appendChild(time);
+
+
+
+    row.appendChild(place);
+
+    row.appendChild(name);
+
+    row.appendChild(score);
+
+
+
+    element.appendChild(row);
+
+  });
+
+}
+
+
+
+
+
+function getThirdPlaceScore(){
+
+
+
+  if(
+
+    !leaderboardData||
+
+    leaderboardData.length<3
+
+  ){
+
+    return null;
+
+  }
+
+
+
+  var value=
+
+    Number(leaderboardData[2].score);
+
+
+
+  return isFinite(value)?value:null;
+
+}
+
+
+
+
+
+function getProjectedPlace(score,time){
+
+
+
+  if(!leaderboardData.length){
+
+    return 1;
+
+  }
+
+
+
+  var place=1;
+
+
+
+  for(var i=0;i<leaderboardData.length;i++){
+
+
+
+    var otherScore=
+
+      Number(leaderboardData[i].score);
+
+
+
+    var otherTime=
+
+      Number(
+
+        leaderboardData[i].completion_time
+
+      );
+
+
+
+    if(otherScore>score){
+
+
+
+      place++;
+
+      continue;
+
+    }
+
+
+
+    if(
+
+      otherScore===score &&
+
+      isFinite(otherTime) &&
+
+      otherTime>0 &&
+
+      otherTime<time
+
+    ){
+
+      place++;
+
+    }
+
+  }
+
+
+
+  return place;
+
+}
+
+
+
+
+
+function updateCompetitionMessage(){
+
+
+
+  competitionElement.classList.remove(
+
+    "cp-top-result"
+
+  );
+
+
+
+  lockButton.textContent=
+
+    "ЗАФИКСИРОВАТЬ "+
+
+    currentScore.toFixed(1)+
+
+    "% · "+
+
+    currentTime.toFixed(2)+
+
+    " С";
+
+
+
+  var projected=
+
+    getProjectedPlace(
+
+      currentScore,
+
+      currentTime
+
+    );
+
+
+
+  var leader=null;
+
+
+
+  if(leaderboardData.length>0){
+
+    leader=Number(leaderboardData[0].score);
+
+  }
+
+
+
+  if(
+
+    leaderboardData.length===0||
+
+    projected===1
+
+  ){
+
+
+
+    competitionElement.textContent=
+
+      "🏆 ТЫ ВЫХОДИШЬ НА 1 МЕСТО";
+
+
+
+    competitionElement.classList.add(
+
+      "cp-top-result"
+
+    );
+
+
+
+    return;
+
+  }
+
+
+
+  if(projected<=3){
+
+
+
+    var toLeader=
+
+      leader-currentScore;
+
+
+
+    if(toLeader<0){
+
+      toLeader=0;
+
+    }
+
+
+
+    competitionElement.textContent=
+
+      "СЕЙЧАС ТЫ №"+
+
+      projected+
+
+      " · До лидера "+
+
+      toLeader.toFixed(1)+
+
+      "%";
+
+
+
+    competitionElement.classList.add(
+
+      "cp-top-result"
+
+    );
+
+
+
+    return;
+
+  }
+
+
+
+  var third=getThirdPlaceScore();
+
+
+
+  if(third===null){
+
+
+
+    competitionElement.textContent=
+
+      "🔥 РЕЗУЛЬТАТ ПРОХОДИТ В TOP-3";
+
+
+
+    competitionElement.classList.add(
+
+      "cp-top-result"
+
+    );
+
+
+
+    return;
+
+  }
+
+
+
+  var difference=
+
+    third-currentScore;
+
+
+
+  if(difference<0){
+
+    difference=0;
+
+  }
+
+
+
+  competitionElement.textContent=
+
+    "До TOP-3 не хватает всего "+
+
+    difference.toFixed(1)+
+
+    "%. Попробуешь ещё раз?";
+
+}
+
+
+
+
+
+/* ===== RESULT MESSAGES ===== */
+
+
+
+function updateResultMessage(){
+
+
+
+  resultMessage.classList.remove(
+
+    "warrior",
+
+    "perfect"
+
+  );
+
+
+
+  if(currentScore>=100){
+
+
+
+    resultMessage.textContent=
+
+      "ИДЕАЛЬНЫЙ РАЗРЕЗ. ЭТО ВООБЩЕ ЗАКОННО?";
+
+
+
+    resultMessage.classList.add(
+
+      "perfect"
+
+    );
+
+
+
+  }else if(currentScore>=95){
+
+
+
+    resultMessage.textContent=
+
+      "КТО ТЫ, ВОИН?";
+
+
+
+    resultMessage.classList.add(
+
+      "warrior"
+
+    );
+
+
+
+  }else if(currentScore>=92){
+
+
+
+    resultMessage.textContent=
+
+      "Очень близко. Это сильный результат.";
+
+
+
+  }else if(currentScore>=85){
+
+
+
+    resultMessage.textContent=
+
+      "Хороший разрез. Но можно ещё точнее.";
+
+
+
+  }else if(currentScore>=70){
+
+
+
+    resultMessage.textContent=
+
+      "Уже неплохо. Попробуешь улучшить?";
+
+
+
+  }else if(currentScore>=60){
+
+
+
+    resultMessage.textContent=
+
+      "Пицца сопротивляется. Попробуй ещё раз.";
+
+
+
+  }else{
+
+
+
+    resultMessage.textContent=
+
+      "МАЛО СИЛ! НАДО СРОЧНО ПОЕСТЬ НАШЕЙ ПИЦЦЫ 🍕";
+
+  }
+
+}
+
+
+
+
+
+/* ===== PERSONAL RECORD ===== */
+
+
+
+function isNewPersonalRecord(){
+
+
+
+  if(bestTrainingScore===0){
+
+    return true;
+
+  }
+
+
+
+  if(currentScore>bestTrainingScore){
+
+    return true;
+
+  }
+
+
+
+  if(
+
+    currentScore===bestTrainingScore &&
+
+    bestTrainingTime!==null &&
+
+    currentTime<bestTrainingTime
+
+  ){
+
+    return true;
+
+  }
+
+
+
+  return false;
+
+}
+
+
+
+
+
+function renderBestResult(){
+
+
+
+  if(
+
+    bestTrainingScore<=0||
+
+    bestTrainingTime===null
+
+  ){
+
+
+
+    bestResultElement.classList.remove(
+
+      "show"
+
+    );
+
+
+
+    return;
+
+  }
+
+
+
+  bestResultElement.textContent=
+
+    "ТВОЙ РЕКОРД: "+
+
+    bestTrainingScore.toFixed(1)+
+
+    "% · "+
+
+    bestTrainingTime.toFixed(2)+
+
+    " С";
+
+
+
+  bestResultElement.classList.add(
+
+    "show"
+
+  );
+
+}
+
+
+
+
+
+function updatePersonalRecord(){
+
+
+
+  recordElement.classList.remove("show");
+
+
+
+  var firstAttempt=
+
+    bestTrainingScore===0;
+
+
+
+  if(isNewPersonalRecord()){
+
+
+
+    bestTrainingScore=currentScore;
+
+    bestTrainingTime=currentTime;
+
+
+
+    recordElement.classList.add("show");
+
+
+
+    if(!firstAttempt){
+
+
+
+      window.setTimeout(function(){
+
+        playApplause();
+
+      },180);
+
+    }
+
+  }
+
+
+
+  renderBestResult();
+
+}
+
+
+
+
+
+/* ===== CANVAS ===== */
+
+
+
+function resizeCanvas(){
+
+
+
+  var rect=
+
+    pizzaImage.getBoundingClientRect();
+
+
+
+  if(!rect.width||!rect.height){
+
+    return;
+
+  }
+
+
+
+  var ratio=
+
+    window.devicePixelRatio||1;
+
+
+
+  canvas.width=
+
+    Math.round(rect.width*ratio);
+
+
+
+  canvas.height=
+
+    Math.round(rect.height*ratio);
+
+
+
+  canvas.style.width=
+
+    rect.width+"px";
+
+
+
+  canvas.style.height=
+
+    rect.height+"px";
+
+
+
+  ctx.setTransform(
+
+    ratio,0,0,ratio,0,0
+
+  );
+
+
+
+  redraw();
+
+}
+
+
+
+
+
+function getPizzaGeometry(){
+
+
+
+  var w=canvas.clientWidth;
+
+  var h=canvas.clientHeight;
+
+
+
+  return {
+
+    cx:w*0.503,
+
+    cy:h*0.504,
+
+    r:h*0.423
+
+  };
+
+}
+
+
+
+
+
+function getPointerPosition(event){
+
+
+
+  var rect=
+
+    canvas.getBoundingClientRect();
+
+
+
+  return {
+
+    x:event.clientX-rect.left,
+
+    y:event.clientY-rect.top
+
+  };
+
+}
+
+
+
+
+
+function lineCircleSegment(p1,p2,circle){
+
+
+
+  var dx=p2.x-p1.x;
+
+  var dy=p2.y-p1.y;
+
+
+
+  var length=
+
+    Math.sqrt(dx*dx+dy*dy);
+
+
+
+  if(length<0.001){
+
+    return null;
+
+  }
+
+
+
+  var ux=dx/length;
+
+  var uy=dy/length;
+
+
+
+  var vx=circle.cx-p1.x;
+
+  var vy=circle.cy-p1.y;
+
+
+
+  var projection=
+
+    vx*ux+vy*uy;
+
+
+
+  var closestX=
+
+    p1.x+projection*ux;
+
+
+
+  var closestY=
+
+    p1.y+projection*uy;
+
+
+
+  var distanceSquared=
+
+    Math.pow(
+
+      closestX-circle.cx,
+
+      2
+
+    )+
+
+    Math.pow(
+
+      closestY-circle.cy,
+
+      2
+
+    );
+
+
+
+  var radiusSquared=
+
+    circle.r*circle.r;
+
+
+
+  if(distanceSquared>radiusSquared){
+
+    return null;
+
+  }
+
+
+
+  var half=
+
+    Math.sqrt(
+
+      Math.max(
+
+        0,
+
+        radiusSquared-distanceSquared
+
+      )
+
+    );
+
+
+
+  return {
+
+
+
+    a:{
+
+      x:closestX-ux*half,
+
+      y:closestY-uy*half
+
+    },
+
+
+
+    b:{
+
+      x:closestX+ux*half,
+
+      y:closestY+uy*half
+
+    }
+
+  };
+
+}
+
+
+
+
+
+function drawCut(line,preview){
+
+
+
+  var circle=
+
+    getPizzaGeometry();
+
+
+
+  var segment=
+
+    lineCircleSegment(
+
+      line.a,
+
+      line.b,
+
+      circle
+
+    );
+
+
+
+  if(!segment){
+
+    return;
+
+  }
+
+
+
+  ctx.save();
+
+
+
+  ctx.beginPath();
+
+
+
+  ctx.arc(
+
+    circle.cx,
+
+    circle.cy,
+
+    circle.r,
+
+    0,
+
+    Math.PI*2
+
+  );
+
+
+
+  ctx.clip();
+
+
+
+  ctx.beginPath();
+
+
+
+  ctx.moveTo(
+
+    segment.a.x,
+
+    segment.a.y
+
+  );
+
+
+
+  ctx.lineTo(
+
+    segment.b.x,
+
+    segment.b.y
+
+  );
+
+
+
+  ctx.strokeStyle=
+
+    preview
+
+    ?"rgba(55,38,28,0.72)"
+
+    :"rgba(48,32,24,0.90)";
+
+
+
+  ctx.lineWidth=
+
+    preview?2.5:3;
+
+
+
+  ctx.lineCap="round";
+
+
+
+  ctx.stroke();
+
+
+
+  ctx.restore();
+
+}
+
+
+
+
+
+function drawCutter(point){
+
+
+
+  if(!point){
+
+    return;
+
+  }
+
+
+
+  var wheelRadius=17;
+
+
+
+  ctx.save();
+
+
+
+  ctx.translate(
+
+    point.x,
+
+    point.y
+
+  );
+
+
+
+  ctx.rotate(cutterAngle);
+
+
+
+  ctx.beginPath();
+
+
+
+  ctx.moveTo(
+
+    wheelRadius-2,
+
+    0
+
+  );
+
+
+
+  ctx.lineTo(
+
+    wheelRadius+55,
+
+    0
+
+  );
+
+
+
+  ctx.strokeStyle="#171717";
+
+  ctx.lineWidth=12;
+
+  ctx.lineCap="round";
+
+  ctx.stroke();
+
+
+
+  ctx.beginPath();
+
+
+
+  ctx.arc(
+
+    0,0,
+
+    wheelRadius+2,
+
+    0,
+
+    Math.PI*2
+
+  );
+
+
+
+  ctx.fillStyle=
+
+    "rgba(20,20,20,0.22)";
+
+
+
+  ctx.fill();
+
+
+
+  var gradient=
+
+    ctx.createRadialGradient(
+
+      -6,-7,2,
+
+      0,0,wheelRadius
+
+    );
+
+
+
+  gradient.addColorStop(0,"#fff");
+
+  gradient.addColorStop(.35,"#d9d9d9");
+
+  gradient.addColorStop(.7,"#8d8d8d");
+
+  gradient.addColorStop(1,"#eee");
+
+
+
+  ctx.save();
+
+
+
+  ctx.rotate(wheelRotation);
+
+
+
+  ctx.beginPath();
+
+
+
+  ctx.arc(
+
+    0,0,
+
+    wheelRadius,
+
+    0,
+
+    Math.PI*2
+
+  );
+
+
+
+  ctx.fillStyle=gradient;
+
+  ctx.fill();
+
+
+
+  ctx.strokeStyle="#555";
+
+  ctx.lineWidth=1.5;
+
+  ctx.stroke();
+
+
+
+  for(var i=0;i<6;i++){
+
+
+
+    var angle=
+
+      i*Math.PI/3;
+
+
+
+    ctx.beginPath();
+
+    ctx.moveTo(0,0);
+
+
+
+    ctx.lineTo(
+
+      Math.cos(angle)*(wheelRadius-4),
+
+      Math.sin(angle)*(wheelRadius-4)
+
+    );
+
+
+
+    ctx.strokeStyle=
+
+      "rgba(80,80,80,0.55)";
+
+
+
+    ctx.lineWidth=1;
+
+
+
+    ctx.stroke();
+
+  }
+
+
+
+  ctx.beginPath();
+
+
+
+  ctx.arc(
+
+    0,0,4,
+
+    0,
+
+    Math.PI*2
+
+  );
+
+
+
+  ctx.fillStyle="#555";
+
+  ctx.fill();
+
+
+
+  ctx.restore();
+
+  ctx.restore();
+
+}
+
+
+
+
+
+function redraw(){
+
+
+
+  if(sliceAnimation){
+
+    return;
+
+  }
+
+
+
+  ctx.clearRect(
+
+    0,0,
+
+    canvas.clientWidth,
+
+    canvas.clientHeight
+
+  );
+
+
+
+  cuts.forEach(function(line){
+
+    drawCut(line,false);
+
+  });
+
+
+
+  if(
+
+    drawing&&
+
+    startPoint&&
+
+    currentPoint
+
+  ){
+
+
+
+    drawCut(
+
+      {
+
+        a:startPoint,
+
+        b:currentPoint
+
+      },
+
+      true
+
+    );
+
+
+
+    drawCutter(currentPoint);
+
+  }
+
+}
+
+
+
+
+
+/* ===== PIECES ===== */
+
+
+
+function makeCirclePolygon(circle){
+
+
+
+  var points=[];
+
+  var count=140;
+
+
+
+  for(var i=0;i<count;i++){
+
+
+
+    var a=
+
+      Math.PI*2*i/count;
+
+
+
+    points.push({
+
+
+
+      x:
+
+        circle.cx+
+
+        Math.cos(a)*circle.r,
+
+
+
+      y:
+
+        circle.cy+
+
+        Math.sin(a)*circle.r
+
+    });
+
+  }
+
+
+
+  return points;
+
+}
+
+
+
+
+
+function lineSide(point,line){
+
+
+
+  return (
+
+    (line.b.x-line.a.x)*
+
+    (point.y-line.a.y)
+
+    -
+
+    (line.b.y-line.a.y)*
+
+    (point.x-line.a.x)
+
+  );
+
+}
+
+
+
+
+
+function clipPolygonByLine(
+
+  poly,
+
+  line,
+
+  keepPositive
+
+){
+
+
+
+  if(!poly.length){
+
+    return [];
+
+  }
+
+
+
+  var output=[];
+
+
+
+  function side(p){
+
+    return lineSide(p,line);
+
+  }
+
+
+
+  function inside(p){
+
+
+
+    var s=side(p);
+
+
+
+    return keepPositive
+
+      ?s>=0
+
+      :s<=0;
+
+  }
+
+
+
+  function intersection(a,b){
+
+
+
+    var sa=side(a);
+
+    var sb=side(b);
+
+
+
+    var denom=sa-sb;
+
+
+
+    if(
+
+      Math.abs(denom)<0.000001
+
+    ){
+
+
+
+      return {
+
+        x:a.x,
+
+        y:a.y
+
+      };
+
+    }
+
+
+
+    var t=sa/denom;
+
+
+
+    return {
+
+
+
+      x:
+
+        a.x+
+
+        (b.x-a.x)*t,
+
+
+
+      y:
+
+        a.y+
+
+        (b.y-a.y)*t
+
+    };
+
+  }
+
+
+
+  for(var i=0;i<poly.length;i++){
+
+
+
+    var current=poly[i];
+
+
+
+    var previous=
+
+      poly[
+
+        (i+poly.length-1)%
+
+        poly.length
+
+      ];
+
+
+
+    var currentInside=
+
+      inside(current);
+
+
+
+    var previousInside=
+
+      inside(previous);
+
+
+
+    if(currentInside){
+
+
+
+      if(!previousInside){
+
+
+
+        output.push(
+
+          intersection(
+
+            previous,
+
+            current
+
+          )
+
+        );
+
+      }
+
+
+
+      output.push(current);
+
+
+
+    }else if(previousInside){
+
+
+
+      output.push(
+
+        intersection(
+
+          previous,
+
+          current
+
+        )
+
+      );
+
+    }
+
+  }
+
+
+
+  return output;
+
+}
+
+
+
+
+
+function polygonArea(poly){
+
+
+
+  if(poly.length<3){
+
+    return 0;
+
+  }
+
+
+
+  var sum=0;
+
+
+
+  for(var i=0;i<poly.length;i++){
+
+
+
+    var a=poly[i];
+
+
+
+    var b=
+
+      poly[
+
+        (i+1)%poly.length
+
+      ];
+
+
+
+    sum+=
+
+      a.x*b.y-
+
+      b.x*a.y;
+
+  }
+
+
+
+  return Math.abs(sum/2);
+
+}
+
+
+
+
+
+function polygonCenter(poly){
+
+
+
+  var x=0;
+
+  var y=0;
+
+
+
+  if(!poly.length){
+
+
+
+    return {
+
+      x:0,
+
+      y:0
+
+    };
+
+  }
+
+
+
+  for(var i=0;i<poly.length;i++){
+
+
+
+    x+=poly[i].x;
+
+    y+=poly[i].y;
+
+  }
+
+
+
+  return {
+
+
+
+    x:x/poly.length,
+
+    y:y/poly.length
+
+  };
+
+}
+
+
+
+
+
+function buildSlicePolygons(){
+
+
+
+  var circle=
+
+    getPizzaGeometry();
+
+
+
+  var base=
+
+    makeCirclePolygon(circle);
+
+
+
+  var pieces=[];
+
+
+
+  for(var mask=0;mask<8;mask++){
+
+
+
+    var poly=
+
+      base.slice();
+
+
+
+    for(var i=0;i<cuts.length;i++){
+
+
+
+      var positive=
+
+        (mask&(1<<i))!==0;
+
+
+
+      poly=
+
+        clipPolygonByLine(
+
+          poly,
+
+          cuts[i],
+
+          positive
+
+        );
+
+
+
+      if(poly.length<3){
+
+        break;
+
+      }
+
+    }
+
+
+
+    if(
+
+      poly.length>=3 &&
+
+      polygonArea(poly)>
+
+      Math.PI*
+
+      circle.r*
+
+      circle.r*
+
+      .004
+
+    ){
+
+
+
+      pieces.push(poly);
+
+    }
+
+  }
+
+
+
+  return pieces;
+
+}
+
+
+
+
+
+function drawPolygonPath(poly){
+
+
+
+  if(!poly.length){
+
+    return;
+
+  }
+
+
+
+  ctx.beginPath();
+
+
+
+  ctx.moveTo(
+
+    poly[0].x,
+
+    poly[0].y
+
+  );
+
+
+
+  for(var i=1;i<poly.length;i++){
+
+
+
+    ctx.lineTo(
+
+      poly[i].x,
+
+      poly[i].y
+
+    );
+
+  }
+
+
+
+  ctx.closePath();
+
+}
+
+
+
+
+
+function drawSeparatedPizza(
+
+  progress,
+
+  pieces
+
+){
+
+
+
+  var w=canvas.clientWidth;
+
+  var h=canvas.clientHeight;
+
+
+
+  var circle=
+
+    getPizzaGeometry();
+
+
+
+  ctx.clearRect(
+
+    0,0,w,h
+
+  );
+
+
+
+  ctx.drawImage(
+
+    pizzaImage,
+
+    0,0,w,h
+
+  );
+
+
+
+  ctx.save();
+
+
+
+  ctx.beginPath();
+
+
+
+  ctx.arc(
+
+    circle.cx,
+
+    circle.cy,
+
+    circle.r+1,
+
+    0,
+
+    Math.PI*2
+
+  );
+
+
+
+  ctx.clip();
+
+
+
+  ctx.fillStyle=
+
+    "rgba(40,25,18,0.96)";
+
+
+
+  ctx.fillRect(
+
+    circle.cx-circle.r-3,
+
+    circle.cy-circle.r-3,
+
+    circle.r*2+6,
+
+    circle.r*2+6
+
+  );
+
+
+
+  ctx.restore();
+
+
+
+  var separation=
+
+    Math.min(
+
+      12,
+
+      circle.r*.07
+
+    )*progress;
+
+
+
+  pieces.forEach(function(poly){
+
+
+
+    var center=
+
+      polygonCenter(poly);
+
+
+
+    var dx=
+
+      center.x-circle.cx;
+
+
+
+    var dy=
+
+      center.y-circle.cy;
+
+
+
+    var length=
+
+      Math.sqrt(
+
+        dx*dx+
+
+        dy*dy
+
+      );
+
+
+
+    if(length<1){
+
+      length=1;
+
+    }
+
+
+
+    var moveX=
+
+      dx/length*
+
+      separation;
+
+
+
+    var moveY=
+
+      dy/length*
+
+      separation;
+
+
+
+    ctx.save();
+
+
+
+    ctx.translate(
+
+      moveX,
+
+      moveY
+
+    );
+
+
+
+    drawPolygonPath(poly);
+
+
+
+    ctx.clip();
+
+
+
+    ctx.shadowColor=
+
+      "rgba(0,0,0,.42)";
+
+
+
+    ctx.shadowBlur=7;
+
+
+
+    ctx.drawImage(
+
+      pizzaImage,
+
+      0,0,w,h
+
+    );
+
+
+
+    ctx.restore();
+
+
+
+    ctx.save();
+
+
+
+    ctx.translate(
+
+      moveX,
+
+      moveY
+
+    );
+
+
+
+    drawPolygonPath(poly);
+
+
+
+    ctx.strokeStyle=
+
+      "rgba(48,30,22,.72)";
+
+
+
+    ctx.lineWidth=1.4;
+
+
+
+    ctx.stroke();
+
+
+
+    ctx.restore();
+
+  });
+
+}
+
+
+
+
+
+function showPieceCounter(number){
+
+
+
+  pieceCount.classList.remove(
+
+    "show",
+
+    "perfect"
+
+  );
+
+
+
+  pieceCount.textContent=
+
+    number+"/6";
+
+
+
+  if(number===6){
+
+
+
+    pieceCount.classList.add(
+
+      "perfect"
+
+    );
+
+
+
+    board.classList.remove(
+
+      "cp-perfect-board"
+
+    );
+
+
+
+    void board.offsetWidth;
+
+
+
+    board.classList.add(
+
+      "cp-perfect-board"
+
+    );
+
+
+
+    hapticPerfect();
+
+
+
+  }else{
+
+
+
+    hapticResult();
+
+  }
+
+
+
+  void pieceCount.offsetWidth;
+
+
+
+  pieceCount.classList.add(
+
+    "show"
+
+  );
+
+}
+
+
+
+
+
+function hidePieceCounter(){
+
+
+
+  pieceCount.classList.remove(
+
+    "show",
+
+    "perfect"
+
+  );
+
+
+
+  board.classList.remove(
+
+    "cp-perfect-board"
+
+  );
+
+
+
+  pieceCount.style.display=
+
+    "none";
+
+
+
+  window.setTimeout(
+
+    function(){
+
+
+
+      pieceCount.style.display="";
+
+
+
+    },
+
+    20
+
+  );
+
+}
+
+
+
+
+
+function animatePizzaSlices(callback){
+
+
+
+  sliceAnimation=true;
+
+
+
+  var pieces=
+
+    buildSlicePolygons();
+
+
+
+  var numberOfPieces=
+
+    pieces.length;
+
+
+
+  pizzaImage.style.visibility=
+
+    "hidden";
+
+
+
+  var duration=520;
+
+  var start=null;
+
+
+
+  function frame(time){
+
+
+
+    if(start===null){
+
+      start=time;
+
+    }
+
+
+
+    var p=
+
+      (time-start)/
+
+      duration;
+
+
+
+    if(p>1){
+
+      p=1;
+
+    }
+
+
+
+    var eased=
+
+      1-
+
+      Math.pow(
+
+        1-p,
+
+        3
+
+      );
+
+
+
+    drawSeparatedPizza(
+
+      eased,
+
+      pieces
+
+    );
+
+
+
+    if(p<1){
+
+
+
+      requestAnimationFrame(
+
+        frame
+
+      );
+
+
+
+    }else{
+
+
+
+      showPieceCounter(
+
+        numberOfPieces
+
+      );
+
+
+
+      window.setTimeout(
+
+        function(){
+
+
+
+          hidePieceCounter();
+
+
+
+          pizzaImage.style.visibility=
+
+            "visible";
+
+
+
+          sliceAnimation=false;
+
+
+
+          ctx.clearRect(
+
+            0,0,
+
+            canvas.clientWidth,
+
+            canvas.clientHeight
+
+          );
+
+
+
+          if(callback){
+
+            callback();
+
+          }
+
+
+
+        },
+
+        1300
+
+      );
+
+    }
+
+  }
+
+
+
+  requestAnimationFrame(frame);
+
+}
+
+
+
+
+
+/* ===== CUTTING ===== */
+
+
+
+function pointerDown(event){
+
+
+
+  if(
+
+    cuts.length>=3||
+
+    resultStarted||
+
+    timerFinished
+
+  ){
+
+    return;
+
+  }
+
+
+
+  initAudio();
+
+
+
+  if(!timerStarted){
+
+    startTimer();
+
+  }
+
+
+
+  drawing=true;
+
+
+
+  startPoint=
+
+    getPointerPosition(event);
+
+
+
+  currentPoint=
+
+    startPoint;
+
+
+
+  lastPointer=
+
+    startPoint;
+
+
+
+  lastCutSoundTime=0;
+
+  lastCutVibrationTime=0;
+
+
+
+  board.classList.add(
+
+    "cp-cut-touch"
+
+  );
+
+
+
+  try{
+
+
+
+    canvas.setPointerCapture(
+
+      event.pointerId
+
+    );
+
+
+
+  }catch(e){}
+
+
+
+  redraw();
+
+}
+
+
+
+
+
+function pointerMove(event){
+
+
+
+  if(
+
+    !drawing||
+
+    timerFinished
+
+  ){
+
+    return;
+
+  }
+
+
+
+  var point=
+
+    getPointerPosition(event);
+
+
+
+  if(lastPointer){
+
+
+
+    var dx=
+
+      point.x-lastPointer.x;
+
+
+
+    var dy=
+
+      point.y-lastPointer.y;
+
+
+
+    var distance=
+
+      Math.sqrt(
+
+        dx*dx+
+
+        dy*dy
+
+      );
+
+
+
+    if(distance>0.2){
+
+
+
+      cutterAngle=
+
+        Math.atan2(
+
+          dy,
+
+          dx
+
+        )+
+
+        Math.PI;
+
+
+
+      wheelRotation+=
+
+        distance/17;
+
+
+
+      if(distance>1.2){
+
+
+
+        soundCutMovement(
+
+          distance
+
+        );
+
+
+
+        hapticCutMovement();
+
+      }
+
+    }
+
+  }
+
+
+
+  currentPoint=point;
+
+  lastPointer=point;
+
+
+
+  redraw();
+
+}
+
+
+
+
+
+function pointerUp(event){
+
+
+
+  if(
+
+    !drawing||
+
+    timerFinished
+
+  ){
+
+    return;
+
+  }
+
+
+
+  drawing=false;
+
+
+
+  board.classList.remove(
+
+    "cp-cut-touch"
+
+  );
+
+
+
+  var endPoint=
+
+    getPointerPosition(event);
+
+
+
+  var dx=
+
+    endPoint.x-
+
+    startPoint.x;
+
+
+
+  var dy=
+
+    endPoint.y-
+
+    startPoint.y;
+
+
+
+  var distance=
+
+    Math.sqrt(
+
+      dx*dx+
+
+      dy*dy
+
+    );
+
+
+
+  if(distance>15){
+
+
+
+    cuts.push({
+
+
+
+      a:{
+
+        x:startPoint.x,
+
+        y:startPoint.y
+
+      },
+
+
+
+      b:{
+
+        x:endPoint.x,
+
+        y:endPoint.y
+
+      }
+
+    });
+
+
+
+    if(cuts.length===3){
+
+
+
+      stopTimer();
+
+
+
+      hapticThirdCut();
+
+      soundThirdCut();
+
+
+
+    }else{
+
+
+
+      hapticCut();
+
+      soundCutFinish();
+
+    }
+
+  }
+
+
+
+  startPoint=null;
+
+  currentPoint=null;
+
+  lastPointer=null;
+
+
+
+  updateCutCounter();
+
+  redraw();
+
+
+
+  if(cuts.length===3){
+
+
+
+    resultStarted=true;
+
+
+
+    window.setTimeout(
+
+      function(){
+
+
+
+        animatePizzaSlices(
+
+          calculateResult
+
+        );
+
+
+
+      },
+
+      260
+
+    );
+
+  }
+
+}
+
+
+
+
+
+function updateCutCounter(){
+
+
+
+  cutCounter.classList.remove(
+
+    "cp-pulse"
+
+  );
+
+
+
+  if(cuts.length>=3){
+
+
+
+    cutCounter.textContent=
+
+      "3 РАЗРЕЗА ГОТОВЫ";
+
+
+
+  }else{
+
+
+
+    cutCounter.textContent=
+
+      "РАЗРЕЗ "+
+
+      (cuts.length+1)+
+
+      " ИЗ 3";
+
+  }
+
+
+
+  void cutCounter.offsetWidth;
+
+
+
+  cutCounter.classList.add(
+
+    "cp-pulse"
+
+  );
+
+}
+
+
+
+
+
+/* ===== SCORING ===== */
+
+
+
+function measurePieces(){
+
+
+
+  var circle=
+
+    getPizzaGeometry();
+
+
+
+  var counts={};
+
+  var total=0;
+
+
+
+  var step=
+
+    Math.max(
+
+      2,
+
+      circle.r/95
+
+    );
+
+
+
+  for(
+
+    var y=circle.cy-circle.r;
+
+    y<=circle.cy+circle.r;
+
+    y+=step
+
+  ){
+
+
+
+    for(
+
+      var x=circle.cx-circle.r;
+
+      x<=circle.cx+circle.r;
+
+      x+=step
+
+    ){
+
+
+
+      var dx=
+
+        x-circle.cx;
+
+
+
+      var dy=
+
+        y-circle.cy;
+
+
+
+      if(
+
+        dx*dx+
+
+        dy*dy>
+
+        circle.r*
+
+        circle.r
+
+      ){
+
+        continue;
+
+      }
+
+
+
+      total++;
+
+
+
+      var mask=0;
+
+
+
+      for(var i=0;i<cuts.length;i++){
+
+
+
+        if(
+
+          lineSide(
+
+            {x:x,y:y},
+
+            cuts[i]
+
+          )>=0
+
+        ){
+
+
+
+          mask|=
+
+            (1<<i);
+
+        }
+
+      }
+
+
+
+      if(!counts[mask]){
+
+        counts[mask]=0;
+
+      }
+
+
+
+      counts[mask]++;
+
+    }
+
+  }
+
+
+
+  var pieces=[];
+
+
+
+  Object.keys(
+
+    counts
+
+  ).forEach(
+
+    function(key){
+
+
+
+      var fraction=
+
+        counts[key]/
+
+        total;
+
+
+
+      if(fraction>.004){
+
+
+
+        pieces.push(
+
+          fraction
+
+        );
+
+      }
+
+    }
+
+  );
+
+
+
+  pieces.sort(
+
+    function(a,b){
+
+      return b-a;
+
+    }
+
+  );
+
+
+
+  return pieces;
+
+}
+
+
+
+
+
+function calculateScore(pieces){
+
+
+
+  var target=1/6;
+
+
+
+  var sorted=
+
+    pieces.slice();
+
+
+
+  sorted.sort(
+
+    function(a,b){
+
+
+
+      return (
+
+        Math.abs(a-target)-
+
+        Math.abs(b-target)
+
+      );
+
+    }
+
+  );
+
+
+
+  var selected=
+
+    sorted.slice(0,6);
+
+
+
+  while(
+
+    selected.length<6
+
+  ){
+
+    selected.push(0);
+
+  }
+
+
+
+  var error=0;
+
+
+
+  for(var i=0;i<6;i++){
+
+
+
+    error+=
+
+      Math.abs(
+
+        selected[i]-
+
+        target
+
+      );
+
+  }
+
+
+
+  error=
+
+    error/
+
+    6/
+
+    target;
+
+
+
+  var score=
+
+    100*
+
+    (1-error);
+
+
+
+  var regionPenalty=
+
+    Math.abs(
+
+      pieces.length-6
+
+    )*
+
+    12;
+
+
+
+  score-=
+
+    regionPenalty;
+
+
+
+  if(
+
+    pieces.length!==6
+
+  ){
+
+
+
+    score=
+
+      Math.min(
+
+        score,
+
+        88
+
+      );
+
+  }
+
+
+
+  if(score<0){
+
+    score=0;
+
+  }
+
+
+
+  if(score>100){
+
+    score=100;
+
+  }
+
+
+
+  return (
+
+    Math.round(
+
+      score*10
+
+    )/
+
+    10
+
+  );
+
+}
+
+
+
+
+
+/* ===== RESULT ===== */
+
+
+
+async function calculateResult(){
+
+
+
+  var pieces=
+
+    measurePieces();
+
+
+
+  currentScore=
+
+    calculateScore(pieces);
+
+
+
+  scoreElement.textContent=
+
+    "0.0%";
+
+
+
+  resultTimeElement.textContent=
+
+    "ВРЕМЯ "+
+
+    currentTime.toFixed(2)+
+
+    " СЕК";
+
+
+
+  scoreElement.classList.remove(
+
+    "cp-score-finish",
+
+    "cp-score-great",
+
+    "cp-score-warrior",
+
+    "cp-score-perfect"
+
+  );
+
+
+
+  resultMessage.classList.remove(
+
+    "warrior",
+
+    "perfect"
+
+  );
+
+
+
+  resultMessage.textContent="";
+
+  competitionElement.textContent="";
+
+
+
+  resultMessage.style.opacity="0";
+
+  resultMessage.style.transform=
+
+    "translateY(8px)";
+
+
+
+  competitionElement.style.opacity="0";
+
+  competitionElement.style.transform=
+
+    "translateY(8px)";
+
+
+
+  resultActions.style.opacity="0";
+
+  resultActions.style.transform=
+
+    "translateY(10px)";
+
+
+
+  recordElement.classList.remove(
+
+    "show"
+
+  );
+
+
+
+  bestResultElement.classList.remove(
+
+    "show"
+
+  );
+
+
+
+  showScreen(
+
+    resultScreen
+
+  );
+
+
+
+  resultActions.style.display=
+
+    "grid";
+
+
+
+  lockButton.disabled=false;
+
+  againButton.disabled=false;
+
+
+
+  hideLockError();
+
+
+
+  var leaderboardPromise=
+
+    loadLeaderboard();
+
+
+
+  var duration=900;
+
+  var start=null;
+
+
+
+  function animateScore(time){
+
+
+
+    if(start===null){
+
+      start=time;
+
+    }
+
+
+
+    var progress=
+
+      (time-start)/
+
+      duration;
+
+
+
+    if(progress>1){
+
+      progress=1;
+
+    }
+
+
+
+    var eased=
+
+      1-
+
+      Math.pow(
+
+        1-progress,
+
+        3
+
+      );
+
+
+
+    var displayed=
+
+      currentScore*
+
+      eased;
+
+
+
+    scoreElement.textContent=
+
+      displayed.toFixed(1)+
+
+      "%";
+
+
+
+    if(progress<1){
+
+
+
+      requestAnimationFrame(
+
+        animateScore
+
+      );
+
+
+
+    }else{
+
+
+
+      scoreElement.textContent=
+
+        currentScore.toFixed(1)+
+
+        "%";
+
+
+
+      if(currentScore>=100){
+
+
+
+        scoreElement.classList.add(
+
+          "cp-score-perfect"
+
+        );
+
+
+
+        hapticPerfect();
+
+        soundUltraPerfect();
+
+        launchConfetti();
+
+
+
+      }else if(currentScore>=95){
+
+
+
+        scoreElement.classList.add(
+
+          "cp-score-warrior"
+
+        );
+
+
+
+        hapticPerfect();
+
+        soundPerfectResult();
+
+
+
+      }else if(currentScore>=92){
+
+
+
+        scoreElement.classList.add(
+
+          "cp-score-great"
+
+        );
+
+
+
+        hapticPerfect();
+
+        soundGreatResult();
+
+
+
+      }else{
+
+
+
+        scoreElement.classList.add(
+
+          "cp-score-finish"
+
+        );
+
+
+
+        hapticResult();
+
+        soundResult();
+
+      }
+
+
+
+      finishResultReveal();
+
+    }
+
+  }
+
+
+
+
+
+  async function finishResultReveal(){
+
+
+
+    await leaderboardPromise;
+
+
+
+    updateResultMessage();
+
+    updateCompetitionMessage();
+
+
+
+    resultMessage.style.transition=
+
+      "opacity .28s ease, transform .28s ease";
+
+
+
+    requestAnimationFrame(
+
+      function(){
+
+
+
+        resultMessage.style.opacity="1";
+
+
+
+        resultMessage.style.transform=
+
+          "translateY(0)";
+
+      }
+
+    );
+
+
+
+    window.setTimeout(
+
+      function(){
+
+
+
+        updatePersonalRecord();
+
+
+
+      },
+
+      180
+
+    );
+
+
+
+    window.setTimeout(
+
+      function(){
+
+
+
+        competitionElement.style.transition=
+
+          "opacity .3s ease, transform .3s ease";
+
+
+
+        competitionElement.style.opacity="1";
+
+
+
+        competitionElement.style.transform=
+
+          "translateY(0)";
+
+
+
+      },
+
+      300
+
+    );
+
+
+
+    window.setTimeout(
+
+      function(){
+
+
+
+        resultActions.style.transition=
+
+          "opacity .32s ease, transform .32s ease";
+
+
+
+        resultActions.style.opacity="1";
+
+
+
+        resultActions.style.transform=
+
+          "translateY(0)";
+
+
+
+      },
+
+      520
+
+    );
+
+  }
+
+
+
+  requestAnimationFrame(
+
+    animateScore
+
+  );
+
+}
+
+
+
+
+
+/* ===== RESET ===== */
+
+
+
+function resetGame(){
+
+
+
+  cuts=[];
+
+
+
+  drawing=false;
+
+
+
+  startPoint=null;
+
+  currentPoint=null;
+
+  lastPointer=null;
+
+
+
+  resultStarted=false;
+
+  sliceAnimation=false;
+
+
+
+  currentScore=0;
+
+
+
+  cutterAngle=0;
+
+  wheelRotation=0;
+
+
+
+  lastCutSoundTime=0;
+
+  lastCutVibrationTime=0;
+
+
+
+  resetTimer();
+
+
+
+  pizzaImage.style.visibility=
+
+    "visible";
+
+
+
+  board.classList.remove(
+
+    "cp-cut-touch",
+
+    "cp-perfect-board"
+
+  );
+
+
+
+  hidePieceCounter();
+
+
+
+  resultMessage.classList.remove(
+
+    "warrior",
+
+    "perfect"
+
+  );
+
+
+
+  scoreElement.classList.remove(
+
+    "cp-score-finish",
+
+    "cp-score-great",
+
+    "cp-score-warrior",
+
+    "cp-score-perfect"
+
+  );
+
+
+
+  resultMessage.style.transition=
+
+    "none";
+
+
+
+  resultMessage.style.opacity="";
+
+  resultMessage.style.transform="";
+
+
+
+  competitionElement.style.transition=
+
+    "none";
+
+
+
+  competitionElement.style.opacity="";
+
+  competitionElement.style.transform="";
+
+
+
+  resultActions.style.transition=
+
+    "none";
+
+
+
+  resultActions.style.opacity="";
+
+  resultActions.style.transform="";
+
+
+
+  recordElement.classList.remove(
+
+    "show"
+
+  );
+
+
+
+  bestResultElement.classList.remove(
+
+    "show"
+
+  );
+
+
+
+  lockButton.disabled=false;
+
+
+
+  lockButton.textContent=
+
+    "ЗАФИКСИРОВАТЬ РЕЗУЛЬТАТ";
+
+
+
+  updateCutCounter();
+
+
+
+  showScreen(
+
+    gameScreen
+
+  );
+
+
+
+  window.setTimeout(
+
+    function(){
+
+
+
+      resizeCanvas();
+
+
+
+    },
+
+    100
+
+  );
+
+}
+
+
+
+
+
+/* ===== TELEGRAM ===== */
+
+
+
+function resetTelegramBox(){
+
+
+
+  telegramButton.disabled=false;
+
+
+
+  telegramButton.textContent=
+
+    "✈ ПОДКЛЮЧИТЬ TELEGRAM";
+
+
+
+  telegramStatus.textContent="";
+
+
+
+  telegramStatus.classList.remove(
+
+    "show"
+
+  );
+
+}
+
+
+
+
+
+async function connectTelegram(){
+
+
+
+  initAudio();
+
+  hapticTap();
+
+
+
+  if(!playerPhone){
+
+
+
+    telegramStatus.textContent=
+
+      "Не удалось определить номер телефона.";
+
+
+
+    telegramStatus.classList.add(
+
+      "show"
+
+    );
+
+
+
+    return;
+
+  }
+
+
+
+  telegramButton.disabled=true;
+
+
+
+  telegramButton.textContent=
+
+    "ПОДКЛЮЧАЕМ...";
+
+
+
+  telegramStatus.classList.remove(
+
+    "show"
+
+  );
+
+
+
+  telegramStatus.textContent="";
+
+
+
+  try{
+
+
+
+    var data=
+
+      await rpc(
+
+        "create_pizza_telegram_link",
+
+        {
+
+          p_phone:
+
+            playerPhone
+
+        }
+
+      );
+
+
+
+    if(
+
+      !data||
+
+      data.success!==true
+
+    ){
+
+
+
+      throw new Error(
+
+        "Telegram link error"
+
+      );
+
+    }
+
+
+
+    if(
+
+      data.connected===true
+
+    ){
+
+
+
+      telegramButton.textContent=
+
+        "✓ TELEGRAM ПОДКЛЮЧЁН";
+
+
+
+      telegramButton.disabled=true;
+
+
+
+      telegramStatus.textContent=
+
+        "Если ты попадёшь в TOP-3, сообщение придёт в Telegram.";
+
+
+
+      telegramStatus.classList.add(
+
+        "show"
+
+      );
+
+
+
+      return;
+
+    }
+
+
+
+    if(data.telegram_url){
+
+
+
+      telegramButton.textContent=
+
+        "ОТКРЫВАЕМ TELEGRAM...";
+
+
+
+      telegramStatus.textContent=
+
+        "В Telegram нажми «Начать», чтобы завершить подключение.";
+
+
+
+      telegramStatus.classList.add(
+
+        "show"
+
+      );
+
+
+
+      window.setTimeout(
+
+        function(){
+
+
+
+          window.location.href=
+
+            data.telegram_url;
+
+
+
+        },
+
+        350
+
+      );
+
+
+
+      return;
+
+    }
+
+
+
+    throw new Error(
+
+      "Telegram URL missing"
+
+    );
+
+
+
+  }catch(error){
+
+
+
+    console.error(error);
+
+
+
+    telegramButton.disabled=false;
+
+
+
+    telegramButton.textContent=
+
+      "✈ ПОДКЛЮЧИТЬ TELEGRAM";
+
+
+
+    telegramStatus.textContent=
+
+      "Не удалось открыть Telegram. Попробуй ещё раз.";
+
+
+
+    telegramStatus.classList.add(
+
+      "show"
+
+    );
+
+  }
+
+}
+
+
+
+
+
+/* ===== LOCK SCORE ===== */
+
+
+
+async function lockScore(){
+
+
+
+  if(
+
+    timerFinished &&
+
+    currentTime>=GAME_LIMIT &&
+
+    cuts.length<3
+
+  ){
+
+    return;
+
+  }
+
+
+
+  initAudio();
+
+
+
+  hapticLock();
+
+  soundLock();
+
+
+
+  hideLockError();
+
+
+
+  lockButton.disabled=true;
+
+  againButton.disabled=true;
+
+
+
+  lockButton.textContent=
+
+    "ФИКСИРУЕМ...";
+
+
+
+  try{
+
+
+
+    var data=
+
+      await rpc(
+
+        "lock_pizza_weekly_score",
+
+        {
+
+          p_name:
+
+            playerName,
+
+
+
+          p_phone:
+
+            playerPhone,
+
+
+
+          p_score:
+
+            currentScore,
+
+
+
+          p_time:
+
+            currentTime
+
+        }
+
+      );
+
+
+
+    if(
+
+      data&&
+
+      data.success===true
+
+    ){
+
+
+
+      var place=
+
+        Number(
+
+          data.place||0
+
+        );
+
+
+
+      if(place>0){
+
+
+
+        finalBig.textContent=
+
+          currentScore.toFixed(1)+
+
+          "% · "+
+
+          currentTime.toFixed(2)+
+
+          " сек — сейчас это "+
+
+          place+
+
+          " место.";
+
+
+
+      }else{
+
+
+
+        finalBig.textContent=
+
+          currentScore.toFixed(1)+
+
+          "% · "+
+
+          currentTime.toFixed(2)+
+
+          " сек зафиксировано.";
+
+      }
+
+
+
+      hapticPerfect();
+
+
+
+      resetTelegramBox();
+
+
+
+      await loadLeaderboard();
+
+
+
+      showScreen(
+
+        finalScreen
+
+      );
+
+
+
+      return;
+
+    }
+
+
+
+    if(
+
+      data&&
+
+      data.reason===
+
+      "already_locked"
+
+    ){
+
+
+
+      showLockError(
+
+        "Результат с этим номером телефона уже зафиксирован на этой неделе."
+
+      );
+
+
+
+    }else if(
+
+      data&&
+
+      data.reason===
+
+      "invalid_time"
+
+    ){
+
+
+
+      showLockError(
+
+        "Не удалось сохранить время попытки. Попробуй ещё раз."
+
+      );
+
+
+
+    }else{
+
+
+
+      showLockError(
+
+        "Не удалось зафиксировать результат. Попробуй ещё раз."
+
+      );
+
+    }
+
+
+
+  }catch(error){
+
+
+
+    console.error(error);
+
+
+
+    showLockError(
+
+      "Не удалось связаться с сервером. Проверь интернет и попробуй ещё раз."
+
+    );
+
+  }
+
+
+
+  lockButton.disabled=false;
+
+  againButton.disabled=false;
+
+
+
+  lockButton.textContent=
+
+    "ЗАФИКСИРОВАТЬ "+
+
+    currentScore.toFixed(1)+
+
+    "% · "+
+
+    currentTime.toFixed(2)+
+
+    " С";
+
+}
+
+
+
+
+
+/* ===== START ===== */
+
+
+
+async function startGame(){
+
+
+
+  initAudio();
+
+  hapticTap();
+
+
+
+  hideRegisterError();
+
+
+
+  var name=
+
+    nameInput.value.trim();
+
+
+
+  var phone=
+
+    normalizePhone(
+
+      phoneInput.value
+
+    );
+
+
+
+  if(name.length<2){
+
+
+
+    showRegisterError(
+
+      "Напиши имя или ник."
+
+    );
+
+
+
+    return;
+
+  }
+
+
+
+  if(phone.length<10){
+
+
+
+    showRegisterError(
+
+      "Проверь номер телефона."
+
+    );
+
+
+
+    return;
+
+  }
+
+
+
+  if(!consentInput.checked){
+
+
+
+    showRegisterError(
+
+      "Нужно согласие на обработку данных."
+
+    );
+
+
+
+    return;
+
+  }
+
+
+
+  playerName=name;
+
+  playerPhone=phone;
+
+
+
+  startButton.disabled=true;
+
+
+
+  startButton.textContent=
+
+    "ПРОВЕРЯЕМ...";
+
+
+
+  var existing=
+
+    await checkExistingEntry();
+
+
+
+  startButton.disabled=false;
+
+
+
+  startButton.textContent=
+
+    "НАЧАТЬ ИГРУ";
+
+
+
+  if(
+
+    existing&&
+
+    existing.locked===true
+
+  ){
+
+
+
+    var oldScore=
+
+      Number(
+
+        existing.score||0
+
+      );
+
+
+
+    finalBig.textContent=
+
+      "Твой результат этой недели — "+
+
+      oldScore.toFixed(1)+
+
+      "%.";
+
+
+
+    resetTelegramBox();
+
+
+
+    await loadLeaderboard();
+
+
+
+    showScreen(
+
+      finalScreen
+
+    );
+
+
+
+    return;
+
+  }
+
+
+
+  bestTrainingScore=0;
+
+  bestTrainingTime=null;
+
+
+
+  resetGame();
+
+}
+
+
+
+
+
+/* ===== EVENTS ===== */
+
+
+
+startButton.addEventListener(
+
+  "click",
+
+  startGame
+
+);
+
+
+
+againButton.addEventListener(
+
+  "click",
+
+  function(){
+
+
+
+    initAudio();
+
+    hapticTap();
+
+
+
+    resetGame();
+
+  }
+
+);
+
+
+
+lockButton.addEventListener(
+
+  "click",
+
+  lockScore
+
+);
+
+
+
+telegramButton.addEventListener(
+
+  "click",
+
+  connectTelegram
+
+);
+
+
+
+canvas.addEventListener(
+
+  "pointerdown",
+
+  pointerDown
+
+);
+
+
+
+canvas.addEventListener(
+
+  "pointermove",
+
+  pointerMove
+
+);
+
+
+
+canvas.addEventListener(
+
+  "pointerup",
+
+  pointerUp
+
+);
+
+
+
+canvas.addEventListener(
+
+  "pointercancel",
+
+  pointerUp
+
+);
+
+
+
+pizzaImage.addEventListener(
+
+  "load",
+
+  resizeCanvas
+
+);
+
+
+
+window.addEventListener(
+
+  "resize",
+
+  function(){
+
+
+
+    if(
+
+      gameScreen.classList.contains(
+
+        "active"
+
+      )
+
+    ){
+
+
+
+      resizeCanvas();
+
+    }
+
+  }
+
+);
+
+
+
+if(pizzaImage.complete){
+
+
+
+  window.setTimeout(
+
+    resizeCanvas,
+
+    100
+
+  );
+
+}
+
+
+
+loadLeaderboard();
+
+
+
+})();
+
+</script>
