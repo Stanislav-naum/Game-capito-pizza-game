@@ -87,6 +87,18 @@ html,body{margin:0;padding:0;width:100%;background:#fff;overscroll-behavior-y:no
 @media(max-height:740px) and (max-width:600px){body.cp-playing #cp-game.active{gap:7px;padding-top:calc(env(safe-area-inset-top) + 4px)!important;padding-bottom:calc(env(safe-area-inset-bottom) + 8px)!important}body.cp-playing #cp-game .cp-game-instruction{font-size:24px!important;margin-bottom:7px}body.cp-playing #cp-board{width:min(100%,390px,calc((100dvh - 270px)*1.12))}body.cp-playing #cp-game .cp-tip{padding:8px 12px;font-size:14px}}
 </style>
 
+
+<style id="capito-v5-photo-game">
+@media(max-width:600px){
+body.cp-playing #capito-pizza-cut{background:#e9d6b9 url("capito-tabletop-v5.webp") center center / cover no-repeat!important}
+body.cp-playing #cp-board{border-radius:0!important;box-shadow:none!important;overflow:visible!important;background:transparent!important;aspect-ratio:1/1!important}
+body.cp-playing #cp-pizza-image{width:150%!important;max-width:none!important;height:100%!important;margin-left:-25%!important;object-fit:fill!important;clip-path:circle(28.2% at 50.3% 50.4%);filter:drop-shadow(0 15px 16px rgba(57,30,12,.24))}
+body.cp-playing #cp-canvas{inset:0!important}
+body.cp-playing #cp-game .cp-game-head{margin-bottom:0!important}
+body.cp-playing #cp-game .cp-game-status{box-shadow:0 5px 22px rgba(57,30,12,.12)!important}
+}
+</style>
+
 <div id="cp-v2-facade" aria-label="Capito — пицца и вино"><img src="capito-facade-new.jpg" alt="Фасад Capito"><span class="cp-v2-walker"></span></div>
 <div id="capito-pizza-cut">
 <button id="cp-v2-sound" type="button" aria-label="Звук включен">🔊</button>
