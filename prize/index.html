@@ -1,0 +1,1004 @@
+<div id="capito-prize">
+
+<style>
+#capito-prize{
+  --blue:#1655d8;
+  --black:#111;
+  font-family:Arial,Helvetica,sans-serif;
+  color:var(--black);
+  width:100%;
+  max-width:480px;
+  margin:0 auto;
+  padding:22px 14px 40px;
+  box-sizing:border-box;
+}
+
+#capito-prize *{
+  box-sizing:border-box;
+}
+
+.cp-prize-screen{
+  display:none;
+}
+
+.cp-prize-screen.active{
+  display:block;
+  animation:cpPrizeIn .35s ease-out;
+}
+
+.cp-prize-brand{
+  text-align:center;
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:3px;
+  margin-bottom:25px;
+}
+
+.cp-prize-card{
+  border:2px solid var(--black);
+  border-radius:22px;
+  overflow:hidden;
+  background:#fff;
+}
+
+.cp-prize-top{
+  background:var(--blue);
+  color:#fff;
+  text-align:center;
+  padding:30px 16px 26px;
+}
+
+.cp-prize-place{
+  font-size:14px;
+  font-weight:900;
+  letter-spacing:2px;
+  margin-bottom:8px;
+}
+
+.cp-prize-title{
+  font-size:38px;
+  line-height:.98;
+  font-weight:900;
+  letter-spacing:-1.5px;
+  margin:0;
+}
+
+.cp-prize-body{
+  padding:24px 18px 20px;
+  text-align:center;
+}
+
+.cp-prize-name{
+  font-size:14px;
+  font-weight:700;
+  margin-bottom:21px;
+}
+
+.cp-prize-label{
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:1.5px;
+  opacity:.55;
+  margin-bottom:5px;
+}
+
+.cp-prize-code{
+  font-size:25px;
+  font-weight:900;
+  letter-spacing:1px;
+  margin-bottom:18px;
+  word-break:break-word;
+}
+
+.cp-prize-expire{
+  font-size:12px;
+  line-height:1.4;
+  opacity:.65;
+  margin-bottom:21px;
+}
+
+.cp-prize-btn{
+  width:100%;
+  min-height:54px;
+  border:2px solid var(--black);
+  border-radius:14px;
+  background:var(--black);
+  color:#fff;
+  padding:12px;
+  font-size:14px;
+  font-weight:900;
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+}
+
+.cp-prize-btn.blue{
+  background:var(--blue);
+  border-color:var(--blue);
+}
+
+.cp-prize-btn.secondary{
+  background:#fff;
+  color:var(--black);
+}
+
+.cp-prize-btn:disabled{
+  opacity:.45;
+  cursor:default;
+}
+
+.cp-prize-info{
+  margin-top:14px;
+  font-size:11px;
+  line-height:1.4;
+  opacity:.62;
+}
+
+.cp-status{
+  text-align:center;
+  padding:55px 15px;
+}
+
+.cp-status-icon{
+  font-size:48px;
+  line-height:1;
+  margin-bottom:18px;
+}
+
+.cp-status-title{
+  font-size:29px;
+  line-height:1;
+  font-weight:900;
+  letter-spacing:-1px;
+  margin-bottom:12px;
+}
+
+.cp-status-text{
+  max-width:380px;
+  margin:0 auto;
+  font-size:14px;
+  line-height:1.45;
+}
+
+.cp-staff-box{
+  display:none;
+  margin-top:14px;
+  padding:17px;
+  border:2px solid var(--black);
+  border-radius:16px;
+  background:#fff;
+}
+
+.cp-staff-box.show{
+  display:block;
+  animation:cpPrizeIn .25s ease-out;
+}
+
+.cp-staff-title{
+  text-align:center;
+  font-size:16px;
+  font-weight:900;
+  margin-bottom:5px;
+}
+
+.cp-staff-subtitle{
+  text-align:center;
+  font-size:11px;
+  line-height:1.4;
+  opacity:.62;
+  margin-bottom:13px;
+}
+
+.cp-pin{
+  width:100%;
+  height:54px;
+  border:2px solid var(--black);
+  border-radius:13px;
+  text-align:center;
+  font-size:25px;
+  font-weight:900;
+  letter-spacing:8px;
+  outline:none;
+  margin-bottom:9px;
+  background:#fff;
+  color:#111;
+}
+
+.cp-pin:focus{
+  border-color:var(--blue);
+}
+
+.cp-staff-actions{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:7px;
+}
+
+.cp-prize-error{
+  display:none;
+  text-align:center;
+  color:#b00020;
+  font-size:12px;
+  font-weight:700;
+  line-height:1.35;
+  margin:11px 0 0;
+}
+
+.cp-loading{
+  text-align:center;
+  padding:70px 15px;
+}
+
+.cp-loading-wheel{
+  width:34px;
+  height:34px;
+  margin:0 auto 17px;
+  border:4px solid #ddd;
+  border-top-color:var(--black);
+  border-radius:50%;
+  animation:cpSpin .7s linear infinite;
+}
+
+.cp-loading-text{
+  font-size:13px;
+  font-weight:900;
+  letter-spacing:1px;
+}
+
+@keyframes cpSpin{
+  to{transform:rotate(360deg)}
+}
+
+@keyframes cpPrizeIn{
+  from{
+    opacity:0;
+    transform:translateY(8px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+@media(max-width:360px){
+  #capito-prize{
+    padding-left:9px;
+    padding-right:9px;
+  }
+
+  .cp-prize-title{
+    font-size:33px;
+  }
+
+  .cp-prize-code{
+    font-size:22px;
+  }
+}
+</style>
+
+
+<div class="cp-prize-brand">
+  CAPITO / PIZZA CUT
+</div>
+
+
+<!-- ЗАГРУЗКА -->
+
+<div id="cp-loading" class="cp-prize-screen active">
+
+  <div class="cp-loading">
+
+    <div class="cp-loading-wheel"></div>
+
+    <div class="cp-loading-text">
+      ПРОВЕРЯЕМ ПРИЗ...
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- АКТИВНЫЙ ПРИЗ -->
+
+<div id="cp-active" class="cp-prize-screen">
+
+  <div class="cp-prize-card">
+
+    <div class="cp-prize-top">
+
+      <div id="cp-place" class="cp-prize-place">
+        1 МЕСТО
+      </div>
+
+      <div class="cp-prize-title">
+        ТЫ<br>ПОБЕДИЛ!
+      </div>
+
+    </div>
+
+    <div class="cp-prize-body">
+
+      <div id="cp-player" class="cp-prize-name"></div>
+
+      <div class="cp-prize-label">
+        ТВОЙ ПРИЗ
+      </div>
+
+      <div id="cp-prize-name" class="cp-prize-code">
+        ПИЦЦА
+      </div>
+
+      <div class="cp-prize-label">
+        КОД ПРИЗА
+      </div>
+
+      <div id="cp-code" class="cp-prize-code">
+        CAPITO-XXXXXX
+      </div>
+
+      <div id="cp-expire" class="cp-prize-expire"></div>
+
+      <button
+        id="cp-show-staff"
+        class="cp-prize-btn blue"
+        type="button"
+      >
+        ПОКАЗАТЬ ОФИЦИАНТУ
+      </button>
+
+      <div class="cp-prize-info">
+        Покажи этот экран сотруднику Capito.
+        Приз можно использовать только один раз.
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ПАНЕЛЬ ОФИЦИАНТА -->
+
+  <div id="cp-staff-box" class="cp-staff-box">
+
+    <div class="cp-staff-title">
+      ПОГАШЕНИЕ ПРИЗА
+    </div>
+
+    <div class="cp-staff-subtitle">
+      Сотрудник Capito вводит действующий
+      код погашения после выдачи приза.
+    </div>
+
+    <input
+      id="cp-pin"
+      class="cp-pin"
+      type="password"
+      inputmode="numeric"
+      maxlength="3"
+      autocomplete="off"
+      placeholder="•••"
+    >
+
+    <div class="cp-staff-actions">
+
+      <button
+        id="cp-redeem"
+        class="cp-prize-btn"
+        type="button"
+      >
+        ПОДТВЕРДИТЬ ВЫДАЧУ
+      </button>
+
+      <button
+        id="cp-cancel"
+        class="cp-prize-btn secondary"
+        type="button"
+      >
+        ОТМЕНА
+      </button>
+
+    </div>
+
+    <div
+      id="cp-redeem-error"
+      class="cp-prize-error"
+    ></div>
+
+  </div>
+
+</div>
+
+
+<!-- УЖЕ ИСПОЛЬЗОВАН -->
+
+<div id="cp-redeemed" class="cp-prize-screen">
+
+  <div class="cp-prize-card">
+
+    <div class="cp-status">
+
+      <div class="cp-status-icon">
+        ✓
+      </div>
+
+      <div class="cp-status-title">
+        ПРИЗ<br>ИСПОЛЬЗОВАН
+      </div>
+
+      <div id="cp-redeemed-text" class="cp-status-text">
+        Этот приз уже был выдан.
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- ИСТЁК -->
+
+<div id="cp-expired" class="cp-prize-screen">
+
+  <div class="cp-prize-card">
+
+    <div class="cp-status">
+
+      <div class="cp-status-icon">
+        ⏱
+      </div>
+
+      <div class="cp-status-title">
+        СРОК ПРИЗА<br>ИСТЁК
+      </div>
+
+      <div class="cp-status-text">
+        Этот приз больше нельзя использовать.
+        Если возник вопрос, обратись к сотруднику Capito.
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- ОШИБКА -->
+
+<div id="cp-invalid" class="cp-prize-screen">
+
+  <div class="cp-prize-card">
+
+    <div class="cp-status">
+
+      <div class="cp-status-icon">
+        ×
+      </div>
+
+      <div class="cp-status-title">
+        ПРИЗ<br>НЕ НАЙДЕН
+      </div>
+
+      <div class="cp-status-text">
+        Ссылка недействительна или код приза указан неверно.
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<script>
+(function(){
+
+"use strict";
+
+
+var SUPABASE_URL=
+"https://betbkhvyejtjqfyuxmql.supabase.co";
+
+var SUPABASE_KEY=
+"sb_publishable_AY3okNvvxefclorginvwZQ_fzRXjrYQ";
+
+
+var prizeCode="";
+
+
+var loadingScreen=
+document.getElementById("cp-loading");
+
+var activeScreen=
+document.getElementById("cp-active");
+
+var redeemedScreen=
+document.getElementById("cp-redeemed");
+
+var expiredScreen=
+document.getElementById("cp-expired");
+
+var invalidScreen=
+document.getElementById("cp-invalid");
+
+
+var placeElement=
+document.getElementById("cp-place");
+
+var playerElement=
+document.getElementById("cp-player");
+
+var prizeNameElement=
+document.getElementById("cp-prize-name");
+
+var codeElement=
+document.getElementById("cp-code");
+
+var expireElement=
+document.getElementById("cp-expire");
+
+
+var staffButton=
+document.getElementById("cp-show-staff");
+
+var staffBox=
+document.getElementById("cp-staff-box");
+
+var pinInput=
+document.getElementById("cp-pin");
+
+var redeemButton=
+document.getElementById("cp-redeem");
+
+var cancelButton=
+document.getElementById("cp-cancel");
+
+var redeemError=
+document.getElementById("cp-redeem-error");
+
+var redeemedText=
+document.getElementById("cp-redeemed-text");
+
+
+function showScreen(screen){
+
+  loadingScreen.classList.remove("active");
+  activeScreen.classList.remove("active");
+  redeemedScreen.classList.remove("active");
+  expiredScreen.classList.remove("active");
+  invalidScreen.classList.remove("active");
+
+  screen.classList.add("active");
+}
+
+
+function apiHeaders(){
+
+  return {
+    "apikey":SUPABASE_KEY,
+    "Authorization":"Bearer "+SUPABASE_KEY,
+    "Content-Type":"application/json"
+  };
+}
+
+
+async function rpc(functionName,body){
+
+  var response=
+  await fetch(
+    SUPABASE_URL+
+    "/rest/v1/rpc/"+
+    functionName,
+    {
+      method:"POST",
+      headers:apiHeaders(),
+      body:JSON.stringify(body||{})
+    }
+  );
+
+  if(!response.ok){
+
+    var text=
+    await response.text();
+
+    throw new Error(
+      "Supabase "+
+      response.status+
+      ": "+
+      text
+    );
+  }
+
+  return await response.json();
+}
+
+
+function getCodeFromURL(){
+
+  var params=
+  new URLSearchParams(
+    window.location.search
+  );
+
+  return (
+    params.get("code")||
+    ""
+  ).trim();
+}
+
+
+function formatDate(value){
+
+  if(!value){
+    return "";
+  }
+
+  var date=new Date(value);
+
+  if(isNaN(date.getTime())){
+    return "";
+  }
+
+  return date.toLocaleDateString(
+    "ru-RU",
+    {
+      day:"2-digit",
+      month:"2-digit",
+      year:"numeric"
+    }
+  );
+}
+
+
+function placeText(place){
+
+  var number=Number(place||0);
+
+  if(number===1){
+    return "1 МЕСТО";
+  }
+
+  if(number===2){
+    return "2 МЕСТО";
+  }
+
+  if(number===3){
+    return "3 МЕСТО";
+  }
+
+  return number+" МЕСТО";
+}
+
+
+function showError(message){
+
+  redeemError.textContent=message;
+  redeemError.style.display="block";
+}
+
+
+function hideError(){
+
+  redeemError.textContent="";
+  redeemError.style.display="none";
+}
+
+
+/* ===== ПРОВЕРКА ПЕРСОНАЛЬНОГО ПРИЗА ===== */
+
+async function checkPrize(){
+
+  prizeCode=getCodeFromURL();
+
+  if(!prizeCode){
+
+    showScreen(invalidScreen);
+    return;
+  }
+
+  try{
+
+    var data=
+    await rpc(
+      "check_pizza_prize",
+      {
+        p_code:prizeCode
+      }
+    );
+
+
+    if(!data||data.success!==true){
+
+      showScreen(invalidScreen);
+      return;
+    }
+
+
+    if(data.status==="redeemed"){
+
+      var usedPrize=
+      String(
+        data.prize_name||
+        "приз"
+      );
+
+      redeemedText.textContent=
+        "Этот приз ("+
+        usedPrize+
+        ") уже был выдан.";
+
+      showScreen(redeemedScreen);
+      return;
+    }
+
+
+    if(data.status==="expired"){
+
+      showScreen(expiredScreen);
+      return;
+    }
+
+
+    if(data.status!=="active"){
+
+      showScreen(invalidScreen);
+      return;
+    }
+
+
+    placeElement.textContent=
+      placeText(data.place);
+
+    playerElement.textContent=
+      data.player_name
+      ?data.player_name+", поздравляем!"
+      :"Поздравляем!";
+
+    prizeNameElement.textContent=
+      String(
+        data.prize_name||
+        ""
+      ).toUpperCase();
+
+    codeElement.textContent=
+      String(
+        data.prize_code||
+        prizeCode
+      ).toUpperCase();
+
+
+    var date=
+    formatDate(
+      data.expires_at
+    );
+
+    if(date){
+
+      expireElement.textContent=
+        "Приз действует до "+
+        date+
+        " включительно.";
+
+    }else{
+
+      expireElement.textContent="";
+    }
+
+
+    showScreen(activeScreen);
+
+
+  }catch(error){
+
+    console.error(error);
+
+    showScreen(invalidScreen);
+  }
+}
+
+
+/* ===== ПОКАЗАТЬ ПАНЕЛЬ ОФИЦИАНТА ===== */
+
+staffButton.addEventListener(
+  "click",
+  function(){
+
+    hideError();
+
+    staffBox.classList.add("show");
+
+    window.setTimeout(
+      function(){
+        pinInput.focus();
+      },
+      150
+    );
+  }
+);
+
+
+/* ===== ОТМЕНА ===== */
+
+cancelButton.addEventListener(
+  "click",
+  function(){
+
+    hideError();
+
+    pinInput.value="";
+
+    staffBox.classList.remove("show");
+  }
+);
+
+
+/* ===== ПОГАШЕНИЕ ПРИЗА ===== */
+
+redeemButton.addEventListener(
+  "click",
+  async function(){
+
+    hideError();
+
+
+    var weeklyCode=
+    pinInput.value
+    .replace(/\D/g,"")
+    .trim();
+
+
+    if(!weeklyCode){
+
+      showError(
+        "Введите код погашения."
+      );
+
+      return;
+    }
+
+
+    if(weeklyCode.length!==3){
+
+      showError(
+        "Код погашения состоит из 3 цифр."
+      );
+
+      return;
+    }
+
+
+    redeemButton.disabled=true;
+    cancelButton.disabled=true;
+
+    redeemButton.textContent=
+      "ПРОВЕРЯЕМ...";
+
+
+    try{
+
+      /*
+        prizeCode:
+        персональный код победителя из ссылки.
+
+        weeklyCode:
+        служебный код текущей призовой недели:
+        001, затем 002, затем 003...
+      */
+
+      var data=
+      await rpc(
+        "redeem_pizza_prize_weekly",
+        {
+          p_prize_code:prizeCode,
+          p_weekly_code:weeklyCode
+        }
+      );
+
+
+      if(
+        data&&
+        data.success===true
+      ){
+
+        redeemedText.textContent=
+          "Приз «"+
+          String(
+            data.prize_name||
+            ""
+          )+
+          "» выдан. Повторное использование невозможно.";
+
+        showScreen(redeemedScreen);
+
+        return;
+      }
+
+
+      if(
+        data&&
+        data.reason==="wrong_weekly_code"
+      ){
+
+        showError(
+          "Неверный код погашения."
+        );
+
+      }else if(
+        data&&
+        data.reason==="already_redeemed"
+      ){
+
+        redeemedText.textContent=
+          "Этот приз уже был выдан.";
+
+        showScreen(redeemedScreen);
+
+        return;
+
+      }else if(
+        data&&
+        data.reason==="expired"
+      ){
+
+        showScreen(expiredScreen);
+
+        return;
+
+      }else if(
+        data&&
+        data.reason==="not_found"
+      ){
+
+        showError(
+          "Приз не найден."
+        );
+
+      }else{
+
+        showError(
+          "Не удалось подтвердить приз."
+        );
+      }
+
+
+    }catch(error){
+
+      console.error(error);
+
+      showError(
+        "Ошибка соединения. Попробуйте ещё раз."
+      );
+    }
+
+
+    redeemButton.disabled=false;
+    cancelButton.disabled=false;
+
+    redeemButton.textContent=
+      "ПОДТВЕРДИТЬ ВЫДАЧУ";
+  }
+);
+
+
+/* ===== ENTER ===== */
+
+pinInput.addEventListener(
+  "keydown",
+  function(event){
+
+    if(event.key==="Enter"){
+      redeemButton.click();
+    }
+  }
+);
+
+
+/* ===== START ===== */
+
+checkPrize();
+
+})();
+</script>
+
+</div>
