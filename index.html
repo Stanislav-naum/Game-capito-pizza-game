@@ -65,7 +65,7 @@ html,body{margin:0;padding:0;width:100%;background:#fff;overscroll-behavior-y:no
 @media(max-width:600px){
  body.cp-playing #cp-v2-facade{display:none!important}
  body.cp-playing{overflow:hidden!important}
- body.cp-playing #capito-pizza-cut{max-width:none!important;width:100%!important;height:100dvh!important;min-height:100dvh!important;overflow:hidden!important;padding:0!important;background:#f2e3cd url("capito-tabletop-v8.webp") center / cover no-repeat!important;color:#173d34}
+ body.cp-playing #capito-pizza-cut{max-width:none!important;width:100%!important;height:100dvh!important;min-height:100dvh!important;overflow:hidden!important;padding:0!important;background:#f2e3cd url("capito-tabletop-v9.webp") center / cover no-repeat!important;color:#173d34}
  body.cp-playing #cp-mobile-app{height:100%!important}
  body.cp-playing #cp-game.active{height:100%!important;min-height:0!important;display:flex!important;flex-direction:column;align-items:center;justify-content:space-between;gap:0!important;padding:calc(env(safe-area-inset-top) + 14px) 13px calc(env(safe-area-inset-bottom) + 24px)!important;overflow:hidden;box-sizing:border-box}
  body.cp-playing #cp-game .cp-brand{font-size:clamp(11px,3vw,14px);letter-spacing:3.5px;font-weight:800;color:#173d34;margin:0 0 8px!important;flex:0 0 auto}
@@ -87,7 +87,7 @@ html,body{margin:0;padding:0;width:100%;background:#fff;overscroll-behavior-y:no
 
 <style id="capito-v8-polish">
 @media(max-width:600px){
- body.cp-playing #capito-pizza-cut{background-image:url("capito-tabletop-v8.webp")!important;background-color:#eee0c8!important}
+ body.cp-playing #capito-pizza-cut{background-image:url("capito-tabletop-v9.webp")!important;background-color:#eee0c8!important}
  body.cp-playing #cp-piece-count,body.cp-playing #cp-piece-count.perfect{background:#173d34!important;color:#fff!important;box-shadow:0 9px 28px rgba(20,54,44,.24)!important}
  body.cp-playing #cp-game .cp-game-instruction{text-shadow:none!important}
  body.cp-playing #cp-board{filter:drop-shadow(0 12px 12px rgba(68,37,18,.16))}
@@ -95,6 +95,21 @@ html,body{margin:0;padding:0;width:100%;background:#fff;overscroll-behavior-y:no
  body.cp-playing #cp-game .cp-tip{box-shadow:0 6px 20px rgba(71,42,24,.09)!important}
 }
 </style>
+
+<style id="capito-v9-photo-fix">
+@media(max-width:600px){
+ body.cp-playing #capito-pizza-cut{background-image:url("capito-tabletop-v9.webp")!important;background-position:center center!important}
+ body.cp-playing #cp-board{width:min(calc(100vw - 8px),480px,calc(100dvh - 275px))!important;filter:none!important;filter:drop-shadow(0 11px 12px rgba(69,38,20,.18))!important}
+ body.cp-playing #cp-pizza-image{filter:none!important}
+ body.cp-playing #cp-board.cp-separated #cp-pizza-image{visibility:hidden!important}
+ body.cp-playing #cp-game .cp-game-instruction{margin-bottom:11px!important;font-size:clamp(29px,8vw,42px)!important}
+ body.cp-playing #cp-game .cp-game-status{min-height:52px!important}
+ body.cp-playing #cp-game .cp-tip{padding:13px 18px!important}
+ body.cp-playing #cp-piece-count{background:#173d34!important}
+}
+@media(max-height:740px) and (max-width:600px){body.cp-playing #cp-board{width:min(calc(100vw - 8px),calc(100dvh - 250px))!important}}
+</style>
+
 <div id="cp-v2-facade" aria-label="Capito — пицца и вино"><img src="capito-facade-new.jpg" alt="Фасад Capito"><span class="cp-v2-walker"></span></div>
 <div id="capito-pizza-cut">
 <button id="cp-v2-sound" type="button" aria-label="Звук включен">🔊</button>
@@ -6080,6 +6095,8 @@ function drawSeparatedPizza(
 
 
 
+  document.getElementById("cp-board").classList.add("cp-separated");
+
   // Transparent separation: marble shows through gaps, not a dark disk.
 
   var separation=
@@ -8865,6 +8882,14 @@ loadLeaderboard();
     var sec=Math.ceil(n); if(sec===lastSecond)return; lastSecond=sec;
     try{ if(typeof makeTone==='function'){makeTone(sec===1?880:660,.055,.055,'sine',0);} }catch(e){}
   },80);
+})();
+</script>
+
+<script id="capito-v9-reset-slices">
+(function(){
+ var game=document.getElementById('cp-game'), board=document.getElementById('cp-board');
+ if(!game||!board)return;
+ new MutationObserver(function(){if(game.classList.contains('active'))board.classList.remove('cp-separated');}).observe(game,{attributes:true,attributeFilter:['class']});
 })();
 </script>
 </body>
