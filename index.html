@@ -1748,6 +1748,69 @@ html,body{
 
 }
 
+
+/* ===== VERCEL MOBILE GAME VIEWPORT FIX =====
+   Fixes only the cutting screen so the page itself does not scroll/move
+   while the guest is drawing the three cuts.
+*/
+@media (max-width: 600px) {
+  #cp-game.active{
+    position:fixed !important;
+    z-index:1000;
+    top:0;
+    right:0;
+    bottom:0;
+    left:0;
+    width:100% !important;
+    max-width:480px !important;
+    height:100dvh !important;
+    min-height:0 !important;
+    margin:0 auto !important;
+    padding:
+      max(8px, env(safe-area-inset-top))
+      10px
+      max(8px, env(safe-area-inset-bottom)) !important;
+    overflow:hidden !important;
+    background:#fff;
+    box-sizing:border-box;
+    touch-action:none;
+    overscroll-behavior:none;
+  }
+
+  #cp-game.active .cp-game-head{
+    flex:0 0 auto;
+  }
+
+  #cp-game.active #cp-board{
+    flex:0 0 auto;
+    max-height:calc(
+      100dvh
+      - env(safe-area-inset-top)
+      - env(safe-area-inset-bottom)
+      - 105px
+    );
+  }
+
+  #cp-game.active #cp-pizza-image{
+    max-height:calc(
+      100dvh
+      - env(safe-area-inset-top)
+      - env(safe-area-inset-bottom)
+      - 105px
+    );
+    object-fit:contain;
+  }
+
+  #cp-game.active .cp-tip{
+    flex:0 0 auto;
+  }
+
+  body:has(#cp-game.active){
+    overflow:hidden !important;
+    overscroll-behavior:none !important;
+  }
+}
+
 </style>
 
 
