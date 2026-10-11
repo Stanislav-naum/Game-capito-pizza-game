@@ -66,6 +66,29 @@ body.cp-playing #cp-canvas{z-index:2}
  #cp-register .cp-input{height:39px!important;min-height:39px!important;}
 }
 </style>
+<style id="cp-v30-styles">
+.cp-v30-wrap{margin:14px 0 18px;font-family:inherit;color:#173b30}
+.cp-v30-head{background:#eff4ee;border:1px solid #d9e6d8;border-radius:15px;padding:12px 14px;text-align:center;margin-bottom:14px}
+.cp-v30-label{font-size:11px;letter-spacing:1.1px;font-weight:800;text-transform:uppercase}
+.cp-v30-count{font-size:21px;font-weight:900;margin:4px 0 2px;font-variant-numeric:tabular-nums}
+.cp-v30-small{font-size:11px;opacity:.73}
+.cp-v30-podium{display:grid;grid-template-columns:1fr 1.14fr 1fr;align-items:end;gap:7px;margin:16px 0 14px}
+.cp-v30-podium-item{min-width:0;text-align:center}
+.cp-v30-medal{font-size:25px;line-height:1.2}
+.cp-v30-person{font-size:12px;font-weight:800;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin:5px 0}
+.cp-v30-percent{font-size:16px;font-weight:900}
+.cp-v30-step{display:flex;align-items:center;justify-content:center;color:white;border-radius:11px 11px 5px 5px;font-size:23px;font-weight:900;margin-top:7px}
+.cp-v30-first .cp-v30-step{height:85px;background:linear-gradient(145deg,#b58b38,#d5b86c)}
+.cp-v30-second .cp-v30-step{height:65px;background:linear-gradient(145deg,#82938e,#b0bbb6)}
+.cp-v30-third .cp-v30-step{height:50px;background:linear-gradient(145deg,#ab7752,#ca9a70)}
+.cp-v30-person-empty{opacity:.55}
+.cp-v30-personal{border:1px solid #d6e2d7;border-radius:13px;padding:12px 14px;background:#fafcf9;font-size:13px;line-height:1.55;margin-bottom:12px}
+.cp-v30-personal strong{font-weight:900}
+.cp-v30-personal-title{font-size:11px;letter-spacing:.8px;font-weight:900;margin-bottom:3px}
+.cp-v30-prizes{text-align:center;font-size:11px;opacity:.72;margin:0 0 12px}
+.cp-v30-myrow{background:#edf4e9;border-radius:6px}
+@media(max-width:370px){.cp-v30-percent{font-size:14px}.cp-v30-person{font-size:11px}.cp-v30-count{font-size:18px}}
+</style>
 </head>
 <body>
 
@@ -4262,6 +4285,7 @@ async function loadLeaderboard(){
     leaderboardData
 
   );
+  if(window.cpV30Render)window.cpV30Render();
 
 
 
@@ -9106,5 +9130,60 @@ loadLeaderboard();
 <style id="capito-v28-cut-touch-fidelity">
 #cp-board #cp-canvas {touch-action:none!important;-webkit-user-select:none!important;user-select:none!important;}
 </style>
+<script id="cp-v30-script">
+(function(){
+  function escapeHtml(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+  function remainingWeek(){
+    // Moscow competition week: Monday 00:00 (UTC+03:00).
+    var now=Date.now(), moscow=new Date(now+3*3600000);
+    var day=moscow.getUTCDay(), daysToMonday=(8-day)%7||7;
+    var next=Date.UTC(moscow.getUTCFullYear(),moscow.getUTCMonth(),moscow.getUTCDate()+daysToMonday,0,0,0)-3*3600000;
+    var seconds=Math.max(0,Math.floor((next-now)/1000));
+    return {days:Math.floor(seconds/86400),hours:Math.floor(seconds%86400/3600),minutes:Math.floor(seconds%3600/60),seconds:seconds%60};
+  }
+  function updateClocks(){
+    var t=remainingWeek();
+    document.querySelectorAll('.cp-v30-count').forEach(function(el){el.textContent=t.days+' д '+String(t.hours).padStart(2,'0')+' ч '+String(t.minutes).padStart(2,'0')+' мин';});
+  }
+  function createPodium(item,position){
+    var label=['','🥇','🥈','🥉'][position];
+    var cls=['','first','second','third'][position];
+    var name=item?escapeHtml(item.player_name||'Игрок'):'Место свободно';
+    var score=item?Number(item.score||0).toFixed(1)+'%':'—';
+    return '<div class="cp-v30-podium-item cp-v30-'+cls+'"><div class="cp-v30-medal">'+label+'</div><div class="cp-v30-person'+(item?'':' cp-v30-person-empty')+'">'+name+'</div><div class="cp-v30-percent">'+score+'</div><div class="cp-v30-step">'+position+'</div></div>';
+  }
+  function render(){
+    var data=Array.isArray(window.leaderboardData)?window.leaderboardData:[];
+    // Global lexical var in original classic script is accessible as window property.
+    var name=String(window.playerName||'').trim().toLowerCase();
+    var myIndex=name?data.findIndex(function(p){return String(p.player_name||'').trim().toLowerCase()===name;}):-1;
+    var personal='Зарегистрируйтесь и сыграйте зачётный раунд, чтобы увидеть свой результат.';
+    if(name){
+      if(myIndex>=0){
+        var me=data[myIndex], place=Number(me.place||myIndex+1);
+        personal='<strong>Место №'+place+'</strong> · '+Number(me.score||0).toFixed(1)+'%';
+        if(place>3&&data.length>=3){var gap=Math.max(0,Number(data[2].score||0)-Number(me.score||0));personal+=' · До тройки лидеров: '+gap.toFixed(1)+' п.п.';}
+        else if(place<=3){personal+=' · Вы в тройке лидеров!';}
+      }else{personal='Ваш результат пока не отображается в TOP-10. После зачётной игры обновите рейтинг.';}
+    }
+    ['cp-leaderboard','cp-final-leaderboard'].forEach(function(id){
+      var list=document.getElementById(id);if(!list)return;
+      var panel=document.getElementById('cp-v30-'+id);
+      if(!panel){panel=document.createElement('div');panel.id='cp-v30-'+id;panel.className='cp-v30-wrap';list.parentNode.insertBefore(panel,list);}
+      panel.innerHTML='<div class="cp-v30-head"><div class="cp-v30-label">До конца недели</div><div class="cp-v30-count"></div><div class="cp-v30-small">Рейтинг обновляется каждый понедельник · Москва</div></div>'+
+        '<div class="cp-v30-podium">'+createPodium(data[1],2)+createPodium(data[0],1)+createPodium(data[2],3)+'</div>'+
+        '<div class="cp-v30-personal"><div class="cp-v30-personal-title">МОЙ РЕЗУЛЬТАТ</div>'+personal+'</div>'+
+        '<div class="cp-v30-prizes">🎁 Призы за 1, 2 и 3 место определяет ресторан CAPITO</div>';
+      list.querySelectorAll('.cp-v30-myrow').forEach(function(row){row.classList.remove('cp-v30-myrow')});
+      if(myIndex>=0&&list.children[myIndex])list.children[myIndex].classList.add('cp-v30-myrow');
+    });
+    updateClocks();
+  }
+  // Called after each existing Supabase leaderboard render; backend remains unchanged.
+  window.cpV30Render=render;
+  setInterval(updateClocks,30000);
+  document.addEventListener('DOMContentLoaded',function(){setTimeout(render,100)});
+})();
+</script>
 </body>
 </html>
