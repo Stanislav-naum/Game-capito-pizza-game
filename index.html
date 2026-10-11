@@ -5330,16 +5330,16 @@ function drawCut(line,preview){
   ctx.lineCap="round";
   ctx.lineJoin="round";
   ctx.shadowColor=preview ? "rgba(48,25,12,.16)" : "rgba(31,16,8,.46)";
-  ctx.shadowBlur=preview ? 2 : 4;
+  ctx.shadowBlur=preview ? 2 : 5;
   ctx.shadowOffsetY=preview ? 0 : 1;
   ctx.strokeStyle=preview ? "rgba(255,248,225,.66)" : "rgba(255,239,205,.93)";
-  ctx.lineWidth=preview ? 5.2 : 6.4;
+  ctx.lineWidth=preview ? 4.5 : 5.7;
   ctx.stroke();
   ctx.shadowColor="transparent";
   ctx.shadowBlur=0;
   ctx.shadowOffsetY=0;
   ctx.strokeStyle=preview ? "rgba(81,44,23,.73)" : "rgba(48,25,15,.94)";
-  ctx.lineWidth=preview ? 2.3 : 3.1;
+  ctx.lineWidth=preview ? 2.1 : 2.9;
   ctx.stroke();
   ctx.strokeStyle=preview ? "rgba(248,197,133,.38)" : "rgba(255,215,156,.63)";
   ctx.lineWidth=preview ? .65 : .9;
@@ -6304,15 +6304,10 @@ function drawSeparatedPizza(
 
 
 
-    ctx.translate(
-
-      moveX,
-
-      moveY
-
-    );
-
-
+    ctx.translate(moveX,moveY);
+    // V32: subtle rotation about each piece's center; keeps polygon and image aligned.
+    var turn=Math.max(-0.024,Math.min(0.024,((center.x+center.y)%17-8)*0.003))*progress;
+    ctx.translate(center.x,center.y);ctx.rotate(turn);ctx.translate(-center.x,-center.y);
 
     drawPolygonPath(poly);
 
@@ -6347,15 +6342,10 @@ function drawSeparatedPizza(
 
 
 
-    ctx.translate(
-
-      moveX,
-
-      moveY
-
-    );
-
-
+    ctx.translate(moveX,moveY);
+    // V32: subtle rotation about each piece's center; keeps polygon and image aligned.
+    var turn=Math.max(-0.024,Math.min(0.024,((center.x+center.y)%17-8)*0.003))*progress;
+    ctx.translate(center.x,center.y);ctx.rotate(turn);ctx.translate(-center.x,-center.y);
 
     drawPolygonPath(poly);
 
@@ -7627,6 +7617,7 @@ async function calculateResult(){
   );
 
   cpV29UpdateResult();
+  if(typeof cpV32Celebrate==='function')cpV32Celebrate(currentScore);
 
 
 
@@ -9228,5 +9219,36 @@ loadLeaderboard();
   window.cpV31LoadRecords=loadRecords;
 })();
 </script>
+
+<style id="capito-v32-effects">
+#cp-timer.running.warning{animation:cpV32Pulse .75s ease-in-out infinite!important;color:#b52920!important;border-color:rgba(181,41,32,.4)!important}
+@keyframes cpV32Pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.055)}}
+#cp-v32-confetti{position:fixed;inset:0;pointer-events:none;z-index:99999;overflow:hidden}
+.cp-v32-spark{position:absolute;top:-20px;width:7px;height:13px;border-radius:2px;opacity:0;animation:cpV32Fall var(--duration) ease-in forwards;transform:translate3d(0,0,0) rotate(0deg)}
+@keyframes cpV32Fall{0%{opacity:0;transform:translate3d(0,-15px,0) rotate(0)}10%{opacity:1}85%{opacity:1}100%{opacity:0;transform:translate3d(var(--drift),105vh,0) rotate(var(--spin))}}
+@media(prefers-reduced-motion:reduce){#cp-timer.running.warning{animation:none!important}.cp-v32-spark{display:none}}
+</style>
+<script id="capito-v32-effects-script">
+(function(){
+ var layer=null,cleanup=null;
+ window.cpV32Celebrate=function(score){
+   if(layer){layer.remove();layer=null;} if(cleanup)clearTimeout(cleanup);
+   if(Number(score)<99 || window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+   layer=document.createElement('div');layer.id='cp-v32-confetti';document.body.appendChild(layer);
+   var colors=['#cda24a','#f1d47c','#fff3c5','#52704b'];
+   var count=Number(score)>=99.95?46:26;
+   for(var i=0;i<count;i++){
+     var piece=document.createElement('span');piece.className='cp-v32-spark';
+     piece.style.left=(4+Math.random()*92)+'%';piece.style.background=colors[i%colors.length];
+     piece.style.setProperty('--drift',(Math.random()*140-70)+'px');
+     piece.style.setProperty('--spin',(Math.random()*800-400)+'deg');
+     piece.style.setProperty('--duration',(2+Math.random()*1.4)+'s');
+     piece.style.animationDelay=(Math.random()*.55)+'s';layer.appendChild(piece);
+   }
+   cleanup=setTimeout(function(){if(layer){layer.remove();layer=null;}},4300);
+ };
+})();
+</script>
+
 </body>
 </html>
