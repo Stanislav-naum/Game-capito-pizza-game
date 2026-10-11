@@ -9012,7 +9012,7 @@ loadLeaderboard();
   body.cp-playing #cp-board::before{
     content:"";position:absolute;z-index:0;pointer-events:none;
     width:94%;height:139%;left:3%;top:0;
-    background:url("capito-board-v22.webp") center top / 100% 100% no-repeat;
+    background:url("capito-board-v23.webp") center top / 100% 100% no-repeat;
     filter:drop-shadow(1px 5px 5px rgba(26,20,16,.25));
   }
   body.cp-playing #cp-board #cp-pizza-image{z-index:2!important;}
@@ -9035,23 +9035,48 @@ loadLeaderboard();
 
 
 
-<style id="capito-v22-composition">
+
+
+<style id="capito-v23-final-paddle">
 @media(max-width:600px){
-  html,body{max-width:100%!important;overflow-x:hidden!important;}
-  body.cp-playing #cp-game.active{overflow-x:clip!important;}
-  /* Board and pizza use the SAME fixed square: cuts remain geometrically aligned. */
-  body.cp-playing #cp-board{top:-8px!important;transform:none!important;filter:none!important;}
-  body.cp-playing #cp-board::before{
-    content:"";position:absolute;z-index:0;pointer-events:none;
-    left:-2%!important;top:-1%!important;width:104%!important;height:119%!important;
-    background:url("capito-board-v22.webp") center top / 100% 100% no-repeat!important;
-    filter:drop-shadow(1px 5px 6px rgba(32,20,13,.37))!important;
+  html,body{overflow-x:hidden!important;max-width:100%!important;}
+  body.cp-playing #capito-pizza-cut{overflow:hidden!important;}
+  body.cp-playing #cp-game.active{overflow:hidden!important;}
+  /* The board is a decorative layer, NOT part of the touch/scoring surface. */
+  body.cp-playing #cp-board{
+    position:relative!important;top:-4px!important;left:auto!important;right:auto!important;
+    isolation:isolate!important;overflow:visible!important;
+    transform:none!important;filter:none!important;
+    width:min(calc(100vw - 24px),440px,calc(100dvh - 292px))!important;
+    aspect-ratio:1 / 1!important;margin:0 auto!important;
   }
-  body.cp-playing #cp-board #cp-pizza-image{z-index:2!important;filter:drop-shadow(0 3px 3px rgba(28,17,11,.27))!important;}
+  /* The source board has a round head occupying 71% of its height.
+     Height 150% => head is 106% of pizza diameter, leaving a slim wood rim.
+     Handle stays visible beneath the pizza and ends behind the hint. */
+  body.cp-playing #cp-board::before{
+    content:""!important;display:block!important;position:absolute!important;
+    pointer-events:none!important;z-index:0!important;
+    left:-4%!important;top:-3%!important;width:108%!important;height:150%!important;
+    background-image:url("capito-board-v23.webp")!important;
+    background-size:100% 100%!important;background-position:center top!important;background-repeat:no-repeat!important;
+    filter:drop-shadow(0 7px 8px rgba(41,27,16,.32))!important;
+  }
+  body.cp-playing #cp-board #cp-pizza-image{
+    z-index:2!important;position:absolute!important;inset:0!important;
+    width:100%!important;height:100%!important;object-fit:fill!important;
+    clip-path:none!important;-webkit-clip-path:none!important;
+    filter:drop-shadow(0 4px 5px rgba(27,16,10,.31))!important;
+  }
   body.cp-playing #cp-board #cp-canvas{z-index:5!important;pointer-events:auto!important;}
-  body.cp-playing #cp-game .cp-tip{position:relative!important;z-index:20!important;background:#fffdf6!important;box-shadow:0 5px 16px rgba(45,29,19,.18)!important;margin-top:8px!important;}
+  body.cp-playing #cp-board #cp-piece-count,
+  body.cp-playing #cp-board #cp-timeout-overlay{z-index:7!important;}
+  body.cp-playing #cp-game .cp-tip{
+    position:relative!important;z-index:30!important;
+    background:#fffdf6!important;box-shadow:0 6px 16px rgba(41,29,19,.18)!important;
+    white-space:normal!important;isolation:isolate!important;
+  }
   body.cp-playing #cp-game .cp-tip::after{display:none!important;content:none!important;}
-  body.cp-playing #cp-game .cp-game-status{z-index:10!important;position:relative!important;}
+  body.cp-playing #cp-game .cp-game-status{position:relative!important;z-index:20!important;}
 }
 </style>
 </body>
