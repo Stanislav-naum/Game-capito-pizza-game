@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#ffffff">
-<title>CAPITO / PIZZA CUT — V22</title>
+<title>CAPITO / PIZZA CUT — V16</title>
 
 <style id="capito-v15-pizza-photo">
 @media(max-width:600px){
@@ -12,6 +12,13 @@ body.cp-playing #cp-pizza-image{position:absolute!important;inset:0!important;to
 body.cp-playing #cp-board.cp-separated #cp-pizza-image{visibility:hidden!important}
 body.cp-playing #cp-board{filter:none!important}
 body.cp-playing #cp-canvas{z-index:2}
+}
+</style>
+<style id="capito-v22-photos">
+@media(max-width:600px){
+#cp-v2-facade{aspect-ratio:16/9!important;overflow:hidden!important}
+#cp-v2-facade img{width:100%!important;height:100%!important;object-fit:cover!important;object-position:center!important}
+#cp-register .cp-interior-photo img{width:100%!important;display:block!important}
 }
 </style>
 </head>
@@ -158,7 +165,7 @@ html,body{margin:0;padding:0;width:100%;background:#fff;overscroll-behavior-y:no
  body.cp-playing #cp-game .cp-tip{background:rgba(255,252,244,.97)!important}
 }
 </style>
-<div id="cp-v2-facade" aria-label="Capito — пицца и вино"><img src="capito-facade-new.jpg" alt="Фасад Capito"><span class="cp-v2-walker"></span></div>
+<div id="cp-v2-facade" aria-label="Интерьер ресторана Capito"><img src="capito-interior-v21.webp?v=22" alt="Интерьер ресторана Capito"><span class="cp-v2-walker"></span></div>
 <div id="capito-pizza-cut">
 <button id="cp-v2-sound" type="button" aria-label="Звук включен">🔊</button>
 
@@ -2059,7 +2066,7 @@ html,body{
 
 
   </div>
-  <div class="cp-interior-photo" aria-label="Интерьер ресторана Capito"><img src="capito-interior.jpg" alt="Интерьер Capito" loading="lazy"></div>
+  <div class="cp-interior-photo" aria-label="Интерьер ресторана Capito"><img src="capito-interior-v21.webp?v=22" alt="Интерьер ресторана Capito" loading="lazy" decoding="async"></div>
 </div>
 
 <div id="cp-game" class="cp-screen">
@@ -2116,7 +2123,7 @@ html,body{
 
     <img id="cp-pizza-image"
 
-      src="capito-pizza-v25.webp"
+      src="capito-pizza-v15.webp"
 
       alt="Пицца Capito">
 
@@ -9012,7 +9019,7 @@ loadLeaderboard();
   body.cp-playing #cp-board::before{
     content:"";position:absolute;z-index:0;pointer-events:none;
     width:94%;height:139%;left:3%;top:0;
-    background:url("capito-board-v23.webp") center top / 100% 100% no-repeat;
+    background:url("capito-board-v20.webp") center top / 100% 100% no-repeat;
     filter:drop-shadow(1px 5px 5px rgba(26,20,16,.25));
   }
   body.cp-playing #cp-board #cp-pizza-image{z-index:2!important;}
@@ -9033,97 +9040,15 @@ loadLeaderboard();
 }
 </style>
 
-
-
-
-
-<style id="capito-v23-final-paddle">
-@media(max-width:600px){
-  html,body{overflow-x:hidden!important;max-width:100%!important;}
-  body.cp-playing #capito-pizza-cut{overflow:hidden!important;}
-  body.cp-playing #cp-game.active{overflow:hidden!important;}
-  /* The board is a decorative layer, NOT part of the touch/scoring surface. */
-  body.cp-playing #cp-board{
-    position:relative!important;top:-4px!important;left:auto!important;right:auto!important;
-    isolation:isolate!important;overflow:visible!important;
-    transform:none!important;filter:none!important;
-    width:min(calc(100vw - 24px),440px,calc(100dvh - 292px))!important;
-    aspect-ratio:1 / 1!important;margin:0 auto!important;
-  }
-  /* The source board has a round head occupying 71% of its height.
-     Height 150% => head is 106% of pizza diameter, leaving a slim wood rim.
-     Handle stays visible beneath the pizza and ends behind the hint. */
-  body.cp-playing #cp-board::before{
-    content:""!important;display:block!important;position:absolute!important;
-    pointer-events:none!important;z-index:0!important;
-    left:-4%!important;top:-3%!important;width:108%!important;height:150%!important;
-    background-image:url("capito-board-v23.webp")!important;
-    background-size:100% 100%!important;background-position:center top!important;background-repeat:no-repeat!important;
-    filter:drop-shadow(0 7px 8px rgba(41,27,16,.32))!important;
-  }
-  body.cp-playing #cp-board #cp-pizza-image{
-    z-index:2!important;position:absolute!important;inset:0!important;
-    width:100%!important;height:100%!important;object-fit:fill!important;
-    clip-path:none!important;-webkit-clip-path:none!important;
-    filter:drop-shadow(0 4px 5px rgba(27,16,10,.31))!important;
-  }
-  body.cp-playing #cp-board #cp-canvas{z-index:5!important;pointer-events:auto!important;}
-  body.cp-playing #cp-board #cp-piece-count,
-  body.cp-playing #cp-board #cp-timeout-overlay{z-index:7!important;}
-  body.cp-playing #cp-game .cp-tip{
-    position:relative!important;z-index:30!important;
-    background:#fffdf6!important;box-shadow:0 6px 16px rgba(41,29,19,.18)!important;
-    white-space:normal!important;isolation:isolate!important;
-  }
-  body.cp-playing #cp-game .cp-tip::after{display:none!important;content:none!important;}
-  body.cp-playing #cp-game .cp-game-status{position:relative!important;z-index:20!important;}
-}
-</style>
-<style id="capito-v25-no-board-final">
-@media(max-width:600px){
-  html,body{max-width:100%!important;overflow-x:hidden!important}
-  body.cp-playing #cp-board{top:0!important;filter:none!important;isolation:isolate!important}
-  body.cp-playing #cp-board::before,
-  body.cp-playing #cp-board::after{content:none!important;display:none!important;background:none!important}
-  body.cp-playing #cp-board #cp-pizza-image{
-    position:absolute!important;inset:0!important;top:0!important;left:0!important;
-    width:100%!important;height:100%!important;margin:0!important;
-    object-fit:fill!important;clip-path:none!important;-webkit-clip-path:none!important;
-    filter:drop-shadow(0 6px 6px rgba(51,30,15,.28))!important;
-    z-index:2!important;pointer-events:none!important
-  }
-  body.cp-playing #cp-board #cp-canvas{z-index:5!important;pointer-events:auto!important}
-  body.cp-playing #cp-game .cp-tip{z-index:30!important}
-}
-</style>
-
-<style id="capito-v26-smaller-pizza">
-/* Reduce the entire interactive pizza board by 15% without changing scoring. */
+<!-- V20: refinements to the existing functional layout; no scoring or registration changes. -->
+<style id="capito-v20-refinement">
 @media (max-width:600px){
-  body.cp-playing #cp-board{
-    width:min(calc((100vw - 24px) * .85),374px,calc((100dvh - 292px) * .85))!important;
-    max-width:calc(100vw - 24px)!important;
-    aspect-ratio:1 / 1!important;
-    margin-left:auto!important;margin-right:auto!important;
-    left:auto!important;right:auto!important;
-    transform:none!important;
-  }
-  body.cp-playing #cp-board #cp-pizza-image{width:100%!important;height:100%!important;inset:0!important;}
-  body.cp-playing #cp-board #cp-canvas{width:100%!important;height:100%!important;inset:0!important;}
+ body.cp-playing #cp-board{top:-12px!important;}
+ body.cp-playing #cp-board #cp-pizza-image{filter:drop-shadow(0 4px 2px rgba(24,17,11,.34)) drop-shadow(0 9px 8px rgba(31,22,15,.17))!important;}
+ body.cp-playing #cp-board::before{filter:drop-shadow(1px 6px 7px rgba(26,20,16,.31))!important;}
+ body.cp-playing #cp-game .cp-tip{margin-top:0!important;}
 }
-</style>
-
-<style id="capito-v27-raise-pizza">
-/* Move the entire interactive board upwards, not just its picture: the
-   canvas and hit-testing stay perfectly aligned with the pizza. */
-@media (max-width:600px){
-  body.cp-playing #cp-game.active #cp-board{
-    top:-34px!important;
-  }
-}
-@media (max-width:600px) and (max-height:740px){
-  body.cp-playing #cp-game.active #cp-board{top:-22px!important;}
-}
+@media(max-width:600px) and (max-height:720px){body.cp-playing #cp-board{top:-6px!important;}}
 </style>
 </body>
 </html>
