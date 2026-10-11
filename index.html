@@ -9012,7 +9012,7 @@ loadLeaderboard();
   body.cp-playing #cp-board::before{
     content:"";position:absolute;z-index:0;pointer-events:none;
     width:94%;height:139%;left:3%;top:0;
-    background:url("capito-board-v18.webp") center top / 100% 100% no-repeat;
+    background:url("capito-board-v20.webp") center top / 100% 100% no-repeat;
     filter:drop-shadow(1px 5px 5px rgba(26,20,16,.25));
   }
   body.cp-playing #cp-board #cp-pizza-image{z-index:2!important;}
@@ -9031,6 +9031,17 @@ loadLeaderboard();
   body.cp-playing #cp-game .cp-tip{padding-bottom:14px!important;}
   body.cp-playing #cp-game .cp-game-status{position:relative!important;z-index:7!important;}
 }
+</style>
+
+<!-- V20: refinements to the existing functional layout; no scoring or registration changes. -->
+<style id="capito-v20-refinement">
+@media (max-width:600px){
+ body.cp-playing #cp-board{top:-12px!important;}
+ body.cp-playing #cp-board #cp-pizza-image{filter:drop-shadow(0 4px 2px rgba(24,17,11,.34)) drop-shadow(0 9px 8px rgba(31,22,15,.17))!important;}
+ body.cp-playing #cp-board::before{filter:drop-shadow(1px 6px 7px rgba(26,20,16,.31))!important;}
+ body.cp-playing #cp-game .cp-tip{margin-top:0!important;}
+}
+@media(max-width:600px) and (max-height:720px){body.cp-playing #cp-board{top:-6px!important;}}
 </style>
 </body>
 </html>
