@@ -2382,6 +2382,7 @@ html,body{
 
 
   <div id="cp-leaderboard" class="cp-leaderboard"></div>
+<div class="cp-v31-records" id="cp-v31-cp-leaderboard"><h3>🏅 РЕКОРДЫ ЗА ВСЁ ВРЕМЯ</h3><p>Лучшие результаты за всю историю CAPITO PIZZA CUT</p><div class="cp-v31-empty">Загружаем рекорды…</div></div>
 
 
 
@@ -2518,6 +2519,7 @@ html,body{
 
 
   <div id="cp-final-leaderboard" class="cp-leaderboard"></div>
+<div class="cp-v31-records" id="cp-v31-cp-final-leaderboard"><h3>🏅 РЕКОРДЫ ЗА ВСЁ ВРЕМЯ</h3><p>Лучшие результаты за всю историю CAPITO PIZZA CUT</p><div class="cp-v31-empty">Загружаем рекорды…</div></div>
 
 
 
@@ -9183,6 +9185,47 @@ loadLeaderboard();
   window.cpV30Render=render;
   setInterval(updateClocks,30000);
   document.addEventListener('DOMContentLoaded',function(){setTimeout(render,100)});
+})();
+</script>
+<style id="cp-v31-records-style">
+.cp-v31-records{margin:22px auto 16px;padding:18px 15px;border:1px solid #c8d0bd;border-radius:20px;background:#f7f8f0;color:#234a35;max-width:480px;text-align:center;box-shadow:0 6px 22px rgba(15,50,30,.07)}
+.cp-v31-records h3{font-size:20px;letter-spacing:.07em;margin:0 0 6px;font-weight:800}
+.cp-v31-records p{font-size:12px;line-height:1.5;margin:0 0 12px;opacity:.8}
+.cp-v31-records ol{list-style:none;padding:0;margin:0}
+.cp-v31-records li{display:flex;justify-content:space-between;gap:12px;text-align:left;padding:10px 9px;border-bottom:1px solid #dce3d6;font-size:14px}
+.cp-v31-records li:last-child{border-bottom:0}
+.cp-v31-records .cp-v31-record-score{font-weight:800;white-space:nowrap}
+.cp-v31-records .cp-v31-empty{font-size:13px;line-height:1.5;padding:8px 0;color:#536558}
+</style>
+<script id="cp-v31-records-script">
+(function(){
+  function escapeText(value){return String(value==null?'':value).replace(/[&<>"']/g,function(ch){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]})}
+  function show(message,rows){
+    ['cp-v31-cp-leaderboard','cp-v31-cp-final-leaderboard'].forEach(function(id){
+      var panel=document.getElementById(id);if(!panel)return;
+      var old=panel.querySelector('ol,.cp-v31-empty');if(old)old.remove();
+      if(!rows||!rows.length){var div=document.createElement('div');div.className='cp-v31-empty';div.textContent=message;panel.appendChild(div);return}
+      var ol=document.createElement('ol');
+      rows.slice(0,10).forEach(function(row,index){
+        var li=document.createElement('li');
+        var label=document.createElement('span');label.textContent=(index+1)+'. '+String(row.player_name||row.name||'Игрок');
+        var score=document.createElement('span');score.className='cp-v31-record-score';score.textContent=Number(row.score||0).toFixed(1)+'%';
+        li.appendChild(label);li.appendChild(score);ol.appendChild(li)
+      });panel.appendChild(ol)
+    });
+  }
+  async function loadRecords(){
+    try{
+      var rows=await rpc('get_pizza_all_time_leaderboard',{});
+      if(!Array.isArray(rows))throw new Error('Invalid all-time leaderboard');
+      show('Рекордов пока нет — станьте первым!',rows)
+    }catch(error){
+      console.warn('All-time records not configured:',error);
+      show('Исторический рейтинг подключается. Недельный рейтинг продолжает работать.',[])
+    }
+  }
+  document.addEventListener('DOMContentLoaded',loadRecords);
+  window.cpV31LoadRecords=loadRecords;
 })();
 </script>
 </body>
