@@ -9003,5 +9003,21 @@ loadLeaderboard();
  body.cp-playing #cp-game .cp-game-instruction{font-size:clamp(22px,6vw,32px)!important;}
 }
 </style>
+
+<style id="capito-v18-paddle">
+@media(max-width:600px){
+ body.cp-playing #cp-board{isolation:isolate!important;overflow:visible!important;}
+ body.cp-playing #cp-board::before{
+   content:"";position:absolute;z-index:-1;pointer-events:none;
+   width:113%;height:168%;left:-6.5%;top:-8%;
+   background:url("capito-board-v18.webp") center top/100% 100% no-repeat;
+   filter:drop-shadow(2px 8px 7px rgba(25,21,18,.28));
+ }
+ body.cp-playing #cp-board #cp-pizza-image{z-index:1!important;}
+ body.cp-playing #cp-board #cp-canvas{z-index:3!important;}
+ body.cp-playing #cp-board #cp-piece-count,
+ body.cp-playing #cp-board #cp-timeout-overlay{z-index:5!important;}
+}
+</style>
 </body>
 </html>
