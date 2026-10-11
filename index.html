@@ -13,6 +13,20 @@ body.cp-playing #cp-board.cp-separated #cp-pizza-image{visibility:hidden!importa
 body.cp-playing #cp-board{filter:none!important}
 body.cp-playing #cp-canvas{z-index:2}
 }
+
+/* CAPITO V29 — result polish; gameplay and registration untouched */
+.cp-v29-summary{max-width:390px;margin:9px auto 12px;padding:14px 15px 13px;border:1px solid rgba(28,65,42,.17);border-radius:19px;background:linear-gradient(145deg,rgba(255,255,255,.96),rgba(242,246,239,.92));box-shadow:0 9px 26px rgba(24,50,33,.09);text-align:left}
+.cp-v29-heading{display:flex;justify-content:space-between;align-items:center;gap:8px;color:#244b36;font-size:10px;font-weight:900;letter-spacing:1.25px}
+.cp-v29-badge{border-radius:30px;background:#e3ede2;padding:5px 9px;font-size:10px;letter-spacing:.2px;white-space:nowrap}
+.cp-v29-track{height:12px;margin-top:12px;background:#e1e8df;border-radius:30px;overflow:hidden;box-shadow:inset 0 1px 3px rgba(0,0,0,.09)}
+.cp-v29-fill{height:100%;width:0;background:linear-gradient(90deg,#598366,#245d3e);border-radius:30px;transition:width 1.05s cubic-bezier(.22,.85,.22,1)}
+.cp-v29-scale{display:flex;justify-content:space-between;margin-top:6px;color:#657b69;font-size:10px;font-weight:700}
+.cp-v29-caption{margin-top:9px;color:#375443;font-size:12px;line-height:1.35;font-weight:700;text-align:center}
+.cp-v29-view{border:1.5px solid #2c573e!important;background:#fff!important;color:#2c573e!important}
+.cp-v29-view:focus-visible{outline:3px solid #80b495;outline-offset:2px}
+@media(max-width:370px){.cp-v29-summary{padding:11px}.cp-v29-heading{font-size:9px}}
+@media(prefers-reduced-motion:reduce){.cp-v29-fill{transition:none}}
+
 </style>
 <style id="capito-v22-photos">
 @media(max-width:600px){
@@ -2229,6 +2243,12 @@ html,body{
       ВРЕМЯ 0.00 СЕК
 
     </div>
+<div class="cp-v29-summary" aria-label="Шкала точности разрезов">
+  <div class="cp-v29-heading"><span>ТОЧНОСТЬ РАЗРЕЗОВ</span><span class="cp-v29-badge" id="cp-v29-badge">ТВОЙ РЕЗУЛЬТАТ</span></div>
+  <div class="cp-v29-track"><div class="cp-v29-fill" id="cp-v29-fill"></div></div>
+  <div class="cp-v29-scale"><span>0%</span><span>50%</span><span>100%</span></div>
+  <div class="cp-v29-caption" id="cp-v29-caption">Три разреза — шесть кусочков</div>
+</div>
 
 
 
@@ -2265,6 +2285,8 @@ html,body{
     </button>
 
 
+
+    <button id="cp-v29-ranking" class="cp-btn cp-v29-view" type="button">🏆 СМОТРЕТЬ РЕЙТИНГ НЕДЕЛИ</button>
 
     <button id="cp-lock" class="cp-btn blue" type="button">
 
@@ -7444,6 +7466,32 @@ function calculateScore(pieces){
 
 
 
+function cpV29UpdateResult(){
+  var fill=document.getElementById('cp-v29-fill');
+  var badge=document.getElementById('cp-v29-badge');
+  var caption=document.getElementById('cp-v29-caption');
+  if(!fill||!badge||!caption)return;
+  var score=Math.max(0,Math.min(100,Number(currentScore)||0));
+  fill.style.transition='none';
+  fill.style.width='0%';
+  void fill.offsetWidth;
+  fill.style.transition='';
+  requestAnimationFrame(function(){requestAnimationFrame(function(){fill.style.width=score+'%';});});
+  if(score>=99.95){badge.textContent='ИДЕАЛЬНО';caption.textContent='Идеальная точность! Настоящий мастер пиццы.';}
+  else if(score>=95){badge.textContent='ПРЕВОСХОДНО';caption.textContent='Почти идеальные шесть кусочков!';}
+  else if(score>=85){badge.textContent='ОЧЕНЬ ХОРОШО';caption.textContent='Совсем немного до идеального результата.';}
+  else if(score>=70){badge.textContent='ХОРОШО';caption.textContent='Попробуй сделать кусочки ещё ровнее.';}
+  else {badge.textContent='ЕСТЬ КУДА РАСТИ';caption.textContent='Попробуй ещё раз — каждый разрез важен!';}
+}
+(function(){
+  var button=document.getElementById('cp-v29-ranking');
+  if(!button)return;
+  button.addEventListener('click',function(){
+    var ranking=document.getElementById('cp-leaderboard');
+    if(ranking)ranking.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+})();
+
 async function calculateResult(){
 
 
@@ -7551,6 +7599,8 @@ async function calculateResult(){
     resultScreen
 
   );
+
+  cpV29UpdateResult();
 
 
 
