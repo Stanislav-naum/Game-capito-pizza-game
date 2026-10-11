@@ -2116,7 +2116,7 @@ html,body{
 
     <img id="cp-pizza-image"
 
-      src="capito-pizza-v24.webp"
+      src="capito-pizza-v25.webp"
 
       alt="Пицца Capito">
 
@@ -9079,7 +9079,7 @@ loadLeaderboard();
   body.cp-playing #cp-game .cp-game-status{position:relative!important;z-index:20!important;}
 }
 </style>
-<style id="capito-v24-no-board-final">
+<style id="capito-v25-no-board-final">
 @media(max-width:600px){
   html,body{max-width:100%!important;overflow-x:hidden!important}
   body.cp-playing #cp-board{top:0!important;filter:none!important;isolation:isolate!important}
@@ -9094,6 +9094,22 @@ loadLeaderboard();
   }
   body.cp-playing #cp-board #cp-canvas{z-index:5!important;pointer-events:auto!important}
   body.cp-playing #cp-game .cp-tip{z-index:30!important}
+}
+</style>
+
+<style id="capito-v26-smaller-pizza">
+/* Reduce the entire interactive pizza board by 15% without changing scoring. */
+@media (max-width:600px){
+  body.cp-playing #cp-board{
+    width:min(calc((100vw - 24px) * .85),374px,calc((100dvh - 292px) * .85))!important;
+    max-width:calc(100vw - 24px)!important;
+    aspect-ratio:1 / 1!important;
+    margin-left:auto!important;margin-right:auto!important;
+    left:auto!important;right:auto!important;
+    transform:none!important;
+  }
+  body.cp-playing #cp-board #cp-pizza-image{width:100%!important;height:100%!important;inset:0!important;}
+  body.cp-playing #cp-board #cp-canvas{width:100%!important;height:100%!important;inset:0!important;}
 }
 </style>
 </body>
