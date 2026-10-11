@@ -5277,16 +5277,25 @@ function drawCut(line,preview){
 
 
 
-  // V25: a subtle pale cut edge plus a darker inner incision.
-  // Both passes use the existing clipped segment and do not affect scoring.
+  // V28: three layered strokes create a convincing incision while keeping
+  // the existing exact clipping and scoring geometry untouched.
   ctx.lineCap="round";
-  ctx.strokeStyle=preview ? "rgba(255,245,216,.62)" : "rgba(255,240,205,.82)";
-  ctx.lineWidth=preview ? 5 : 6;
+  ctx.lineJoin="round";
+  ctx.shadowColor=preview ? "rgba(48,25,12,.16)" : "rgba(31,16,8,.46)";
+  ctx.shadowBlur=preview ? 2 : 4;
+  ctx.shadowOffsetY=preview ? 0 : 1;
+  ctx.strokeStyle=preview ? "rgba(255,248,225,.66)" : "rgba(255,239,205,.93)";
+  ctx.lineWidth=preview ? 5.2 : 6.4;
   ctx.stroke();
-  ctx.strokeStyle=preview ? "rgba(69,40,24,.74)" : "rgba(62,32,20,.92)";
-  ctx.lineWidth=preview ? 2 : 2.8;
+  ctx.shadowColor="transparent";
+  ctx.shadowBlur=0;
+  ctx.shadowOffsetY=0;
+  ctx.strokeStyle=preview ? "rgba(81,44,23,.73)" : "rgba(48,25,15,.94)";
+  ctx.lineWidth=preview ? 2.3 : 3.1;
   ctx.stroke();
-
+  ctx.strokeStyle=preview ? "rgba(248,197,133,.38)" : "rgba(255,215,156,.63)";
+  ctx.lineWidth=preview ? .65 : .9;
+  ctx.stroke();
 
 
   ctx.restore();
@@ -6177,9 +6186,9 @@ function drawSeparatedPizza(
 
     Math.min(
 
-      9,
+      13,
 
-      circle.r*.046
+      circle.r*.058
 
     )*progress;
 
@@ -6270,11 +6279,11 @@ function drawSeparatedPizza(
 
     ctx.shadowColor=
 
-      "rgba(0,0,0,.42)";
+      "rgba(27,13,7,.52)";
 
 
 
-    ctx.shadowBlur=11;
+    ctx.shadowBlur=14;
 
 
 
@@ -6306,11 +6315,11 @@ function drawSeparatedPizza(
 
     ctx.strokeStyle=
 
-      "rgba(48,30,22,.72)";
+      "rgba(49,25,13,.82)";
 
 
 
-    ctx.lineWidth=1.4;
+    ctx.lineWidth=1.6;
 
 
 
@@ -6486,7 +6495,7 @@ function animatePizzaSlices(callback){
 
 
 
-  var duration=720;
+  var duration=940;
 
   var start=null;
 
@@ -6634,6 +6643,7 @@ function animatePizzaSlices(callback){
 
 function pointerDown(event){
 
+  if(event.cancelable) event.preventDefault();
 
 
   if(
@@ -6726,6 +6736,7 @@ function pointerDown(event){
 
 function pointerMove(event){
 
+  if(event.cancelable) event.preventDefault();
 
 
   if(
@@ -6838,6 +6849,7 @@ function pointerMove(event){
 
 function pointerUp(event){
 
+  if(event.cancelable) event.preventDefault();
 
 
   if(
@@ -9040,6 +9052,9 @@ loadLeaderboard();
  body.cp-playing #cp-game .cp-tip{margin-top:0!important;}
 }
 @media(max-width:600px) and (max-height:720px){body.cp-playing #cp-board{top:-6px!important;}}
+</style>
+<style id="capito-v28-cut-touch-fidelity">
+#cp-board #cp-canvas {touch-action:none!important;-webkit-user-select:none!important;user-select:none!important;}
 </style>
 </body>
 </html>
