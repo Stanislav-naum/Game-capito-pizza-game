@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#ffffff">
-<title>CAPITO / PIZZA CUT — V21</title>
+<title>CAPITO / PIZZA CUT — V22</title>
 
 <style id="capito-v15-pizza-photo">
 @media(max-width:600px){
@@ -9012,7 +9012,7 @@ loadLeaderboard();
   body.cp-playing #cp-board::before{
     content:"";position:absolute;z-index:0;pointer-events:none;
     width:94%;height:139%;left:3%;top:0;
-    background:url("capito-board-v21.webp") center top / 100% 100% no-repeat;
+    background:url("capito-board-v22.webp") center top / 100% 100% no-repeat;
     filter:drop-shadow(1px 5px 5px rgba(26,20,16,.25));
   }
   body.cp-playing #cp-board #cp-pizza-image{z-index:2!important;}
@@ -9033,25 +9033,26 @@ loadLeaderboard();
 }
 </style>
 
-<!-- V20: refinements to the existing functional layout; no scoring or registration changes. -->
-<style id="capito-v20-refinement">
-@media (max-width:600px){
- body.cp-playing #cp-board{top:-12px!important;}
- body.cp-playing #cp-board #cp-pizza-image{filter:drop-shadow(0 4px 2px rgba(24,17,11,.34)) drop-shadow(0 9px 8px rgba(31,22,15,.17))!important;}
- body.cp-playing #cp-board::before{filter:drop-shadow(1px 6px 7px rgba(26,20,16,.31))!important;}
- body.cp-playing #cp-game .cp-tip{margin-top:0!important;}
-}
-@media(max-width:600px) and (max-height:720px){body.cp-playing #cp-board{top:-6px!important;}}
-</style>
 
-<style id="capito-v21-finish">
+
+<style id="capito-v22-composition">
 @media(max-width:600px){
- body.cp-playing #cp-board{top:-18px!important;}
- body.cp-playing #cp-board::before{width:96%!important;left:2%!important;height:132%!important;top:0!important;filter:drop-shadow(2px 7px 7px rgba(36,21,13,.36))!important;}
- body.cp-playing #cp-board #cp-pizza-image{filter:drop-shadow(0 3px 2px rgba(37,19,9,.38)) drop-shadow(0 7px 8px rgba(40,23,12,.23))!important;}
- body.cp-playing #cp-game .cp-tip{z-index:15!important;box-shadow:0 4px 12px rgba(36,26,16,.15)!important;}
+  html,body{max-width:100%!important;overflow-x:hidden!important;}
+  body.cp-playing #cp-game.active{overflow-x:clip!important;}
+  /* Board and pizza use the SAME fixed square: cuts remain geometrically aligned. */
+  body.cp-playing #cp-board{top:-8px!important;transform:none!important;filter:none!important;}
+  body.cp-playing #cp-board::before{
+    content:"";position:absolute;z-index:0;pointer-events:none;
+    left:-2%!important;top:-1%!important;width:104%!important;height:119%!important;
+    background:url("capito-board-v22.webp") center top / 100% 100% no-repeat!important;
+    filter:drop-shadow(1px 5px 6px rgba(32,20,13,.37))!important;
+  }
+  body.cp-playing #cp-board #cp-pizza-image{z-index:2!important;filter:drop-shadow(0 3px 3px rgba(28,17,11,.27))!important;}
+  body.cp-playing #cp-board #cp-canvas{z-index:5!important;pointer-events:auto!important;}
+  body.cp-playing #cp-game .cp-tip{position:relative!important;z-index:20!important;background:#fffdf6!important;box-shadow:0 5px 16px rgba(45,29,19,.18)!important;margin-top:8px!important;}
+  body.cp-playing #cp-game .cp-tip::after{display:none!important;content:none!important;}
+  body.cp-playing #cp-game .cp-game-status{z-index:10!important;position:relative!important;}
 }
-@media(max-width:600px) and (max-height:720px){body.cp-playing #cp-board{top:-9px!important;}}
 </style>
 </body>
 </html>
