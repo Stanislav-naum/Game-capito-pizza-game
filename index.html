@@ -65,7 +65,7 @@ html,body{margin:0;padding:0;width:100%;background:#fff;overscroll-behavior-y:no
 @media(max-width:600px){
  body.cp-playing #cp-v2-facade{display:none!important}
  body.cp-playing{overflow:hidden!important}
- body.cp-playing #capito-pizza-cut{max-width:none!important;width:100%!important;height:100dvh!important;min-height:100dvh!important;overflow:hidden!important;padding:0!important;background:#f2e3cd url("capito-tabletop-v9.webp") center / cover no-repeat!important;color:#173d34}
+ body.cp-playing #capito-pizza-cut{max-width:none!important;width:100%!important;height:100dvh!important;min-height:100dvh!important;overflow:hidden!important;padding:0!important;background:#f2e3cd url("capito-tabletop-v14.webp") center / cover no-repeat!important;color:#173d34}
  body.cp-playing #cp-mobile-app{height:100%!important}
  body.cp-playing #cp-game.active{height:100%!important;min-height:0!important;display:flex!important;flex-direction:column;align-items:center;justify-content:space-between;gap:0!important;padding:calc(env(safe-area-inset-top) + 14px) 13px calc(env(safe-area-inset-bottom) + 24px)!important;overflow:hidden;box-sizing:border-box}
  body.cp-playing #cp-game .cp-brand{font-size:clamp(11px,3vw,14px);letter-spacing:3.5px;font-weight:800;color:#173d34;margin:0 0 8px!important;flex:0 0 auto}
@@ -87,7 +87,7 @@ html,body{margin:0;padding:0;width:100%;background:#fff;overscroll-behavior-y:no
 
 <style id="capito-v8-polish">
 @media(max-width:600px){
- body.cp-playing #capito-pizza-cut{background-image:url("capito-tabletop-v9.webp")!important;background-color:#eee0c8!important}
+ body.cp-playing #capito-pizza-cut{background-image:url("capito-tabletop-v14.webp")!important;background-color:#eee0c8!important}
  body.cp-playing #cp-piece-count,body.cp-playing #cp-piece-count.perfect{background:#173d34!important;color:#fff!important;box-shadow:0 9px 28px rgba(20,54,44,.24)!important}
  body.cp-playing #cp-game .cp-game-instruction{text-shadow:none!important}
  body.cp-playing #cp-board{filter:drop-shadow(0 12px 12px rgba(68,37,18,.16))}
@@ -98,7 +98,7 @@ html,body{margin:0;padding:0;width:100%;background:#fff;overscroll-behavior-y:no
 
 <style id="capito-v9-photo-fix">
 @media(max-width:600px){
- body.cp-playing #capito-pizza-cut{background-image:url("capito-tabletop-v9.webp")!important;background-position:center center!important}
+ body.cp-playing #capito-pizza-cut{background-image:url("capito-tabletop-v14.webp")!important;background-position:center center!important}
  body.cp-playing #cp-board{width:min(calc(100vw - 8px),480px,calc(100dvh - 275px))!important;filter:none!important;filter:drop-shadow(0 11px 12px rgba(69,38,20,.18))!important}
  body.cp-playing #cp-pizza-image{filter:none!important}
  body.cp-playing #cp-board.cp-separated #cp-pizza-image{visibility:hidden!important}
@@ -110,6 +110,45 @@ html,body{margin:0;padding:0;width:100%;background:#fff;overscroll-behavior-y:no
 @media(max-height:740px) and (max-width:600px){body.cp-playing #cp-board{width:min(calc(100vw - 8px),calc(100dvh - 250px))!important}}
 </style>
 
+
+<style id="capito-v10-real-photo-game">
+@media(max-width:600px){
+ body.cp-playing #capito-pizza-cut{background-image:url("capito-tabletop-v14.webp")!important;background-color:#f2e7d5!important;background-position:center center!important;background-size:cover!important}
+ body.cp-playing #cp-board{width:min(calc(100vw - 10px),480px,calc(100dvh - 262px))!important;aspect-ratio:1/1!important;filter:drop-shadow(0 11px 9px rgba(59,39,22,.20))!important}
+ /* Image is scaled 1.18x so the actual pizza matches the scoring circle (r=42.3%). */
+ body.cp-playing #cp-pizza-image{position:relative!important;top:-9%!important;left:0!important;width:177%!important;height:118%!important;margin-left:-38.5%!important;max-width:none!important;object-fit:fill!important;clip-path:circle(28.2% at 50.3% 50.4%)!important;filter:none!important}
+ body.cp-playing #cp-board.cp-separated #cp-pizza-image{visibility:hidden!important}
+ body.cp-playing #cp-game .cp-game-instruction{font-size:clamp(27px,7.6vw,41px)!important;margin-bottom:10px!important}
+ body.cp-playing #cp-game .cp-tip{font-size:clamp(16px,4.1vw,20px)!important;padding:12px 18px!important}
+ body.cp-playing #cp-game .cp-game-status{min-height:52px!important}
+ body.cp-playing #cp-piece-count,body.cp-playing #cp-piece-count.perfect{background:#173d34!important;color:white!important}
+}
+@media(max-height:740px) and (max-width:600px){body.cp-playing #cp-board{width:min(calc(100vw - 10px),calc(100dvh - 244px))!important}}
+</style>
+
+<style id="capito-v11-reference-composition">
+@media(max-width:600px){
+ body.cp-playing #capito-pizza-cut{background:#eee0c8 url("capito-tabletop-v14.webp") center center / 100% 100% no-repeat!important}
+ body.cp-playing #cp-game.active{padding-top:calc(env(safe-area-inset-top) + 14px)!important;padding-bottom:calc(env(safe-area-inset-bottom) + 24px)!important}
+ body.cp-playing #cp-game .cp-brand{font-size:clamp(12px,3.5vw,16px)!important;letter-spacing:4.5px!important;margin-bottom:10px!important}
+ body.cp-playing #cp-game .cp-game-instruction{font-size:clamp(29px,8.2vw,44px)!important;max-width:410px!important;line-height:1.04!important}
+ body.cp-playing #cp-game .cp-game-status{max-width:440px!important;min-height:56px!important}
+ body.cp-playing #cp-game .cp-timer{display:flex;align-items:center;gap:9px!important}
+ body.cp-playing #cp-game .cp-timer:before{content:"◷";font-size:29px;font-family:Georgia,serif;font-weight:400;line-height:1}
+ body.cp-playing #cp-board{width:min(calc(100vw - 6px),490px,calc(100dvh - 245px))!important}
+ body.cp-playing #cp-game .cp-tip{max-width:390px!important;width:calc(100% - 40px);font-size:clamp(17px,4.5vw,22px)!important}
+ body.cp-playing #cp-game .cp-tip:after{content:" ☝";font-family:Arial,sans-serif;font-size:23px;white-space:nowrap}
+}
+@media(max-height:740px) and (max-width:600px){body.cp-playing #cp-board{width:min(calc(100vw - 8px),calc(100dvh - 230px))!important}}
+</style>
+
+<style id="capito-v13-actual-marble">
+@media(max-width:600px){
+ body.cp-playing #capito-pizza-cut{background:#efe0c5 url("capito-tabletop-v14.webp") center center/100% 100% no-repeat!important}
+ body.cp-playing #cp-game .cp-game-instruction{font-size:clamp(29px,7.5vw,39px)!important;margin-bottom:12px!important}
+ body.cp-playing #cp-game .cp-tip{background:rgba(255,252,244,.97)!important}
+}
+</style>
 <div id="cp-v2-facade" aria-label="Capito — пицца и вино"><img src="capito-facade-new.jpg" alt="Фасад Capito"><span class="cp-v2-walker"></span></div>
 <div id="capito-pizza-cut">
 <button id="cp-v2-sound" type="button" aria-label="Звук включен">🔊</button>
@@ -6191,7 +6230,7 @@ function drawSeparatedPizza(
 
     // Visual-only crop: hide the original photo's blue tile rim.
     ctx.beginPath();
-    ctx.arc(circle.cx-moveX,circle.cy-moveY,circle.r*.946,0,Math.PI*2);
+    ctx.arc(circle.cx-moveX,circle.cy-moveY,circle.r*.995,0,Math.PI*2);
     ctx.clip();
 
     ctx.shadowColor=
@@ -6204,7 +6243,7 @@ function drawSeparatedPizza(
 
 
 
-    if(document.body.classList.contains("cp-playing")){ctx.drawImage(pizzaImage,-w*.25,0,w*1.5,h)}else{ctx.drawImage(pizzaImage,0,0,w,h)}
+    if(document.body.classList.contains("cp-playing")){ctx.drawImage(pizzaImage,-w*.385,-h*.09,w*1.77,h*1.18)}else{ctx.drawImage(pizzaImage,0,0,w,h)}
 
 
 
