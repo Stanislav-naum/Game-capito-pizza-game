@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#ffffff">
-<title>CAPITO / PIZZA CUT</title>
+<title>CAPITO / PIZZA CUT — V16</title>
 
 <style id="capito-v15-pizza-photo">
 @media(max-width:600px){
@@ -8940,5 +8940,43 @@ loadLeaderboard();
  new MutationObserver(function(){if(game.classList.contains('active'))board.classList.remove('cp-separated');}).observe(game,{attributes:true,attributeFilter:['class']});
 })();
 </script>
+
+<!-- V16: transparent pizza photo is already correctly cropped; render it 1:1 with the scoring canvas. -->
+<style id="capito-v16-pizza-alignment">
+@media (max-width:600px) {
+  body.cp-playing #cp-board { position:relative!important; overflow:visible!important; }
+  body.cp-playing #cp-board #cp-pizza-image {
+    display:block!important;
+    position:absolute!important;
+    inset:0!important;
+    top:0!important;
+    right:0!important;
+    bottom:0!important;
+    left:0!important;
+    width:100%!important;
+    height:100%!important;
+    min-width:0!important;
+    max-width:none!important;
+    margin:0!important;
+    padding:0!important;
+    object-fit:fill!important;
+    object-position:center center!important;
+    clip-path:none!important;
+    -webkit-clip-path:none!important;
+    border-radius:0!important;
+    transform:none!important;
+    filter:drop-shadow(0 7px 7px rgba(54,29,12,.22))!important;
+    pointer-events:none!important;
+  }
+  body.cp-playing #cp-board.cp-separated #cp-pizza-image { visibility:hidden!important; }
+  body.cp-playing #cp-board #cp-canvas {
+    position:absolute!important;
+    inset:0!important;
+    width:100%!important;
+    height:100%!important;
+    z-index:2!important;
+  }
+}
+</style>
 </body>
 </html>
