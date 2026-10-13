@@ -9349,5 +9349,35 @@ loadLeaderboard();
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
 </script>
+
+<style id="capito-v37-fire-style">
+/* Decorative ember animation; does not intercept touches or change scoring. */
+.cp-v34-oven .cp-v37-embers{position:absolute;inset:0;z-index:2;overflow:hidden;pointer-events:none}
+.cp-v37-ember{position:absolute;left:var(--x);top:var(--y);width:var(--sz);height:var(--sz);border-radius:50%;background:#ffe0a0;box-shadow:0 0 5px 2px rgba(255,125,28,.68);opacity:0;animation:cpV37Ember var(--dur) linear infinite;animation-delay:var(--delay)}
+@keyframes cpV37Ember{0%,8%{opacity:0;transform:translate3d(0,5px,0) scale(.55)}19%{opacity:.85}67%{opacity:.65}100%{opacity:0;transform:translate3d(var(--drift),-65px,0) scale(.2)}}
+@media(prefers-reduced-motion:reduce){.cp-v37-ember{animation:none;display:none}}
+</style>
+<script id="capito-v37-fire-script">
+(function(){
+ function decorate(){
+  document.querySelectorAll('.cp-v34-oven').forEach(function(oven){
+   if(oven.querySelector('.cp-v37-embers'))return;
+   var layer=document.createElement('div');layer.className='cp-v37-embers';layer.setAttribute('aria-hidden','true');
+   for(var i=0;i<9;i++){
+    var dot=document.createElement('i');dot.className='cp-v37-ember';
+    dot.style.setProperty('--x',(57+(i*7%35))+'%');
+    dot.style.setProperty('--y',(65+(i*11%18))+'%');
+    dot.style.setProperty('--sz',(1.5+(i%3))+'px');
+    dot.style.setProperty('--dur',(3.1+(i%4)*.8)+'s');
+    dot.style.setProperty('--delay',(-i*.83)+'s');
+    dot.style.setProperty('--drift',((i%2?1:-1)*(8+i*2))+'px');
+    layer.appendChild(dot);
+   }
+   oven.appendChild(layer);
+  });
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',decorate);else decorate();
+})();
+</script>
 </body>
 </html>
