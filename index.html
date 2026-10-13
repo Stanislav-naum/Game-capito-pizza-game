@@ -6221,185 +6221,52 @@ function drawPolygonPath(poly){
 
 
 
-function drawSeparatedPizza(
-
-  progress,
-
-  pieces
-
-){
-
-
-
-  var w=canvas.clientWidth;
-
-  var h=canvas.clientHeight;
-
-
-
-  var circle=
-
-    getPizzaGeometry();
-
-
-
-  ctx.clearRect(
-
-    0,0,w,h
-
-  );
-
-
-
-  if(!document.body.classList.contains("cp-playing")){ctx.drawImage(pizzaImage,0,0,w,h)}
-
-
-
-  document.getElementById("cp-board").classList.add("cp-separated");
-
-  // Transparent separation: marble shows through gaps, not a dark disk.
-
-  var separation=
-
-    Math.min(
-
-      13,
-
-      circle.r*.058
-
-    )*progress;
-
-
-
-  pieces.forEach(function(poly){
-
-
-
-    var center=
-
-      polygonCenter(poly);
-
-
-
-    var dx=
-
-      center.x-circle.cx;
-
-
-
-    var dy=
-
-      center.y-circle.cy;
-
-
-
-    var length=
-
-      Math.sqrt(
-
-        dx*dx+
-
-        dy*dy
-
-      );
-
-
-
-    if(length<1){
-
-      length=1;
-
-    }
-
-
-
-    var moveX=
-
-      dx/length*
-
-      separation;
-
-
-
-    var moveY=
-
-      dy/length*
-
-      separation;
-
-
-
+function drawSeparatedPizza(progress,pieces){
+  // V43: each visible fragment follows the actual three user-drawn cut lines.
+  // Scoring and polygon construction are deliberately unchanged.
+  var w=canvas.clientWidth,h=canvas.clientHeight;
+  var circle=getPizzaGeometry();
+  ctx.clearRect(0,0,w,h);
+  if(!document.body.classList.contains('cp-playing'))ctx.drawImage(pizzaImage,0,0,w,h);
+  board.classList.add('cp-separated');
+  var opening=Math.max(0,Math.min(1,progress));
+  var distance=Math.min(21,circle.r*.095)*opening;
+  pieces.forEach(function(poly,index){
+    var center=polygonCenter(poly);
+    var dx=center.x-circle.cx,dy=center.y-circle.cy;
+    var len=Math.hypot(dx,dy);
+    // For central fragments, derive a stable direction from the actual vertices.
+    if(len<.5){var v=poly[index%poly.length];dx=v.x-circle.cx;dy=v.y-circle.cy;len=Math.hypot(dx,dy)}
+    if(len<.5){dx=Math.cos(index*2.4);dy=Math.sin(index*2.4);len=1}
+    var mx=dx/len*distance,my=dy/len*distance;
+    var turn=Math.max(-.045,Math.min(.045,(index%2?1:-1)*(.013+index*.004)))*opening;
     ctx.save();
-
-
-
-    ctx.translate(moveX,moveY);
-    // V32: subtle rotation about each piece's center; keeps polygon and image aligned.
-    var turn=Math.max(-0.035,Math.min(0.035,((center.x+center.y)%17-8)*0.004))*progress;
+    ctx.translate(mx,my);
     ctx.translate(center.x,center.y);ctx.rotate(turn);ctx.translate(-center.x,-center.y);
-
+    // Shadows follow each individually clipped piece, not the whole pizza image.
     drawPolygonPath(poly);
-
-
-
-    ctx.clip();
-
-    // Clip pieces to the actual pizza footprint (transparent PNG/WebP).
-    ctx.beginPath();
-    ctx.arc(circle.cx-moveX,circle.cy-moveY,circle.r*.995,0,Math.PI*2);
-    ctx.clip();
-
-    ctx.shadowColor=
-
-      "rgba(27,13,7,.52)";
-
-
-
-    ctx.shadowBlur=14;
-
-
-
-    ctx.drawImage(pizzaImage,0,0,w,h)
-
-
-
-    ctx.restore();
-
-
-
     ctx.save();
-
-
-
-    ctx.translate(moveX,moveY);
-    // V32: subtle rotation about each piece's center; keeps polygon and image aligned.
-    var turn=Math.max(-0.035,Math.min(0.035,((center.x+center.y)%17-8)*0.004))*progress;
-    ctx.translate(center.x,center.y);ctx.rotate(turn);ctx.translate(-center.x,-center.y);
-
-    drawPolygonPath(poly);
-
-
-
-    ctx.strokeStyle=
-
-      "rgba(49,25,13,.82)";
-
-
-
-    ctx.lineWidth=1.6;
-
-
-
-    ctx.stroke();
-
-
-
+    ctx.shadowColor='rgba(35,17,8,.48)';
+    ctx.shadowBlur=8+opening*13;
+    ctx.shadowOffsetX=mx*.15;
+    ctx.shadowOffsetY=3+opening*5;
+    ctx.fillStyle='rgba(75,36,16,.22)';
+    ctx.fill();
     ctx.restore();
-
+    ctx.save();
+    drawPolygonPath(poly);ctx.clip();
+    // Correct circle clipping in the transformed coordinate system.
+    ctx.beginPath();ctx.arc(circle.cx,circle.cy,circle.r*.995,0,Math.PI*2);ctx.clip();
+    ctx.drawImage(pizzaImage,0,0,w,h);
+    ctx.restore();
+    // Subtle toasted cut edge, visible only once the slices pull apart.
+    drawPolygonPath(poly);
+    ctx.strokeStyle='rgba(83,42,19,'+(.25+.43*opening)+')';
+    ctx.lineWidth=1.1+opening*.65;
+    ctx.lineJoin='round';ctx.stroke();
+    ctx.restore();
   });
-
 }
-
 
 
 
@@ -6562,7 +6429,7 @@ function animatePizzaSlices(callback){
 
 
 
-  var duration=940;
+  var duration=1180;
 
   var start=null;
 
@@ -6597,9 +6464,10 @@ function animatePizzaSlices(callback){
 
 
     // Fast initial separation, a tiny overshoot, then a soft return.
-    var eased = p < .72
-      ? 1.075*(1-Math.pow(1-p/.72,3))
-      : 1 + .075*Math.pow(1-(p-.72)/.28,2);
+    // Quick initial opening, gentle settling, fully separated at the end.
+    var eased = p < .68
+      ? 1.055*(1-Math.pow(1-p/.68,3))
+      : 1 + .055*Math.pow(1-(p-.68)/.32,2);
 
     drawSeparatedPizza(
 
