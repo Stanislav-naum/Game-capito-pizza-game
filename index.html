@@ -7539,6 +7539,7 @@ async function calculateResult(){
   );
 
   cpV29UpdateResult();
+  if(typeof cpV45ResetResult === "function") cpV45ResetResult();
   cpV44PerfectResult(currentScore);
   if(typeof cpV32Celebrate==='function')cpV32Celebrate(currentScore);
 
@@ -7751,6 +7752,7 @@ async function calculateResult(){
     updateResultMessage();
 
     updateCompetitionMessage();
+    if(typeof cpV45RevealResult === "function") cpV45RevealResult();
 
 
 
@@ -9385,6 +9387,60 @@ function cpV44PerfectResult(score){
   setTimeout(function(){e.remove()},1900);
  }catch(e){}
 }
+</script>
+
+<style id="cp-v45-result-style">
+.cp-v45-preview{margin:15px auto 4px;max-width:280px;text-align:center;opacity:0;transform:translateY(13px) scale(.97);transition:opacity .55s ease,transform .55s cubic-bezier(.2,.8,.2,1)}
+.cp-v45-preview.is-visible{opacity:1;transform:none}
+.cp-v45-caption{font-size:10px;font-weight:800;letter-spacing:.13em;color:#62705b;margin-bottom:8px}
+.cp-v45-pizza{width:142px;height:142px;position:relative;margin:0 auto 8px;filter:drop-shadow(0 7px 7px rgba(40,30,12,.15))}
+.cp-v45-pizza svg{width:100%;height:100%;overflow:visible}
+.cp-v45-slice{transform-box:fill-box;transform-origin:center;transition:transform .8s cubic-bezier(.2,.8,.2,1);transition-delay:.12s}
+.cp-v45-preview.is-visible .cp-v45-slice:nth-child(1){transform:translate(0,-5px)}
+.cp-v45-preview.is-visible .cp-v45-slice:nth-child(2){transform:translate(5px,-3px)}
+.cp-v45-preview.is-visible .cp-v45-slice:nth-child(3){transform:translate(6px,3px)}
+.cp-v45-preview.is-visible .cp-v45-slice:nth-child(4){transform:translate(0,6px)}
+.cp-v45-preview.is-visible .cp-v45-slice:nth-child(5){transform:translate(-6px,3px)}
+.cp-v45-preview.is-visible .cp-v45-slice:nth-child(6){transform:translate(-5px,-3px)}
+.cp-v45-note{font-size:11px;color:#687465;line-height:1.35}
+.cp-v45-top3{margin:12px auto 0;max-width:310px;padding:12px 14px;border-radius:13px;background:#e9e0b9;color:#24472f;font-weight:850;font-size:14px;opacity:0;transform:translateY(12px) scale(.96);transition:opacity .5s ease,transform .5s ease}
+.cp-v45-top3.is-visible{opacity:1;transform:none}
+.cp-v45-top3 small{display:block;font-size:11px;font-weight:500;margin-top:4px}
+@media(prefers-reduced-motion:reduce){.cp-v45-preview,.cp-v45-top3,.cp-v45-slice{transition:none!important}}
+</style>
+<script id="cp-v45-result-effects">
+(function(){
+ var container,top3,timer;
+ function init(){
+  var card=document.querySelector('#cp-result .cp-result-card');
+  if(!card)return;
+  container=document.createElement('div');container.className='cp-v45-preview';container.setAttribute('aria-label','Иллюстрация шести кусочков пиццы');
+  var svg='<svg viewBox="0 0 160 160" role="img" aria-label="Шесть кусочков пиццы">';
+  for(var i=0;i<6;i++){
+   var a=(-90+i*60)*Math.PI/180,b=(-90+(i+1)*60)*Math.PI/180;
+   var x1=80+67*Math.cos(a),y1=80+67*Math.sin(a),x2=80+67*Math.cos(b),y2=80+67*Math.sin(b);
+   var d='M80 80 L'+x1.toFixed(2)+' '+y1.toFixed(2)+' A67 67 0 0 1 '+x2.toFixed(2)+' '+y2.toFixed(2)+' Z';
+   svg+='<g class="cp-v45-slice"><path d="'+d+'" fill="#e7b85d" stroke="#9d612c" stroke-width="3" stroke-linejoin="round"/><path d="'+d+'" fill="none" stroke="#d58d39" stroke-width="8" stroke-linejoin="round" opacity=".7"/>';
+   var mid=(a+b)/2,px=80+39*Math.cos(mid),py=80+39*Math.sin(mid);
+   svg+='<circle cx="'+px.toFixed(2)+'" cy="'+py.toFixed(2)+'" r="8" fill="#b93e2f"/><circle cx="'+(px-3).toFixed(2)+'" cy="'+(py-2).toFixed(2)+'" r="2" fill="#efb46d"/></g>';
+  }
+  svg+='</svg>';
+  container.innerHTML='<div class="cp-v45-caption">ШЕСТЬ КУСОЧКОВ</div><div class="cp-v45-pizza">'+svg+'</div><div class="cp-v45-note">Иллюстрация разделённой пиццы</div>';
+  var anchor=document.getElementById('cp-result-message');card.insertBefore(container,anchor);
+  top3=document.createElement('div');top3.className='cp-v45-top3';top3.setAttribute('role','status');card.insertBefore(top3,document.getElementById('cp-competition'));
+ }
+ window.cpV45ResetResult=function(){clearTimeout(timer);if(!container)init();if(container)container.classList.remove('is-visible');if(top3){top3.classList.remove('is-visible');top3.style.display='none';}};
+ window.cpV45RevealResult=function(){
+  if(!container)init();if(!container)return;
+  requestAnimationFrame(function(){container.classList.add('is-visible')});
+  if(!top3)return;
+  var place=typeof getProjectedPlace==='function'?getProjectedPlace(currentScore,currentTime):null;
+  if(!Number.isFinite(Number(place))||Number(place)<1||Number(place)>3){top3.style.display='none';return;}
+  top3.innerHTML='🏆 ВОЗМОЖНОЕ МЕСТО В ТОП-3 — №'+Number(place)+'<small>Место предварительное. Оно подтвердится после фиксации результата.</small>';
+  top3.style.display='block';timer=setTimeout(function(){top3.classList.add('is-visible')},350);
+ };
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
 </script>
 </body>
 </html>
