@@ -3738,7 +3738,8 @@ function apiHeaders(){
 
     "apikey":SUPABASE_KEY,
 
-    "Authorization":"Bearer "+SUPABASE_KEY,
+    // Publishable keys are API keys, not JWT bearer tokens.
+    ...(SUPABASE_KEY.startsWith("sb_publishable_") ? {} : {"Authorization":"Bearer "+SUPABASE_KEY}),
 
     "Content-Type":"application/json"
 
