@@ -99,6 +99,22 @@ body.cp-playing #cp-canvas{z-index:2}
 @keyframes cpV35Fire{0%{opacity:.24;transform:scale(.99)}45%{opacity:.72}100%{opacity:1;transform:scale(1.035)}}
 @media(prefers-reduced-motion:reduce){.cp-v34-oven::before{animation:none}}
 </style>
+
+<!-- V42: cut-line impact and dough reaction. Only decorative; no score changes. -->
+<style id="capito-v42-pizza-feedback">
+#cp-board{isolation:isolate}
+#cp-board .cp-v42-cut-impact{position:absolute;z-index:28;width:0;height:0;pointer-events:none;animation:cp-v42-impact-fade .48s ease-out both}
+#cp-board .cp-v42-cut-impact i{position:absolute;left:-22px;top:-22px;width:44px;height:44px;border:2px solid rgba(255,234,177,.9);border-radius:50%;box-shadow:0 0 13px rgba(255,214,111,.7);animation:cp-v42-ring .44s cubic-bezier(.1,.6,.2,1) both}
+#cp-board .cp-v42-cut-impact b{position:absolute;left:-36px;top:-2px;width:72px;height:4px;border-radius:9px;background:linear-gradient(90deg,transparent,rgba(255,252,211,.92),transparent);transform:rotate(var(--cut-angle));filter:blur(1px);animation:cp-v42-blade .38s ease-out both}
+#cp-board .cp-v42-cut-impact em{position:absolute;left:-3px;top:-3px;width:6px;height:6px;background:#eab663;border-radius:50%;box-shadow:-19px -13px 0 -1px #eab663,16px -17px 0 -2px #c77836,22px 10px 0 -2px #eab663,-16px 14px 0 -2px #b9692e;animation:cp-v42-crumbs .46s ease-out both}
+@keyframes cp-v42-impact-fade{0%,40%{opacity:1}100%{opacity:0}}
+@keyframes cp-v42-ring{from{transform:scale(.2);opacity:.9}to{transform:scale(1.65);opacity:0}}
+@keyframes cp-v42-blade{from{opacity:1;scale:.4 1}to{opacity:0;scale:1.2 1}}
+@keyframes cp-v42-crumbs{from{transform:scale(.4) rotate(0)}to{transform:scale(1.6) rotate(23deg);opacity:0}}
+body.cp-playing #cp-board.cp-v42-pizza-tap #cp-pizza-image{animation:cp-v42-dough .25s ease-out!important;transform-origin:center center!important}
+@keyframes cp-v42-dough{0%{scale:1}38%{scale:.991 1.009}75%{scale:1.005 .997}100%{scale:1}}
+@media(prefers-reduced-motion:reduce){#cp-board .cp-v42-cut-impact{display:none!important}body.cp-playing #cp-board.cp-v42-pizza-tap #cp-pizza-image{animation:none!important}}
+</style>
 </head>
 <body>
 
@@ -6679,6 +6695,27 @@ function animatePizzaSlices(callback){
 
 
 
+/* V42 — lightweight cut feedback, isolated from scoring and pointer logic. */
+function capitoCutImpact(a,b,cutNumber){
+  var host=document.getElementById('cp-board');
+  if(!host||!a||!b)return;
+  var x=(a.x+b.x)/2, y=(a.y+b.y)/2;
+  var burst=document.createElement('div');
+  burst.className='cp-v42-cut-impact';
+  burst.style.left=x+'px'; burst.style.top=y+'px';
+  burst.style.setProperty('--cut-angle',Math.atan2(b.y-a.y,b.x-a.x)+'rad');
+  burst.innerHTML='<i></i><b></b><em></em>';
+  host.appendChild(burst);
+  burst.addEventListener('animationend',function(){burst.remove()},{once:true});
+  setTimeout(function(){burst.remove()},650);
+  // The pizza responds to each stroke, without moving the scoring canvas.
+  host.classList.remove('cp-v42-pizza-tap');
+  void host.offsetWidth;
+  host.classList.add('cp-v42-pizza-tap');
+  clearTimeout(host._capitoTapTimer);
+  host._capitoTapTimer=setTimeout(function(){host.classList.remove('cp-v42-pizza-tap')},300);
+}
+
 /* ===== CUTTING ===== */
 
 
@@ -6957,6 +6994,9 @@ function pointerUp(event){
   if(distance>15){
 
 
+
+    // V42: physical-looking impact at the end of each real cut.
+    capitoCutImpact(startPoint,endPoint,cuts.length+1);
 
     cuts.push({
 
