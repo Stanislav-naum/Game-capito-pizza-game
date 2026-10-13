@@ -89,6 +89,22 @@ body.cp-playing #cp-canvas{z-index:2}
 .cp-v30-myrow{background:#edf4e9;border-radius:6px}
 @media(max-width:370px){.cp-v30-percent{font-size:14px}.cp-v30-person{font-size:11px}.cp-v30-count{font-size:18px}}
 </style>
+
+<style id="capito-v34-oven-rating">
+/* V34: illustrated brick oven; decorative only, no impact on score or Supabase */
+.cp-v34-oven{position:relative;height:188px;margin:12px -2px 17px;border-radius:20px;overflow:hidden;isolation:isolate;background:linear-gradient(#9b6447,#71452f);box-shadow:inset 0 3px 12px #4b261a66,0 8px 18px #4b261a24}
+.cp-v34-bricks{position:absolute;inset:0;background-image:linear-gradient(#3c201b40 2px,transparent 2px),repeating-linear-gradient(90deg,transparent 0 59px,#3c201b55 59px 62px,transparent 62px 123px);background-size:100% 32px,123px 64px;opacity:.75}
+.cp-v34-bricks:after{content:"";position:absolute;inset:32px 0 0;background:repeating-linear-gradient(90deg,transparent 0 26px,#3c201b55 26px 29px,transparent 29px 90px);background-size:90px 64px;mask-image:repeating-linear-gradient(to bottom,transparent 0 32px,#000 32px 64px)}
+.cp-v34-arch{position:absolute;bottom:-42px;left:50%;transform:translateX(-50%);width:76%;height:171px;border-radius:53% 53% 0 0 / 85% 85% 0 0;background:radial-gradient(ellipse at 50% 82%,#e99b3e 0%,#b9531f 28%,#4b211b 68%,#261713 100%);border:13px solid #c89160;box-shadow:0 0 0 4px #5b3428, inset 0 0 24px #090807}
+.cp-v34-ember{position:absolute;left:23%;right:23%;bottom:11px;height:22px;background:radial-gradient(ellipse,#ffb93a 0%,#e95b13 37%,transparent 70%);filter:blur(5px);animation:cpV34Glow 2.4s ease-in-out infinite alternate}
+.cp-v34-flame{position:absolute;bottom:27px;left:50%;width:34px;height:90px;transform-origin:50% 100%;border-radius:75% 12% 68% 30%;background:linear-gradient(0deg,#ff6619 2%,#ffc138 48%,#fff2a5 90%);filter:drop-shadow(0 0 12px #ff8a17);animation:cpV34Flame 1.55s ease-in-out infinite alternate}
+.cp-v34-flame.f1{margin-left:-38px;height:71px;animation-delay:-.6s}.cp-v34-flame.f2{margin-left:-4px;height:103px;animation-delay:-1.1s}.cp-v34-flame.f3{margin-left:27px;height:66px;animation-delay:-.2s}
+.cp-v34-label{position:absolute;z-index:2;top:11px;left:0;right:0;text-align:center;color:#fff8e9;font:bold 11px Arial,sans-serif;letter-spacing:2px;text-shadow:0 2px 5px #32140c}
+@keyframes cpV34Flame{0%{transform:rotate(-9deg) scale(.87,1);opacity:.85}50%{transform:rotate(7deg) scale(1.05,.85)}100%{transform:rotate(-3deg) scale(.92,1.1);opacity:1}}
+@keyframes cpV34Glow{to{opacity:.55;transform:scaleX(1.2)}}
+.cp-v34-oven.cp-v34-compact{height:143px;margin:4px 0 16px}.cp-v34-compact .cp-v34-arch{height:140px;bottom:-51px}.cp-v34-compact .cp-v34-flame{bottom:11px;transform:scale(.7)}
+@media(prefers-reduced-motion:reduce){.cp-v34-flame,.cp-v34-ember{animation:none}}
+</style>
 </head>
 <body>
 
@@ -2365,7 +2381,8 @@ html,body{
 
 
 
-  <div class="cp-leaderboard-title">
+  <div class="cp-v34-oven" role="img" aria-label="Рисованная кирпичная печь CAPITO с мерцающим огнём"><div class="cp-v34-bricks"></div><div class="cp-v34-arch"></div><div class="cp-v34-ember"></div><i class="cp-v34-flame f1"></i><i class="cp-v34-flame f2"></i><i class="cp-v34-flame f3"></i><span class="cp-v34-label">ИЗ ПЕЧИ CAPITO</span></div>
+<div class="cp-leaderboard-title">
 
     TOP-10 НЕДЕЛИ
 
@@ -2382,7 +2399,7 @@ html,body{
 
 
   <div id="cp-leaderboard" class="cp-leaderboard"></div>
-<div class="cp-v31-records" id="cp-v31-cp-leaderboard"><h3>🏆 ЗАЛ СЛАВЫ CAPITO</h3><p>Абсолютные рекорды за всю историю CAPITO PIZZA CUT</p><div class="cp-v31-empty">Загружаем рекорды…</div></div>
+<div class="cp-v31-records" id="cp-v31-cp-leaderboard"><h3>🏆 ЗАЛ СЛАВЫ CAPITO</h3><p>Абсолютные рекорды за всю историю CAPITO PIZZA CUT</p><div class="cp-v34-oven cp-v34-compact" role="img" aria-label="Рисованная кирпичная печь CAPITO с мерцающим огнём"><div class="cp-v34-bricks"></div><div class="cp-v34-arch"></div><div class="cp-v34-ember"></div><i class="cp-v34-flame f1"></i><i class="cp-v34-flame f2"></i><i class="cp-v34-flame f3"></i><span class="cp-v34-label">ИЗ ПЕЧИ CAPITO</span></div><div class="cp-v31-empty">Загружаем рекорды…</div></div>
 
 
 
@@ -2510,7 +2527,8 @@ html,body{
 
 
 
-  <div class="cp-leaderboard-title">
+  <div class="cp-v34-oven" role="img" aria-label="Рисованная кирпичная печь CAPITO с мерцающим огнём"><div class="cp-v34-bricks"></div><div class="cp-v34-arch"></div><div class="cp-v34-ember"></div><i class="cp-v34-flame f1"></i><i class="cp-v34-flame f2"></i><i class="cp-v34-flame f3"></i><span class="cp-v34-label">ИЗ ПЕЧИ CAPITO</span></div>
+<div class="cp-leaderboard-title">
 
     TOP-10 НЕДЕЛИ
 
@@ -2519,7 +2537,7 @@ html,body{
 
 
   <div id="cp-final-leaderboard" class="cp-leaderboard"></div>
-<div class="cp-v31-records" id="cp-v31-cp-final-leaderboard"><h3>🏆 ЗАЛ СЛАВЫ CAPITO</h3><p>Абсолютные рекорды за всю историю CAPITO PIZZA CUT</p><div class="cp-v31-empty">Загружаем рекорды…</div></div>
+<div class="cp-v31-records" id="cp-v31-cp-final-leaderboard"><h3>🏆 ЗАЛ СЛАВЫ CAPITO</h3><p>Абсолютные рекорды за всю историю CAPITO PIZZA CUT</p><div class="cp-v34-oven cp-v34-compact" role="img" aria-label="Рисованная кирпичная печь CAPITO с мерцающим огнём"><div class="cp-v34-bricks"></div><div class="cp-v34-arch"></div><div class="cp-v34-ember"></div><i class="cp-v34-flame f1"></i><i class="cp-v34-flame f2"></i><i class="cp-v34-flame f3"></i><span class="cp-v34-label">ИЗ ПЕЧИ CAPITO</span></div><div class="cp-v31-empty">Загружаем рекорды…</div></div>
 
 
 
