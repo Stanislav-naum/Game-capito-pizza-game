@@ -9196,7 +9196,7 @@ loadLeaderboard();
   return new Intl.DateTimeFormat('ru-RU',{timeZone:'Europe/Moscow',day:'2-digit',month:'2-digit',year:'numeric'}).format(d);
  }
  function buildPanel(panel,rows,message){
-  var existing=panel.querySelector('.cp-v33-content');if(existing)existing.remove();
+  var existing=panel.querySelector('.cp-v33-content');if(existing)existing.remove();var placeholder=panel.querySelector(':scope > .cp-v31-empty');if(placeholder)placeholder.remove();
   var wrap=document.createElement('div');wrap.className='cp-v33-content';
   if(!rows||!rows.length){var empty=document.createElement('div');empty.className='cp-v31-empty';empty.textContent=message;wrap.appendChild(empty);panel.appendChild(wrap);return;}
   var champion=rows[0],hero=document.createElement('div');hero.className='cp-v33-champion';
@@ -9216,11 +9216,42 @@ loadLeaderboard();
    var right=document.createElement('span');right.className='cp-v31-record-score';right.textContent=Number(row.score).toFixed(2)+'%';li.appendChild(left);li.appendChild(right);ol.appendChild(li)});wrap.appendChild(ol);panel.appendChild(wrap);
  }
  function render(rows,message){['cp-v31-cp-leaderboard','cp-v31-cp-final-leaderboard'].forEach(function(id){var panel=document.getElementById(id);if(panel)buildPanel(panel,rows,message)})}
- async function load(){if(loading)return loading;loading=(async function(){try{
-  var rows=await rpc('get_pizza_all_time_leaderboard',{});if(!Array.isArray(rows))throw new Error('Некорректный ответ сервера');
-  lastRows=rows.filter(function(r){return r&&Number.isFinite(Number(r.score))&&Number(r.score)>=0&&Number(r.score)<=100}).sort(function(a,b){return Number(b.score)-Number(a.score)});
-  render(lastRows,'Рекордов пока нет — станьте первым!');
- }catch(e){console.warn('CAPITO all-time leaderboard:',e);render(null,'Зал славы ожидает подключения к базе результатов. Недельный рейтинг продолжает работать.');}finally{loading=null}})();return loading}
+ async function fetchAllTimeRecords(){
+  // Preferred source: server-side function, one best result per participant.
+  try {return await rpc('get_pizza_all_time_leaderboard',{});}
+  catch(rpcError){
+    console.warn('CAPITO: all-time RPC unavailable, trying score history:',rpcError);
+    // Fallback: read only public leaderboard fields. Never request phone numbers.
+    var url=SUPABASE_URL+'/rest/v1/pizza_scores?select=player_name,score,week_start&order=score.desc&limit=1000';
+    var response=await fetch(url,{headers:apiHeaders(),cache:'no-store'});
+    if(!response.ok){throw new Error('RPC: '+rpcError.message+'; table: HTTP '+response.status+' '+(await response.text()).slice(0,250));}
+    var scores=await response.json();
+    if(!Array.isArray(scores))throw new Error('История результатов вернула неверный формат');
+    var unique=new Map();
+    scores.forEach(function(row){
+      if(!row||!Number.isFinite(Number(row.score)))return;
+      var name=String(row.player_name||'').trim();if(!name)return;
+      var key=name.toLocaleLowerCase('ru-RU');
+      if(!unique.has(key)||Number(row.score)>Number(unique.get(key).score))unique.set(key,row);
+    });
+    return Array.from(unique.values()).sort(function(a,b){return Number(b.score)-Number(a.score)}).slice(0,10);
+  }
+ }
+ async function load(){
+  if(loading)return loading;
+  loading=(async function(){
+   render(null,'Загружаем рекорды…');
+   try{
+    var rows=await fetchAllTimeRecords();
+    if(!Array.isArray(rows))throw new Error('Некорректный ответ сервера');
+    lastRows=rows.filter(function(r){return r&&Number.isFinite(Number(r.score))&&Number(r.score)>=0&&Number(r.score)<=100}).sort(function(a,b){return Number(b.score)-Number(a.score)}).slice(0,10);
+    render(lastRows,'Рекордов пока нет — станьте первым!');
+   }catch(e){
+    console.error('CAPITO all-time leaderboard:',e);
+    render(null,'Не удалось получить рекорды. Проверьте доступ к функции get_pizza_all_time_leaderboard в Supabase.');
+   }finally{loading=null;}
+  })();return loading;
+ }
  document.addEventListener('DOMContentLoaded',load);window.cpV31LoadRecords=load;
 })();
 </script>
