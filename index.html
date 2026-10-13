@@ -6319,7 +6319,7 @@ function drawSeparatedPizza(
 
     ctx.translate(moveX,moveY);
     // V32: subtle rotation about each piece's center; keeps polygon and image aligned.
-    var turn=Math.max(-0.024,Math.min(0.024,((center.x+center.y)%17-8)*0.003))*progress;
+    var turn=Math.max(-0.035,Math.min(0.035,((center.x+center.y)%17-8)*0.004))*progress;
     ctx.translate(center.x,center.y);ctx.rotate(turn);ctx.translate(-center.x,-center.y);
 
     drawPolygonPath(poly);
@@ -6357,7 +6357,7 @@ function drawSeparatedPizza(
 
     ctx.translate(moveX,moveY);
     // V32: subtle rotation about each piece's center; keeps polygon and image aligned.
-    var turn=Math.max(-0.024,Math.min(0.024,((center.x+center.y)%17-8)*0.003))*progress;
+    var turn=Math.max(-0.035,Math.min(0.035,((center.x+center.y)%17-8)*0.004))*progress;
     ctx.translate(center.x,center.y);ctx.rotate(turn);ctx.translate(-center.x,-center.y);
 
     drawPolygonPath(poly);
@@ -6580,19 +6580,10 @@ function animatePizzaSlices(callback){
 
 
 
-    var eased=
-
-      1-
-
-      Math.pow(
-
-        1-p,
-
-        3
-
-      );
-
-
+    // Fast initial separation, a tiny overshoot, then a soft return.
+    var eased = p < .72
+      ? 1.075*(1-Math.pow(1-p/.72,3))
+      : 1 + .075*Math.pow(1-(p-.72)/.28,2);
 
     drawSeparatedPizza(
 
@@ -9378,6 +9369,17 @@ loadLeaderboard();
  }
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',decorate);else decorate();
 })();
+</script>
+
+<style id="capito-v38-motion">
+/* V38: warm moving glow above the existing photo, not cartoon flames. */
+.cp-v34-oven{isolation:isolate}
+.cp-v34-oven .cp-v38-glow{position:absolute;inset:0;z-index:1;pointer-events:none;mix-blend-mode:screen;opacity:.45;background:radial-gradient(ellipse 24% 40% at 70% 53%,rgba(255,178,57,.30),rgba(255,86,12,.10) 54%,transparent 80%);transform-origin:70% 75%;animation:cpV38Glow 2.25s ease-in-out infinite alternate}
+@keyframes cpV38Glow{0%{opacity:.28;transform:translateY(2px) scale(.96,1.01)}45%{opacity:.53;transform:translateY(-2px) scale(1.02,1.04)}100%{opacity:.34;transform:translateY(1px) scale(.98,.99)}}
+@media(prefers-reduced-motion:reduce){.cp-v34-oven .cp-v38-glow{animation:none;opacity:.28}}
+</style>
+<script id="capito-v38-motion-script">
+(function(){function init(){document.querySelectorAll('.cp-v34-oven').forEach(function(oven){if(oven.querySelector('.cp-v38-glow'))return;var glow=document.createElement('span');glow.className='cp-v38-glow';glow.setAttribute('aria-hidden','true');oven.appendChild(glow)})}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init()})();
 </script>
 </body>
 </html>
