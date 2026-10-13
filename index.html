@@ -2382,7 +2382,7 @@ html,body{
 
 
   <div id="cp-leaderboard" class="cp-leaderboard"></div>
-<div class="cp-v31-records" id="cp-v31-cp-leaderboard"><h3>🏅 РЕКОРДЫ ЗА ВСЁ ВРЕМЯ</h3><p>Лучшие результаты за всю историю CAPITO PIZZA CUT</p><div class="cp-v31-empty">Загружаем рекорды…</div></div>
+<div class="cp-v31-records" id="cp-v31-cp-leaderboard"><h3>🏆 ЗАЛ СЛАВЫ CAPITO</h3><p>Абсолютные рекорды за всю историю CAPITO PIZZA CUT</p><div class="cp-v31-empty">Загружаем рекорды…</div></div>
 
 
 
@@ -2519,7 +2519,7 @@ html,body{
 
 
   <div id="cp-final-leaderboard" class="cp-leaderboard"></div>
-<div class="cp-v31-records" id="cp-v31-cp-final-leaderboard"><h3>🏅 РЕКОРДЫ ЗА ВСЁ ВРЕМЯ</h3><p>Лучшие результаты за всю историю CAPITO PIZZA CUT</p><div class="cp-v31-empty">Загружаем рекорды…</div></div>
+<div class="cp-v31-records" id="cp-v31-cp-final-leaderboard"><h3>🏆 ЗАЛ СЛАВЫ CAPITO</h3><p>Абсолютные рекорды за всю историю CAPITO PIZZA CUT</p><div class="cp-v31-empty">Загружаем рекорды…</div></div>
 
 
 
@@ -9178,45 +9178,50 @@ loadLeaderboard();
   document.addEventListener('DOMContentLoaded',function(){setTimeout(render,100)});
 })();
 </script>
-<style id="cp-v31-records-style">
-.cp-v31-records{margin:22px auto 16px;padding:18px 15px;border:1px solid #c8d0bd;border-radius:20px;background:#f7f8f0;color:#234a35;max-width:480px;text-align:center;box-shadow:0 6px 22px rgba(15,50,30,.07)}
-.cp-v31-records h3{font-size:20px;letter-spacing:.07em;margin:0 0 6px;font-weight:800}
-.cp-v31-records p{font-size:12px;line-height:1.5;margin:0 0 12px;opacity:.8}
-.cp-v31-records ol{list-style:none;padding:0;margin:0}
-.cp-v31-records li{display:flex;justify-content:space-between;gap:12px;text-align:left;padding:10px 9px;border-bottom:1px solid #dce3d6;font-size:14px}
-.cp-v31-records li:last-child{border-bottom:0}
-.cp-v31-records .cp-v31-record-score{font-weight:800;white-space:nowrap}
-.cp-v31-records .cp-v31-empty{font-size:13px;line-height:1.5;padding:8px 0;color:#536558}
+<style id="cp-v33-hall-style">
+.cp-v31-records{margin:22px auto 16px;padding:22px 15px;border:1px solid #c8d0bd;border-radius:22px;background:linear-gradient(155deg,#fbfcf7,#edf2e9);color:#234a35;max-width:480px;text-align:center;box-shadow:0 8px 24px rgba(15,50,30,.08)}
+.cp-v31-records h3{font-size:21px;letter-spacing:.05em;margin:0 0 6px;font-weight:800}.cp-v31-records p{font-size:12px;line-height:1.5;margin:0 0 14px;opacity:.85}
+.cp-v33-champion{border-radius:17px;background:#244b38;color:#fff;padding:15px 12px;margin:0 0 14px;box-shadow:0 7px 18px rgba(16,45,28,.15)}
+.cp-v33-crown{font-size:25px}.cp-v33-champion-name{font-size:21px;font-weight:800;overflow-wrap:anywhere}.cp-v33-champion-score{font-size:30px;font-weight:800;color:#f3d991}.cp-v33-champion-date{font-size:11px;opacity:.8}
+.cp-v33-podium{display:grid;grid-template-columns:1fr 1.1fr 1fr;align-items:end;gap:6px;margin:0 0 15px}.cp-v33-podium-cell{min-width:0;border-radius:13px 13px 5px 5px;background:#e2e8da;padding:12px 5px 9px}.cp-v33-podium-cell.first{background:#e9dba9;padding-top:24px}.cp-v33-podium-cell.second{background:#dce2e2}.cp-v33-podium-cell.third{background:#e7d3c2}.cp-v33-podium-medal{font-size:24px}.cp-v33-podium-name{font-size:12px;font-weight:700;overflow-wrap:anywhere}.cp-v33-podium-score{font-size:14px;font-weight:800;margin-top:5px}
+.cp-v31-records ol{list-style:none;padding:0;margin:0}.cp-v31-records li{display:flex;justify-content:space-between;align-items:center;gap:12px;text-align:left;padding:11px 9px;border-bottom:1px solid #dce3d6;font-size:14px}.cp-v31-records li:last-child{border-bottom:0}.cp-v31-records .cp-v31-record-score{font-weight:800;white-space:nowrap}.cp-v31-records .cp-v31-empty{font-size:13px;line-height:1.6;padding:12px 3px;color:#536558}.cp-v33-date{display:block;font-size:10px;color:#738274;margin-top:2px}.cp-v33-record-title{font-size:12px;font-weight:800;letter-spacing:.09em;margin:14px 0 4px}
 </style>
-<script id="cp-v31-records-script">
+<script id="cp-v33-hall-script">
 (function(){
-  function escapeText(value){return String(value==null?'':value).replace(/[&<>"']/g,function(ch){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]})}
-  function show(message,rows){
-    ['cp-v31-cp-leaderboard','cp-v31-cp-final-leaderboard'].forEach(function(id){
-      var panel=document.getElementById(id);if(!panel)return;
-      var old=panel.querySelector('ol,.cp-v31-empty');if(old)old.remove();
-      if(!rows||!rows.length){var div=document.createElement('div');div.className='cp-v31-empty';div.textContent=message;panel.appendChild(div);return}
-      var ol=document.createElement('ol');
-      rows.slice(0,10).forEach(function(row,index){
-        var li=document.createElement('li');
-        var label=document.createElement('span');label.textContent=(index+1)+'. '+String(row.player_name||row.name||'Игрок');
-        var score=document.createElement('span');score.className='cp-v31-record-score';score.textContent=Number(row.score||0).toFixed(1)+'%';
-        li.appendChild(label);li.appendChild(score);ol.appendChild(li)
-      });panel.appendChild(ol)
-    });
-  }
-  async function loadRecords(){
-    try{
-      var rows=await rpc('get_pizza_all_time_leaderboard',{});
-      if(!Array.isArray(rows))throw new Error('Invalid all-time leaderboard');
-      show('Рекордов пока нет — станьте первым!',rows)
-    }catch(error){
-      console.warn('All-time records not configured:',error);
-      show('Исторический рейтинг подключается. Недельный рейтинг продолжает работать.',[])
-    }
-  }
-  document.addEventListener('DOMContentLoaded',loadRecords);
-  window.cpV31LoadRecords=loadRecords;
+ var lastRows=null,loading=null;
+ function dateLabel(row){
+  var raw=row.completed_at||row.completion_time||row.created_at||row.played_at||row.recorded_at;
+  if(!raw)return '';
+  var d=new Date(raw);if(isNaN(d.getTime()))return '';
+  return new Intl.DateTimeFormat('ru-RU',{timeZone:'Europe/Moscow',day:'2-digit',month:'2-digit',year:'numeric'}).format(d);
+ }
+ function buildPanel(panel,rows,message){
+  var existing=panel.querySelector('.cp-v33-content');if(existing)existing.remove();
+  var wrap=document.createElement('div');wrap.className='cp-v33-content';
+  if(!rows||!rows.length){var empty=document.createElement('div');empty.className='cp-v31-empty';empty.textContent=message;wrap.appendChild(empty);panel.appendChild(wrap);return;}
+  var champion=rows[0],hero=document.createElement('div');hero.className='cp-v33-champion';
+  var crown=document.createElement('div');crown.className='cp-v33-crown';crown.textContent='👑 АБСОЛЮТНЫЙ РЕКОРДСМЕН';hero.appendChild(crown);
+  var name=document.createElement('div');name.className='cp-v33-champion-name';name.textContent=champion.player_name||champion.name||'Игрок';hero.appendChild(name);
+  var score=document.createElement('div');score.className='cp-v33-champion-score';score.textContent=Number(champion.score).toFixed(2)+'%';hero.appendChild(score);
+  var date=document.createElement('div');date.className='cp-v33-champion-date';date.textContent=dateLabel(champion)?'Рекорд установлен '+dateLabel(champion):'Лучший результат за всю историю';hero.appendChild(date);wrap.appendChild(hero);
+  var podium=document.createElement('div');podium.className='cp-v33-podium';
+  [1,0,2].forEach(function(i){var row=rows[i],cell=document.createElement('div');cell.className='cp-v33-podium-cell '+(['first','second','third'][i]);
+   var medal=document.createElement('div');medal.className='cp-v33-podium-medal';medal.textContent=['🥇','🥈','🥉'][i];cell.appendChild(medal);
+   var nm=document.createElement('div');nm.className='cp-v33-podium-name';nm.textContent=row?(row.player_name||row.name||'Игрок'):'—';cell.appendChild(nm);
+   var sc=document.createElement('div');sc.className='cp-v33-podium-score';sc.textContent=row?Number(row.score).toFixed(2)+'%':'—';cell.appendChild(sc);podium.appendChild(cell);
+  });wrap.appendChild(podium);
+  var title=document.createElement('div');title.className='cp-v33-record-title';title.textContent='ТОП-10 ЗА ВСЁ ВРЕМЯ';wrap.appendChild(title);
+  var ol=document.createElement('ol');rows.slice(0,10).forEach(function(row,i){var li=document.createElement('li'),left=document.createElement('span');left.textContent=(i+1)+'. '+String(row.player_name||row.name||'Игрок');
+   var dt=dateLabel(row);if(dt){var small=document.createElement('span');small.className='cp-v33-date';small.textContent=dt;left.appendChild(small)}
+   var right=document.createElement('span');right.className='cp-v31-record-score';right.textContent=Number(row.score).toFixed(2)+'%';li.appendChild(left);li.appendChild(right);ol.appendChild(li)});wrap.appendChild(ol);panel.appendChild(wrap);
+ }
+ function render(rows,message){['cp-v31-cp-leaderboard','cp-v31-cp-final-leaderboard'].forEach(function(id){var panel=document.getElementById(id);if(panel)buildPanel(panel,rows,message)})}
+ async function load(){if(loading)return loading;loading=(async function(){try{
+  var rows=await rpc('get_pizza_all_time_leaderboard',{});if(!Array.isArray(rows))throw new Error('Некорректный ответ сервера');
+  lastRows=rows.filter(function(r){return r&&Number.isFinite(Number(r.score))&&Number(r.score)>=0&&Number(r.score)<=100}).sort(function(a,b){return Number(b.score)-Number(a.score)});
+  render(lastRows,'Рекордов пока нет — станьте первым!');
+ }catch(e){console.warn('CAPITO all-time leaderboard:',e);render(null,'Зал славы ожидает подключения к базе результатов. Недельный рейтинг продолжает работать.');}finally{loading=null}})();return loading}
+ document.addEventListener('DOMContentLoaded',load);window.cpV31LoadRecords=load;
 })();
 </script>
 
