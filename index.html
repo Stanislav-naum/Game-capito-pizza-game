@@ -2375,7 +2375,7 @@ html,body{
 
 
 
-  <div class="cp-v34-oven" role="img" aria-label="Иллюстрация дровяной кирпичной печи CAPITO с горящими дровами"></div><div class="cp-v34-arch"></div><div class="cp-v34-ember"></div><i class="cp-v34-flame f1"></i><i class="cp-v34-flame f2"></i><i class="cp-v34-flame f3"></i><span class="cp-v34-label">ИЗ ПЕЧИ CAPITO</span></div>
+  <div class="cp-v34-oven" role="img" aria-label="Иллюстрация дровяной кирпичной печи CAPITO с горящими дровами"></div>
 <div class="cp-leaderboard-title">
 
     TOP-10 НЕДЕЛИ
@@ -2393,7 +2393,7 @@ html,body{
 
 
   <div id="cp-leaderboard" class="cp-leaderboard"></div>
-<div class="cp-v31-records" id="cp-v31-cp-leaderboard"><h3>🏆 ЗАЛ СЛАВЫ CAPITO</h3><p>Абсолютные рекорды за всю историю CAPITO PIZZA CUT</p><div class="cp-v34-oven cp-v34-compact" role="img" aria-label="Иллюстрация дровяной кирпичной печи CAPITO с горящими дровами"></div><div class="cp-v34-arch"></div><div class="cp-v34-ember"></div><i class="cp-v34-flame f1"></i><i class="cp-v34-flame f2"></i><i class="cp-v34-flame f3"></i><span class="cp-v34-label">ИЗ ПЕЧИ CAPITO</span></div><div class="cp-v31-empty">Загружаем рекорды…</div></div>
+<div class="cp-v31-records" id="cp-v31-cp-leaderboard"><h3>🏆 ЗАЛ СЛАВЫ CAPITO</h3><p>Абсолютные рекорды за всю историю CAPITO PIZZA CUT</p><div class="cp-v34-oven cp-v34-compact" role="img" aria-label="Иллюстрация дровяной кирпичной печи CAPITO с горящими дровами"></div><div class="cp-v31-empty">Загружаем рекорды…</div></div>
 
 
 
@@ -2521,7 +2521,7 @@ html,body{
 
 
 
-  <div class="cp-v34-oven" role="img" aria-label="Иллюстрация дровяной кирпичной печи CAPITO с горящими дровами"></div><div class="cp-v34-arch"></div><div class="cp-v34-ember"></div><i class="cp-v34-flame f1"></i><i class="cp-v34-flame f2"></i><i class="cp-v34-flame f3"></i><span class="cp-v34-label">ИЗ ПЕЧИ CAPITO</span></div>
+  <div class="cp-v34-oven" role="img" aria-label="Иллюстрация дровяной кирпичной печи CAPITO с горящими дровами"></div>
 <div class="cp-leaderboard-title">
 
     TOP-10 НЕДЕЛИ
@@ -2531,7 +2531,7 @@ html,body{
 
 
   <div id="cp-final-leaderboard" class="cp-leaderboard"></div>
-<div class="cp-v31-records" id="cp-v31-cp-final-leaderboard"><h3>🏆 ЗАЛ СЛАВЫ CAPITO</h3><p>Абсолютные рекорды за всю историю CAPITO PIZZA CUT</p><div class="cp-v34-oven cp-v34-compact" role="img" aria-label="Иллюстрация дровяной кирпичной печи CAPITO с горящими дровами"></div><div class="cp-v34-arch"></div><div class="cp-v34-ember"></div><i class="cp-v34-flame f1"></i><i class="cp-v34-flame f2"></i><i class="cp-v34-flame f3"></i><span class="cp-v34-label">ИЗ ПЕЧИ CAPITO</span></div><div class="cp-v31-empty">Загружаем рекорды…</div></div>
+<div class="cp-v31-records" id="cp-v31-cp-final-leaderboard"><h3>🏆 ЗАЛ СЛАВЫ CAPITO</h3><p>Абсолютные рекорды за всю историю CAPITO PIZZA CUT</p><div class="cp-v34-oven cp-v34-compact" role="img" aria-label="Иллюстрация дровяной кирпичной печи CAPITO с горящими дровами"></div><div class="cp-v31-empty">Загружаем рекорды…</div></div>
 
 
 
@@ -9296,5 +9296,58 @@ loadLeaderboard();
 })();
 </script>
 
+
+<style id="capito-v36-tabs-style">
+.cp-v36-rank{margin:14px 0 20px;max-width:100%;min-width:0}
+.cp-v36-title{text-align:center;font-size:23px;font-weight:900;letter-spacing:.045em;color:#173e30;margin:20px 0 12px}
+.cp-v36-tabs{display:grid;grid-template-columns:1fr 1fr;gap:7px;padding:5px;border:1px solid #cdd8cb;background:#f5f6ef;border-radius:17px;margin:0 0 16px}
+.cp-v36-tab{min-width:0;min-height:47px;border:0;border-radius:12px;background:transparent;color:#315746;font-size:13px;font-weight:800;letter-spacing:.02em;cursor:pointer;padding:8px 4px}
+.cp-v36-tab[aria-selected="true"]{background:#234b38;color:#fff;box-shadow:0 4px 11px #173d3024}
+.cp-v36-panel[hidden]{display:none!important}
+.cp-v36-panel{min-width:0}
+.cp-v36-rank .cp-v34-oven{height:165px;margin:0 0 14px;border-radius:17px}
+.cp-v36-rank .cp-leaderboard-title{margin-top:10px}
+.cp-v36-rank .cp-v31-records{margin:0 auto 10px}
+.cp-v36-rank .cp-v31-records .cp-v34-oven{display:none!important}
+.cp-v36-rank .cp-v31-records h3{margin-top:0}
+.cp-v36-rank .cp-v31-records .cp-v33-content{min-width:0}
+@media(max-width:360px){.cp-v36-tab{font-size:11px}.cp-v36-title{font-size:20px}}
+</style>
+<script id="capito-v36-tabs-script">
+(function(){
+ function setup(leaderId,hallId){
+  var list=document.getElementById(leaderId),hall=document.getElementById(hallId);
+  if(!list||!hall)return;
+  var screen=list.closest('.cp-screen');if(!screen)return;
+  var oldOven=screen.querySelector('.cp-v34-oven:not(.cp-v34-compact)');
+  var oldTitle=screen.querySelector('.cp-leaderboard-title');
+  var oldNote=screen.querySelector('.cp-leaderboard-note');
+  var rank=document.createElement('section');rank.className='cp-v36-rank';rank.setAttribute('aria-label','Рейтинг CAPITO');
+  var heading=document.createElement('h2');heading.className='cp-v36-title';heading.textContent='РЕЙТИНГ CAPITO';rank.appendChild(heading);
+  var tabs=document.createElement('div');tabs.className='cp-v36-tabs';tabs.setAttribute('role','tablist');tabs.setAttribute('aria-label','Период рейтинга');
+  var weekly=document.createElement('div'),all=document.createElement('div');weekly.className='cp-v36-panel';all.className='cp-v36-panel';
+  var unique=leaderId.replace(/[^a-z-]/g,'');weekly.id=unique+'-week';all.id=unique+'-all';
+  function addTab(label,panel,selected){var b=document.createElement('button');b.type='button';b.className='cp-v36-tab';b.textContent=label;b.setAttribute('role','tab');b.setAttribute('aria-controls',panel.id);b.setAttribute('aria-selected',selected?'true':'false');tabs.appendChild(b);b.addEventListener('click',function(){for(var i=0;i<tabs.children.length;i++)tabs.children[i].setAttribute('aria-selected',tabs.children[i]===b?'true':'false');weekly.hidden=panel!==weekly;all.hidden=panel!==all;if(panel===all&&window.cpV31LoadRecords)window.cpV31LoadRecords();});return b;}
+  addTab('ЭТА НЕДЕЛЯ',weekly,true);addTab('ЗА ВСЁ ВРЕМЯ',all,false);all.hidden=true;
+  var anchor=oldOven||oldTitle||list;anchor.parentNode.insertBefore(rank,anchor);
+  rank.appendChild(tabs);
+  if(oldOven)rank.appendChild(oldOven);
+  rank.appendChild(weekly);rank.appendChild(all);
+  if(oldTitle)weekly.appendChild(oldTitle);
+  if(oldNote)weekly.appendChild(oldNote);
+  // The original weekly leaderboard renderer injects a summary directly before its list.
+  var weeklySummary=document.getElementById('cp-v30-'+leaderId);
+  if(weeklySummary)weekly.appendChild(weeklySummary);
+  weekly.appendChild(list);all.appendChild(hall);
+  // Any future summary injected by existing renderer must also be moved into the weekly tab.
+  var observer=new MutationObserver(function(){var summary=document.getElementById('cp-v30-'+leaderId);if(summary&&summary.parentNode!==weekly)weekly.insertBefore(summary,list);});
+  observer.observe(screen,{childList:true,subtree:true});
+  // Prevent duplicate oven artwork within the all-time records card.
+  hall.querySelectorAll('.cp-v34-oven').forEach(function(el){el.remove()});
+ }
+ function init(){setup('cp-leaderboard','cp-v31-cp-leaderboard');setup('cp-final-leaderboard','cp-v31-cp-final-leaderboard')}
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
 </body>
 </html>
