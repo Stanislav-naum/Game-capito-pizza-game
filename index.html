@@ -115,6 +115,15 @@ body.cp-playing #cp-board.cp-v42-pizza-tap #cp-pizza-image{animation:cp-v42-doug
 @keyframes cp-v42-dough{0%{scale:1}38%{scale:.991 1.009}75%{scale:1.005 .997}100%{scale:1}}
 @media(prefers-reduced-motion:reduce){#cp-board .cp-v42-cut-impact{display:none!important}body.cp-playing #cp-board.cp-v42-pizza-tap #cp-pizza-image{animation:none!important}}
 </style>
+<style id="cp-v44-effects">
+/* V44: restrained tactile cut accents */
+#cp-board{position:relative}
+.cp-v44-cut-flash{position:absolute;z-index:20;pointer-events:none;width:52px;height:52px;border:2px solid rgba(255,245,199,.88);border-radius:50%;transform:translate(-50%,-50%) scale(.35);box-shadow:0 0 14px rgba(255,210,110,.7),inset 0 0 10px rgba(255,210,110,.3);animation:cpV44Flash .42s ease-out forwards}
+@keyframes cpV44Flash{0%{opacity:0;transform:translate(-50%,-50%) scale(.35)}25%{opacity:1}100%{opacity:0;transform:translate(-50%,-50%) scale(1.65)}}
+.cp-v44-perfect{position:fixed;left:50%;top:30%;z-index:9999;pointer-events:none;padding:13px 28px;border-radius:16px;background:#fff6dd;color:#234d32;border:2px solid #d8ae59;box-shadow:0 12px 40px #0005;font-weight:900;font-size:clamp(25px,7vw,42px);letter-spacing:.05em;white-space:nowrap;animation:cpV44Perfect 1.8s both}
+@keyframes cpV44Perfect{0%{opacity:0;transform:translate(-50%,-15%) scale(.65)}22%{opacity:1;transform:translate(-50%,0) scale(1.09)}36%{transform:translate(-50%,0) scale(1)}80%{opacity:1}100%{opacity:0;transform:translate(-50%,-30%) scale(1)}}
+@media(prefers-reduced-motion:reduce){.cp-v44-cut-flash,.cp-v44-perfect{animation-duration:.01ms}}
+</style>
 </head>
 <body>
 
@@ -6863,6 +6872,7 @@ function pointerUp(event){
 
 
 
+    cpV44CutFlash(endPoint);
     // V42: physical-looking impact at the end of each real cut.
     capitoCutImpact(startPoint,endPoint,cuts.length+1);
 
@@ -7529,6 +7539,7 @@ async function calculateResult(){
   );
 
   cpV29UpdateResult();
+  cpV44PerfectResult(currentScore);
   if(typeof cpV32Celebrate==='function')cpV32Celebrate(currentScore);
 
 
@@ -9352,5 +9363,28 @@ function mount(oven){
 /* Animated WebP frames animate the original illustration itself, not just an overlay. */
 .cp-v34-oven{background-image:url("capito-oven-LIVE-v41.webp")!important}
 </style>
+<script id="cp-v44-interactions">
+/* V44 cut-feedback and perfect-result overlay. No score/backend changes. */
+function cpV44CutFlash(point){
+ try{
+  if(!point||!board||!canvas)return;
+  var c=canvas.getBoundingClientRect(),b=board.getBoundingClientRect();
+  var x=c.left-b.left+(point.x/canvas.width)*c.width;
+  var y=c.top-b.top+(point.y/canvas.height)*c.height;
+  var e=document.createElement('span');e.className='cp-v44-cut-flash';
+  e.style.left=x+'px';e.style.top=y+'px';board.appendChild(e);
+  setTimeout(function(){e.remove()},500);
+ }catch(e){}
+}
+function cpV44PerfectResult(score){
+ if(Number(score)<99.95)return;
+ try{
+  var e=document.createElement('div');e.className='cp-v44-perfect';
+  e.textContent='ИДЕАЛЬНО! 🍕';document.body.appendChild(e);
+  if(typeof hapticPerfect==='function')hapticPerfect();
+  setTimeout(function(){e.remove()},1900);
+ }catch(e){}
+}
+</script>
 </body>
 </html>
