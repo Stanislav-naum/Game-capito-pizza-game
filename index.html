@@ -9190,6 +9190,9 @@ loadLeaderboard();
 <script id="cp-v33-hall-script">
 (function(){
  var lastRows=null,loading=null;
+ // Hall of Fame runs in its own IIFE, separate from the main game's private scope.
+ var hallSupabaseUrl="https://betbkhvyejtjqfyuxmql.supabase.co";
+ var hallSupabaseKey="sb_publishable_AY3okNvvxefclorginvwZQ_fzRXjrYQ";
  function dateLabel(row){
   var raw=row.completed_at||row.completion_time||row.created_at||row.played_at||row.recorded_at;
   if(!raw)return '';
@@ -9218,25 +9221,19 @@ loadLeaderboard();
  }
  function render(rows,message){['cp-v31-cp-leaderboard','cp-v31-cp-final-leaderboard'].forEach(function(id){var panel=document.getElementById(id);if(panel)buildPanel(panel,rows,message)})}
  async function fetchAllTimeRecords(){
-  // Preferred source: server-side function, one best result per participant.
-  try {return await rpc('get_pizza_all_time_leaderboard',{});}
-  catch(rpcError){
-    console.warn('CAPITO: all-time RPC unavailable, trying score history:',rpcError);
-    // Fallback: read only public leaderboard fields. Never request phone numbers.
-    var url=SUPABASE_URL+'/rest/v1/pizza_scores?select=player_name,score,week_start&order=score.desc&limit=1000';
-    var response=await fetch(url,{headers:apiHeaders(),cache:'no-store'});
-    if(!response.ok){throw new Error('RPC: '+rpcError.message+'; table: HTTP '+response.status+' '+(await response.text()).slice(0,250));}
-    var scores=await response.json();
-    if(!Array.isArray(scores))throw new Error('История результатов вернула неверный формат');
-    var unique=new Map();
-    scores.forEach(function(row){
-      if(!row||!Number.isFinite(Number(row.score)))return;
-      var name=String(row.player_name||'').trim();if(!name)return;
-      var key=name.toLocaleLowerCase('ru-RU');
-      if(!unique.has(key)||Number(row.score)>Number(unique.get(key).score))unique.set(key,row);
-    });
-    return Array.from(unique.values()).sort(function(a,b){return Number(b.score)-Number(a.score)}).slice(0,10);
+  // Use the restricted SECURITY DEFINER RPC only; never query private score rows.
+  var response=await fetch(hallSupabaseUrl+'/rest/v1/rpc/get_pizza_all_time_leaderboard',{
+   method:'POST',
+   headers:{'apikey':hallSupabaseKey,'Content-Type':'application/json'},
+   body:'{}',cache:'no-store'
+  });
+  if(!response.ok){
+   var detail=await response.text();
+   throw new Error('Hall of Fame HTTP '+response.status+': '+detail.slice(0,500));
   }
+  var rows=await response.json();
+  if(!Array.isArray(rows))throw new Error('Hall of Fame: invalid response');
+  return rows;
  }
  async function load(){
   if(loading)return loading;
