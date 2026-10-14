@@ -1,0 +1,9529 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#ffffff">
+<title>CAPITO / PIZZA CUT — V24</title>
+
+<style id="capito-v15-pizza-photo">
+@media(max-width:600px){
+body.cp-playing #cp-pizza-image{position:absolute!important;inset:0!important;top:0!important;left:0!important;width:100%!important;height:100%!important;margin:0!important;max-width:none!important;object-fit:contain!important;clip-path:none!important;filter:drop-shadow(0 9px 7px rgba(57,29,13,.27))!important;transform:none!important}
+body.cp-playing #cp-board.cp-separated #cp-pizza-image{visibility:hidden!important}
+body.cp-playing #cp-board{filter:none!important}
+body.cp-playing #cp-canvas{z-index:2}
+}
+
+/* CAPITO V29 — result polish; gameplay and registration untouched */
+.cp-v29-summary{max-width:390px;margin:9px auto 12px;padding:14px 15px 13px;border:1px solid rgba(28,65,42,.17);border-radius:19px;background:linear-gradient(145deg,rgba(255,255,255,.96),rgba(242,246,239,.92));box-shadow:0 9px 26px rgba(24,50,33,.09);text-align:left}
+.cp-v29-heading{display:flex;justify-content:space-between;align-items:center;gap:8px;color:#244b36;font-size:10px;font-weight:900;letter-spacing:1.25px}
+.cp-v29-badge{border-radius:30px;background:#e3ede2;padding:5px 9px;font-size:10px;letter-spacing:.2px;white-space:nowrap}
+.cp-v29-track{height:12px;margin-top:12px;background:#e1e8df;border-radius:30px;overflow:hidden;box-shadow:inset 0 1px 3px rgba(0,0,0,.09)}
+.cp-v29-fill{height:100%;width:0;background:linear-gradient(90deg,#598366,#245d3e);border-radius:30px;transition:width 1.05s cubic-bezier(.22,.85,.22,1)}
+.cp-v29-scale{display:flex;justify-content:space-between;margin-top:6px;color:#657b69;font-size:10px;font-weight:700}
+.cp-v29-caption{margin-top:9px;color:#375443;font-size:12px;line-height:1.35;font-weight:700;text-align:center}
+.cp-v29-view{border:1.5px solid #2c573e!important;background:#fff!important;color:#2c573e!important}
+.cp-v29-view:focus-visible{outline:3px solid #80b495;outline-offset:2px}
+@media(max-width:370px){.cp-v29-summary{padding:11px}.cp-v29-heading{font-size:9px}}
+@media(prefers-reduced-motion:reduce){.cp-v29-fill{transition:none}}
+
+</style>
+<style id="capito-v22-photos">
+@media(max-width:600px){
+#cp-v2-facade{aspect-ratio:16/9!important;overflow:hidden!important}
+#cp-v2-facade img{width:100%!important;height:100%!important;object-fit:cover!important;object-position:center!important}
+#cp-register .cp-interior-photo img{width:100%!important;display:block!important}
+}
+</style>
+
+<style id="capito-v24-compact-register">
+/* Registration: remove unused vertical space; keep both photographs. */
+@media(max-width:600px){
+ body:not(.cp-playing) #capito-pizza-cut{min-height:0!important;padding-top:0!important;padding-bottom:0!important;}
+ body:not(.cp-playing) #cp-v2-facade{height:clamp(125px,19dvh,190px)!important;aspect-ratio:auto!important;max-width:480px!important;overflow:hidden!important;margin:0 auto!important;}
+ body:not(.cp-playing) #cp-v2-facade img{width:100%!important;height:100%!important;object-fit:cover!important;object-position:center 52%!important;}
+ body:not(.cp-playing) #cp-register.active{min-height:0!important;margin:0 -10px!important;padding:8px 16px 0!important;}
+ #cp-register .cp-brand{margin:0 0 3px!important;font-size:9px!important;}
+ #cp-register .cp-title{font-size:clamp(24px,6.6vw,34px)!important;line-height:1!important;margin:0 0 7px!important;}
+ #cp-register .cp-subtitle{font-size:clamp(12px,3.4vw,15px)!important;line-height:1.17!important;margin:0 auto 5px!important;}
+ #cp-register .cp-description{font-size:clamp(10px,2.85vw,12px)!important;line-height:1.22!important;margin:0 auto 8px!important;}
+ #cp-register .cp-prizes{margin:7px 0 9px!important;gap:6px!important;}
+ #cp-register .cp-prize{min-height:48px!important;padding:7px 2px 5px!important;border-radius:10px!important;}
+ #cp-register .cp-prize-place{font-size:9px!important;margin-bottom:3px!important;}
+ #cp-register .cp-prize-name{font-size:12px!important;}
+ #cp-register .cp-label{margin:5px 0 3px!important;font-size:10px!important;}
+ #cp-register .cp-input{height:42px!important;min-height:42px!important;padding:7px 12px!important;font-size:16px!important;margin-bottom:5px!important;}
+ #cp-register .cp-consent{margin:5px 0 8px!important;font-size:10px!important;line-height:1.15!important;}
+ #cp-register #cp-start{min-height:46px!important;padding:10px!important;font-size:15px!important;}
+ #cp-register .cp-interior-photo{margin:10px -16px 0!important;}
+ #cp-register .cp-interior-photo:before{height:28px!important;}
+ #cp-register .cp-interior-photo img{max-height:220px!important;object-fit:cover!important;object-position:center!important;}
+}
+@media(max-width:600px) and (max-height:750px){
+ body:not(.cp-playing) #cp-v2-facade{height:115px!important;}
+ #cp-register .cp-description{font-size:10px!important;}
+ #cp-register .cp-prizes{margin:5px 0!important;}
+ #cp-register .cp-input{height:39px!important;min-height:39px!important;}
+}
+</style>
+<style id="cp-v30-styles">
+.cp-v30-wrap{margin:14px 0 18px;font-family:inherit;color:#173b30}
+.cp-v30-head{background:#eff4ee;border:1px solid #d9e6d8;border-radius:15px;padding:12px 14px;text-align:center;margin-bottom:14px}
+.cp-v30-label{font-size:11px;letter-spacing:1.1px;font-weight:800;text-transform:uppercase}
+.cp-v30-count{font-size:21px;font-weight:900;margin:4px 0 2px;font-variant-numeric:tabular-nums}
+.cp-v30-small{font-size:11px;opacity:.73}
+.cp-v30-podium{display:grid;grid-template-columns:1fr 1.14fr 1fr;align-items:end;gap:7px;margin:16px 0 14px}
+.cp-v30-podium-item{min-width:0;text-align:center}
+.cp-v30-medal{font-size:25px;line-height:1.2}
+.cp-v30-person{font-size:12px;font-weight:800;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin:5px 0}
+.cp-v30-percent{font-size:16px;font-weight:900}
+.cp-v30-step{display:flex;align-items:center;justify-content:center;color:white;border-radius:11px 11px 5px 5px;font-size:23px;font-weight:900;margin-top:7px}
+.cp-v30-first .cp-v30-step{height:85px;background:linear-gradient(145deg,#b58b38,#d5b86c)}
+.cp-v30-second .cp-v30-step{height:65px;background:linear-gradient(145deg,#82938e,#b0bbb6)}
+.cp-v30-third .cp-v30-step{height:50px;background:linear-gradient(145deg,#ab7752,#ca9a70)}
+.cp-v30-person-empty{opacity:.55}
+.cp-v30-personal{border:1px solid #d6e2d7;border-radius:13px;padding:12px 14px;background:#fafcf9;font-size:13px;line-height:1.55;margin-bottom:12px}
+.cp-v30-personal strong{font-weight:900}
+.cp-v30-personal-title{font-size:11px;letter-spacing:.8px;font-weight:900;margin-bottom:3px}
+.cp-v30-prizes{text-align:center;font-size:11px;opacity:.72;margin:0 0 12px}
+.cp-v30-myrow{background:#edf4e9;border-radius:6px}
+@media(max-width:370px){.cp-v30-percent{font-size:14px}.cp-v30-person{font-size:11px}.cp-v30-count{font-size:18px}}
+</style>
+
+<style id="capito-v35-oven-rating">
+/* Original approved illustration; decorative layer only. */
+.cp-v34-oven{position:relative;height:194px;margin:12px -2px 18px;border-radius:18px;overflow:hidden;isolation:isolate;background:#30170e url("capito-oven-LIVE-v41.webp") center 57% / cover no-repeat;box-shadow:0 7px 22px #4b261a26}
+.cp-v34-oven::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 31% 55% at 69% 48%,rgba(255,162,35,.18),transparent 75%);mix-blend-mode:screen;animation:cpV35Fire 2.6s ease-in-out infinite alternate}
+.cp-v34-oven::after{content:"";position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 24px #1b09094d;border-radius:inherit}
+.cp-v34-oven.cp-v34-compact{height:142px;margin:12px 0 18px;background-position:center 54%}
+@keyframes cpV35Fire{0%{opacity:.24;transform:scale(.99)}45%{opacity:.72}100%{opacity:1;transform:scale(1.035)}}
+@media(prefers-reduced-motion:reduce){.cp-v34-oven::before{animation:none}}
+</style>
+
+<!-- V42: cut-line impact and dough reaction. Only decorative; no score changes. -->
+<style id="capito-v42-pizza-feedback">
+#cp-board{isolation:isolate}
+#cp-board .cp-v42-cut-impact{position:absolute;z-index:28;width:0;height:0;pointer-events:none;animation:cp-v42-impact-fade .48s ease-out both}
+#cp-board .cp-v42-cut-impact i{position:absolute;left:-22px;top:-22px;width:44px;height:44px;border:2px solid rgba(255,234,177,.9);border-radius:50%;box-shadow:0 0 13px rgba(255,214,111,.7);animation:cp-v42-ring .44s cubic-bezier(.1,.6,.2,1) both}
+#cp-board .cp-v42-cut-impact b{position:absolute;left:-36px;top:-2px;width:72px;height:4px;border-radius:9px;background:linear-gradient(90deg,transparent,rgba(255,252,211,.92),transparent);transform:rotate(var(--cut-angle));filter:blur(1px);animation:cp-v42-blade .38s ease-out both}
+#cp-board .cp-v42-cut-impact em{position:absolute;left:-3px;top:-3px;width:6px;height:6px;background:#eab663;border-radius:50%;box-shadow:-19px -13px 0 -1px #eab663,16px -17px 0 -2px #c77836,22px 10px 0 -2px #eab663,-16px 14px 0 -2px #b9692e;animation:cp-v42-crumbs .46s ease-out both}
+@keyframes cp-v42-impact-fade{0%,40%{opacity:1}100%{opacity:0}}
+@keyframes cp-v42-ring{from{transform:scale(.2);opacity:.9}to{transform:scale(1.65);opacity:0}}
+@keyframes cp-v42-blade{from{opacity:1;scale:.4 1}to{opacity:0;scale:1.2 1}}
+@keyframes cp-v42-crumbs{from{transform:scale(.4) rotate(0)}to{transform:scale(1.6) rotate(23deg);opacity:0}}
+body.cp-playing #cp-board.cp-v42-pizza-tap #cp-pizza-image{animation:cp-v42-dough .25s ease-out!important;transform-origin:center center!important}
+@keyframes cp-v42-dough{0%{scale:1}38%{scale:.991 1.009}75%{scale:1.005 .997}100%{scale:1}}
+@media(prefers-reduced-motion:reduce){#cp-board .cp-v42-cut-impact{display:none!important}body.cp-playing #cp-board.cp-v42-pizza-tap #cp-pizza-image{animation:none!important}}
+</style>
+<style id="cp-v44-effects">
+/* V44: restrained tactile cut accents */
+#cp-board{position:relative}
+.cp-v44-cut-flash{position:absolute;z-index:20;pointer-events:none;width:52px;height:52px;border:2px solid rgba(255,245,199,.88);border-radius:50%;transform:translate(-50%,-50%) scale(.35);box-shadow:0 0 14px rgba(255,210,110,.7),inset 0 0 10px rgba(255,210,110,.3);animation:cpV44Flash .42s ease-out forwards}
+@keyframes cpV44Flash{0%{opacity:0;transform:translate(-50%,-50%) scale(.35)}25%{opacity:1}100%{opacity:0;transform:translate(-50%,-50%) scale(1.65)}}
+.cp-v44-perfect{position:fixed;left:50%;top:30%;z-index:9999;pointer-events:none;padding:13px 28px;border-radius:16px;background:#fff6dd;color:#234d32;border:2px solid #d8ae59;box-shadow:0 12px 40px #0005;font-weight:900;font-size:clamp(25px,7vw,42px);letter-spacing:.05em;white-space:nowrap;animation:cpV44Perfect 1.8s both}
+@keyframes cpV44Perfect{0%{opacity:0;transform:translate(-50%,-15%) scale(.65)}22%{opacity:1;transform:translate(-50%,0) scale(1.09)}36%{transform:translate(-50%,0) scale(1)}80%{opacity:1}100%{opacity:0;transform:translate(-50%,-30%) scale(1)}}
+@media(prefers-reduced-motion:reduce){.cp-v44-cut-flash,.cp-v44-perfect{animation-duration:.01ms}}
+</style>
+</head>
+<body>
+
+<style id="capito-v2-mobile">
+:root{--cp-vh:1vh}
+html,body{margin:0;padding:0;width:100%;background:#fff;overscroll-behavior-y:none}
+#cp-v2-facade{display:none;position:relative;width:100%;max-width:480px;margin:0 auto 0;overflow:hidden;background:#f7f2e8;aspect-ratio:1536/583;border-bottom:1px solid rgba(0,0,0,.08)}
+#cp-v2-facade img{position:relative;display:block;width:100%;height:auto;object-fit:contain;animation:none}
+#cp-v2-facade:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent 0 18%,rgba(255,225,160,.08) 35%,transparent 55%,rgba(255,225,160,.08) 78%,transparent);animation:cpWindowGlow 5.8s ease-in-out infinite;pointer-events:none}
+.cp-v2-walker{position:absolute;right:2.5%;bottom:7%;width:4px;height:4px;border-radius:50%;box-shadow:0 0 18px 8px rgba(255,255,255,.10);animation:cpWalker 7s ease-in-out infinite;pointer-events:none}
+#cp-v2-sound{display:none;position:absolute;z-index:50;right:10px;top:max(8px,env(safe-area-inset-top));width:42px;height:42px;border:2px solid #111;border-radius:50%;background:rgba(255,255,255,.92);color:#111;font-size:18px;font-weight:900;align-items:center;justify-content:center;padding:0}
+@keyframes cpFacadeBreath{0%,100%{transform:scale(1.01) translateX(0)}50%{transform:scale(1.025) translateX(-.3%)}}
+@keyframes cpWindowGlow{0%,100%{opacity:.35}50%{opacity:.85}}
+@keyframes cpWalker{0%{transform:translateX(0);opacity:.2}20%{opacity:.7}80%{opacity:.7}100%{transform:translateX(-330px);opacity:.1}}
+@media(max-width:600px){
+ #cp-v2-facade{display:block}
+ #cp-v2-sound{display:flex}
+ #capito-pizza-cut{max-width:none;width:100%;min-height:0;padding-left:10px;padding-right:10px}
+ #cp-game.active{min-height:0!important;height:auto!important;padding-top:2px}
+ #cp-game.active .cp-brand{margin-bottom:3px}
+ #cp-game.active .cp-game-head{margin-bottom:5px}
+ #cp-game.active .cp-game-instruction{font-size:17px}
+ #cp-board{width:min(100%,440px);margin:0 auto}
+ #cp-result.active,#cp-final.active{min-height:0!important}
+}
+@media(prefers-reduced-motion:reduce){#cp-v2-facade img,#cp-v2-facade:after,.cp-v2-walker{animation:none!important}}
+</style>
+
+<style id="capito-restaurant-visual-v3">
+/* Real editable interface over an understated warm restaurant-inspired background */
+@media(max-width:600px){
+ html,body{background:#f3e6d2!important}
+ #cp-v2-facade{border:0;background:#f3e6d2;overflow:visible}
+ #cp-v2-facade img{position:relative!important;inset:auto!important;width:100%!important;height:auto!important;transform:none!important;animation:none!important;object-fit:contain!important}
+ #cp-v2-facade:after,.cp-v2-walker{display:none!important}
+ #capito-pizza-cut{background:#f3e6d2;color:#173d34;}
+ #cp-register.active{position:relative;isolation:isolate;margin:0 -10px;padding:25px 18px 0;background:
+ radial-gradient(ellipse at 0% 22%,rgba(159,121,67,.12),transparent 42%),
+ radial-gradient(ellipse at 100% 72%,rgba(111,107,62,.10),transparent 40%),
+ repeating-linear-gradient(112deg,rgba(103,71,38,.025) 0px,rgba(103,71,38,.025) 1px,transparent 1px,transparent 8px),#f3e6d2;}
+ #cp-register .cp-brand,#cp-register .cp-title,#cp-register .cp-subtitle,#cp-register .cp-description{color:#173d34!important}
+ #cp-register .cp-title{font-size:clamp(28px,8vw,40px);line-height:1.07;letter-spacing:-.03em}
+ #cp-register .cp-prize{border-color:#173d34!important;background:rgba(255,255,255,.55)!important;color:#173d34!important}
+ #cp-register .cp-prize.first{background:#173d34!important;color:#fff!important}
+ #cp-register .cp-input{border-color:#173d34!important;background:rgba(255,255,255,.72)!important;color:#173d34!important}
+ #cp-register .cp-label,#cp-register .cp-consent{color:#173d34!important}
+ #cp-register #cp-start{background:#173d34!important;color:#fff!important;border-color:#173d34!important}
+ #cp-register .cp-interior-photo{display:block;position:relative;margin:25px -18px 0;overflow:hidden;background:#c4aa86;line-height:0}
+ #cp-register .cp-interior-photo:before{content:"";position:absolute;top:0;left:0;right:0;height:70px;background:linear-gradient(to bottom,#f3e6d2 0%,rgba(243,230,210,0) 100%);z-index:1;pointer-events:none}
+ #cp-register .cp-interior-photo img{display:block;width:100%;height:auto;object-fit:cover}
+ #cp-v2-sound{color:#173d34;border-color:#173d34}
+}
+@media(min-width:601px){#cp-register .cp-interior-photo{display:none}}
+</style>
+
+
+<style id="capito-v7-premium-game">
+@media(max-width:600px){
+ body.cp-playing #cp-v2-facade{display:none!important}
+ body.cp-playing{overflow:hidden!important}
+ body.cp-playing #capito-pizza-cut{max-width:none!important;width:100%!important;height:100dvh!important;min-height:100dvh!important;overflow:hidden!important;padding:0!important;background:#f2e3cd url("capito-tabletop-v14.webp") center / cover no-repeat!important;color:#173d34}
+ body.cp-playing #cp-mobile-app{height:100%!important}
+ body.cp-playing #cp-game.active{height:100%!important;min-height:0!important;display:flex!important;flex-direction:column;align-items:center;justify-content:space-between;gap:0!important;padding:calc(env(safe-area-inset-top) + 14px) 13px calc(env(safe-area-inset-bottom) + 24px)!important;overflow:hidden;box-sizing:border-box}
+ body.cp-playing #cp-game .cp-brand{font-size:clamp(11px,3vw,14px);letter-spacing:3.5px;font-weight:800;color:#173d34;margin:0 0 8px!important;flex:0 0 auto}
+ body.cp-playing #cp-game .cp-game-head{width:100%;flex:0 0 auto;margin:0!important;text-align:center}
+ body.cp-playing #cp-game .cp-game-instruction{font-family:Georgia,'Times New Roman',serif;font-size:clamp(29px,8vw,43px)!important;line-height:1.03;font-weight:700;letter-spacing:-.7px;color:#173d34;max-width:350px;margin:0 auto 18px!important;text-shadow:0 1px 1px rgba(255,255,255,.45)}
+ body.cp-playing #cp-game .cp-game-status{display:flex;flex-direction:row-reverse;justify-content:space-between;align-items:center;width:100%;max-width:430px;min-height:55px;margin:0 auto!important;padding:11px 19px;border:1px solid rgba(23,61,52,.12);border-radius:999px;background:rgba(255,253,246,.95);box-shadow:0 9px 22px rgba(72,42,20,.13)}
+ body.cp-playing #cp-game .cp-cut-counter{opacity:1;font-size:clamp(11px,3.2vw,14px);font-weight:900;color:#173d34}
+ body.cp-playing #cp-game .cp-timer{font-size:clamp(17px,4.7vw,22px);font-weight:900;color:#173d34;background:transparent!important;border:0!important;padding:0!important;min-width:75px}
+ body.cp-playing #cp-game .cp-timer.warning{color:#b7432c!important}
+ body.cp-playing #cp-board{position:relative!important;flex:0 1 auto!important;width:min(calc(100vw - 20px),440px,calc(100dvh - 310px))!important;max-width:none!important;min-height:0!important;aspect-ratio:1/1!important;height:auto!important;margin:0 auto!important;overflow:visible!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;transform:none!important;touch-action:none}
+ /* Keep source photo's correct 3:2 image scale, crop tiles at the original pizza circle. */
+ body.cp-playing #cp-pizza-image{display:block;width:150%!important;max-width:none!important;height:100%!important;margin-left:-25%!important;object-fit:fill!important;clip-path:circle(28.2% at 50.3% 50.4%)!important;filter:drop-shadow(0 13px 11px rgba(49,26,13,.24));pointer-events:none}
+ body.cp-playing #cp-canvas{position:absolute;inset:0!important;width:100%!important;height:100%!important;touch-action:none}
+ body.cp-playing #cp-game .cp-tip{flex:0 0 auto;margin:0 auto!important;padding:15px 22px;max-width:360px;border-radius:999px;background:rgba(255,253,246,.96);border:1px solid rgba(23,61,52,.14);box-shadow:0 9px 20px rgba(72,42,20,.12);color:#173d34;font-family:Georgia,'Times New Roman',serif;font-size:clamp(17px,4.6vw,22px);font-weight:700;line-height:1.13;opacity:1}
+ body.cp-playing #cp-v2-sound{display:flex!important;position:fixed;z-index:100;top:calc(env(safe-area-inset-top) + 10px);right:12px;width:42px;height:42px;border:1.5px solid #173d34;color:#173d34;background:rgba(255,253,246,.96);font-size:18px}
+}
+@media(max-height:740px) and (max-width:600px){body.cp-playing #cp-game.active{padding-top:8px!important;padding-bottom:12px!important}body.cp-playing #cp-game .cp-game-instruction{font-size:26px!important;margin-bottom:9px!important}body.cp-playing #cp-board{width:min(calc(100vw - 20px),calc(100dvh - 270px))!important}body.cp-playing #cp-game .cp-tip{padding:10px 15px;font-size:16px}}
+</style>
+
+<style id="capito-v8-polish">
+@media(max-width:600px){
+ body.cp-playing #capito-pizza-cut{background-image:url("capito-tabletop-v14.webp")!important;background-color:#eee0c8!important}
+ body.cp-playing #cp-piece-count,body.cp-playing #cp-piece-count.perfect{background:#173d34!important;color:#fff!important;box-shadow:0 9px 28px rgba(20,54,44,.24)!important}
+ body.cp-playing #cp-game .cp-game-instruction{text-shadow:none!important}
+ body.cp-playing #cp-board{filter:drop-shadow(0 12px 12px rgba(68,37,18,.16))}
+ body.cp-playing #cp-game .cp-game-status{box-shadow:0 6px 20px rgba(71,42,24,.09)!important}
+ body.cp-playing #cp-game .cp-tip{box-shadow:0 6px 20px rgba(71,42,24,.09)!important}
+}
+</style>
+
+<style id="capito-v9-photo-fix">
+@media(max-width:600px){
+ body.cp-playing #capito-pizza-cut{background-image:url("capito-tabletop-v14.webp")!important;background-position:center center!important}
+ body.cp-playing #cp-board{width:min(calc(100vw - 8px),480px,calc(100dvh - 275px))!important;filter:none!important;filter:drop-shadow(0 11px 12px rgba(69,38,20,.18))!important}
+ body.cp-playing #cp-pizza-image{filter:none!important}
+ body.cp-playing #cp-board.cp-separated #cp-pizza-image{visibility:hidden!important}
+ body.cp-playing #cp-game .cp-game-instruction{margin-bottom:11px!important;font-size:clamp(29px,8vw,42px)!important}
+ body.cp-playing #cp-game .cp-game-status{min-height:52px!important}
+ body.cp-playing #cp-game .cp-tip{padding:13px 18px!important}
+ body.cp-playing #cp-piece-count{background:#173d34!important}
+}
+@media(max-height:740px) and (max-width:600px){body.cp-playing #cp-board{width:min(calc(100vw - 8px),calc(100dvh - 250px))!important}}
+</style>
+
+
+<style id="capito-v10-real-photo-game">
+@media(max-width:600px){
+ body.cp-playing #capito-pizza-cut{background-image:url("capito-tabletop-v14.webp")!important;background-color:#f2e7d5!important;background-position:center center!important;background-size:cover!important}
+ body.cp-playing #cp-board{width:min(calc(100vw - 10px),480px,calc(100dvh - 262px))!important;aspect-ratio:1/1!important;filter:drop-shadow(0 11px 9px rgba(59,39,22,.20))!important}
+ /* Image is scaled 1.18x so the actual pizza matches the scoring circle (r=42.3%). */
+ body.cp-playing #cp-pizza-image{position:relative!important;top:-9%!important;left:0!important;width:177%!important;height:118%!important;margin-left:-38.5%!important;max-width:none!important;object-fit:fill!important;clip-path:circle(28.2% at 50.3% 50.4%)!important;filter:none!important}
+ body.cp-playing #cp-board.cp-separated #cp-pizza-image{visibility:hidden!important}
+ body.cp-playing #cp-game .cp-game-instruction{font-size:clamp(27px,7.6vw,41px)!important;margin-bottom:10px!important}
+ body.cp-playing #cp-game .cp-tip{font-size:clamp(16px,4.1vw,20px)!important;padding:12px 18px!important}
+ body.cp-playing #cp-game .cp-game-status{min-height:52px!important}
+ body.cp-playing #cp-piece-count,body.cp-playing #cp-piece-count.perfect{background:#173d34!important;color:white!important}
+}
+@media(max-height:740px) and (max-width:600px){body.cp-playing #cp-board{width:min(calc(100vw - 10px),calc(100dvh - 244px))!important}}
+</style>
+
+<style id="capito-v11-reference-composition">
+@media(max-width:600px){
+ body.cp-playing #capito-pizza-cut{background:#eee0c8 url("capito-tabletop-v14.webp") center center / 100% 100% no-repeat!important}
+ body.cp-playing #cp-game.active{padding-top:calc(env(safe-area-inset-top) + 14px)!important;padding-bottom:calc(env(safe-area-inset-bottom) + 24px)!important}
+ body.cp-playing #cp-game .cp-brand{font-size:clamp(12px,3.5vw,16px)!important;letter-spacing:4.5px!important;margin-bottom:10px!important}
+ body.cp-playing #cp-game .cp-game-instruction{font-size:clamp(29px,8.2vw,44px)!important;max-width:410px!important;line-height:1.04!important}
+ body.cp-playing #cp-game .cp-game-status{max-width:440px!important;min-height:56px!important}
+ body.cp-playing #cp-game .cp-timer{display:flex;align-items:center;gap:9px!important}
+ body.cp-playing #cp-game .cp-timer:before{content:"◷";font-size:29px;font-family:Georgia,serif;font-weight:400;line-height:1}
+ body.cp-playing #cp-board{width:min(calc(100vw - 6px),490px,calc(100dvh - 245px))!important}
+ body.cp-playing #cp-game .cp-tip{max-width:390px!important;width:calc(100% - 40px);font-size:clamp(17px,4.5vw,22px)!important}
+ body.cp-playing #cp-game .cp-tip:after{content:" ☝";font-family:Arial,sans-serif;font-size:23px;white-space:nowrap}
+}
+@media(max-height:740px) and (max-width:600px){body.cp-playing #cp-board{width:min(calc(100vw - 8px),calc(100dvh - 230px))!important}}
+</style>
+
+<style id="capito-v13-actual-marble">
+@media(max-width:600px){
+ body.cp-playing #capito-pizza-cut{background:#efe0c5 url("capito-tabletop-v14.webp") center center/100% 100% no-repeat!important}
+ body.cp-playing #cp-game .cp-game-instruction{font-size:clamp(29px,7.5vw,39px)!important;margin-bottom:12px!important}
+ body.cp-playing #cp-game .cp-tip{background:rgba(255,252,244,.97)!important}
+}
+</style>
+<div id="cp-v2-facade" aria-label="Capito — пицца и вино"><img src="capito-facade-new.jpg" alt="Фасад Capito"><span class="cp-v2-walker"></span></div>
+<div id="capito-pizza-cut">
+<button id="cp-v2-sound" type="button" aria-label="Звук включен">🔊</button>
+
+
+
+<style>
+
+html,body{
+
+  margin:0!important;
+
+  padding:0!important;
+
+  width:100%!important;
+
+  max-width:100%!important;
+
+  overflow-x:hidden!important;
+
+  background:#fff!important;
+
+  -webkit-text-size-adjust:100%;
+
+}
+
+
+
+#capito-pizza-cut{
+
+  --blue:#1655d8;
+
+  --ink:#111;
+
+  font-family:Arial,Helvetica,sans-serif;
+
+  color:var(--ink);
+
+  width:100%;
+
+  max-width:480px;
+
+  min-height:100vh;
+
+  min-height:100dvh;
+
+  margin:0 auto;
+
+  padding:max(8px,env(safe-area-inset-top)) 10px max(28px,env(safe-area-inset-bottom));
+
+  box-sizing:border-box;
+
+  overflow-x:hidden;
+
+  overscroll-behavior:none;
+
+  -webkit-tap-highlight-color:transparent;
+
+  position:relative;
+
+}
+
+
+
+#capito-pizza-cut *{box-sizing:border-box}
+
+
+
+#cp-mobile-app{display:none;width:100%}
+
+#cp-desktop-block{display:none}
+
+.cp-screen{display:none}
+
+
+
+.cp-screen.active{
+
+  display:block;
+
+  animation:cpScreenIn .34s cubic-bezier(.2,.8,.2,1);
+
+}
+
+
+
+#cp-game.active,
+
+#cp-result.active,
+
+#cp-final.active{
+
+  min-height:calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 20px);
+
+}
+
+
+
+.cp-desktop-inner{
+
+  min-height:70vh;
+
+  display:flex;
+
+  flex-direction:column;
+
+  align-items:center;
+
+  justify-content:center;
+
+  text-align:center;
+
+  padding:35px 20px;
+
+}
+
+
+
+.cp-desktop-brand{
+
+  font-size:11px;
+
+  font-weight:700;
+
+  letter-spacing:2.5px;
+
+  margin-bottom:17px;
+
+}
+
+
+
+.cp-desktop-title{
+
+  font-size:34px;
+
+  line-height:.98;
+
+  font-weight:900;
+
+  letter-spacing:-1.2px;
+
+  margin-bottom:17px;
+
+}
+
+
+
+.cp-desktop-text{
+
+  font-size:15px;
+
+  line-height:1.45;
+
+  max-width:380px;
+
+}
+
+
+
+.cp-brand{
+
+  text-align:center;
+
+  font-size:10px;
+
+  font-weight:700;
+
+  letter-spacing:2.5px;
+
+  margin:2px 0 7px;
+
+}
+
+
+
+.cp-title{
+
+  text-align:center;
+
+  font-size:29px;
+
+  line-height:.98;
+
+  font-weight:900;
+
+  letter-spacing:-1.2px;
+
+  margin:0 0 11px;
+
+}
+
+
+
+.cp-subtitle{
+
+  text-align:center;
+
+  font-size:16px;
+
+  line-height:1.28;
+
+  font-weight:700;
+
+  margin:0 auto 12px;
+
+  max-width:430px;
+
+}
+
+
+
+.cp-description{
+
+  text-align:center;
+
+  font-size:13px;
+
+  line-height:1.4;
+
+  margin:0 auto 15px;
+
+  max-width:420px;
+
+}
+
+
+
+.cp-prizes{
+
+  display:grid;
+
+  grid-template-columns:repeat(3,1fr);
+
+  gap:6px;
+
+  margin:14px 0 17px;
+
+}
+
+
+
+.cp-prize{
+
+  border:2px solid #111;
+
+  border-radius:13px;
+
+  padding:10px 3px 9px;
+
+  text-align:center;
+
+  min-height:72px;
+
+  background:#fff;
+
+}
+
+
+
+.cp-prize.first{
+
+  background:#111;
+
+  color:#fff;
+
+}
+
+
+
+.cp-prize-place{
+
+  font-size:10px;
+
+  font-weight:900;
+
+  letter-spacing:.7px;
+
+  margin-bottom:6px;
+
+}
+
+
+
+.cp-prize-name{
+
+  font-size:13px;
+
+  font-weight:900;
+
+  line-height:1.1;
+
+}
+
+
+
+.cp-form{
+
+  width:100%;
+
+  max-width:440px;
+
+  margin:0 auto;
+
+}
+
+
+
+.cp-label{
+
+  display:block;
+
+  font-size:11px;
+
+  font-weight:900;
+
+  margin:0 0 5px;
+
+}
+
+
+
+.cp-input{
+
+  width:100%;
+
+  height:49px;
+
+  border:2px solid #111;
+
+  border-radius:11px;
+
+  padding:0 13px;
+
+  font-size:16px!important;
+
+  background:#fff;
+
+  color:#111;
+
+  outline:none;
+
+  margin-bottom:11px;
+
+  -webkit-appearance:none;
+
+  appearance:none;
+
+}
+
+
+
+.cp-input:focus{
+
+  border-color:var(--blue);
+
+  box-shadow:0 0 0 3px rgba(22,85,216,.09);
+
+}
+
+
+
+.cp-consent{
+
+  display:flex;
+
+  gap:9px;
+
+  align-items:flex-start;
+
+  font-size:11px;
+
+  line-height:1.32;
+
+  margin:2px 0 14px;
+
+}
+
+
+
+.cp-consent input{
+
+  width:19px;
+
+  height:19px;
+
+  flex:0 0 19px;
+
+  margin:0;
+
+}
+
+
+
+.cp-btn{
+
+  width:100%;
+
+  min-height:56px;
+
+  border:2px solid #111;
+
+  border-radius:13px;
+
+  background:#111;
+
+  color:#fff;
+
+  font-size:14px;
+
+  font-weight:900;
+
+  cursor:pointer;
+
+  padding:11px 12px;
+
+  touch-action:manipulation;
+
+  -webkit-appearance:none;
+
+  appearance:none;
+
+  transition:transform .12s ease,opacity .12s ease,box-shadow .18s ease;
+
+}
+
+
+
+.cp-btn:active{transform:scale(.975)}
+
+
+
+.cp-btn.secondary{
+
+  background:#fff;
+
+  color:#111;
+
+}
+
+
+
+.cp-btn.blue{
+
+  background:var(--blue);
+
+  border-color:var(--blue);
+
+  box-shadow:0 7px 18px rgba(22,85,216,.16);
+
+}
+
+
+
+.cp-btn:disabled{
+
+  opacity:.45;
+
+  cursor:default;
+
+}
+
+
+
+.cp-error{
+
+  display:none;
+
+  text-align:center;
+
+  color:#b00020;
+
+  font-size:12px;
+
+  font-weight:700;
+
+  margin:9px 0;
+
+}
+
+
+
+
+
+/* GAME */
+
+
+
+.cp-game-head{
+
+  text-align:center;
+
+  margin-bottom:8px;
+
+}
+
+
+
+.cp-game-instruction{
+
+  font-size:18px;
+
+  line-height:1.2;
+
+  font-weight:900;
+
+  margin:0 0 4px;
+
+}
+
+
+
+.cp-game-status{
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  gap:10px;
+
+  min-height:29px;
+
+}
+
+
+
+.cp-cut-counter{
+
+  font-size:12px;
+
+  opacity:.65;
+
+  font-weight:700;
+
+  letter-spacing:.4px;
+
+}
+
+
+
+.cp-cut-counter.cp-pulse{
+
+  animation:cpCounterPulse .25s ease;
+
+}
+
+
+
+.cp-timer{
+
+  min-width:69px;
+
+  padding:5px 8px;
+
+  border:2px solid #111;
+
+  border-radius:100px;
+
+  font-size:13px;
+
+  line-height:1;
+
+  font-weight:900;
+
+  background:#fff;
+
+  transition:background .18s ease,color .18s ease,border-color .18s ease,transform .18s ease;
+
+}
+
+
+
+.cp-timer.running{
+
+  border-color:var(--blue);
+
+  color:var(--blue);
+
+}
+
+
+
+.cp-timer.warning{
+
+  background:#111;
+
+  color:#fff;
+
+  border-color:#111;
+
+  animation:cpTimerWarning .55s infinite alternate;
+
+}
+
+
+
+.cp-timer.done{
+
+  background:var(--blue);
+
+  color:#fff;
+
+  border-color:var(--blue);
+
+}
+
+
+
+#cp-board{
+
+  position:relative;
+
+  width:100%;
+
+  overflow:hidden;
+
+  border-radius:14px;
+
+  user-select:none;
+
+  -webkit-user-select:none;
+
+  touch-action:none;
+
+  background:#eee;
+
+  box-shadow:0 6px 22px rgba(0,0,0,.07);
+
+  transition:transform .18s ease;
+
+}
+
+
+
+#cp-board.cp-cut-touch{transform:scale(.997)}
+
+#cp-board.cp-perfect-board{animation:cpPerfectBoard .55s ease}
+
+
+
+#cp-pizza-image{
+
+  display:block;
+
+  width:100%;
+
+  height:auto;
+
+  pointer-events:none;
+
+  user-select:none;
+
+  -webkit-user-select:none;
+
+  -webkit-user-drag:none;
+
+}
+
+
+
+#cp-canvas{
+
+  position:absolute;
+
+  inset:0;
+
+  width:100%;
+
+  height:100%;
+
+  touch-action:none;
+
+}
+
+
+
+#cp-piece-count{
+
+  position:absolute;
+
+  left:50%;
+
+  top:50%;
+
+  transform:translate(-50%,-50%) scale(.65);
+
+  z-index:10;
+
+  display:none;
+
+  align-items:center;
+
+  justify-content:center;
+
+  min-width:112px;
+
+  height:76px;
+
+  padding:0 18px;
+
+  border-radius:20px;
+
+  background:rgba(17,17,17,.9);
+
+  color:#fff;
+
+  font-size:43px;
+
+  line-height:1;
+
+  font-weight:900;
+
+  letter-spacing:-2px;
+
+  pointer-events:none;
+
+  opacity:0;
+
+  box-shadow:0 12px 35px rgba(0,0,0,.22);
+
+}
+
+
+
+#cp-piece-count.show{
+
+  display:flex;
+
+  animation:cpPiecePop .38s cubic-bezier(.2,.9,.25,1.25) forwards;
+
+}
+
+
+
+#cp-piece-count.perfect{
+
+  background:var(--blue);
+
+  box-shadow:0 10px 30px rgba(22,85,216,.35),0 0 0 7px rgba(22,85,216,.10);
+
+}
+
+
+
+.cp-timeout-overlay{
+
+  position:absolute;
+
+  inset:0;
+
+  z-index:20;
+
+  display:none;
+
+  align-items:center;
+
+  justify-content:center;
+
+  flex-direction:column;
+
+  text-align:center;
+
+  padding:20px;
+
+  background:rgba(17,17,17,.88);
+
+  color:#fff;
+
+  pointer-events:none;
+
+}
+
+
+
+.cp-timeout-overlay.show{
+
+  display:flex;
+
+  animation:cpScreenIn .25s ease;
+
+}
+
+
+
+.cp-timeout-big{
+
+  font-size:32px;
+
+  line-height:.95;
+
+  font-weight:900;
+
+  letter-spacing:-1px;
+
+  margin-bottom:9px;
+
+}
+
+
+
+.cp-timeout-small{
+
+  font-size:13px;
+
+  line-height:1.35;
+
+  max-width:260px;
+
+}
+
+
+
+.cp-tip{
+
+  text-align:center;
+
+  font-size:11px;
+
+  line-height:1.3;
+
+  opacity:.62;
+
+  margin:8px auto 0;
+
+  max-width:390px;
+
+}
+
+
+
+
+
+/* RESULT */
+
+
+
+#cp-result.active{padding-top:14px}
+
+
+
+#cp-result .cp-brand{
+
+  display:block;
+
+  text-align:center;
+
+  font-size:10px;
+
+  line-height:1.2;
+
+  font-weight:700;
+
+  letter-spacing:2.5px;
+
+  margin:0 0 7px;
+
+}
+
+
+
+.cp-result-card{text-align:center;padding:0}
+
+
+
+.cp-result-label{
+
+  display:block;
+
+  font-size:11px;
+
+  line-height:1.2;
+
+  font-weight:900;
+
+  letter-spacing:2px;
+
+  margin:0 0 4px;
+
+  text-align:center;
+
+}
+
+
+
+.cp-score{
+
+  font-size:58px;
+
+  line-height:1;
+
+  font-weight:900;
+
+  letter-spacing:-4px;
+
+  margin:2px 0 5px;
+
+  transform-origin:center;
+
+}
+
+
+
+.cp-result-time{
+
+  font-size:14px;
+
+  line-height:1.2;
+
+  font-weight:900;
+
+  letter-spacing:1.1px;
+
+  margin:0 0 8px;
+
+}
+
+
+
+.cp-best-result{
+
+  display:none;
+
+  width:max-content;
+
+  max-width:100%;
+
+  margin:0 auto 9px;
+
+  padding:6px 11px;
+
+  border:1.5px solid #111;
+
+  border-radius:100px;
+
+  font-size:10px;
+
+  line-height:1.1;
+
+  font-weight:900;
+
+  letter-spacing:.7px;
+
+  background:#fff;
+
+}
+
+
+
+.cp-best-result.show{
+
+  display:block;
+
+  animation:cpPop .3s ease-out;
+
+}
+
+
+
+.cp-score.cp-score-finish{animation:cpScoreFinish .48s cubic-bezier(.2,.9,.2,1)}
+
+.cp-score.cp-score-great{animation:cpScoreGreat .65s cubic-bezier(.2,.9,.2,1)}
+
+
+
+.cp-score.cp-score-warrior{
+
+  animation:cpWarriorScore .8s cubic-bezier(.2,.9,.2,1);
+
+}
+
+
+
+.cp-score.cp-score-perfect{
+
+  animation:cpPerfectScore 1s cubic-bezier(.2,.9,.2,1);
+
+}
+
+
+
+.cp-record{
+
+  display:none;
+
+  width:max-content;
+
+  max-width:100%;
+
+  margin:0 auto 9px;
+
+  padding:6px 11px;
+
+  border-radius:100px;
+
+  background:#111;
+
+  color:#fff;
+
+  font-size:10px;
+
+  font-weight:900;
+
+  letter-spacing:1px;
+
+}
+
+
+
+.cp-record.show{
+
+  display:block;
+
+  animation:cpPop .35s ease-out;
+
+}
+
+
+
+.cp-result-message{
+
+  font-size:18px;
+
+  font-weight:900;
+
+  line-height:1.2;
+
+  margin:0 auto 7px;
+
+  max-width:430px;
+
+}
+
+
+
+.cp-result-message.warrior{
+
+  font-size:25px;
+
+  line-height:1;
+
+  letter-spacing:-.7px;
+
+}
+
+
+
+.cp-result-message.perfect{
+
+  font-size:27px;
+
+  line-height:.98;
+
+  color:var(--blue);
+
+  letter-spacing:-1px;
+
+}
+
+
+
+.cp-competition{
+
+  min-height:40px;
+
+  font-size:14px;
+
+  line-height:1.3;
+
+  font-weight:700;
+
+  margin:0 auto 13px;
+
+  max-width:430px;
+
+}
+
+
+
+.cp-top-result{
+
+  font-size:18px;
+
+  font-weight:900;
+
+  animation:cpPop .35s ease-out;
+
+}
+
+
+
+.cp-result-actions{
+
+  display:grid;
+
+  grid-template-columns:1fr;
+
+  gap:7px;
+
+  margin:12px 0 17px;
+
+}
+
+
+
+.cp-final-box{
+
+  border:2px solid #111;
+
+  border-radius:15px;
+
+  padding:16px 12px;
+
+  text-align:center;
+
+  margin:13px 0 17px;
+
+  animation:cpFinalBox .45s cubic-bezier(.2,.8,.2,1);
+
+}
+
+
+
+.cp-final-big{
+
+  font-size:21px;
+
+  line-height:1.2;
+
+  font-weight:900;
+
+  margin-bottom:6px;
+
+}
+
+
+
+.cp-final-small{
+
+  font-size:12px;
+
+  line-height:1.35;
+
+}
+
+
+
+.cp-telegram-box{
+
+  margin:14px 0 18px;
+
+  padding:17px 13px;
+
+  border:2px solid #111;
+
+  border-radius:15px;
+
+  text-align:center;
+
+  background:#fff;
+
+}
+
+
+
+.cp-telegram-title{
+
+  font-size:17px;
+
+  line-height:1.15;
+
+  font-weight:900;
+
+  margin-bottom:7px;
+
+}
+
+
+
+.cp-telegram-text{
+
+  font-size:11px;
+
+  line-height:1.4;
+
+  opacity:.68;
+
+  margin:0 auto 12px;
+
+  max-width:390px;
+
+}
+
+
+
+.cp-telegram-status{
+
+  display:none;
+
+  margin-top:10px;
+
+  font-size:11px;
+
+  line-height:1.35;
+
+  font-weight:700;
+
+}
+
+
+
+.cp-telegram-status.show{display:block}
+
+
+
+.cp-telegram-btn{
+
+  background:var(--blue);
+
+  border-color:var(--blue);
+
+}
+
+
+
+.cp-leaderboard-title{
+
+  text-align:center;
+
+  font-size:23px;
+
+  font-weight:900;
+
+  letter-spacing:-.7px;
+
+  margin:20px 0 5px;
+
+}
+
+
+
+.cp-leaderboard-note{
+
+  text-align:center;
+
+  font-size:10px;
+
+  opacity:.62;
+
+  margin-bottom:11px;
+
+}
+
+
+
+.cp-leaderboard{border-top:2px solid #111}
+
+
+
+.cp-row{
+
+  display:grid;
+
+  grid-template-columns:35px 1fr 112px;
+
+  gap:7px;
+
+  align-items:center;
+
+  min-height:44px;
+
+  border-bottom:1px solid #ddd;
+
+  font-size:13px;
+
+}
+
+
+
+.cp-place{font-weight:900;text-align:center}
+
+
+
+.cp-name{
+
+  font-weight:700;
+
+  overflow:hidden;
+
+  text-overflow:ellipsis;
+
+  white-space:nowrap;
+
+}
+
+
+
+.cp-row-score{
+
+  text-align:right;
+
+  font-weight:900;
+
+  font-size:12px;
+
+}
+
+
+
+.cp-row-time{
+
+  display:block;
+
+  font-size:9px;
+
+  line-height:1.1;
+
+  opacity:.55;
+
+  margin-top:2px;
+
+}
+
+
+
+.cp-empty{
+
+  text-align:center;
+
+  padding:18px 8px;
+
+  font-size:13px;
+
+  opacity:.65;
+
+}
+
+
+
+
+
+/* CONFETTI */
+
+
+
+#cp-confetti{
+
+  position:fixed;
+
+  inset:0;
+
+  z-index:99999;
+
+  pointer-events:none;
+
+  overflow:hidden;
+
+  display:none;
+
+}
+
+
+
+#cp-confetti.show{display:block}
+
+
+
+.cp-confetti-piece{
+
+  position:absolute;
+
+  top:-20px;
+
+  width:9px;
+
+  height:16px;
+
+  border-radius:2px;
+
+  animation:cpConfettiFall linear forwards;
+
+}
+
+
+
+
+
+/* REGISTER */
+
+
+
+#cp-register.active{
+
+  min-height:auto;
+
+  padding-top:0;
+
+  padding-bottom:18px;
+
+}
+
+
+
+#cp-register .cp-brand{
+
+  margin:0 0 5px;
+
+  font-size:9px;
+
+  letter-spacing:2.2px;
+
+}
+
+
+
+#cp-register .cp-title{
+
+  font-size:27px;
+
+  line-height:.94;
+
+  letter-spacing:-1px;
+
+  margin:0 0 9px;
+
+}
+
+
+
+#cp-register .cp-subtitle{
+
+  font-size:15px;
+
+  line-height:1.2;
+
+  margin:0 auto 0;
+
+}
+
+
+
+#cp-register .cp-description{
+
+  font-size:12px;
+
+  line-height:1.3;
+
+  margin:0 auto 10px;
+
+}
+
+
+
+#cp-register .cp-prizes{
+
+  gap:6px;
+
+  margin:9px 0 11px;
+
+}
+
+
+
+#cp-register .cp-prize{
+
+  min-height:61px;
+
+  padding:7px 3px 6px;
+
+  border-radius:12px;
+
+}
+
+
+
+#cp-register .cp-prize-place{
+
+  font-size:9px;
+
+  margin-bottom:4px;
+
+}
+
+
+
+#cp-register .cp-prize-name{font-size:12px}
+
+
+
+#cp-register .cp-label{
+
+  font-size:10px;
+
+  margin-bottom:4px;
+
+}
+
+
+
+#cp-register .cp-input{
+
+  height:45px;
+
+  margin-bottom:8px;
+
+}
+
+
+
+#cp-register .cp-consent{
+
+  gap:8px;
+
+  margin:1px 0 10px;
+
+  font-size:10px;
+
+  line-height:1.23;
+
+}
+
+
+
+#cp-register .cp-consent input{
+
+  width:18px;
+
+  height:18px;
+
+  flex:0 0 18px;
+
+}
+
+
+
+#cp-register #cp-start{min-height:52px}
+
+
+
+
+
+/* ANIMATIONS */
+
+
+
+@keyframes cpScreenIn{
+
+  from{opacity:0;transform:translateY(7px)}
+
+  to{opacity:1;transform:translateY(0)}
+
+}
+
+
+
+@keyframes cpPop{
+
+  0%{transform:scale(.88);opacity:0}
+
+  70%{transform:scale(1.04);opacity:1}
+
+  100%{transform:scale(1);opacity:1}
+
+}
+
+
+
+@keyframes cpPiecePop{
+
+  0%{transform:translate(-50%,-50%) scale(.55);opacity:0}
+
+  65%{transform:translate(-50%,-50%) scale(1.08);opacity:1}
+
+  100%{transform:translate(-50%,-50%) scale(1);opacity:1}
+
+}
+
+
+
+@keyframes cpCounterPulse{
+
+  0%{transform:scale(1)}
+
+  50%{transform:scale(1.12)}
+
+  100%{transform:scale(1)}
+
+}
+
+
+
+@keyframes cpPerfectBoard{
+
+  0%{transform:scale(1)}
+
+  40%{transform:scale(.985)}
+
+  72%{transform:scale(1.008)}
+
+  100%{transform:scale(1)}
+
+}
+
+
+
+@keyframes cpScoreFinish{
+
+  0%{transform:scale(.94)}
+
+  65%{transform:scale(1.055)}
+
+  100%{transform:scale(1)}
+
+}
+
+
+
+@keyframes cpScoreGreat{
+
+  0%{transform:scale(.93)}
+
+  45%{transform:scale(1.075)}
+
+  70%{transform:scale(.99)}
+
+  100%{transform:scale(1)}
+
+}
+
+
+
+@keyframes cpWarriorScore{
+
+  0%{transform:scale(.85)}
+
+  35%{transform:scale(1.12)}
+
+  55%{transform:rotate(-2deg) scale(1.03)}
+
+  72%{transform:rotate(2deg) scale(1.05)}
+
+  100%{transform:rotate(0) scale(1)}
+
+}
+
+
+
+@keyframes cpPerfectScore{
+
+  0%{transform:scale(.75);opacity:.3}
+
+  35%{transform:scale(1.16)}
+
+  55%{transform:scale(.98)}
+
+  72%{transform:scale(1.08)}
+
+  100%{transform:scale(1);opacity:1}
+
+}
+
+
+
+@keyframes cpFinalBox{
+
+  from{opacity:0;transform:translateY(12px) scale(.98)}
+
+  to{opacity:1;transform:translateY(0) scale(1)}
+
+}
+
+
+
+@keyframes cpTimerWarning{
+
+  from{transform:scale(1)}
+
+  to{transform:scale(1.06)}
+
+}
+
+
+
+@keyframes cpConfettiFall{
+
+  0%{
+
+    transform:translate3d(0,-20px,0) rotate(0deg);
+
+    opacity:1;
+
+  }
+
+  100%{
+
+    transform:translate3d(var(--drift),110vh,0) rotate(var(--spin));
+
+    opacity:.15;
+
+  }
+
+}
+
+
+
+@media(max-width:390px){
+
+  #capito-pizza-cut{padding-left:9px;padding-right:9px}
+
+  #cp-register .cp-title{font-size:25px}
+
+  #cp-register .cp-subtitle{font-size:14px}
+
+  #cp-register .cp-description{font-size:11px}
+
+  #cp-result .cp-score{font-size:54px}
+
+}
+
+
+
+@media(max-width:360px){
+
+  #capito-pizza-cut{padding-left:7px;padding-right:7px}
+
+  #cp-register .cp-title{font-size:24px}
+
+  .cp-prize-name{font-size:12px}
+
+  #cp-piece-count{font-size:38px;min-width:102px;height:70px}
+
+  .cp-row{grid-template-columns:31px 1fr 100px}
+
+}
+
+
+
+@media(max-height:700px){
+
+  #cp-register .cp-title{font-size:24px;margin-bottom:6px}
+
+  #cp-register .cp-subtitle{margin-bottom:6px}
+
+  #cp-register .cp-description{margin-bottom:7px}
+
+  #cp-register .cp-prizes{margin-top:7px;margin-bottom:8px}
+
+  #cp-register .cp-prize{min-height:57px}
+
+}
+
+</style>
+
+
+
+
+
+<div id="cp-desktop-block">
+
+  <div class="cp-desktop-inner">
+
+    <div class="cp-desktop-brand">CAPITO / PIZZA CUT</div>
+
+    <div class="cp-desktop-title">ИГРАЙ<br>С ТЕЛЕФОНА</div>
+
+    <div class="cp-desktop-text">
+
+      PIZZA CUT создана для игры пальцем.<br>
+
+      Открой эту страницу на iPhone или Android.
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+
+
+<div id="cp-mobile-app">
+
+
+
+<div id="cp-register" class="cp-screen active">
+
+
+
+  <div class="cp-brand">CAPITO / PIZZA CUT</div>
+
+
+
+  <div class="cp-title">
+
+    РАЗРЕЖЬ.<br>
+
+    ПОПАДИ В TOP-3.<br>
+
+    ЗАБЕРИ ПРИЗ.
+
+  </div>
+
+
+
+  <div class="cp-subtitle">
+
+    Раздели пиццу на 6 равных частей всего тремя разрезами.
+
+  </div>
+
+
+
+  <div class="cp-description">
+
+    У тебя 10 секунд с первого касания.
+
+    Тренируйся сколько хочешь, а лучший результат
+
+    зафиксируй в недельном рейтинге.
+
+  </div>
+
+
+
+  <div class="cp-prizes">
+
+    <div class="cp-prize first">
+
+      <div class="cp-prize-place">1 МЕСТО</div>
+
+      <div class="cp-prize-name">ПИЦЦА</div>
+
+    </div>
+
+    <div class="cp-prize">
+
+      <div class="cp-prize-place">2 МЕСТО</div>
+
+      <div class="cp-prize-name">ДЕСЕРТ</div>
+
+    </div>
+
+    <div class="cp-prize">
+
+      <div class="cp-prize-place">3 МЕСТО</div>
+
+      <div class="cp-prize-name">КОФЕ</div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="cp-form">
+
+
+
+    <label class="cp-label" for="cp-name">ИМЯ ИЛИ НИК</label>
+
+    <input id="cp-name" class="cp-input" type="text" maxlength="30" autocomplete="name" placeholder="Например, Маша">
+
+
+
+    <label class="cp-label" for="cp-phone">ТЕЛЕФОН</label>
+
+    <input id="cp-phone" class="cp-input" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 999 123-45-67">
+
+
+
+    <label class="cp-consent">
+
+      <input id="cp-consent" type="checkbox">
+
+      <span>
+
+        Согласен на обработку данных для участия в игре и определения победителей.
+
+        Телефон в рейтинге не отображается.
+
+      </span>
+
+    </label>
+
+
+
+    <button id="cp-start" class="cp-btn blue" type="button">
+
+      НАЧАТЬ ИГРУ
+
+    </button>
+
+
+
+    <div id="cp-register-error" class="cp-error"></div>
+
+
+
+  </div>
+  <div class="cp-interior-photo" aria-label="Интерьер ресторана Capito"><img src="capito-interior-v21.webp?v=22" alt="Интерьер ресторана Capito" loading="lazy" decoding="async"></div>
+</div>
+
+<div id="cp-game" class="cp-screen">
+
+
+
+  <div class="cp-brand">CAPITO / PIZZA CUT</div>
+
+
+
+  <div class="cp-game-head">
+
+
+
+    <div class="cp-game-instruction">
+
+      Сделай 3 разреза за 10 секунд
+
+    </div>
+
+
+
+    <div class="cp-game-status">
+
+
+
+      <div id="cp-cut-counter" class="cp-cut-counter">
+
+        РАЗРЕЗ 1 ИЗ 3
+
+      </div>
+
+
+
+      <div id="cp-timer" class="cp-timer">
+
+        10.0 С
+
+      </div>
+
+
+
+    </div>
+
+
+
+  </div>
+
+
+
+  <div id="cp-board">
+
+
+
+    <img id="cp-pizza-image"
+
+      src="capito-pizza-v27.webp"
+
+      alt="Пицца Capito">
+
+
+
+    <canvas id="cp-canvas"></canvas>
+
+
+
+    <div id="cp-piece-count">6/6</div>
+
+
+
+    <div id="cp-timeout-overlay" class="cp-timeout-overlay">
+
+      <div class="cp-timeout-big">ВРЕМЯ<br>ВЫШЛО</div>
+
+      <div class="cp-timeout-small">
+
+        Нужно успеть сделать все 3 разреза за 10 секунд.
+
+      </div>
+
+    </div>
+
+
+
+  </div>
+
+
+
+  <div class="cp-tip">
+
+    Проведи пальцем через пиццу
+
+  </div>
+
+
+
+</div>
+
+
+
+
+
+<div id="cp-result" class="cp-screen">
+
+
+
+  <div class="cp-brand">CAPITO / PIZZA CUT</div>
+
+
+
+  <div class="cp-result-card">
+
+
+
+    <div class="cp-result-label">ТВОЙ РЕЗУЛЬТАТ</div>
+
+
+
+    <div id="cp-score" class="cp-score">
+
+      0.0%
+
+    </div>
+
+
+
+    <div id="cp-result-time" class="cp-result-time">
+
+      ВРЕМЯ 0.00 СЕК
+
+    </div>
+<div class="cp-v29-summary" aria-label="Шкала точности разрезов">
+  <div class="cp-v29-heading"><span>ТОЧНОСТЬ РАЗРЕЗОВ</span><span class="cp-v29-badge" id="cp-v29-badge">ТВОЙ РЕЗУЛЬТАТ</span></div>
+  <div class="cp-v29-track"><div class="cp-v29-fill" id="cp-v29-fill"></div></div>
+  <div class="cp-v29-scale"><span>0%</span><span>50%</span><span>100%</span></div>
+  <div class="cp-v29-caption" id="cp-v29-caption">Три разреза — шесть кусочков</div>
+</div>
+
+
+
+    <div id="cp-record" class="cp-record">
+
+      🔥 НОВЫЙ ЛИЧНЫЙ РЕКОРД
+
+    </div>
+
+
+
+    <div id="cp-best-result" class="cp-best-result"></div>
+
+
+
+    <div id="cp-result-message" class="cp-result-message"></div>
+
+    <div id="cp-competition" class="cp-competition"></div>
+
+
+
+  </div>
+
+
+
+  <div id="cp-result-actions" class="cp-result-actions">
+
+
+
+    <button id="cp-again" class="cp-btn secondary" type="button">
+
+      ЕЩЁ ПОПЫТКА
+
+    </button>
+
+
+
+    <button id="cp-v29-ranking" class="cp-btn cp-v29-view" type="button">🏆 СМОТРЕТЬ РЕЙТИНГ НЕДЕЛИ</button>
+
+    <button id="cp-lock" class="cp-btn blue" type="button">
+
+      ЗАФИКСИРОВАТЬ РЕЗУЛЬТАТ
+
+    </button>
+
+
+
+  </div>
+
+
+
+  <div id="cp-lock-error" class="cp-error"></div>
+
+
+
+  <div class="cp-prizes">
+
+
+
+    <div class="cp-prize first">
+
+      <div class="cp-prize-place">1 МЕСТО</div>
+
+      <div class="cp-prize-name">ПИЦЦА</div>
+
+    </div>
+
+
+
+    <div class="cp-prize">
+
+      <div class="cp-prize-place">2 МЕСТО</div>
+
+      <div class="cp-prize-name">ДЕСЕРТ</div>
+
+    </div>
+
+
+
+    <div class="cp-prize">
+
+      <div class="cp-prize-place">3 МЕСТО</div>
+
+      <div class="cp-prize-name">КОФЕ</div>
+
+    </div>
+
+
+
+  </div>
+
+
+
+  <div class="cp-v34-oven" role="img" aria-label="Иллюстрация дровяной кирпичной печи CAPITO с горящими дровами"></div>
+<div class="cp-leaderboard-title">
+
+    TOP-10 НЕДЕЛИ
+
+  </div>
+
+
+
+  <div class="cp-leaderboard-note">
+
+    При одинаковой точности выше тот, кто сделал разрезы быстрее
+
+  </div>
+
+
+
+  <div id="cp-leaderboard" class="cp-leaderboard"></div>
+<div class="cp-v31-records" id="cp-v31-cp-leaderboard"><h3>🏆 ЗАЛ СЛАВЫ CAPITO</h3><p>Абсолютные рекорды за всю историю CAPITO PIZZA CUT</p><div class="cp-v34-oven cp-v34-compact" role="img" aria-label="Иллюстрация дровяной кирпичной печи CAPITO с горящими дровами"></div><div class="cp-v31-empty">Загружаем рекорды…</div></div>
+
+
+
+</div>
+
+
+
+
+
+<div id="cp-final" class="cp-screen">
+
+
+
+  <div class="cp-brand">CAPITO / PIZZA CUT</div>
+
+
+
+  <div class="cp-title">
+
+    РЕЗУЛЬТАТ<br>
+
+    ЗАФИКСИРОВАН
+
+  </div>
+
+
+
+  <div class="cp-final-box">
+
+
+
+    <div id="cp-final-big" class="cp-final-big"></div>
+
+
+
+    <div class="cp-final-small">
+
+      Этот результат участвует в рейтинге текущей недели.
+
+      Новый официальный результат можно будет зафиксировать
+
+      на следующей неделе.
+
+    </div>
+
+
+
+  </div>
+
+
+
+  <div id="cp-telegram-box" class="cp-telegram-box">
+
+
+
+    <div class="cp-telegram-title">
+
+      УЗНАЙ, ЕСЛИ ПОПАДЁШЬ В TOP-3
+
+    </div>
+
+
+
+    <div class="cp-telegram-text">
+
+      Подключи Telegram. Если по итогам недели ты окажешься среди победителей,
+
+      Capito пришлёт сюда результат и персональную ссылку на приз.
+
+    </div>
+
+
+
+    <button id="cp-telegram" class="cp-btn cp-telegram-btn" type="button">
+
+      ✈ ПОДКЛЮЧИТЬ TELEGRAM
+
+    </button>
+
+
+
+    <div id="cp-telegram-status" class="cp-telegram-status"></div>
+
+
+
+  </div>
+
+
+
+  <div class="cp-prizes">
+
+
+
+    <div class="cp-prize first">
+
+      <div class="cp-prize-place">1 МЕСТО</div>
+
+      <div class="cp-prize-name">ПИЦЦА</div>
+
+    </div>
+
+
+
+    <div class="cp-prize">
+
+      <div class="cp-prize-place">2 МЕСТО</div>
+
+      <div class="cp-prize-name">ДЕСЕРТ</div>
+
+    </div>
+
+
+
+    <div class="cp-prize">
+
+      <div class="cp-prize-place">3 МЕСТО</div>
+
+      <div class="cp-prize-name">КОФЕ</div>
+
+    </div>
+
+
+
+  </div>
+
+
+
+  <div class="cp-v34-oven" role="img" aria-label="Иллюстрация дровяной кирпичной печи CAPITO с горящими дровами"></div>
+<div class="cp-leaderboard-title">
+
+    TOP-10 НЕДЕЛИ
+
+  </div>
+
+
+
+  <div id="cp-final-leaderboard" class="cp-leaderboard"></div>
+<div class="cp-v31-records" id="cp-v31-cp-final-leaderboard"><h3>🏆 ЗАЛ СЛАВЫ CAPITO</h3><p>Абсолютные рекорды за всю историю CAPITO PIZZA CUT</p><div class="cp-v34-oven cp-v34-compact" role="img" aria-label="Иллюстрация дровяной кирпичной печи CAPITO с горящими дровами"></div><div class="cp-v31-empty">Загружаем рекорды…</div></div>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+<div id="cp-confetti"></div>
+
+
+
+</div>
+
+
+
+
+
+<script>
+
+(function(){
+
+
+
+"use strict";
+
+
+
+
+
+/* ===== DEVICE ===== */
+
+
+
+function isMobileGameDevice(){
+
+
+
+  var ua=navigator.userAgent||"";
+
+
+
+  var isAndroid=/Android/i.test(ua);
+
+  var isiPhoneOrIPad=/iPhone|iPad|iPod/i.test(ua);
+
+
+
+  var isiPadDesktopMode=
+
+    navigator.platform==="MacIntel" &&
+
+    navigator.maxTouchPoints>1;
+
+
+
+  return isAndroid||isiPhoneOrIPad||isiPadDesktopMode;
+
+}
+
+
+
+
+
+var mobileApp=document.getElementById("cp-mobile-app");
+
+var desktopBlock=document.getElementById("cp-desktop-block");
+
+
+
+if(!isMobileGameDevice()){
+
+  mobileApp.style.display="none";
+
+  desktopBlock.style.display="block";
+
+  return;
+
+}
+
+
+
+desktopBlock.style.display="none";
+
+mobileApp.style.display="block";
+
+
+
+
+
+/* ===== HAPTICS ===== */
+
+
+
+function vibrate(pattern){
+
+  try{
+
+    if(navigator.vibrate){
+
+      navigator.vibrate(pattern);
+
+    }
+
+  }catch(e){}
+
+}
+
+
+
+function hapticTap(){vibrate(15)}
+
+function hapticCut(){vibrate(30)}
+
+function hapticThirdCut(){vibrate([35,35,45])}
+
+function hapticPerfect(){vibrate([45,45,75])}
+
+function hapticResult(){vibrate([25,35,25])}
+
+function hapticLock(){vibrate([35,40,55])}
+
+
+
+
+
+/* ===== SOUND ===== */
+
+
+
+var audioContext=null;
+
+var masterGain=null;
+window.cpSoundMuted=false;
+window.cpSetMuted=function(value){window.cpSoundMuted=!!value;if(masterGain)masterGain.gain.value=value?0:1;};
+
+var lastCutSoundTime=0;
+
+var lastCutVibrationTime=0;
+
+
+
+
+
+function initAudio(){
+
+
+
+  try{
+
+
+
+    if(!audioContext){
+
+
+
+      var AC=
+
+        window.AudioContext||
+
+        window.webkitAudioContext;
+
+
+
+      if(!AC){
+
+        return;
+
+      }
+
+
+
+      audioContext=new AC();
+
+
+
+      masterGain=audioContext.createGain();
+
+      masterGain.gain.value=window.cpSoundMuted?0:1;
+
+      masterGain.connect(audioContext.destination);
+
+    }
+
+
+
+    if(audioContext.state==="suspended"){
+
+      audioContext.resume().catch(function(){});
+
+    }
+
+
+
+  }catch(e){}
+
+}
+
+
+
+
+
+function audioOutput(){
+
+
+
+  if(masterGain){
+
+    return masterGain;
+
+  }
+
+
+
+  if(audioContext){
+
+    return audioContext.destination;
+
+  }
+
+
+
+  return null;
+
+}
+
+
+
+
+
+function makeTone(frequency,duration,volume,type,delay){
+
+
+
+  if(!audioContext){
+
+    return;
+
+  }
+
+
+
+  try{
+
+
+
+    var output=audioOutput();
+
+
+
+    if(!output){
+
+      return;
+
+    }
+
+
+
+    var now=
+
+      audioContext.currentTime+
+
+      (delay||0);
+
+
+
+    var osc=audioContext.createOscillator();
+
+    var gain=audioContext.createGain();
+
+
+
+    osc.type=type||"sine";
+
+    osc.frequency.setValueAtTime(frequency,now);
+
+
+
+    gain.gain.setValueAtTime(.0001,now);
+
+
+
+    gain.gain.exponentialRampToValueAtTime(
+
+      Math.max(.0001,volume),
+
+      now+.005
+
+    );
+
+
+
+    gain.gain.exponentialRampToValueAtTime(
+
+      .0001,
+
+      now+duration
+
+    );
+
+
+
+    osc.connect(gain);
+
+    gain.connect(output);
+
+
+
+    osc.start(now);
+
+    osc.stop(now+duration+.04);
+
+
+
+  }catch(e){}
+
+}
+
+
+
+
+
+function soundCutMovement(speed){
+
+
+
+  if(!audioContext){
+
+    return;
+
+  }
+
+
+
+  var nowMs=Date.now();
+
+
+
+  if(nowMs-lastCutSoundTime<32){
+
+    return;
+
+  }
+
+
+
+  lastCutSoundTime=nowMs;
+
+
+
+  var speedFactor=
+
+    Math.min(
+
+      1,
+
+      Math.max(.2,speed/14)
+
+    );
+
+
+
+  try{
+
+
+
+    var output=audioOutput();
+
+
+
+    if(!output){
+
+      return;
+
+    }
+
+
+
+    var now=audioContext.currentTime;
+
+
+
+    var osc=audioContext.createOscillator();
+
+    var gain=audioContext.createGain();
+
+    var filter=audioContext.createBiquadFilter();
+
+
+
+    osc.type="sawtooth";
+
+    osc.frequency.setValueAtTime(120+speedFactor*100,now);
+
+
+
+    filter.type="bandpass";
+
+    filter.frequency.setValueAtTime(650+speedFactor*850,now);
+
+    filter.Q.setValueAtTime(1.1,now);
+
+
+
+    gain.gain.setValueAtTime(.0001,now);
+
+    gain.gain.exponentialRampToValueAtTime(.09+speedFactor*.06,now+.003);
+
+    gain.gain.exponentialRampToValueAtTime(.0001,now+.052);
+
+
+
+    osc.connect(filter);
+
+    filter.connect(gain);
+
+    gain.connect(output);
+
+
+
+    osc.start(now);
+
+    osc.stop(now+.06);
+
+
+
+
+
+    var crunch=audioContext.createOscillator();
+
+    var crunchGain=audioContext.createGain();
+
+
+
+    crunch.type="square";
+
+    crunch.frequency.setValueAtTime(900+speedFactor*650,now);
+
+
+
+    crunchGain.gain.setValueAtTime(.0001,now);
+
+    crunchGain.gain.exponentialRampToValueAtTime(.04+speedFactor*.035,now+.002);
+
+    crunchGain.gain.exponentialRampToValueAtTime(.0001,now+.025);
+
+
+
+    crunch.connect(crunchGain);
+
+    crunchGain.connect(output);
+
+
+
+    crunch.start(now);
+
+    crunch.stop(now+.032);
+
+
+
+
+
+    var metal=audioContext.createOscillator();
+
+    var metalGain=audioContext.createGain();
+
+
+
+    metal.type="triangle";
+
+    metal.frequency.setValueAtTime(1450+speedFactor*450,now);
+
+
+
+    metalGain.gain.setValueAtTime(.0001,now);
+
+    metalGain.gain.exponentialRampToValueAtTime(.025+speedFactor*.02,now+.002);
+
+    metalGain.gain.exponentialRampToValueAtTime(.0001,now+.02);
+
+
+
+    metal.connect(metalGain);
+
+    metalGain.connect(output);
+
+
+
+    metal.start(now);
+
+    metal.stop(now+.025);
+
+
+
+  }catch(e){}
+
+}
+
+
+
+
+
+function hapticCutMovement(){
+
+
+
+  var now=Date.now();
+
+
+
+  if(now-lastCutVibrationTime<80){
+
+    return;
+
+  }
+
+
+
+  lastCutVibrationTime=now;
+
+  vibrate(22);
+
+}
+
+
+
+
+
+function soundCutFinish(){
+
+  makeTone(180,.075,.13,"triangle",0);
+
+  makeTone(115,.10,.09,"sine",.025);
+
+  makeTone(700,.04,.05,"square",.005);
+
+}
+
+
+
+function soundThirdCut(){
+
+  makeTone(180,.08,.14,"triangle",0);
+
+  makeTone(260,.10,.13,"triangle",.055);
+
+  makeTone(410,.14,.10,"sine",.12);
+
+}
+
+
+
+function soundResult(){
+
+  makeTone(440,.15,.13,"sine",0);
+
+  makeTone(554,.20,.14,"sine",.10);
+
+}
+
+
+
+function soundGreatResult(){
+
+  makeTone(440,.14,.14,"sine",0);
+
+  makeTone(554,.17,.15,"sine",.09);
+
+  makeTone(659,.27,.17,"sine",.18);
+
+}
+
+
+
+function soundPerfectResult(){
+
+  makeTone(523,.14,.15,"sine",0);
+
+  makeTone(659,.16,.16,"sine",.085);
+
+  makeTone(784,.30,.19,"sine",.17);
+
+  makeTone(1046,.24,.09,"sine",.27);
+
+}
+
+
+
+function soundUltraPerfect(){
+
+  makeTone(523,.13,.17,"sine",0);
+
+  makeTone(659,.14,.18,"sine",.07);
+
+  makeTone(784,.17,.19,"sine",.14);
+
+  makeTone(1046,.24,.18,"sine",.22);
+
+  makeTone(1318,.32,.13,"sine",.32);
+
+}
+
+
+
+function soundLock(){
+
+  makeTone(330,.10,.12,"triangle",0);
+
+  makeTone(494,.17,.14,"sine",.075);
+
+  makeTone(659,.20,.12,"sine",.15);
+
+}
+
+
+
+function soundTimeout(){
+
+  makeTone(260,.18,.14,"triangle",0);
+
+  makeTone(190,.25,.14,"triangle",.15);
+
+}
+
+
+
+
+
+/* ===== APPLAUSE ===== */
+
+
+
+function playApplause(){
+
+
+
+  if(!audioContext){
+
+    return;
+
+  }
+
+
+
+  try{
+
+
+
+    var output=audioOutput();
+
+
+
+    if(!output){
+
+      return;
+
+    }
+
+
+
+    var start=audioContext.currentTime+.18;
+
+    var duration=1.8;
+
+
+
+    var bufferLength=
+
+      Math.floor(audioContext.sampleRate*duration);
+
+
+
+    var buffer=audioContext.createBuffer(
+
+      1,
+
+      bufferLength,
+
+      audioContext.sampleRate
+
+    );
+
+
+
+    var data=buffer.getChannelData(0);
+
+
+
+    for(var i=0;i<bufferLength;i++){
+
+      data[i]=Math.random()*2-1;
+
+    }
+
+
+
+    function createClap(time,volume,frequency){
+
+
+
+      var source=audioContext.createBufferSource();
+
+      var gain=audioContext.createGain();
+
+      var filter=audioContext.createBiquadFilter();
+
+
+
+      source.buffer=buffer;
+
+
+
+      filter.type="bandpass";
+
+      filter.frequency.setValueAtTime(frequency,time);
+
+      filter.Q.setValueAtTime(.7,time);
+
+
+
+      gain.gain.setValueAtTime(.0001,time);
+
+      gain.gain.exponentialRampToValueAtTime(volume,time+.006);
+
+      gain.gain.exponentialRampToValueAtTime(.0001,time+.10);
+
+
+
+      source.connect(filter);
+
+      filter.connect(gain);
+
+      gain.connect(output);
+
+
+
+      source.start(
+
+        time,
+
+        Math.random()*.7,
+
+        .13
+
+      );
+
+    }
+
+
+
+    var clapTimes=[
+
+      0,.09,.18,.27,.37,
+
+      .47,.57,.68,.79,.90,
+
+      1.02,1.14,1.27,1.40,1.54
+
+    ];
+
+
+
+    for(var c=0;c<clapTimes.length;c++){
+
+
+
+      createClap(
+
+        start+clapTimes[c]+Math.random()*.025,
+
+        .14+Math.random()*.08,
+
+        1050+Math.random()*950
+
+      );
+
+    }
+
+
+
+    for(var j=0;j<22;j++){
+
+
+
+      createClap(
+
+        start+Math.random()*1.6,
+
+        .035+Math.random()*.055,
+
+        850+Math.random()*1500
+
+      );
+
+    }
+
+
+
+  }catch(e){}
+
+}
+
+
+
+
+
+/* ===== CONFETTI ===== */
+
+
+
+var confettiContainer=
+
+  document.getElementById("cp-confetti");
+
+
+
+function launchConfetti(){
+
+
+
+  while(confettiContainer.firstChild){
+
+    confettiContainer.removeChild(confettiContainer.firstChild);
+
+  }
+
+
+
+  var colors=[
+
+    "#1655d8",
+
+    "#111111",
+
+    "#ffffff",
+
+    "#f2c94c"
+
+  ];
+
+
+
+  for(var i=0;i<55;i++){
+
+
+
+    var piece=document.createElement("div");
+
+
+
+    piece.className="cp-confetti-piece";
+
+
+
+    piece.style.left=
+
+      (Math.random()*100)+"%";
+
+
+
+    piece.style.background=
+
+      colors[
+
+        Math.floor(Math.random()*colors.length)
+
+      ];
+
+
+
+    piece.style.animationDuration=
+
+      (1.8+Math.random()*1.3)+"s";
+
+
+
+    piece.style.animationDelay=
+
+      (Math.random()*.35)+"s";
+
+
+
+    piece.style.setProperty(
+
+      "--drift",
+
+      ((Math.random()-.5)*180)+"px"
+
+    );
+
+
+
+    piece.style.setProperty(
+
+      "--spin",
+
+      ((Math.random()*900)-450)+"deg"
+
+    );
+
+
+
+    piece.style.width=
+
+      (6+Math.random()*6)+"px";
+
+
+
+    piece.style.height=
+
+      (9+Math.random()*10)+"px";
+
+
+
+    confettiContainer.appendChild(piece);
+
+  }
+
+
+
+  confettiContainer.classList.add("show");
+
+
+
+  window.setTimeout(function(){
+
+
+
+    confettiContainer.classList.remove("show");
+
+
+
+    while(confettiContainer.firstChild){
+
+      confettiContainer.removeChild(confettiContainer.firstChild);
+
+    }
+
+
+
+  },3400);
+
+}
+
+
+
+
+
+/* ===== CONFIG ===== */
+
+
+
+var SUPABASE_URL=
+
+  "https://betbkhvyejtjqfyuxmql.supabase.co";
+
+
+
+var SUPABASE_KEY=
+
+  "sb_publishable_AY3okNvvxefclorginvwZQ_fzRXjrYQ";
+
+
+
+var playerName="";
+
+var playerPhone="";
+
+
+
+var cuts=[];
+
+var drawing=false;
+
+
+
+var startPoint=null;
+
+var currentPoint=null;
+
+var lastPointer=null;
+
+
+
+var currentScore=0;
+
+var currentTime=0;
+
+
+
+var bestTrainingScore=0;
+
+var bestTrainingTime=null;
+
+
+
+var leaderboardData=[];
+
+
+
+var resultStarted=false;
+
+var sliceAnimation=false;
+
+
+
+var cutterAngle=0;
+
+var wheelRotation=0;
+
+
+
+
+
+/* TIMER */
+
+
+
+var GAME_LIMIT=10;
+
+
+
+var timerStarted=false;
+
+var timerFinished=false;
+
+var timerStartTimestamp=0;
+
+var timerAnimationFrame=null;
+
+
+
+
+
+/* ===== ELEMENTS ===== */
+
+
+
+var registerScreen=document.getElementById("cp-register");
+
+var gameScreen=document.getElementById("cp-game");
+
+var resultScreen=document.getElementById("cp-result");
+
+var finalScreen=document.getElementById("cp-final");
+
+
+
+var nameInput=document.getElementById("cp-name");
+
+var phoneInput=document.getElementById("cp-phone");
+
+var consentInput=document.getElementById("cp-consent");
+
+var startButton=document.getElementById("cp-start");
+
+var registerError=document.getElementById("cp-register-error");
+
+
+
+var pizzaImage=document.getElementById("cp-pizza-image");
+
+var board=document.getElementById("cp-board");
+
+var canvas=document.getElementById("cp-canvas");
+
+var ctx=canvas.getContext("2d");
+
+
+
+var cutCounter=document.getElementById("cp-cut-counter");
+
+var timerElement=document.getElementById("cp-timer");
+
+var pieceCount=document.getElementById("cp-piece-count");
+
+var timeoutOverlay=document.getElementById("cp-timeout-overlay");
+
+
+
+var scoreElement=document.getElementById("cp-score");
+
+var resultTimeElement=document.getElementById("cp-result-time");
+
+var recordElement=document.getElementById("cp-record");
+
+var bestResultElement=document.getElementById("cp-best-result");
+
+var resultMessage=document.getElementById("cp-result-message");
+
+var competitionElement=document.getElementById("cp-competition");
+
+
+
+var againButton=document.getElementById("cp-again");
+
+var lockButton=document.getElementById("cp-lock");
+
+var resultActions=document.getElementById("cp-result-actions");
+
+var lockError=document.getElementById("cp-lock-error");
+
+
+
+var leaderboardElement=document.getElementById("cp-leaderboard");
+
+var finalLeaderboardElement=document.getElementById("cp-final-leaderboard");
+
+var finalBig=document.getElementById("cp-final-big");
+
+
+
+var telegramButton=document.getElementById("cp-telegram");
+
+var telegramStatus=document.getElementById("cp-telegram-status");
+
+
+
+
+
+/* ===== SCREEN ===== */
+
+
+
+function showScreen(screen){
+
+
+
+  registerScreen.classList.remove("active");
+
+  gameScreen.classList.remove("active");
+
+  resultScreen.classList.remove("active");
+
+  finalScreen.classList.remove("active");
+
+
+
+  screen.classList.add("active");
+  document.body.classList.toggle("cp-playing",screen===gameScreen);
+
+
+
+  window.scrollTo({
+
+    top:0,
+
+    behavior:"smooth"
+
+  });
+
+}
+
+
+
+
+
+/* ===== HELPERS ===== */
+
+
+
+function normalizePhone(value){
+
+  return String(value||"").replace(/\D/g,"");
+
+}
+
+
+
+function showRegisterError(message){
+
+  registerError.textContent=message;
+
+  registerError.style.display="block";
+
+}
+
+
+
+function hideRegisterError(){
+
+  registerError.textContent="";
+
+  registerError.style.display="none";
+
+}
+
+
+
+function showLockError(message){
+
+  lockError.textContent=message;
+
+  lockError.style.display="block";
+
+}
+
+
+
+function hideLockError(){
+
+  lockError.textContent="";
+
+  lockError.style.display="none";
+
+}
+
+
+
+function apiHeaders(){
+
+  return {
+
+    "apikey":SUPABASE_KEY,
+
+    // Publishable keys are API keys, not JWT bearer tokens.
+    ...(SUPABASE_KEY.startsWith("sb_publishable_") ? {} : {"Authorization":"Bearer "+SUPABASE_KEY}),
+
+    "Content-Type":"application/json"
+
+  };
+
+}
+
+
+
+async function rpc(functionName,body){
+
+
+
+  var response=await fetch(
+
+    SUPABASE_URL+
+
+    "/rest/v1/rpc/"+
+
+    functionName,
+
+    {
+
+      method:"POST",
+
+      headers:apiHeaders(),
+
+      body:JSON.stringify(body||{})
+
+    }
+
+  );
+
+
+
+  if(!response.ok){
+
+
+
+    var text=await response.text();
+
+
+
+    throw new Error(
+
+      "Supabase "+
+
+      response.status+
+
+      ": "+
+
+      text
+
+    );
+
+  }
+
+
+
+  return await response.json();
+
+}
+
+
+
+
+
+/* ===== TIMER ===== */
+
+
+
+function resetTimer(){
+
+
+
+  if(timerAnimationFrame){
+
+    cancelAnimationFrame(timerAnimationFrame);
+
+  }
+
+
+
+  timerAnimationFrame=null;
+
+  timerStarted=false;
+
+  timerFinished=false;
+
+  timerStartTimestamp=0;
+
+  currentTime=0;
+
+
+
+  timerElement.textContent="10.0 С";
+
+
+
+  timerElement.classList.remove(
+
+    "running",
+
+    "warning",
+
+    "done"
+
+  );
+
+
+
+  timeoutOverlay.classList.remove("show");
+
+}
+
+
+
+
+
+function startTimer(){
+
+
+
+  if(timerStarted||timerFinished||resultStarted){
+
+    return;
+
+  }
+
+
+
+  timerStarted=true;
+
+  timerStartTimestamp=performance.now();
+
+
+
+  timerElement.classList.add("running");
+
+
+
+  updateTimer();
+
+}
+
+
+
+
+
+function updateTimer(){
+
+
+
+  if(!timerStarted||timerFinished){
+
+    return;
+
+  }
+
+
+
+  var elapsed=
+
+    (performance.now()-timerStartTimestamp)/1000;
+
+
+
+  var remaining=
+
+    Math.max(0,GAME_LIMIT-elapsed);
+
+
+
+  timerElement.textContent=
+
+    remaining.toFixed(1)+" С";
+
+
+
+  if(remaining<=3){
+
+    timerElement.classList.add("warning");
+
+  }else{
+
+    timerElement.classList.remove("warning");
+
+  }
+
+
+
+  if(elapsed>=GAME_LIMIT){
+
+    handleTimeout();
+
+    return;
+
+  }
+
+
+
+  timerAnimationFrame=
+
+    requestAnimationFrame(updateTimer);
+
+}
+
+
+
+
+
+function stopTimer(){
+
+
+
+  if(!timerStarted||timerFinished){
+
+    return;
+
+  }
+
+
+
+  var elapsed=
+
+    (performance.now()-timerStartTimestamp)/1000;
+
+
+
+  currentTime=
+
+    Math.min(
+
+      GAME_LIMIT,
+
+      Math.max(.01,elapsed)
+
+    );
+
+
+
+  currentTime=
+
+    Math.round(currentTime*100)/100;
+
+
+
+  timerFinished=true;
+
+  timerStarted=false;
+
+
+
+  if(timerAnimationFrame){
+
+    cancelAnimationFrame(timerAnimationFrame);
+
+  }
+
+
+
+  timerAnimationFrame=null;
+
+
+
+  timerElement.classList.remove(
+
+    "running",
+
+    "warning"
+
+  );
+
+
+
+  timerElement.classList.add("done");
+
+
+
+  timerElement.textContent=
+
+    currentTime.toFixed(2)+" С";
+
+}
+
+
+
+
+
+function handleTimeout(){
+
+
+
+  if(timerFinished||resultStarted){
+
+    return;
+
+  }
+
+
+
+  timerFinished=true;
+
+  timerStarted=false;
+
+  resultStarted=true;
+
+  drawing=false;
+
+
+
+  currentTime=GAME_LIMIT;
+
+
+
+  if(timerAnimationFrame){
+
+    cancelAnimationFrame(timerAnimationFrame);
+
+  }
+
+
+
+  timerAnimationFrame=null;
+
+
+
+  timerElement.classList.remove(
+
+    "running",
+
+    "warning"
+
+  );
+
+
+
+  timerElement.textContent="0.0 С";
+
+
+
+  board.classList.remove("cp-cut-touch");
+
+
+
+  soundTimeout();
+
+  hapticResult();
+
+
+
+  redraw();
+
+
+
+  timeoutOverlay.classList.add("show");
+
+
+
+  window.setTimeout(function(){
+
+    showTimeoutResult();
+
+  },1200);
+
+}
+
+
+
+
+
+function showTimeoutResult(){
+
+
+
+  currentScore=0;
+
+
+
+  scoreElement.textContent="ВРЕМЯ";
+
+  resultTimeElement.textContent="10.00 СЕК";
+
+
+
+  scoreElement.classList.remove(
+
+    "cp-score-finish",
+
+    "cp-score-great",
+
+    "cp-score-warrior",
+
+    "cp-score-perfect"
+
+  );
+
+
+
+  recordElement.classList.remove("show");
+
+  bestResultElement.classList.remove("show");
+
+
+
+  resultMessage.classList.remove(
+
+    "warrior",
+
+    "perfect"
+
+  );
+
+
+
+  resultMessage.textContent=
+
+    "Время вышло. Нужно сделать все 3 разреза за 10 секунд.";
+
+
+
+  competitionElement.textContent=
+
+    "Эта попытка не участвует в рейтинге.";
+
+
+
+  showScreen(resultScreen);
+
+
+
+  resultActions.style.display="grid";
+
+  resultActions.style.opacity="1";
+
+  resultActions.style.transform="translateY(0)";
+
+
+
+  againButton.disabled=false;
+
+
+
+  lockButton.disabled=true;
+
+  lockButton.textContent="РЕЗУЛЬТАТ НЕ ЗАСЧИТАН";
+
+
+
+  loadLeaderboard();
+
+}
+
+
+
+
+
+/* ===== DATABASE ===== */
+
+
+
+async function checkExistingEntry(){
+
+
+
+  try{
+
+
+
+    return await rpc(
+
+      "check_pizza_weekly_entry",
+
+      {p_phone:playerPhone}
+
+    );
+
+
+
+  }catch(error){
+
+
+
+    console.error(error);
+
+    return null;
+
+  }
+
+}
+
+
+
+
+
+async function loadLeaderboard(){
+
+
+
+  try{
+
+
+
+    var data=await rpc(
+
+      "get_pizza_weekly_leaderboard",
+
+      {}
+
+    );
+
+
+
+    leaderboardData=
+
+      Array.isArray(data)?data:[];
+
+
+
+  }catch(error){
+
+
+
+    console.error(error);
+
+    leaderboardData=[];
+
+  }
+
+
+
+  renderLeaderboard(
+
+    leaderboardElement,
+
+    leaderboardData
+
+  );
+
+
+
+  renderLeaderboard(
+
+    finalLeaderboardElement,
+
+    leaderboardData
+
+  );
+  if(window.cpV30Render)window.cpV30Render();
+
+
+
+  return leaderboardData;
+
+}
+
+
+
+
+
+function renderLeaderboard(element,data){
+
+
+
+  while(element.firstChild){
+
+    element.removeChild(element.firstChild);
+
+  }
+
+
+
+  if(!data||data.length===0){
+
+
+
+    var empty=document.createElement("div");
+
+
+
+    empty.className="cp-empty";
+
+    empty.textContent=
+
+      "Пока рейтинг пуст. Можно стать первым.";
+
+
+
+    element.appendChild(empty);
+
+
+
+    return;
+
+  }
+
+
+
+  data.forEach(function(item,index){
+
+
+
+    var row=document.createElement("div");
+
+    row.className="cp-row";
+
+
+
+    var place=document.createElement("div");
+
+    place.className="cp-place";
+
+    place.textContent=String(item.place||index+1);
+
+
+
+    var name=document.createElement("div");
+
+    name.className="cp-name";
+
+    name.textContent=String(item.player_name||"Игрок");
+
+
+
+    var score=document.createElement("div");
+
+    score.className="cp-row-score";
+
+    score.textContent=
+
+      Number(item.score||0).toFixed(1)+"%";
+
+
+
+    var time=document.createElement("span");
+
+    time.className="cp-row-time";
+
+
+
+    var savedTime=
+
+      Number(item.completion_time);
+
+
+
+    if(
+
+      item.completion_time!==null &&
+
+      isFinite(savedTime) &&
+
+      savedTime>0
+
+    ){
+
+
+
+      time.textContent=
+
+        savedTime.toFixed(2)+" сек";
+
+
+
+    }else{
+
+
+
+      time.textContent="—";
+
+    }
+
+
+
+    score.appendChild(time);
+
+
+
+    row.appendChild(place);
+
+    row.appendChild(name);
+
+    row.appendChild(score);
+
+
+
+    element.appendChild(row);
+
+  });
+
+}
+
+
+
+
+
+function getThirdPlaceScore(){
+
+
+
+  if(
+
+    !leaderboardData||
+
+    leaderboardData.length<3
+
+  ){
+
+    return null;
+
+  }
+
+
+
+  var value=
+
+    Number(leaderboardData[2].score);
+
+
+
+  return isFinite(value)?value:null;
+
+}
+
+
+
+
+
+function getProjectedPlace(score,time){
+
+
+
+  if(!leaderboardData.length){
+
+    return 1;
+
+  }
+
+
+
+  var place=1;
+
+
+
+  for(var i=0;i<leaderboardData.length;i++){
+
+
+
+    var otherScore=
+
+      Number(leaderboardData[i].score);
+
+
+
+    var otherTime=
+
+      Number(
+
+        leaderboardData[i].completion_time
+
+      );
+
+
+
+    if(otherScore>score){
+
+
+
+      place++;
+
+      continue;
+
+    }
+
+
+
+    if(
+
+      otherScore===score &&
+
+      isFinite(otherTime) &&
+
+      otherTime>0 &&
+
+      otherTime<time
+
+    ){
+
+      place++;
+
+    }
+
+  }
+
+
+
+  return place;
+
+}
+
+
+
+
+
+function updateCompetitionMessage(){
+
+
+
+  competitionElement.classList.remove(
+
+    "cp-top-result"
+
+  );
+
+
+
+  lockButton.textContent=
+
+    "ЗАФИКСИРОВАТЬ "+
+
+    currentScore.toFixed(1)+
+
+    "% · "+
+
+    currentTime.toFixed(2)+
+
+    " С";
+
+
+
+  var projected=
+
+    getProjectedPlace(
+
+      currentScore,
+
+      currentTime
+
+    );
+
+
+
+  var leader=null;
+
+
+
+  if(leaderboardData.length>0){
+
+    leader=Number(leaderboardData[0].score);
+
+  }
+
+
+
+  if(
+
+    leaderboardData.length===0||
+
+    projected===1
+
+  ){
+
+
+
+    competitionElement.textContent=
+
+      "🏆 ТЫ ВЫХОДИШЬ НА 1 МЕСТО";
+
+
+
+    competitionElement.classList.add(
+
+      "cp-top-result"
+
+    );
+
+
+
+    return;
+
+  }
+
+
+
+  if(projected<=3){
+
+
+
+    var toLeader=
+
+      leader-currentScore;
+
+
+
+    if(toLeader<0){
+
+      toLeader=0;
+
+    }
+
+
+
+    competitionElement.textContent=
+
+      "СЕЙЧАС ТЫ №"+
+
+      projected+
+
+      " · До лидера "+
+
+      toLeader.toFixed(1)+
+
+      "%";
+
+
+
+    competitionElement.classList.add(
+
+      "cp-top-result"
+
+    );
+
+
+
+    return;
+
+  }
+
+
+
+  var third=getThirdPlaceScore();
+
+
+
+  if(third===null){
+
+
+
+    competitionElement.textContent=
+
+      "🔥 РЕЗУЛЬТАТ ПРОХОДИТ В TOP-3";
+
+
+
+    competitionElement.classList.add(
+
+      "cp-top-result"
+
+    );
+
+
+
+    return;
+
+  }
+
+
+
+  var difference=
+
+    third-currentScore;
+
+
+
+  if(difference<0){
+
+    difference=0;
+
+  }
+
+
+
+  competitionElement.textContent=
+
+    "До TOP-3 не хватает всего "+
+
+    difference.toFixed(1)+
+
+    "%. Попробуешь ещё раз?";
+
+}
+
+
+
+
+
+/* ===== RESULT MESSAGES ===== */
+
+
+
+function updateResultMessage(){
+
+
+
+  resultMessage.classList.remove(
+
+    "warrior",
+
+    "perfect"
+
+  );
+
+
+
+  if(currentScore>=100){
+
+
+
+    resultMessage.textContent=
+
+      "ИДЕАЛЬНЫЙ РАЗРЕЗ. ЭТО ВООБЩЕ ЗАКОННО?";
+
+
+
+    resultMessage.classList.add(
+
+      "perfect"
+
+    );
+
+
+
+  }else if(currentScore>=95){
+
+
+
+    resultMessage.textContent=
+
+      "КТО ТЫ, ВОИН?";
+
+
+
+    resultMessage.classList.add(
+
+      "warrior"
+
+    );
+
+
+
+  }else if(currentScore>=92){
+
+
+
+    resultMessage.textContent=
+
+      "Очень близко. Это сильный результат.";
+
+
+
+  }else if(currentScore>=85){
+
+
+
+    resultMessage.textContent=
+
+      "Хороший разрез. Но можно ещё точнее.";
+
+
+
+  }else if(currentScore>=70){
+
+
+
+    resultMessage.textContent=
+
+      "Уже неплохо. Попробуешь улучшить?";
+
+
+
+  }else if(currentScore>=60){
+
+
+
+    resultMessage.textContent=
+
+      "Пицца сопротивляется. Попробуй ещё раз.";
+
+
+
+  }else{
+
+
+
+    resultMessage.textContent=
+
+      "МАЛО СИЛ! НАДО СРОЧНО ПОЕСТЬ НАШЕЙ ПИЦЦЫ 🍕";
+
+  }
+
+}
+
+
+
+
+
+/* ===== PERSONAL RECORD ===== */
+
+
+
+function isNewPersonalRecord(){
+
+
+
+  if(bestTrainingScore===0){
+
+    return true;
+
+  }
+
+
+
+  if(currentScore>bestTrainingScore){
+
+    return true;
+
+  }
+
+
+
+  if(
+
+    currentScore===bestTrainingScore &&
+
+    bestTrainingTime!==null &&
+
+    currentTime<bestTrainingTime
+
+  ){
+
+    return true;
+
+  }
+
+
+
+  return false;
+
+}
+
+
+
+
+
+function renderBestResult(){
+
+
+
+  if(
+
+    bestTrainingScore<=0||
+
+    bestTrainingTime===null
+
+  ){
+
+
+
+    bestResultElement.classList.remove(
+
+      "show"
+
+    );
+
+
+
+    return;
+
+  }
+
+
+
+  bestResultElement.textContent=
+
+    "ТВОЙ РЕКОРД: "+
+
+    bestTrainingScore.toFixed(1)+
+
+    "% · "+
+
+    bestTrainingTime.toFixed(2)+
+
+    " С";
+
+
+
+  bestResultElement.classList.add(
+
+    "show"
+
+  );
+
+}
+
+
+
+
+
+function updatePersonalRecord(){
+
+
+
+  recordElement.classList.remove("show");
+
+
+
+  var firstAttempt=
+
+    bestTrainingScore===0;
+
+
+
+  if(isNewPersonalRecord()){
+
+
+
+    bestTrainingScore=currentScore;
+
+    bestTrainingTime=currentTime;
+
+
+
+    recordElement.classList.add("show");
+
+
+
+    if(!firstAttempt){
+
+
+
+      window.setTimeout(function(){
+
+        playApplause();
+
+      },180);
+
+    }
+
+  }
+
+
+
+  renderBestResult();
+
+}
+
+
+
+
+
+/* ===== CANVAS ===== */
+
+
+
+function resizeCanvas(){
+
+
+
+  var rect=
+
+    board.getBoundingClientRect();
+
+
+
+  if(!rect.width||!rect.height){
+
+    return;
+
+  }
+
+
+
+  var ratio=
+
+    window.devicePixelRatio||1;
+
+
+
+  canvas.width=
+
+    Math.round(rect.width*ratio);
+
+
+
+  canvas.height=
+
+    Math.round(rect.height*ratio);
+
+
+
+  canvas.style.width=
+
+    rect.width+"px";
+
+
+
+  canvas.style.height=
+
+    rect.height+"px";
+
+
+
+  ctx.setTransform(
+
+    ratio,0,0,ratio,0,0
+
+  );
+
+
+
+  redraw();
+
+}
+
+
+
+
+
+function getPizzaGeometry(){
+
+
+
+  var w=canvas.clientWidth;
+
+  var h=canvas.clientHeight;
+
+
+
+  return {
+
+    cx:w*0.503,
+
+    cy:h*0.504,
+
+    r:h*0.423
+
+  };
+
+}
+
+
+
+
+
+function getPointerPosition(event){
+
+
+
+  var rect=
+
+    canvas.getBoundingClientRect();
+
+
+
+  return {
+
+    x:event.clientX-rect.left,
+
+    y:event.clientY-rect.top
+
+  };
+
+}
+
+
+
+
+
+function lineCircleSegment(p1,p2,circle){
+
+
+
+  var dx=p2.x-p1.x;
+
+  var dy=p2.y-p1.y;
+
+
+
+  var length=
+
+    Math.sqrt(dx*dx+dy*dy);
+
+
+
+  if(length<0.001){
+
+    return null;
+
+  }
+
+
+
+  var ux=dx/length;
+
+  var uy=dy/length;
+
+
+
+  var vx=circle.cx-p1.x;
+
+  var vy=circle.cy-p1.y;
+
+
+
+  var projection=
+
+    vx*ux+vy*uy;
+
+
+
+  var closestX=
+
+    p1.x+projection*ux;
+
+
+
+  var closestY=
+
+    p1.y+projection*uy;
+
+
+
+  var distanceSquared=
+
+    Math.pow(
+
+      closestX-circle.cx,
+
+      2
+
+    )+
+
+    Math.pow(
+
+      closestY-circle.cy,
+
+      2
+
+    );
+
+
+
+  var radiusSquared=
+
+    circle.r*circle.r;
+
+
+
+  if(distanceSquared>radiusSquared){
+
+    return null;
+
+  }
+
+
+
+  var half=
+
+    Math.sqrt(
+
+      Math.max(
+
+        0,
+
+        radiusSquared-distanceSquared
+
+      )
+
+    );
+
+
+
+  return {
+
+
+
+    a:{
+
+      x:closestX-ux*half,
+
+      y:closestY-uy*half
+
+    },
+
+
+
+    b:{
+
+      x:closestX+ux*half,
+
+      y:closestY+uy*half
+
+    }
+
+  };
+
+}
+
+
+
+
+
+function drawCut(line,preview){
+
+
+
+  var circle=
+
+    getPizzaGeometry();
+
+
+
+  var segment=
+
+    lineCircleSegment(
+
+      line.a,
+
+      line.b,
+
+      circle
+
+    );
+
+
+
+  if(!segment){
+
+    return;
+
+  }
+
+
+
+  ctx.save();
+
+
+
+  ctx.beginPath();
+
+
+
+  ctx.arc(
+
+    circle.cx,
+
+    circle.cy,
+
+    circle.r,
+
+    0,
+
+    Math.PI*2
+
+  );
+
+
+
+  ctx.clip();
+
+
+
+  ctx.beginPath();
+
+
+
+  ctx.moveTo(
+
+    segment.a.x,
+
+    segment.a.y
+
+  );
+
+
+
+  ctx.lineTo(
+
+    segment.b.x,
+
+    segment.b.y
+
+  );
+
+
+
+  // V28: three layered strokes create a convincing incision while keeping
+  // the existing exact clipping and scoring geometry untouched.
+  ctx.lineCap="round";
+  ctx.lineJoin="round";
+  ctx.shadowColor=preview ? "rgba(48,25,12,.16)" : "rgba(31,16,8,.46)";
+  ctx.shadowBlur=preview ? 2 : 5;
+  ctx.shadowOffsetY=preview ? 0 : 1;
+  ctx.strokeStyle=preview ? "rgba(255,248,225,.66)" : "rgba(255,239,205,.93)";
+  ctx.lineWidth=preview ? 4.5 : 5.7;
+  ctx.stroke();
+  ctx.shadowColor="transparent";
+  ctx.shadowBlur=0;
+  ctx.shadowOffsetY=0;
+  ctx.strokeStyle=preview ? "rgba(81,44,23,.73)" : "rgba(48,25,15,.94)";
+  ctx.lineWidth=preview ? 2.1 : 2.9;
+  ctx.stroke();
+  ctx.strokeStyle=preview ? "rgba(248,197,133,.38)" : "rgba(255,215,156,.63)";
+  ctx.lineWidth=preview ? .65 : .9;
+  ctx.stroke();
+
+
+  ctx.restore();
+
+}
+
+
+
+
+
+function drawCutter(point){
+
+
+
+  if(!point){
+
+    return;
+
+  }
+
+
+
+  var wheelRadius=17;
+
+
+
+  ctx.save();
+
+
+
+  ctx.translate(
+
+    point.x,
+
+    point.y
+
+  );
+
+
+
+  ctx.rotate(cutterAngle);
+
+
+
+  ctx.beginPath();
+
+
+
+  ctx.moveTo(
+
+    wheelRadius-2,
+
+    0
+
+  );
+
+
+
+  ctx.lineTo(
+
+    wheelRadius+55,
+
+    0
+
+  );
+
+
+
+  ctx.strokeStyle="#171717";
+
+  ctx.lineWidth=12;
+
+  ctx.lineCap="round";
+
+  ctx.stroke();
+
+
+
+  ctx.beginPath();
+
+
+
+  ctx.arc(
+
+    0,0,
+
+    wheelRadius+2,
+
+    0,
+
+    Math.PI*2
+
+  );
+
+
+
+  ctx.fillStyle=
+
+    "rgba(20,20,20,0.22)";
+
+
+
+  ctx.fill();
+
+
+
+  var gradient=
+
+    ctx.createRadialGradient(
+
+      -6,-7,2,
+
+      0,0,wheelRadius
+
+    );
+
+
+
+  gradient.addColorStop(0,"#fff");
+
+  gradient.addColorStop(.35,"#d9d9d9");
+
+  gradient.addColorStop(.7,"#8d8d8d");
+
+  gradient.addColorStop(1,"#eee");
+
+
+
+  ctx.save();
+
+
+
+  ctx.rotate(wheelRotation);
+
+
+
+  ctx.beginPath();
+
+
+
+  ctx.arc(
+
+    0,0,
+
+    wheelRadius,
+
+    0,
+
+    Math.PI*2
+
+  );
+
+
+
+  ctx.fillStyle=gradient;
+
+  ctx.fill();
+
+
+
+  ctx.strokeStyle="#555";
+
+  ctx.lineWidth=1.5;
+
+  ctx.stroke();
+
+
+
+  for(var i=0;i<6;i++){
+
+
+
+    var angle=
+
+      i*Math.PI/3;
+
+
+
+    ctx.beginPath();
+
+    ctx.moveTo(0,0);
+
+
+
+    ctx.lineTo(
+
+      Math.cos(angle)*(wheelRadius-4),
+
+      Math.sin(angle)*(wheelRadius-4)
+
+    );
+
+
+
+    ctx.strokeStyle=
+
+      "rgba(80,80,80,0.55)";
+
+
+
+    ctx.lineWidth=1;
+
+
+
+    ctx.stroke();
+
+  }
+
+
+
+  ctx.beginPath();
+
+
+
+  ctx.arc(
+
+    0,0,4,
+
+    0,
+
+    Math.PI*2
+
+  );
+
+
+
+  ctx.fillStyle="#555";
+
+  ctx.fill();
+
+
+
+  ctx.restore();
+
+  ctx.restore();
+
+}
+
+
+
+
+
+function redraw(){
+
+
+
+  if(sliceAnimation){
+
+    return;
+
+  }
+
+
+
+  ctx.clearRect(
+
+    0,0,
+
+    canvas.clientWidth,
+
+    canvas.clientHeight
+
+  );
+
+
+
+  cuts.forEach(function(line){
+
+    drawCut(line,false);
+
+  });
+
+
+
+  if(
+
+    drawing&&
+
+    startPoint&&
+
+    currentPoint
+
+  ){
+
+
+
+    drawCut(
+
+      {
+
+        a:startPoint,
+
+        b:currentPoint
+
+      },
+
+      true
+
+    );
+
+
+
+    drawCutter(currentPoint);
+
+  }
+
+}
+
+
+
+
+
+/* ===== PIECES ===== */
+
+
+
+function makeCirclePolygon(circle){
+
+
+
+  var points=[];
+
+  var count=140;
+
+
+
+  for(var i=0;i<count;i++){
+
+
+
+    var a=
+
+      Math.PI*2*i/count;
+
+
+
+    points.push({
+
+
+
+      x:
+
+        circle.cx+
+
+        Math.cos(a)*circle.r,
+
+
+
+      y:
+
+        circle.cy+
+
+        Math.sin(a)*circle.r
+
+    });
+
+  }
+
+
+
+  return points;
+
+}
+
+
+
+
+
+function lineSide(point,line){
+
+
+
+  return (
+
+    (line.b.x-line.a.x)*
+
+    (point.y-line.a.y)
+
+    -
+
+    (line.b.y-line.a.y)*
+
+    (point.x-line.a.x)
+
+  );
+
+}
+
+
+
+
+
+function clipPolygonByLine(
+
+  poly,
+
+  line,
+
+  keepPositive
+
+){
+
+
+
+  if(!poly.length){
+
+    return [];
+
+  }
+
+
+
+  var output=[];
+
+
+
+  function side(p){
+
+    return lineSide(p,line);
+
+  }
+
+
+
+  function inside(p){
+
+
+
+    var s=side(p);
+
+
+
+    return keepPositive
+
+      ?s>=0
+
+      :s<=0;
+
+  }
+
+
+
+  function intersection(a,b){
+
+
+
+    var sa=side(a);
+
+    var sb=side(b);
+
+
+
+    var denom=sa-sb;
+
+
+
+    if(
+
+      Math.abs(denom)<0.000001
+
+    ){
+
+
+
+      return {
+
+        x:a.x,
+
+        y:a.y
+
+      };
+
+    }
+
+
+
+    var t=sa/denom;
+
+
+
+    return {
+
+
+
+      x:
+
+        a.x+
+
+        (b.x-a.x)*t,
+
+
+
+      y:
+
+        a.y+
+
+        (b.y-a.y)*t
+
+    };
+
+  }
+
+
+
+  for(var i=0;i<poly.length;i++){
+
+
+
+    var current=poly[i];
+
+
+
+    var previous=
+
+      poly[
+
+        (i+poly.length-1)%
+
+        poly.length
+
+      ];
+
+
+
+    var currentInside=
+
+      inside(current);
+
+
+
+    var previousInside=
+
+      inside(previous);
+
+
+
+    if(currentInside){
+
+
+
+      if(!previousInside){
+
+
+
+        output.push(
+
+          intersection(
+
+            previous,
+
+            current
+
+          )
+
+        );
+
+      }
+
+
+
+      output.push(current);
+
+
+
+    }else if(previousInside){
+
+
+
+      output.push(
+
+        intersection(
+
+          previous,
+
+          current
+
+        )
+
+      );
+
+    }
+
+  }
+
+
+
+  return output;
+
+}
+
+
+
+
+
+function polygonArea(poly){
+
+
+
+  if(poly.length<3){
+
+    return 0;
+
+  }
+
+
+
+  var sum=0;
+
+
+
+  for(var i=0;i<poly.length;i++){
+
+
+
+    var a=poly[i];
+
+
+
+    var b=
+
+      poly[
+
+        (i+1)%poly.length
+
+      ];
+
+
+
+    sum+=
+
+      a.x*b.y-
+
+      b.x*a.y;
+
+  }
+
+
+
+  return Math.abs(sum/2);
+
+}
+
+
+
+
+
+function polygonCenter(poly){
+
+
+
+  var x=0;
+
+  var y=0;
+
+
+
+  if(!poly.length){
+
+
+
+    return {
+
+      x:0,
+
+      y:0
+
+    };
+
+  }
+
+
+
+  for(var i=0;i<poly.length;i++){
+
+
+
+    x+=poly[i].x;
+
+    y+=poly[i].y;
+
+  }
+
+
+
+  return {
+
+
+
+    x:x/poly.length,
+
+    y:y/poly.length
+
+  };
+
+}
+
+
+
+
+
+function buildSlicePolygons(){
+
+
+
+  var circle=
+
+    getPizzaGeometry();
+
+
+
+  var base=
+
+    makeCirclePolygon(circle);
+
+
+
+  var pieces=[];
+
+
+
+  for(var mask=0;mask<8;mask++){
+
+
+
+    var poly=
+
+      base.slice();
+
+
+
+    for(var i=0;i<cuts.length;i++){
+
+
+
+      var positive=
+
+        (mask&(1<<i))!==0;
+
+
+
+      poly=
+
+        clipPolygonByLine(
+
+          poly,
+
+          cuts[i],
+
+          positive
+
+        );
+
+
+
+      if(poly.length<3){
+
+        break;
+
+      }
+
+    }
+
+
+
+    if(
+
+      poly.length>=3 &&
+
+      polygonArea(poly)>
+
+      Math.PI*
+
+      circle.r*
+
+      circle.r*
+
+      .004
+
+    ){
+
+
+
+      pieces.push(poly);
+
+    }
+
+  }
+
+
+
+  return pieces;
+
+}
+
+
+
+
+
+function drawPolygonPath(poly){
+
+
+
+  if(!poly.length){
+
+    return;
+
+  }
+
+
+
+  ctx.beginPath();
+
+
+
+  ctx.moveTo(
+
+    poly[0].x,
+
+    poly[0].y
+
+  );
+
+
+
+  for(var i=1;i<poly.length;i++){
+
+
+
+    ctx.lineTo(
+
+      poly[i].x,
+
+      poly[i].y
+
+    );
+
+  }
+
+
+
+  ctx.closePath();
+
+}
+
+
+
+
+
+function drawSeparatedPizza(progress,pieces){
+  // V43: each visible fragment follows the actual three user-drawn cut lines.
+  // Scoring and polygon construction are deliberately unchanged.
+  var w=canvas.clientWidth,h=canvas.clientHeight;
+  var circle=getPizzaGeometry();
+  ctx.clearRect(0,0,w,h);
+  if(!document.body.classList.contains('cp-playing'))ctx.drawImage(pizzaImage,0,0,w,h);
+  board.classList.add('cp-separated');
+  var opening=Math.max(0,Math.min(1,progress));
+  var distance=Math.min(21,circle.r*.095)*opening;
+  pieces.forEach(function(poly,index){
+    var center=polygonCenter(poly);
+    var dx=center.x-circle.cx,dy=center.y-circle.cy;
+    var len=Math.hypot(dx,dy);
+    // For central fragments, derive a stable direction from the actual vertices.
+    if(len<.5){var v=poly[index%poly.length];dx=v.x-circle.cx;dy=v.y-circle.cy;len=Math.hypot(dx,dy)}
+    if(len<.5){dx=Math.cos(index*2.4);dy=Math.sin(index*2.4);len=1}
+    var mx=dx/len*distance,my=dy/len*distance;
+    var turn=Math.max(-.045,Math.min(.045,(index%2?1:-1)*(.013+index*.004)))*opening;
+    ctx.save();
+    ctx.translate(mx,my);
+    ctx.translate(center.x,center.y);ctx.rotate(turn);ctx.translate(-center.x,-center.y);
+    // Shadows follow each individually clipped piece, not the whole pizza image.
+    drawPolygonPath(poly);
+    ctx.save();
+    ctx.shadowColor='rgba(35,17,8,.48)';
+    ctx.shadowBlur=8+opening*13;
+    ctx.shadowOffsetX=mx*.15;
+    ctx.shadowOffsetY=3+opening*5;
+    ctx.fillStyle='rgba(75,36,16,.22)';
+    ctx.fill();
+    ctx.restore();
+    ctx.save();
+    drawPolygonPath(poly);ctx.clip();
+    // Correct circle clipping in the transformed coordinate system.
+    ctx.beginPath();ctx.arc(circle.cx,circle.cy,circle.r*.995,0,Math.PI*2);ctx.clip();
+    ctx.drawImage(pizzaImage,0,0,w,h);
+    ctx.restore();
+    // Subtle toasted cut edge, visible only once the slices pull apart.
+    drawPolygonPath(poly);
+    ctx.strokeStyle='rgba(83,42,19,'+(.25+.43*opening)+')';
+    ctx.lineWidth=1.1+opening*.65;
+    ctx.lineJoin='round';ctx.stroke();
+    ctx.restore();
+  });
+}
+
+
+
+
+function showPieceCounter(number){
+
+
+
+  pieceCount.classList.remove(
+
+    "show",
+
+    "perfect"
+
+  );
+
+
+
+  pieceCount.textContent=
+
+    number+"/6";
+
+
+
+  if(number===6){
+
+
+
+    pieceCount.classList.add(
+
+      "perfect"
+
+    );
+
+
+
+    board.classList.remove(
+
+      "cp-perfect-board"
+
+    );
+
+
+
+    void board.offsetWidth;
+
+
+
+    board.classList.add(
+
+      "cp-perfect-board"
+
+    );
+
+
+
+    hapticPerfect();
+
+
+
+  }else{
+
+
+
+    hapticResult();
+
+  }
+
+
+
+  void pieceCount.offsetWidth;
+
+
+
+  pieceCount.classList.add(
+
+    "show"
+
+  );
+
+}
+
+
+
+
+
+function hidePieceCounter(){
+
+
+
+  pieceCount.classList.remove(
+
+    "show",
+
+    "perfect"
+
+  );
+
+
+
+  board.classList.remove(
+
+    "cp-perfect-board"
+
+  );
+
+
+
+  pieceCount.style.display=
+
+    "none";
+
+
+
+  window.setTimeout(
+
+    function(){
+
+
+
+      pieceCount.style.display="";
+
+
+
+    },
+
+    20
+
+  );
+
+}
+
+
+
+
+
+function animatePizzaSlices(callback){
+
+
+
+  sliceAnimation=true;
+
+
+
+  var pieces=
+
+    buildSlicePolygons();
+
+
+
+  var numberOfPieces=
+
+    pieces.length;
+
+
+
+  pizzaImage.style.visibility=
+
+    "hidden";
+
+
+
+  var duration=1180;
+
+  var start=null;
+
+
+
+  function frame(time){
+
+
+
+    if(start===null){
+
+      start=time;
+
+    }
+
+
+
+    var p=
+
+      (time-start)/
+
+      duration;
+
+
+
+    if(p>1){
+
+      p=1;
+
+    }
+
+
+
+    // Fast initial separation, a tiny overshoot, then a soft return.
+    // Quick initial opening, gentle settling, fully separated at the end.
+    var eased = p < .68
+      ? 1.055*(1-Math.pow(1-p/.68,3))
+      : 1 + .055*Math.pow(1-(p-.68)/.32,2);
+
+    drawSeparatedPizza(
+
+      eased,
+
+      pieces
+
+    );
+
+
+
+    if(p<1){
+
+
+
+      requestAnimationFrame(
+
+        frame
+
+      );
+
+
+
+    }else{
+
+
+
+      showPieceCounter(
+
+        numberOfPieces
+
+      );
+
+
+
+      window.setTimeout(
+
+        function(){
+
+
+
+          hidePieceCounter();
+
+
+
+          pizzaImage.style.visibility=
+
+            "visible";
+
+
+
+          sliceAnimation=false;
+
+
+
+          ctx.clearRect(
+
+            0,0,
+
+            canvas.clientWidth,
+
+            canvas.clientHeight
+
+          );
+
+
+
+          if(callback){
+
+            callback();
+
+          }
+
+
+
+        },
+
+        1300
+
+      );
+
+    }
+
+  }
+
+
+
+  requestAnimationFrame(frame);
+
+}
+
+
+
+
+
+/* V42 — lightweight cut feedback, isolated from scoring and pointer logic. */
+function capitoCutImpact(a,b,cutNumber){
+  var host=document.getElementById('cp-board');
+  if(!host||!a||!b)return;
+  var x=(a.x+b.x)/2, y=(a.y+b.y)/2;
+  var burst=document.createElement('div');
+  burst.className='cp-v42-cut-impact';
+  burst.style.left=x+'px'; burst.style.top=y+'px';
+  burst.style.setProperty('--cut-angle',Math.atan2(b.y-a.y,b.x-a.x)+'rad');
+  burst.innerHTML='<i></i><b></b><em></em>';
+  host.appendChild(burst);
+  burst.addEventListener('animationend',function(){burst.remove()},{once:true});
+  setTimeout(function(){burst.remove()},650);
+  // The pizza responds to each stroke, without moving the scoring canvas.
+  host.classList.remove('cp-v42-pizza-tap');
+  void host.offsetWidth;
+  host.classList.add('cp-v42-pizza-tap');
+  clearTimeout(host._capitoTapTimer);
+  host._capitoTapTimer=setTimeout(function(){host.classList.remove('cp-v42-pizza-tap')},300);
+}
+
+/* ===== CUTTING ===== */
+
+
+
+function pointerDown(event){
+
+  if(event.cancelable) event.preventDefault();
+
+
+  if(
+
+    cuts.length>=3||
+
+    resultStarted||
+
+    timerFinished
+
+  ){
+
+    return;
+
+  }
+
+
+
+  initAudio();
+
+
+
+  if(!timerStarted){
+
+    startTimer();
+
+  }
+
+
+
+  drawing=true;
+
+
+
+  startPoint=
+
+    getPointerPosition(event);
+
+
+
+  currentPoint=
+
+    startPoint;
+
+
+
+  lastPointer=
+
+    startPoint;
+
+
+
+  lastCutSoundTime=0;
+
+  lastCutVibrationTime=0;
+
+
+
+  board.classList.add(
+
+    "cp-cut-touch"
+
+  );
+
+
+
+  try{
+
+
+
+    canvas.setPointerCapture(
+
+      event.pointerId
+
+    );
+
+
+
+  }catch(e){}
+
+
+
+  redraw();
+
+}
+
+
+
+
+
+function pointerMove(event){
+
+  if(event.cancelable) event.preventDefault();
+
+
+  if(
+
+    !drawing||
+
+    timerFinished
+
+  ){
+
+    return;
+
+  }
+
+
+
+  var point=
+
+    getPointerPosition(event);
+
+
+
+  if(lastPointer){
+
+
+
+    var dx=
+
+      point.x-lastPointer.x;
+
+
+
+    var dy=
+
+      point.y-lastPointer.y;
+
+
+
+    var distance=
+
+      Math.sqrt(
+
+        dx*dx+
+
+        dy*dy
+
+      );
+
+
+
+    if(distance>0.2){
+
+
+
+      cutterAngle=
+
+        Math.atan2(
+
+          dy,
+
+          dx
+
+        )+
+
+        Math.PI;
+
+
+
+      wheelRotation+=
+
+        distance/17;
+
+
+
+      if(distance>1.2){
+
+
+
+        soundCutMovement(
+
+          distance
+
+        );
+
+
+
+        hapticCutMovement();
+
+      }
+
+    }
+
+  }
+
+
+
+  currentPoint=point;
+
+  lastPointer=point;
+
+
+
+  redraw();
+
+}
+
+
+
+
+
+function pointerUp(event){
+
+  if(event.cancelable) event.preventDefault();
+
+
+  if(
+
+    !drawing||
+
+    timerFinished
+
+  ){
+
+    return;
+
+  }
+
+
+
+  drawing=false;
+
+
+
+  board.classList.remove(
+
+    "cp-cut-touch"
+
+  );
+
+
+
+  var endPoint=
+
+    getPointerPosition(event);
+
+
+
+  var dx=
+
+    endPoint.x-
+
+    startPoint.x;
+
+
+
+  var dy=
+
+    endPoint.y-
+
+    startPoint.y;
+
+
+
+  var distance=
+
+    Math.sqrt(
+
+      dx*dx+
+
+      dy*dy
+
+    );
+
+
+
+  if(distance>15){
+
+
+
+    cpV44CutFlash(endPoint);
+    // V42: physical-looking impact at the end of each real cut.
+    capitoCutImpact(startPoint,endPoint,cuts.length+1);
+
+    cuts.push({
+
+
+
+      a:{
+
+        x:startPoint.x,
+
+        y:startPoint.y
+
+      },
+
+
+
+      b:{
+
+        x:endPoint.x,
+
+        y:endPoint.y
+
+      }
+
+    });
+
+
+
+    if(cuts.length===3){
+
+
+
+      stopTimer();
+
+
+
+      hapticThirdCut();
+
+      soundThirdCut();
+
+
+
+    }else{
+
+
+
+      hapticCut();
+
+      soundCutFinish();
+
+    }
+
+  }
+
+
+
+  startPoint=null;
+
+  currentPoint=null;
+
+  lastPointer=null;
+
+
+
+  updateCutCounter();
+
+  redraw();
+
+
+
+  if(cuts.length===3){
+
+
+
+    resultStarted=true;
+
+
+
+    window.setTimeout(
+
+      function(){
+
+
+
+        animatePizzaSlices(
+
+          calculateResult
+
+        );
+
+
+
+      },
+
+      260
+
+    );
+
+  }
+
+}
+
+
+
+
+
+function updateCutCounter(){
+
+
+
+  cutCounter.classList.remove(
+
+    "cp-pulse"
+
+  );
+
+
+
+  if(cuts.length>=3){
+
+
+
+    cutCounter.textContent=
+
+      "3 РАЗРЕЗА ГОТОВЫ";
+
+
+
+  }else{
+
+
+
+    cutCounter.textContent=
+
+      "РАЗРЕЗ "+
+
+      (cuts.length+1)+
+
+      " ИЗ 3";
+
+  }
+
+
+
+  var dots=document.querySelectorAll(".cp-game-dot");
+  for(var di=0;di<dots.length;di++){dots[di].classList.toggle("filled",di<cuts.length);}
+  void cutCounter.offsetWidth;
+
+
+
+  cutCounter.classList.add(
+
+    "cp-pulse"
+
+  );
+
+}
+
+
+
+
+
+/* ===== SCORING ===== */
+
+
+
+function measurePieces(){
+
+
+
+  var circle=
+
+    getPizzaGeometry();
+
+
+
+  var counts={};
+
+  var total=0;
+
+
+
+  var step=
+
+    Math.max(
+
+      2,
+
+      circle.r/95
+
+    );
+
+
+
+  for(
+
+    var y=circle.cy-circle.r;
+
+    y<=circle.cy+circle.r;
+
+    y+=step
+
+  ){
+
+
+
+    for(
+
+      var x=circle.cx-circle.r;
+
+      x<=circle.cx+circle.r;
+
+      x+=step
+
+    ){
+
+
+
+      var dx=
+
+        x-circle.cx;
+
+
+
+      var dy=
+
+        y-circle.cy;
+
+
+
+      if(
+
+        dx*dx+
+
+        dy*dy>
+
+        circle.r*
+
+        circle.r
+
+      ){
+
+        continue;
+
+      }
+
+
+
+      total++;
+
+
+
+      var mask=0;
+
+
+
+      for(var i=0;i<cuts.length;i++){
+
+
+
+        if(
+
+          lineSide(
+
+            {x:x,y:y},
+
+            cuts[i]
+
+          )>=0
+
+        ){
+
+
+
+          mask|=
+
+            (1<<i);
+
+        }
+
+      }
+
+
+
+      if(!counts[mask]){
+
+        counts[mask]=0;
+
+      }
+
+
+
+      counts[mask]++;
+
+    }
+
+  }
+
+
+
+  var pieces=[];
+
+
+
+  Object.keys(
+
+    counts
+
+  ).forEach(
+
+    function(key){
+
+
+
+      var fraction=
+
+        counts[key]/
+
+        total;
+
+
+
+      if(fraction>.004){
+
+
+
+        pieces.push(
+
+          fraction
+
+        );
+
+      }
+
+    }
+
+  );
+
+
+
+  pieces.sort(
+
+    function(a,b){
+
+      return b-a;
+
+    }
+
+  );
+
+
+
+  return pieces;
+
+}
+
+
+
+
+
+function calculateScore(pieces){
+
+
+
+  var target=1/6;
+
+
+
+  var sorted=
+
+    pieces.slice();
+
+
+
+  sorted.sort(
+
+    function(a,b){
+
+
+
+      return (
+
+        Math.abs(a-target)-
+
+        Math.abs(b-target)
+
+      );
+
+    }
+
+  );
+
+
+
+  var selected=
+
+    sorted.slice(0,6);
+
+
+
+  while(
+
+    selected.length<6
+
+  ){
+
+    selected.push(0);
+
+  }
+
+
+
+  var error=0;
+
+
+
+  for(var i=0;i<6;i++){
+
+
+
+    error+=
+
+      Math.abs(
+
+        selected[i]-
+
+        target
+
+      );
+
+  }
+
+
+
+  error=
+
+    error/
+
+    6/
+
+    target;
+
+
+
+  var score=
+
+    100*
+
+    (1-error);
+
+
+
+  var regionPenalty=
+
+    Math.abs(
+
+      pieces.length-6
+
+    )*
+
+    12;
+
+
+
+  score-=
+
+    regionPenalty;
+
+
+
+  if(
+
+    pieces.length!==6
+
+  ){
+
+
+
+    score=
+
+      Math.min(
+
+        score,
+
+        88
+
+      );
+
+  }
+
+
+
+  if(score<0){
+
+    score=0;
+
+  }
+
+
+
+  if(score>100){
+
+    score=100;
+
+  }
+
+
+
+  return (
+
+    Math.round(
+
+      score*10
+
+    )/
+
+    10
+
+  );
+
+}
+
+
+
+
+
+/* ===== RESULT ===== */
+
+
+
+function cpV29UpdateResult(){
+  var fill=document.getElementById('cp-v29-fill');
+  var badge=document.getElementById('cp-v29-badge');
+  var caption=document.getElementById('cp-v29-caption');
+  if(!fill||!badge||!caption)return;
+  var score=Math.max(0,Math.min(100,Number(currentScore)||0));
+  fill.style.transition='none';
+  fill.style.width='0%';
+  void fill.offsetWidth;
+  fill.style.transition='';
+  requestAnimationFrame(function(){requestAnimationFrame(function(){fill.style.width=score+'%';});});
+  if(score>=99.95){badge.textContent='ИДЕАЛЬНО';caption.textContent='Идеальная точность! Настоящий мастер пиццы.';}
+  else if(score>=95){badge.textContent='ПРЕВОСХОДНО';caption.textContent='Почти идеальные шесть кусочков!';}
+  else if(score>=85){badge.textContent='ОЧЕНЬ ХОРОШО';caption.textContent='Совсем немного до идеального результата.';}
+  else if(score>=70){badge.textContent='ХОРОШО';caption.textContent='Попробуй сделать кусочки ещё ровнее.';}
+  else {badge.textContent='ЕСТЬ КУДА РАСТИ';caption.textContent='Попробуй ещё раз — каждый разрез важен!';}
+}
+(function(){
+  var button=document.getElementById('cp-v29-ranking');
+  if(!button)return;
+  button.addEventListener('click',function(){
+    var ranking=document.getElementById('cp-leaderboard');
+    if(ranking)ranking.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+})();
+
+async function calculateResult(){
+
+
+
+  var pieces=
+
+    measurePieces();
+
+
+
+  currentScore=
+
+    calculateScore(pieces);
+
+
+
+  scoreElement.textContent=
+
+    "0.0%";
+
+
+
+  resultTimeElement.textContent=
+
+    "ВРЕМЯ "+
+
+    currentTime.toFixed(2)+
+
+    " СЕК";
+
+
+
+  scoreElement.classList.remove(
+
+    "cp-score-finish",
+
+    "cp-score-great",
+
+    "cp-score-warrior",
+
+    "cp-score-perfect"
+
+  );
+
+
+
+  resultMessage.classList.remove(
+
+    "warrior",
+
+    "perfect"
+
+  );
+
+
+
+  resultMessage.textContent="";
+
+  competitionElement.textContent="";
+
+
+
+  resultMessage.style.opacity="0";
+
+  resultMessage.style.transform=
+
+    "translateY(8px)";
+
+
+
+  competitionElement.style.opacity="0";
+
+  competitionElement.style.transform=
+
+    "translateY(8px)";
+
+
+
+  resultActions.style.opacity="0";
+
+  resultActions.style.transform=
+
+    "translateY(10px)";
+
+
+
+  recordElement.classList.remove(
+
+    "show"
+
+  );
+
+
+
+  bestResultElement.classList.remove(
+
+    "show"
+
+  );
+
+
+
+  showScreen(
+
+    resultScreen
+
+  );
+
+  cpV29UpdateResult();
+  if(typeof cpV45ResetResult === "function") cpV45ResetResult();
+  cpV44PerfectResult(currentScore);
+  if(typeof cpV32Celebrate==='function')cpV32Celebrate(currentScore);
+
+
+
+  resultActions.style.display=
+
+    "grid";
+
+
+
+  lockButton.disabled=false;
+
+  againButton.disabled=false;
+
+
+
+  hideLockError();
+
+
+
+  var leaderboardPromise=
+
+    loadLeaderboard();
+
+
+
+  var duration=900;
+
+  var start=null;
+
+
+
+  function animateScore(time){
+
+
+
+    if(start===null){
+
+      start=time;
+
+    }
+
+
+
+    var progress=
+
+      (time-start)/
+
+      duration;
+
+
+
+    if(progress>1){
+
+      progress=1;
+
+    }
+
+
+
+    var eased=
+
+      1-
+
+      Math.pow(
+
+        1-progress,
+
+        3
+
+      );
+
+
+
+    var displayed=
+
+      currentScore*
+
+      eased;
+
+
+
+    scoreElement.textContent=
+
+      displayed.toFixed(1)+
+
+      "%";
+
+
+
+    if(progress<1){
+
+
+
+      requestAnimationFrame(
+
+        animateScore
+
+      );
+
+
+
+    }else{
+
+
+
+      scoreElement.textContent=
+
+        currentScore.toFixed(1)+
+
+        "%";
+
+
+
+      if(currentScore>=100){
+
+
+
+        scoreElement.classList.add(
+
+          "cp-score-perfect"
+
+        );
+
+
+
+        hapticPerfect();
+
+        soundUltraPerfect();
+
+        launchConfetti();
+
+
+
+      }else if(currentScore>=95){
+
+
+
+        scoreElement.classList.add(
+
+          "cp-score-warrior"
+
+        );
+
+
+
+        hapticPerfect();
+
+        soundPerfectResult();
+
+
+
+      }else if(currentScore>=92){
+
+
+
+        scoreElement.classList.add(
+
+          "cp-score-great"
+
+        );
+
+
+
+        hapticPerfect();
+
+        soundGreatResult();
+
+
+
+      }else{
+
+
+
+        scoreElement.classList.add(
+
+          "cp-score-finish"
+
+        );
+
+
+
+        hapticResult();
+
+        soundResult();
+
+      }
+
+
+
+      finishResultReveal();
+
+    }
+
+  }
+
+
+
+
+
+  async function finishResultReveal(){
+
+
+
+    await leaderboardPromise;
+
+
+
+    updateResultMessage();
+
+    updateCompetitionMessage();
+    if(typeof cpV45RevealResult === "function") cpV45RevealResult();
+
+
+
+    resultMessage.style.transition=
+
+      "opacity .28s ease, transform .28s ease";
+
+
+
+    requestAnimationFrame(
+
+      function(){
+
+
+
+        resultMessage.style.opacity="1";
+
+
+
+        resultMessage.style.transform=
+
+          "translateY(0)";
+
+      }
+
+    );
+
+
+
+    window.setTimeout(
+
+      function(){
+
+
+
+        updatePersonalRecord();
+
+
+
+      },
+
+      180
+
+    );
+
+
+
+    window.setTimeout(
+
+      function(){
+
+
+
+        competitionElement.style.transition=
+
+          "opacity .3s ease, transform .3s ease";
+
+
+
+        competitionElement.style.opacity="1";
+
+
+
+        competitionElement.style.transform=
+
+          "translateY(0)";
+
+
+
+      },
+
+      300
+
+    );
+
+
+
+    window.setTimeout(
+
+      function(){
+
+
+
+        resultActions.style.transition=
+
+          "opacity .32s ease, transform .32s ease";
+
+
+
+        resultActions.style.opacity="1";
+
+
+
+        resultActions.style.transform=
+
+          "translateY(0)";
+
+
+
+      },
+
+      520
+
+    );
+
+  }
+
+
+
+  requestAnimationFrame(
+
+    animateScore
+
+  );
+
+}
+
+
+
+
+
+/* ===== RESET ===== */
+
+
+
+function resetGame(){
+
+
+
+  cuts=[];
+
+
+
+  drawing=false;
+
+
+
+  startPoint=null;
+
+  currentPoint=null;
+
+  lastPointer=null;
+
+
+
+  resultStarted=false;
+
+  sliceAnimation=false;
+
+
+
+  currentScore=0;
+
+
+
+  cutterAngle=0;
+
+  wheelRotation=0;
+
+
+
+  lastCutSoundTime=0;
+
+  lastCutVibrationTime=0;
+
+
+
+  resetTimer();
+
+
+
+  pizzaImage.style.visibility=
+
+    "visible";
+
+
+
+  board.classList.remove(
+
+    "cp-cut-touch",
+
+    "cp-perfect-board"
+
+  );
+
+
+
+  hidePieceCounter();
+
+
+
+  resultMessage.classList.remove(
+
+    "warrior",
+
+    "perfect"
+
+  );
+
+
+
+  scoreElement.classList.remove(
+
+    "cp-score-finish",
+
+    "cp-score-great",
+
+    "cp-score-warrior",
+
+    "cp-score-perfect"
+
+  );
+
+
+
+  resultMessage.style.transition=
+
+    "none";
+
+
+
+  resultMessage.style.opacity="";
+
+  resultMessage.style.transform="";
+
+
+
+  competitionElement.style.transition=
+
+    "none";
+
+
+
+  competitionElement.style.opacity="";
+
+  competitionElement.style.transform="";
+
+
+
+  resultActions.style.transition=
+
+    "none";
+
+
+
+  resultActions.style.opacity="";
+
+  resultActions.style.transform="";
+
+
+
+  recordElement.classList.remove(
+
+    "show"
+
+  );
+
+
+
+  bestResultElement.classList.remove(
+
+    "show"
+
+  );
+
+
+
+  lockButton.disabled=false;
+
+
+
+  lockButton.textContent=
+
+    "ЗАФИКСИРОВАТЬ РЕЗУЛЬТАТ";
+
+
+
+  updateCutCounter();
+
+
+
+  showScreen(
+
+    gameScreen
+
+  );
+
+
+
+  window.setTimeout(
+
+    function(){
+
+
+
+      resizeCanvas();
+
+
+
+    },
+
+    100
+
+  );
+
+}
+
+
+
+
+
+/* ===== TELEGRAM ===== */
+
+
+
+function resetTelegramBox(){
+
+
+
+  telegramButton.disabled=false;
+
+
+
+  telegramButton.textContent=
+
+    "✈ ПОДКЛЮЧИТЬ TELEGRAM";
+
+
+
+  telegramStatus.textContent="";
+
+
+
+  telegramStatus.classList.remove(
+
+    "show"
+
+  );
+
+}
+
+
+
+
+
+async function connectTelegram(){
+
+
+
+  initAudio();
+
+  hapticTap();
+
+
+
+  if(!playerPhone){
+
+
+
+    telegramStatus.textContent=
+
+      "Не удалось определить номер телефона.";
+
+
+
+    telegramStatus.classList.add(
+
+      "show"
+
+    );
+
+
+
+    return;
+
+  }
+
+
+
+  telegramButton.disabled=true;
+
+
+
+  telegramButton.textContent=
+
+    "ПОДКЛЮЧАЕМ...";
+
+
+
+  telegramStatus.classList.remove(
+
+    "show"
+
+  );
+
+
+
+  telegramStatus.textContent="";
+
+
+
+  try{
+
+
+
+    var data=
+
+      await rpc(
+
+        "create_pizza_telegram_link",
+
+        {
+
+          p_phone:
+
+            playerPhone
+
+        }
+
+      );
+
+
+
+    if(
+
+      !data||
+
+      data.success!==true
+
+    ){
+
+
+
+      throw new Error(
+
+        "Telegram link error"
+
+      );
+
+    }
+
+
+
+    if(
+
+      data.connected===true
+
+    ){
+
+
+
+      telegramButton.textContent=
+
+        "✓ TELEGRAM ПОДКЛЮЧЁН";
+
+
+
+      telegramButton.disabled=true;
+
+
+
+      telegramStatus.textContent=
+
+        "Если ты попадёшь в TOP-3, сообщение придёт в Telegram.";
+
+
+
+      telegramStatus.classList.add(
+
+        "show"
+
+      );
+
+
+
+      return;
+
+    }
+
+
+
+    if(data.telegram_url){
+
+
+
+      telegramButton.textContent=
+
+        "ОТКРЫВАЕМ TELEGRAM...";
+
+
+
+      telegramStatus.textContent=
+
+        "В Telegram нажми «Начать», чтобы завершить подключение.";
+
+
+
+      telegramStatus.classList.add(
+
+        "show"
+
+      );
+
+
+
+      window.setTimeout(
+
+        function(){
+
+
+
+          window.location.href=
+
+            data.telegram_url;
+
+
+
+        },
+
+        350
+
+      );
+
+
+
+      return;
+
+    }
+
+
+
+    throw new Error(
+
+      "Telegram URL missing"
+
+    );
+
+
+
+  }catch(error){
+
+
+
+    console.error(error);
+
+
+
+    telegramButton.disabled=false;
+
+
+
+    telegramButton.textContent=
+
+      "✈ ПОДКЛЮЧИТЬ TELEGRAM";
+
+
+
+    telegramStatus.textContent=
+
+      "Не удалось открыть Telegram. Попробуй ещё раз.";
+
+
+
+    telegramStatus.classList.add(
+
+      "show"
+
+    );
+
+  }
+
+}
+
+
+
+
+
+/* ===== LOCK SCORE ===== */
+
+
+
+async function lockScore(){
+
+
+
+  if(
+
+    timerFinished &&
+
+    currentTime>=GAME_LIMIT &&
+
+    cuts.length<3
+
+  ){
+
+    return;
+
+  }
+
+
+
+  initAudio();
+
+
+
+  hapticLock();
+
+  soundLock();
+
+
+
+  hideLockError();
+
+
+
+  lockButton.disabled=true;
+
+  againButton.disabled=true;
+
+
+
+  lockButton.textContent=
+
+    "ФИКСИРУЕМ...";
+
+
+
+  try{
+
+
+
+    var data=
+
+      await rpc(
+
+        "lock_pizza_weekly_score",
+
+        {
+
+          p_name:
+
+            playerName,
+
+
+
+          p_phone:
+
+            playerPhone,
+
+
+
+          p_score:
+
+            currentScore,
+
+
+
+          p_time:
+
+            currentTime
+
+        }
+
+      );
+
+
+
+    if(
+
+      data&&
+
+      data.success===true
+
+    ){
+
+
+
+      var place=
+
+        Number(
+
+          data.place||0
+
+        );
+
+
+
+      if(place>0){
+
+
+
+        finalBig.textContent=
+
+          currentScore.toFixed(1)+
+
+          "% · "+
+
+          currentTime.toFixed(2)+
+
+          " сек — сейчас это "+
+
+          place+
+
+          " место.";
+
+
+
+      }else{
+
+
+
+        finalBig.textContent=
+
+          currentScore.toFixed(1)+
+
+          "% · "+
+
+          currentTime.toFixed(2)+
+
+          " сек зафиксировано.";
+
+      }
+
+
+
+      hapticPerfect();
+
+
+
+      resetTelegramBox();
+
+
+
+      await loadLeaderboard();
+
+
+
+      showScreen(
+
+        finalScreen
+
+      );
+
+
+
+      return;
+
+    }
+
+
+
+    if(
+
+      data&&
+
+      data.reason===
+
+      "already_locked"
+
+    ){
+
+
+
+      showLockError(
+
+        "Результат с этим номером телефона уже зафиксирован на этой неделе."
+
+      );
+
+
+
+    }else if(
+
+      data&&
+
+      data.reason===
+
+      "invalid_time"
+
+    ){
+
+
+
+      showLockError(
+
+        "Не удалось сохранить время попытки. Попробуй ещё раз."
+
+      );
+
+
+
+    }else{
+
+
+
+      showLockError(
+
+        "Не удалось зафиксировать результат. Попробуй ещё раз."
+
+      );
+
+    }
+
+
+
+  }catch(error){
+
+
+
+    console.error(error);
+
+
+
+    showLockError(
+
+      "Не удалось связаться с сервером. Проверь интернет и попробуй ещё раз."
+
+    );
+
+  }
+
+
+
+  lockButton.disabled=false;
+
+  againButton.disabled=false;
+
+
+
+  lockButton.textContent=
+
+    "ЗАФИКСИРОВАТЬ "+
+
+    currentScore.toFixed(1)+
+
+    "% · "+
+
+    currentTime.toFixed(2)+
+
+    " С";
+
+}
+
+
+
+
+
+/* ===== START ===== */
+
+
+
+async function startGame(){
+
+
+
+  initAudio();
+
+  hapticTap();
+
+
+
+  hideRegisterError();
+
+
+
+  var name=
+
+    nameInput.value.trim();
+
+
+
+  var phone=
+
+    normalizePhone(
+
+      phoneInput.value
+
+    );
+
+
+
+  if(name.length<2){
+
+
+
+    showRegisterError(
+
+      "Напиши имя или ник."
+
+    );
+
+
+
+    return;
+
+  }
+
+
+
+  if(phone.length<10){
+
+
+
+    showRegisterError(
+
+      "Проверь номер телефона."
+
+    );
+
+
+
+    return;
+
+  }
+
+
+
+  if(!consentInput.checked){
+
+
+
+    showRegisterError(
+
+      "Нужно согласие на обработку данных."
+
+    );
+
+
+
+    return;
+
+  }
+
+
+
+  playerName=name;
+
+  playerPhone=phone;
+
+
+
+  startButton.disabled=true;
+
+
+
+  startButton.textContent=
+
+    "ПРОВЕРЯЕМ...";
+
+
+
+  var existing=
+
+    await checkExistingEntry();
+
+
+
+  startButton.disabled=false;
+
+
+
+  startButton.textContent=
+
+    "НАЧАТЬ ИГРУ";
+
+
+
+  if(
+
+    existing&&
+
+    existing.locked===true
+
+  ){
+
+
+
+    var oldScore=
+
+      Number(
+
+        existing.score||0
+
+      );
+
+
+
+    finalBig.textContent=
+
+      "Твой результат этой недели — "+
+
+      oldScore.toFixed(1)+
+
+      "%.";
+
+
+
+    resetTelegramBox();
+
+
+
+    await loadLeaderboard();
+
+
+
+    showScreen(
+
+      finalScreen
+
+    );
+
+
+
+    return;
+
+  }
+
+
+
+  bestTrainingScore=0;
+
+  bestTrainingTime=null;
+
+
+
+  resetGame();
+
+}
+
+
+
+
+
+/* ===== EVENTS ===== */
+
+
+
+startButton.addEventListener(
+
+  "click",
+
+  startGame
+
+);
+
+
+
+againButton.addEventListener(
+
+  "click",
+
+  function(){
+
+
+
+    initAudio();
+
+    hapticTap();
+
+
+
+    resetGame();
+
+  }
+
+);
+
+
+
+lockButton.addEventListener(
+
+  "click",
+
+  lockScore
+
+);
+
+
+
+telegramButton.addEventListener(
+
+  "click",
+
+  connectTelegram
+
+);
+
+
+
+canvas.addEventListener(
+
+  "pointerdown",
+
+  pointerDown
+
+);
+
+
+
+canvas.addEventListener(
+
+  "pointermove",
+
+  pointerMove
+
+);
+
+
+
+canvas.addEventListener(
+
+  "pointerup",
+
+  pointerUp
+
+);
+
+
+
+canvas.addEventListener(
+
+  "pointercancel",
+
+  pointerUp
+
+);
+
+
+
+pizzaImage.addEventListener(
+
+  "load",
+
+  resizeCanvas
+
+);
+
+
+
+window.addEventListener(
+
+  "resize",
+
+  function(){
+
+
+
+    if(
+
+      gameScreen.classList.contains(
+
+        "active"
+
+      )
+
+    ){
+
+
+
+      resizeCanvas();
+
+    }
+
+  }
+
+);
+
+
+
+if(pizzaImage.complete){
+
+
+
+  window.setTimeout(
+
+    resizeCanvas,
+
+    100
+
+  );
+
+}
+
+
+
+loadLeaderboard();
+
+
+
+})();
+
+</script>
+
+
+<script id="capito-v2-enhancements">
+(function(){
+  var btn=document.getElementById('cp-v2-sound');
+  var muted=false;
+  if(btn){btn.addEventListener('click',function(){muted=!muted; btn.textContent=muted?'🔇':'🔊'; btn.setAttribute('aria-label',muted?'Звук выключен':'Звук включен'); try{if(window.cpSetMuted) window.cpSetMuted(muted)}catch(e){} });}
+  var lastSecond=null;
+  setInterval(function(){
+    if(muted) return;
+    var el=document.getElementById('cp-timer'); if(!el||!el.classList.contains('running')){lastSecond=null;return;}
+    var n=parseFloat(el.textContent); if(!isFinite(n)||n>3||n<=0)return;
+    var sec=Math.ceil(n); if(sec===lastSecond)return; lastSecond=sec;
+    try{ if(typeof makeTone==='function'){makeTone(sec===1?880:660,.055,.055,'sine',0);} }catch(e){}
+  },80);
+})();
+</script>
+
+<script id="capito-v9-reset-slices">
+(function(){
+ var game=document.getElementById('cp-game'), board=document.getElementById('cp-board');
+ if(!game||!board)return;
+ new MutationObserver(function(){if(game.classList.contains('active'))board.classList.remove('cp-separated');}).observe(game,{attributes:true,attributeFilter:['class']});
+})();
+</script>
+
+<!-- V19: revised board proportions and layering. -->
+<!-- V16: transparent pizza photo is already correctly cropped; render it 1:1 with the scoring canvas. -->
+<style id="capito-v16-pizza-alignment">
+@media (max-width:600px) {
+  body.cp-playing #cp-board { position:relative!important; overflow:visible!important; }
+  body.cp-playing #cp-board #cp-pizza-image {
+    display:block!important;
+    position:absolute!important;
+    inset:0!important;
+    top:0!important;
+    right:0!important;
+    bottom:0!important;
+    left:0!important;
+    width:100%!important;
+    height:100%!important;
+    min-width:0!important;
+    max-width:none!important;
+    margin:0!important;
+    padding:0!important;
+    object-fit:fill!important;
+    object-position:center center!important;
+    clip-path:none!important;
+    -webkit-clip-path:none!important;
+    border-radius:0!important;
+    transform:none!important;
+    filter:drop-shadow(0 7px 7px rgba(54,29,12,.22))!important;
+    pointer-events:none!important;
+  }
+  body.cp-playing #cp-board.cp-separated #cp-pizza-image { visibility:hidden!important; }
+  body.cp-playing #cp-board #cp-canvas {
+    position:absolute!important;
+    inset:0!important;
+    width:100%!important;
+    height:100%!important;
+    z-index:2!important;
+  }
+}
+</style>
+
+<!-- V17: lock viewport to eliminate sideways scrolling and align photo with cut geometry. -->
+<style id="capito-v17-viewport-and-photo">
+@media (max-width:600px) {
+ html,body {width:100%!important;max-width:100%!important;overflow-x:hidden!important;overscroll-behavior-x:none!important;}
+ body.cp-playing {position:fixed!important;inset:0!important;width:100vw!important;max-width:100vw!important;height:100dvh!important;margin:0!important;overflow:hidden!important;touch-action:pan-y!important;}
+ body.cp-playing #capito-pizza-cut {position:relative!important;left:0!important;top:0!important;width:100%!important;max-width:100%!important;min-width:0!important;height:100%!important;min-height:0!important;overflow:hidden!important;box-sizing:border-box!important;background:#f2e2c8 url('capito-tabletop-v14.webp') center center / 100% 100% no-repeat!important;}
+ body.cp-playing #cp-mobile-app,body.cp-playing #cp-game.active {width:100%!important;max-width:100%!important;min-width:0!important;box-sizing:border-box!important;overflow:hidden!important;}
+ body.cp-playing #cp-game.active {padding-left:12px!important;padding-right:12px!important;}
+ body.cp-playing #cp-game .cp-game-head,body.cp-playing #cp-game .cp-game-status {max-width:100%!important;min-width:0!important;box-sizing:border-box!important;}
+ body.cp-playing #cp-game .cp-brand {max-width:calc(100% - 60px)!important;text-align:center!important;font-size:clamp(10px,2.9vw,14px)!important;letter-spacing:clamp(1.4px,.65vw,3px)!important;white-space:nowrap!important;}
+ body.cp-playing #cp-game .cp-game-instruction {max-width:100%!important;font-size:clamp(25px,7vw,39px)!important;line-height:1.06!important;text-wrap:balance!important;}
+ body.cp-playing #cp-game .cp-game-status {padding:10px 14px!important;gap:6px!important;}
+ body.cp-playing #cp-game .cp-cut-counter {white-space:nowrap!important;font-size:clamp(10px,2.8vw,14px)!important;}
+ body.cp-playing #cp-board {position:relative!important;left:auto!important;right:auto!important;flex:0 0 auto!important;width:min(calc(100vw - 26px),440px,calc(100dvh - 290px))!important;max-width:calc(100vw - 26px)!important;height:auto!important;aspect-ratio:1 / 1!important;min-width:0!important;margin:0 auto!important;overflow:visible!important;transform:none!important;filter:none!important;touch-action:none!important;}
+ body.cp-playing #cp-board #cp-pizza-image {position:absolute!important;inset:0!important;display:block!important;width:100%!important;height:100%!important;margin:0!important;object-fit:fill!important;clip-path:none!important;-webkit-clip-path:none!important;transform:none!important;filter:drop-shadow(0 5px 5px rgba(43,24,14,.26))!important;}
+ body.cp-playing #cp-board #cp-canvas {position:absolute!important;inset:0!important;width:100%!important;height:100%!important;touch-action:none!important;}
+ body.cp-playing #cp-game .cp-tip {box-sizing:border-box!important;width:min(100%,410px)!important;max-width:100%!important;min-width:0!important;font-size:clamp(15px,4vw,20px)!important;padding:12px 14px!important;}
+}
+@media(max-width:600px) and (max-height:700px){
+ body.cp-playing #cp-game.active{padding-top:6px!important;padding-bottom:10px!important;}
+ body.cp-playing #cp-board{width:min(calc(100vw - 26px),calc(100dvh - 250px))!important;}
+ body.cp-playing #cp-game .cp-game-instruction{font-size:clamp(22px,6vw,32px)!important;}
+}
+</style>
+
+<!-- V26: no pizza peel / serving board; pizza directly on the marble tabletop. -->
+<style id="capito-v26-no-paddle">
+@media (max-width:600px){
+ body.cp-playing #cp-board{top:-12px!important;background:transparent!important;box-shadow:none!important;}
+ body.cp-playing #cp-board::before,body.cp-playing #cp-board::after{content:none!important;display:none!important;background:none!important;}
+ body.cp-playing #cp-board #cp-pizza-image{filter:drop-shadow(0 4px 2px rgba(24,17,11,.34)) drop-shadow(0 9px 8px rgba(31,22,15,.17))!important;}
+ body.cp-playing #cp-game .cp-tip{margin-top:0!important;}
+}
+@media(max-width:600px) and (max-height:720px){body.cp-playing #cp-board{top:-6px!important;}}
+</style>
+<style id="capito-v28-cut-touch-fidelity">
+#cp-board #cp-canvas {touch-action:none!important;-webkit-user-select:none!important;user-select:none!important;}
+</style>
+<script id="cp-v30-script">
+(function(){
+  function escapeHtml(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+  function remainingWeek(){
+    // Moscow competition week: Monday 00:00 (UTC+03:00).
+    var now=Date.now(), moscow=new Date(now+3*3600000);
+    var day=moscow.getUTCDay(), daysToMonday=(8-day)%7||7;
+    var next=Date.UTC(moscow.getUTCFullYear(),moscow.getUTCMonth(),moscow.getUTCDate()+daysToMonday,0,0,0)-3*3600000;
+    var seconds=Math.max(0,Math.floor((next-now)/1000));
+    return {days:Math.floor(seconds/86400),hours:Math.floor(seconds%86400/3600),minutes:Math.floor(seconds%3600/60),seconds:seconds%60};
+  }
+  function updateClocks(){
+    var t=remainingWeek();
+    document.querySelectorAll('.cp-v30-count').forEach(function(el){el.textContent=t.days+' д '+String(t.hours).padStart(2,'0')+' ч '+String(t.minutes).padStart(2,'0')+' мин';});
+  }
+  function createPodium(item,position){
+    var label=['','🥇','🥈','🥉'][position];
+    var cls=['','first','second','third'][position];
+    var name=item?escapeHtml(item.player_name||'Игрок'):'Место свободно';
+    var score=item?Number(item.score||0).toFixed(1)+'%':'—';
+    return '<div class="cp-v30-podium-item cp-v30-'+cls+'"><div class="cp-v30-medal">'+label+'</div><div class="cp-v30-person'+(item?'':' cp-v30-person-empty')+'">'+name+'</div><div class="cp-v30-percent">'+score+'</div><div class="cp-v30-step">'+position+'</div></div>';
+  }
+  function render(){
+    var data=Array.isArray(window.leaderboardData)?window.leaderboardData:[];
+    // Global lexical var in original classic script is accessible as window property.
+    var name=String(window.playerName||'').trim().toLowerCase();
+    var myIndex=name?data.findIndex(function(p){return String(p.player_name||'').trim().toLowerCase()===name;}):-1;
+    var personal='Зарегистрируйтесь и сыграйте зачётный раунд, чтобы увидеть свой результат.';
+    if(name){
+      if(myIndex>=0){
+        var me=data[myIndex], place=Number(me.place||myIndex+1);
+        personal='<strong>Место №'+place+'</strong> · '+Number(me.score||0).toFixed(1)+'%';
+        if(place>3&&data.length>=3){var gap=Math.max(0,Number(data[2].score||0)-Number(me.score||0));personal+=' · До тройки лидеров: '+gap.toFixed(1)+' п.п.';}
+        else if(place<=3){personal+=' · Вы в тройке лидеров!';}
+      }else{personal='Ваш результат пока не отображается в TOP-10. После зачётной игры обновите рейтинг.';}
+    }
+    ['cp-leaderboard','cp-final-leaderboard'].forEach(function(id){
+      var list=document.getElementById(id);if(!list)return;
+      var panel=document.getElementById('cp-v30-'+id);
+      if(!panel){panel=document.createElement('div');panel.id='cp-v30-'+id;panel.className='cp-v30-wrap';list.parentNode.insertBefore(panel,list);}
+      panel.innerHTML='<div class="cp-v30-head"><div class="cp-v30-label">До конца недели</div><div class="cp-v30-count"></div><div class="cp-v30-small">Рейтинг обновляется каждый понедельник · Москва</div></div>'+
+        '<div class="cp-v30-podium">'+createPodium(data[1],2)+createPodium(data[0],1)+createPodium(data[2],3)+'</div>'+
+        '<div class="cp-v30-personal"><div class="cp-v30-personal-title">МОЙ РЕЗУЛЬТАТ</div>'+personal+'</div>'+
+        '<div class="cp-v30-prizes">🎁 Призы за 1, 2 и 3 место определяет ресторан CAPITO</div>';
+      list.querySelectorAll('.cp-v30-myrow').forEach(function(row){row.classList.remove('cp-v30-myrow')});
+      if(myIndex>=0&&list.children[myIndex])list.children[myIndex].classList.add('cp-v30-myrow');
+    });
+    updateClocks();
+  }
+  // Called after each existing Supabase leaderboard render; backend remains unchanged.
+  window.cpV30Render=render;
+  setInterval(updateClocks,30000);
+  document.addEventListener('DOMContentLoaded',function(){setTimeout(render,100)});
+})();
+</script>
+<style id="cp-v33-hall-style">
+.cp-v31-records{margin:22px auto 16px;padding:22px 15px;border:1px solid #c8d0bd;border-radius:22px;background:linear-gradient(155deg,#fbfcf7,#edf2e9);color:#234a35;max-width:480px;text-align:center;box-shadow:0 8px 24px rgba(15,50,30,.08)}
+.cp-v31-records h3{font-size:21px;letter-spacing:.05em;margin:0 0 6px;font-weight:800}.cp-v31-records p{font-size:12px;line-height:1.5;margin:0 0 14px;opacity:.85}
+.cp-v33-champion{border-radius:17px;background:#244b38;color:#fff;padding:15px 12px;margin:0 0 14px;box-shadow:0 7px 18px rgba(16,45,28,.15)}
+.cp-v33-crown{font-size:25px}.cp-v33-champion-name{font-size:21px;font-weight:800;overflow-wrap:anywhere}.cp-v33-champion-score{font-size:30px;font-weight:800;color:#f3d991}.cp-v33-champion-date{font-size:11px;opacity:.8}
+.cp-v33-podium{display:grid;grid-template-columns:1fr 1.1fr 1fr;align-items:end;gap:6px;margin:0 0 15px}.cp-v33-podium-cell{min-width:0;border-radius:13px 13px 5px 5px;background:#e2e8da;padding:12px 5px 9px}.cp-v33-podium-cell.first{background:#e9dba9;padding-top:24px}.cp-v33-podium-cell.second{background:#dce2e2}.cp-v33-podium-cell.third{background:#e7d3c2}.cp-v33-podium-medal{font-size:24px}.cp-v33-podium-name{font-size:12px;font-weight:700;overflow-wrap:anywhere}.cp-v33-podium-score{font-size:14px;font-weight:800;margin-top:5px}
+.cp-v31-records ol{list-style:none;padding:0;margin:0}.cp-v31-records li{display:flex;justify-content:space-between;align-items:center;gap:12px;text-align:left;padding:11px 9px;border-bottom:1px solid #dce3d6;font-size:14px}.cp-v31-records li:last-child{border-bottom:0}.cp-v31-records .cp-v31-record-score{font-weight:800;white-space:nowrap}.cp-v31-records .cp-v31-empty{font-size:13px;line-height:1.6;padding:12px 3px;color:#536558}.cp-v33-date{display:block;font-size:10px;color:#738274;margin-top:2px}.cp-v33-record-title{font-size:12px;font-weight:800;letter-spacing:.09em;margin:14px 0 4px}
+</style>
+<script id="cp-v33-hall-script">
+(function(){
+ var lastRows=null,loading=null;
+ // Hall of Fame runs in its own IIFE, separate from the main game's private scope.
+ var hallSupabaseUrl="https://betbkhvyejtjqfyuxmql.supabase.co";
+ var hallSupabaseKey="sb_publishable_AY3okNvvxefclorginvwZQ_fzRXjrYQ";
+ function dateLabel(row){
+  var raw=row.completed_at||row.completion_time||row.created_at||row.played_at||row.recorded_at;
+  if(!raw)return '';
+  var d=new Date(raw);if(isNaN(d.getTime()))return '';
+  return new Intl.DateTimeFormat('ru-RU',{timeZone:'Europe/Moscow',day:'2-digit',month:'2-digit',year:'numeric'}).format(d);
+ }
+ function buildPanel(panel,rows,message){
+  var existing=panel.querySelector('.cp-v33-content');if(existing)existing.remove();var placeholder=panel.querySelector(':scope > .cp-v31-empty');if(placeholder)placeholder.remove();
+  var wrap=document.createElement('div');wrap.className='cp-v33-content';
+  if(!rows||!rows.length){var empty=document.createElement('div');empty.className='cp-v31-empty';empty.textContent=message;wrap.appendChild(empty);panel.appendChild(wrap);return;}
+  var champion=rows[0],hero=document.createElement('div');hero.className='cp-v33-champion';
+  var crown=document.createElement('div');crown.className='cp-v33-crown';crown.textContent='👑 АБСОЛЮТНЫЙ РЕКОРДСМЕН';hero.appendChild(crown);
+  var name=document.createElement('div');name.className='cp-v33-champion-name';name.textContent=champion.player_name||champion.name||'Игрок';hero.appendChild(name);
+  var score=document.createElement('div');score.className='cp-v33-champion-score';score.textContent=Number(champion.score).toFixed(2)+'%';hero.appendChild(score);
+  var date=document.createElement('div');date.className='cp-v33-champion-date';date.textContent=dateLabel(champion)?'Рекорд установлен '+dateLabel(champion):'Лучший результат за всю историю';hero.appendChild(date);wrap.appendChild(hero);
+  var podium=document.createElement('div');podium.className='cp-v33-podium';
+  [1,0,2].forEach(function(i){var row=rows[i],cell=document.createElement('div');cell.className='cp-v33-podium-cell '+(['first','second','third'][i]);
+   var medal=document.createElement('div');medal.className='cp-v33-podium-medal';medal.textContent=['🥇','🥈','🥉'][i];cell.appendChild(medal);
+   var nm=document.createElement('div');nm.className='cp-v33-podium-name';nm.textContent=row?(row.player_name||row.name||'Игрок'):'—';cell.appendChild(nm);
+   var sc=document.createElement('div');sc.className='cp-v33-podium-score';sc.textContent=row?Number(row.score).toFixed(2)+'%':'—';cell.appendChild(sc);podium.appendChild(cell);
+  });wrap.appendChild(podium);
+  var title=document.createElement('div');title.className='cp-v33-record-title';title.textContent='ТОП-10 ЗА ВСЁ ВРЕМЯ';wrap.appendChild(title);
+  var ol=document.createElement('ol');rows.slice(0,10).forEach(function(row,i){var li=document.createElement('li'),left=document.createElement('span');left.textContent=(i+1)+'. '+String(row.player_name||row.name||'Игрок');
+   var dt=dateLabel(row);if(dt){var small=document.createElement('span');small.className='cp-v33-date';small.textContent=dt;left.appendChild(small)}
+   var right=document.createElement('span');right.className='cp-v31-record-score';right.textContent=Number(row.score).toFixed(2)+'%';li.appendChild(left);li.appendChild(right);ol.appendChild(li)});wrap.appendChild(ol);panel.appendChild(wrap);
+ }
+ function render(rows,message){['cp-v31-cp-leaderboard','cp-v31-cp-final-leaderboard'].forEach(function(id){var panel=document.getElementById(id);if(panel)buildPanel(panel,rows,message)})}
+ async function fetchAllTimeRecords(){
+  // Use the restricted SECURITY DEFINER RPC only; never query private score rows.
+  var response=await fetch(hallSupabaseUrl+'/rest/v1/rpc/get_pizza_all_time_leaderboard',{
+   method:'POST',
+   headers:{'apikey':hallSupabaseKey,'Content-Type':'application/json'},
+   body:'{}',cache:'no-store'
+  });
+  if(!response.ok){
+   var detail=await response.text();
+   throw new Error('Hall of Fame HTTP '+response.status+': '+detail.slice(0,500));
+  }
+  var rows=await response.json();
+  if(!Array.isArray(rows))throw new Error('Hall of Fame: invalid response');
+  return rows;
+ }
+ async function load(){
+  if(loading)return loading;
+  loading=(async function(){
+   render(null,'Загружаем рекорды…');
+   try{
+    var rows=await fetchAllTimeRecords();
+    if(!Array.isArray(rows))throw new Error('Некорректный ответ сервера');
+    lastRows=rows.filter(function(r){return r&&Number.isFinite(Number(r.score))&&Number(r.score)>=0&&Number(r.score)<=100}).sort(function(a,b){return Number(b.score)-Number(a.score)}).slice(0,10);
+    render(lastRows,'Рекордов пока нет — станьте первым!');
+   }catch(e){
+    console.error('CAPITO all-time leaderboard:',e);
+    render(null,'Не удалось получить рекорды. Проверьте доступ к функции get_pizza_all_time_leaderboard в Supabase.');
+   }finally{loading=null;}
+  })();return loading;
+ }
+ document.addEventListener('DOMContentLoaded',load);window.cpV31LoadRecords=load;
+})();
+</script>
+
+<style id="capito-v32-effects">
+#cp-timer.running.warning{animation:cpV32Pulse .75s ease-in-out infinite!important;color:#b52920!important;border-color:rgba(181,41,32,.4)!important}
+@keyframes cpV32Pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.055)}}
+#cp-v32-confetti{position:fixed;inset:0;pointer-events:none;z-index:99999;overflow:hidden}
+.cp-v32-spark{position:absolute;top:-20px;width:7px;height:13px;border-radius:2px;opacity:0;animation:cpV32Fall var(--duration) ease-in forwards;transform:translate3d(0,0,0) rotate(0deg)}
+@keyframes cpV32Fall{0%{opacity:0;transform:translate3d(0,-15px,0) rotate(0)}10%{opacity:1}85%{opacity:1}100%{opacity:0;transform:translate3d(var(--drift),105vh,0) rotate(var(--spin))}}
+@media(prefers-reduced-motion:reduce){#cp-timer.running.warning{animation:none!important}.cp-v32-spark{display:none}}
+</style>
+<script id="capito-v32-effects-script">
+(function(){
+ var layer=null,cleanup=null;
+ window.cpV32Celebrate=function(score){
+   if(layer){layer.remove();layer=null;} if(cleanup)clearTimeout(cleanup);
+   if(Number(score)<99 || window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+   layer=document.createElement('div');layer.id='cp-v32-confetti';document.body.appendChild(layer);
+   var colors=['#cda24a','#f1d47c','#fff3c5','#52704b'];
+   var count=Number(score)>=99.95?46:26;
+   for(var i=0;i<count;i++){
+     var piece=document.createElement('span');piece.className='cp-v32-spark';
+     piece.style.left=(4+Math.random()*92)+'%';piece.style.background=colors[i%colors.length];
+     piece.style.setProperty('--drift',(Math.random()*140-70)+'px');
+     piece.style.setProperty('--spin',(Math.random()*800-400)+'deg');
+     piece.style.setProperty('--duration',(2+Math.random()*1.4)+'s');
+     piece.style.animationDelay=(Math.random()*.55)+'s';layer.appendChild(piece);
+   }
+   cleanup=setTimeout(function(){if(layer){layer.remove();layer=null;}},4300);
+ };
+})();
+</script>
+
+
+<style id="capito-v36-tabs-style">
+.cp-v36-rank{margin:14px 0 20px;max-width:100%;min-width:0}
+.cp-v36-title{text-align:center;font-size:23px;font-weight:900;letter-spacing:.045em;color:#173e30;margin:20px 0 12px}
+.cp-v36-tabs{display:grid;grid-template-columns:1fr 1fr;gap:7px;padding:5px;border:1px solid #cdd8cb;background:#f5f6ef;border-radius:17px;margin:0 0 16px}
+.cp-v36-tab{min-width:0;min-height:47px;border:0;border-radius:12px;background:transparent;color:#315746;font-size:13px;font-weight:800;letter-spacing:.02em;cursor:pointer;padding:8px 4px}
+.cp-v36-tab[aria-selected="true"]{background:#234b38;color:#fff;box-shadow:0 4px 11px #173d3024}
+.cp-v36-panel[hidden]{display:none!important}
+.cp-v36-panel{min-width:0}
+.cp-v36-rank .cp-v34-oven{height:165px;margin:0 0 14px;border-radius:17px}
+.cp-v36-rank .cp-leaderboard-title{margin-top:10px}
+.cp-v36-rank .cp-v31-records{margin:0 auto 10px}
+.cp-v36-rank .cp-v31-records .cp-v34-oven{display:none!important}
+.cp-v36-rank .cp-v31-records h3{margin-top:0}
+.cp-v36-rank .cp-v31-records .cp-v33-content{min-width:0}
+@media(max-width:360px){.cp-v36-tab{font-size:11px}.cp-v36-title{font-size:20px}}
+</style>
+<script id="capito-v36-tabs-script">
+(function(){
+ function setup(leaderId,hallId){
+  var list=document.getElementById(leaderId),hall=document.getElementById(hallId);
+  if(!list||!hall)return;
+  var screen=list.closest('.cp-screen');if(!screen)return;
+  var oldOven=screen.querySelector('.cp-v34-oven:not(.cp-v34-compact)');
+  var oldTitle=screen.querySelector('.cp-leaderboard-title');
+  var oldNote=screen.querySelector('.cp-leaderboard-note');
+  var rank=document.createElement('section');rank.className='cp-v36-rank';rank.setAttribute('aria-label','Рейтинг CAPITO');
+  var heading=document.createElement('h2');heading.className='cp-v36-title';heading.textContent='РЕЙТИНГ CAPITO';rank.appendChild(heading);
+  var tabs=document.createElement('div');tabs.className='cp-v36-tabs';tabs.setAttribute('role','tablist');tabs.setAttribute('aria-label','Период рейтинга');
+  var weekly=document.createElement('div'),all=document.createElement('div');weekly.className='cp-v36-panel';all.className='cp-v36-panel';
+  var unique=leaderId.replace(/[^a-z-]/g,'');weekly.id=unique+'-week';all.id=unique+'-all';
+  function addTab(label,panel,selected){var b=document.createElement('button');b.type='button';b.className='cp-v36-tab';b.textContent=label;b.setAttribute('role','tab');b.setAttribute('aria-controls',panel.id);b.setAttribute('aria-selected',selected?'true':'false');tabs.appendChild(b);b.addEventListener('click',function(){for(var i=0;i<tabs.children.length;i++)tabs.children[i].setAttribute('aria-selected',tabs.children[i]===b?'true':'false');weekly.hidden=panel!==weekly;all.hidden=panel!==all;if(panel===all&&window.cpV31LoadRecords)window.cpV31LoadRecords();});return b;}
+  addTab('ЭТА НЕДЕЛЯ',weekly,true);addTab('ЗА ВСЁ ВРЕМЯ',all,false);all.hidden=true;
+  var anchor=oldOven||oldTitle||list;anchor.parentNode.insertBefore(rank,anchor);
+  rank.appendChild(tabs);
+  if(oldOven)rank.appendChild(oldOven);
+  rank.appendChild(weekly);rank.appendChild(all);
+  if(oldTitle)weekly.appendChild(oldTitle);
+  if(oldNote)weekly.appendChild(oldNote);
+  // The original weekly leaderboard renderer injects a summary directly before its list.
+  var weeklySummary=document.getElementById('cp-v30-'+leaderId);
+  if(weeklySummary)weekly.appendChild(weeklySummary);
+  weekly.appendChild(list);all.appendChild(hall);
+  // Any future summary injected by existing renderer must also be moved into the weekly tab.
+  var observer=new MutationObserver(function(){var summary=document.getElementById('cp-v30-'+leaderId);if(summary&&summary.parentNode!==weekly)weekly.insertBefore(summary,list);});
+  observer.observe(screen,{childList:true,subtree:true});
+  // Prevent duplicate oven artwork within the all-time records card.
+  hall.querySelectorAll('.cp-v34-oven').forEach(function(el){el.remove()});
+ }
+ function init(){setup('cp-leaderboard','cp-v31-cp-leaderboard');setup('cp-final-leaderboard','cp-v31-cp-final-leaderboard')}
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+
+<style id="capito-v37-fire-style">
+/* Decorative ember animation; does not intercept touches or change scoring. */
+.cp-v34-oven .cp-v37-embers{position:absolute;inset:0;z-index:2;overflow:hidden;pointer-events:none}
+.cp-v37-ember{position:absolute;left:var(--x);top:var(--y);width:var(--sz);height:var(--sz);border-radius:50%;background:#ffe0a0;box-shadow:0 0 5px 2px rgba(255,125,28,.68);opacity:0;animation:cpV37Ember var(--dur) linear infinite;animation-delay:var(--delay)}
+@keyframes cpV37Ember{0%,8%{opacity:0;transform:translate3d(0,5px,0) scale(.55)}19%{opacity:.85}67%{opacity:.65}100%{opacity:0;transform:translate3d(var(--drift),-65px,0) scale(.2)}}
+@media(prefers-reduced-motion:reduce){.cp-v37-ember{animation:none;display:none}}
+</style>
+<script id="capito-v37-fire-script">
+(function(){
+ function decorate(){
+  document.querySelectorAll('.cp-v34-oven').forEach(function(oven){
+   if(oven.querySelector('.cp-v37-embers'))return;
+   var layer=document.createElement('div');layer.className='cp-v37-embers';layer.setAttribute('aria-hidden','true');
+   for(var i=0;i<9;i++){
+    var dot=document.createElement('i');dot.className='cp-v37-ember';
+    dot.style.setProperty('--x',(57+(i*7%35))+'%');
+    dot.style.setProperty('--y',(65+(i*11%18))+'%');
+    dot.style.setProperty('--sz',(1.5+(i%3))+'px');
+    dot.style.setProperty('--dur',(3.1+(i%4)*.8)+'s');
+    dot.style.setProperty('--delay',(-i*.83)+'s');
+    dot.style.setProperty('--drift',((i%2?1:-1)*(8+i*2))+'px');
+    layer.appendChild(dot);
+   }
+   oven.appendChild(layer);
+  });
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',decorate);else decorate();
+})();
+</script>
+
+<style id="capito-v38-motion">
+/* V38: warm moving glow above the existing photo, not cartoon flames. */
+.cp-v34-oven{isolation:isolate}
+.cp-v34-oven .cp-v38-glow{position:absolute;inset:0;z-index:1;pointer-events:none;mix-blend-mode:screen;opacity:.45;background:radial-gradient(ellipse 24% 40% at 70% 53%,rgba(255,178,57,.30),rgba(255,86,12,.10) 54%,transparent 80%);transform-origin:70% 75%;animation:cpV38Glow 2.25s ease-in-out infinite alternate}
+@keyframes cpV38Glow{0%{opacity:.28;transform:translateY(2px) scale(.96,1.01)}45%{opacity:.53;transform:translateY(-2px) scale(1.02,1.04)}100%{opacity:.34;transform:translateY(1px) scale(.98,.99)}}
+@media(prefers-reduced-motion:reduce){.cp-v34-oven .cp-v38-glow{animation:none;opacity:.28}}
+</style>
+<script id="capito-v38-motion-script">
+(function(){function init(){document.querySelectorAll('.cp-v34-oven').forEach(function(oven){if(oven.querySelector('.cp-v38-glow'))return;var glow=document.createElement('span');glow.className='cp-v38-glow';glow.setAttribute('aria-hidden','true');oven.appendChild(glow)})}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init()})();
+</script>
+
+<!-- V39: animated flame layer over the original approved oven illustration. -->
+<style id="capito-v39-live-fire">
+.cp-v34-oven .cp-v39-fire-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:3;pointer-events:none;display:block;mix-blend-mode:screen}
+.cp-v34-oven .cp-v38-glow{opacity:.13!important;animation:none!important}
+.cp-v34-oven::before{animation:none!important;opacity:.12!important}
+@media(prefers-reduced-motion:reduce){.cp-v34-oven .cp-v39-fire-canvas{display:none}}
+</style>
+<script id="capito-v39-live-fire-script">
+(function(){
+'use strict';
+if(window.__capitoV39Fire)return;window.__capitoV39Fire=true;
+var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if(reduce)return;
+function mount(oven){
+ if(oven.querySelector('.cp-v39-fire-canvas'))return;
+ var canvas=document.createElement('canvas');canvas.className='cp-v39-fire-canvas';canvas.setAttribute('aria-hidden','true');oven.appendChild(canvas);
+ var ctx=canvas.getContext('2d',{alpha:true});if(!ctx)return;
+ var w=0,h=0,scale=1,active=true,visible=true;
+ function resize(){var r=oven.getBoundingClientRect();w=r.width;h=r.height;scale=Math.min(window.devicePixelRatio||1,2);canvas.width=Math.round(w*scale);canvas.height=Math.round(h*scale);ctx.setTransform(scale,0,0,scale,0,0)}
+ resize();var observer=window.ResizeObserver?new ResizeObserver(resize):null;if(observer)observer.observe(oven);else window.addEventListener('resize',resize,{passive:true});
+ var io=window.IntersectionObserver?new IntersectionObserver(function(entries){visible=entries[0].isIntersecting},{threshold:0.02}):null;if(io)io.observe(oven);
+ // Coordinates refer to the actual original 1536x1024 illustration (background-size: cover).
+ function map(x,y){var k=Math.max(w/1536,h/1024);return [(x-768)*k+w/2,(y-512)*k+h/2]}
+ var tongues=[
+  [850,645,88,150,0.3],[938,626,75,178,1.5],[1005,615,85,210,2.8],
+  [1075,618,76,195,4.1],[1150,633,70,155,5.4],[1240,652,56,118,6.7]
+ ];
+ function tongue(x,y,rise,width,t,phase){
+  var sw=Math.sin(t*2.2+phase),wiggle=Math.sin(t*3.6+phase*1.7);
+  var tipX=x+sw*width*.45, tipY=y-rise*(.85+.16*Math.sin(t*2.7+phase));
+  var grad=ctx.createLinearGradient(x,y,tipX,tipY);
+  grad.addColorStop(0,'rgba(255,225,75,.48)');grad.addColorStop(.40,'rgba(255,144,19,.32)');grad.addColorStop(1,'rgba(255,72,0,0)');
+  ctx.fillStyle=grad;ctx.beginPath();ctx.moveTo(x-width*.42,y);
+  ctx.bezierCurveTo(x-width*.7+wiggle*8,y-rise*.28,tipX-width*.42,tipY+rise*.3,tipX,tipY);
+  ctx.bezierCurveTo(tipX+width*.22,tipY+rise*.24,x+width*.7+sw*8,y-rise*.32,x+width*.42,y);
+  ctx.closePath();ctx.fill();
+  var core=ctx.createLinearGradient(x,y,tipX,tipY+rise*.25);core.addColorStop(0,'rgba(255,249,161,.46)');core.addColorStop(.7,'rgba(255,191,30,.12)');core.addColorStop(1,'rgba(255,130,0,0)');
+  ctx.fillStyle=core;ctx.beginPath();ctx.moveTo(x-width*.18,y);ctx.quadraticCurveTo(x-width*.3+sw*7,y-rise*.42,tipX,tipY+rise*.25);ctx.quadraticCurveTo(x+width*.22,y-rise*.35,x+width*.18,y);ctx.fill();
+ }
+ var sparks=Array.from({length:17},function(_,i){return {seed:i*1.618,rate:.28+(i%5)*.13,dx:(i%7-3)*10}});
+ var started=performance.now();
+ function draw(now){if(!active)return;requestAnimationFrame(draw);if(!visible||document.hidden||!w||!h)return;
+  var t=(now-started)/1000;ctx.clearRect(0,0,w,h);
+  // Glow and ember bed, with a visibly changing intensity.
+  var bed=map(1060,665);var radius=Math.max(20,145*Math.max(w/1536,h/1024));
+  var g=ctx.createRadialGradient(bed[0],bed[1],2,bed[0],bed[1],radius);
+  g.addColorStop(0,'rgba(255,200,53,'+(.17+.08*Math.sin(t*5))+')');g.addColorStop(1,'rgba(255,100,0,0)');ctx.fillStyle=g;ctx.fillRect(bed[0]-radius,bed[1]-radius,radius*2,radius*2);
+  tongues.forEach(function(f){var base=map(f[0],f[1]);var k=Math.max(w/1536,h/1024);tongue(base[0],base[1],f[3]*k,f[2]*k,t,f[4])});
+  sparks.forEach(function(sp){var u=(t*sp.rate+sp.seed)%1,base=map(1000+sp.dx*7,625);var xx=base[0]+Math.sin(t*2+sp.seed)*15*u, yy=base[1]-u*h*.50;var alpha=Math.sin(Math.PI*u)*.7;
+   ctx.fillStyle='rgba(255,215,101,'+alpha.toFixed(3)+')';ctx.beginPath();ctx.arc(xx,yy,Math.max(.55,w*.0025)*(1-u*.6),0,Math.PI*2);ctx.fill()});
+ }
+ requestAnimationFrame(draw);
+ }
+ function init(){document.querySelectorAll('.cp-v34-oven').forEach(mount)}
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+
+<style id="capito-v40-real-moving-fire">
+/* Animated WebP frames animate the original illustration itself, not just an overlay. */
+.cp-v34-oven{background-image:url("capito-oven-LIVE-v41.webp")!important}
+</style>
+<script id="cp-v44-interactions">
+/* V44 cut-feedback and perfect-result overlay. No score/backend changes. */
+function cpV44CutFlash(point){
+ try{
+  if(!point||!board||!canvas)return;
+  var c=canvas.getBoundingClientRect(),b=board.getBoundingClientRect();
+  var x=c.left-b.left+(point.x/canvas.width)*c.width;
+  var y=c.top-b.top+(point.y/canvas.height)*c.height;
+  var e=document.createElement('span');e.className='cp-v44-cut-flash';
+  e.style.left=x+'px';e.style.top=y+'px';board.appendChild(e);
+  setTimeout(function(){e.remove()},500);
+ }catch(e){}
+}
+function cpV44PerfectResult(score){
+ if(Number(score)<99.95)return;
+ try{
+  var e=document.createElement('div');e.className='cp-v44-perfect';
+  e.textContent='ИДЕАЛЬНО! 🍕';document.body.appendChild(e);
+  if(typeof hapticPerfect==='function')hapticPerfect();
+  setTimeout(function(){e.remove()},1900);
+ }catch(e){}
+}
+</script>
+
+<style id="cp-v45-result-style">
+.cp-v45-preview{margin:15px auto 4px;max-width:280px;text-align:center;opacity:0;transform:translateY(13px) scale(.97);transition:opacity .55s ease,transform .55s cubic-bezier(.2,.8,.2,1)}
+.cp-v45-preview.is-visible{opacity:1;transform:none}
+.cp-v45-caption{font-size:10px;font-weight:800;letter-spacing:.13em;color:#62705b;margin-bottom:8px}
+.cp-v45-pizza{width:142px;height:142px;position:relative;margin:0 auto 8px;filter:drop-shadow(0 7px 7px rgba(40,30,12,.15))}
+.cp-v45-pizza svg{width:100%;height:100%;overflow:visible}
+.cp-v45-slice{transform-box:fill-box;transform-origin:center;transition:transform .8s cubic-bezier(.2,.8,.2,1);transition-delay:.12s}
+.cp-v45-preview.is-visible .cp-v45-slice:nth-child(1){transform:translate(0,-5px)}
+.cp-v45-preview.is-visible .cp-v45-slice:nth-child(2){transform:translate(5px,-3px)}
+.cp-v45-preview.is-visible .cp-v45-slice:nth-child(3){transform:translate(6px,3px)}
+.cp-v45-preview.is-visible .cp-v45-slice:nth-child(4){transform:translate(0,6px)}
+.cp-v45-preview.is-visible .cp-v45-slice:nth-child(5){transform:translate(-6px,3px)}
+.cp-v45-preview.is-visible .cp-v45-slice:nth-child(6){transform:translate(-5px,-3px)}
+.cp-v45-note{font-size:11px;color:#687465;line-height:1.35}
+.cp-v45-top3{margin:12px auto 0;max-width:310px;padding:12px 14px;border-radius:13px;background:#e9e0b9;color:#24472f;font-weight:850;font-size:14px;opacity:0;transform:translateY(12px) scale(.96);transition:opacity .5s ease,transform .5s ease}
+.cp-v45-top3.is-visible{opacity:1;transform:none}
+.cp-v45-top3 small{display:block;font-size:11px;font-weight:500;margin-top:4px}
+@media(prefers-reduced-motion:reduce){.cp-v45-preview,.cp-v45-top3,.cp-v45-slice{transition:none!important}}
+</style>
+<script id="cp-v45-result-effects">
+(function(){
+ var container,top3,timer;
+ function init(){
+  var card=document.querySelector('#cp-result .cp-result-card');
+  if(!card)return;
+  container=document.createElement('div');container.className='cp-v45-preview';container.setAttribute('aria-label','Иллюстрация шести кусочков пиццы');
+  var svg='<svg viewBox="0 0 160 160" role="img" aria-label="Шесть кусочков пиццы">';
+  for(var i=0;i<6;i++){
+   var a=(-90+i*60)*Math.PI/180,b=(-90+(i+1)*60)*Math.PI/180;
+   var x1=80+67*Math.cos(a),y1=80+67*Math.sin(a),x2=80+67*Math.cos(b),y2=80+67*Math.sin(b);
+   var d='M80 80 L'+x1.toFixed(2)+' '+y1.toFixed(2)+' A67 67 0 0 1 '+x2.toFixed(2)+' '+y2.toFixed(2)+' Z';
+   svg+='<g class="cp-v45-slice"><path d="'+d+'" fill="#e7b85d" stroke="#9d612c" stroke-width="3" stroke-linejoin="round"/><path d="'+d+'" fill="none" stroke="#d58d39" stroke-width="8" stroke-linejoin="round" opacity=".7"/>';
+   var mid=(a+b)/2,px=80+39*Math.cos(mid),py=80+39*Math.sin(mid);
+   svg+='<circle cx="'+px.toFixed(2)+'" cy="'+py.toFixed(2)+'" r="8" fill="#b93e2f"/><circle cx="'+(px-3).toFixed(2)+'" cy="'+(py-2).toFixed(2)+'" r="2" fill="#efb46d"/></g>';
+  }
+  svg+='</svg>';
+  container.innerHTML='<div class="cp-v45-caption">ШЕСТЬ КУСОЧКОВ</div><div class="cp-v45-pizza">'+svg+'</div><div class="cp-v45-note">Иллюстрация разделённой пиццы</div>';
+  var anchor=document.getElementById('cp-result-message');card.insertBefore(container,anchor);
+  top3=document.createElement('div');top3.className='cp-v45-top3';top3.setAttribute('role','status');card.insertBefore(top3,document.getElementById('cp-competition'));
+ }
+ window.cpV45ResetResult=function(){clearTimeout(timer);if(!container)init();if(container)container.classList.remove('is-visible');if(top3){top3.classList.remove('is-visible');top3.style.display='none';}};
+ window.cpV45RevealResult=function(){
+  if(!container)init();if(!container)return;
+  requestAnimationFrame(function(){container.classList.add('is-visible')});
+  if(!top3)return;
+  var place=typeof getProjectedPlace==='function'?getProjectedPlace(currentScore,currentTime):null;
+  if(!Number.isFinite(Number(place))||Number(place)<1||Number(place)>3){top3.style.display='none';return;}
+  top3.innerHTML='🏆 ВОЗМОЖНОЕ МЕСТО В ТОП-3 — №'+Number(place)+'<small>Место предварительное. Оно подтвердится после фиксации результата.</small>';
+  top3.style.display='block';timer=setTimeout(function(){top3.classList.add('is-visible')},350);
+ };
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+<!-- CAPITO V46: secure server-verified gift redemption, opened by ?gift=UUID -->
+<style id="cp-v46-gift-style">
+#cp-v46-gift{display:none;position:fixed;inset:0;z-index:200000;background:#f3e6d2;overflow:auto;padding:calc(env(safe-area-inset-top) + 24px) 18px 35px;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif;color:#173d34}
+#cp-v46-gift.cp-v46-active{display:block}
+.cp-v46-card{max-width:430px;margin:6vh auto 0;padding:28px 22px;background:#fffaf1;border:1px solid #dacbb5;border-radius:23px;box-shadow:0 18px 40px #38291920;text-align:center}
+.cp-v46-brand{font-family:Georgia,serif;font-size:39px;font-weight:800;letter-spacing:-1px;color:#5a2633}
+.cp-v46-eyebrow{font-size:10px;letter-spacing:2px;font-weight:900;margin:8px 0 22px}
+.cp-v46-prize{font-family:Georgia,serif;font-size:29px;font-weight:700;margin:0 0 10px}
+.cp-v46-note{font-size:14px;line-height:1.5;margin:0 0 22px}
+.cp-v46-pin{display:block;width:100%;height:55px;border:2px solid #173d34;border-radius:12px;text-align:center;font-size:26px;letter-spacing:12px;box-sizing:border-box;background:white;color:#173d34;margin:8px 0 12px}
+.cp-v46-btn{display:block;width:100%;padding:16px;border:0;border-radius:12px;background:#173d34;color:white;font-size:15px;font-weight:800;cursor:pointer}
+.cp-v46-btn:disabled{opacity:.5;cursor:wait}
+.cp-v46-status{min-height:23px;font-size:13px;font-weight:700;line-height:1.5;margin:15px 0 0;overflow-wrap:anywhere}
+.cp-v46-success{color:#187347}.cp-v46-error{color:#ae352c}
+</style>
+<section id="cp-v46-gift" aria-label="Погашение подарка">
+ <div class="cp-v46-card">
+  <div class="cp-v46-brand">CAPITO</div><div class="cp-v46-eyebrow">ВАШ ПОДАРОК</div>
+  <h1 class="cp-v46-prize" id="cp-v46-prize">Проверяем подарок…</h1>
+  <p class="cp-v46-note" id="cp-v46-note">Покажите этот экран официанту. Для выдачи подарка официант вводит служебный PIN-код.</p>
+  <form id="cp-v46-form" style="display:none">
+   <label for="cp-v46-pin" style="font-size:12px;font-weight:800">PIN-КОД ОФИЦИАНТА</label>
+   <input id="cp-v46-pin" class="cp-v46-pin" type="password" inputmode="numeric" pattern="[0-9]{3}" maxlength="3" autocomplete="off" required placeholder="•••">
+   <button id="cp-v46-submit" class="cp-v46-btn" type="submit">ПОДТВЕРДИТЬ ВЫДАЧУ</button>
+  </form>
+  <div id="cp-v46-status" class="cp-v46-status" role="status" aria-live="polite"></div>
+ </div>
+</section>
+<script id="cp-v46-gift-script">
+(function(){
+ const params=new URLSearchParams(location.search);
+ const giftId=params.get('gift')||params.get('gift_id');
+ if(!giftId)return;
+ const root=document.getElementById('cp-v46-gift');
+ const prize=document.getElementById('cp-v46-prize');
+ const note=document.getElementById('cp-v46-note');
+ const form=document.getElementById('cp-v46-form');
+ const pin=document.getElementById('cp-v46-pin');
+ const button=document.getElementById('cp-v46-submit');
+ const status=document.getElementById('cp-v46-status');
+ root.classList.add('cp-v46-active');
+ function message(value,kind){status.textContent=value||'';status.className='cp-v46-status '+(kind||'');}
+ if(!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(giftId)){
+  prize.textContent='Некорректная ссылка';note.textContent='Попросите сотрудника проверить ссылку на подарок.';return;
+ }
+ const base='https://betbkhvyejtjqfyuxmql.supabase.co/rest/v1/rpc/';
+ const key='sb_publishable_AY3okNvvxefclorginvwZQ_fzRXjrYQ';
+ async function call(name,payload){
+  const response=await fetch(base+name,{method:'POST',headers:{apikey:key,'Content-Type':'application/json'},body:JSON.stringify(payload)});
+  if(!response.ok)throw new Error('HTTP '+response.status);
+  return response.json();
+ }
+ function display(data){
+  if(typeof data==='string'){try{data=JSON.parse(data)}catch(_){data={message:data}}}
+  if(Array.isArray(data))data=data[0]||{};
+  data=data||{};
+  const title=data.prize||data.prize_name||data.gift_name||data.title;
+  if(title)prize.textContent=String(title);
+  const msg=String(data.message||'');
+  const used=data.redeemed===true||data.used===true||data.status==='redeemed'||data.ok===false&&/использован|погашен/i.test(msg);
+  const expired=data.expired===true||data.status==='expired';
+  if(used||expired){form.style.display='none';prize.textContent=used?'Подарок уже использован':'Срок подарка истёк';message(msg,'cp-v46-error');return}
+  if(data.ok===false){form.style.display='none';prize.textContent='Подарок недоступен';message(msg||'Обратитесь к сотруднику.','cp-v46-error');return}
+  if(!title)prize.textContent='Ваш подарок CAPITO';
+  form.style.display='block';message('');
+ }
+ call('capito_gift_status',{p_gift_id:giftId}).then(display).catch(function(){
+  prize.textContent='Не удалось проверить подарок';note.textContent='Проверьте интернет и обновите страницу. Погашение пока недоступно.';
+  message('Сервер не подтвердил действительность подарка.','cp-v46-error');
+ });
+ form.addEventListener('submit',async function(e){
+  e.preventDefault();if(!/^[0-9]{3}$/.test(pin.value)){message('Введите трёхзначный PIN-код.','cp-v46-error');return}
+  button.disabled=true;message('Проверяем код…');
+  try{
+   const data=await call('capito_redeem_gift',{p_gift_id:giftId,p_pin:pin.value});
+   pin.value='';
+   if(data&&data.ok===true){form.style.display='none';prize.textContent='✓ Подарок погашен';note.textContent='Подарок успешно выдан. Повторно использовать его нельзя.';message(data.message||'Подтверждено сервером.','cp-v46-success')}
+   else{message((data&&data.message)||'Не удалось погасить подарок.','cp-v46-error');if(data&&/уже использован|уже погашен/i.test(data.message||''))form.style.display='none'}
+  }catch(err){message('Не удалось связаться с сервером. Попробуйте ещё раз.','cp-v46-error')}
+  finally{button.disabled=false}
+ });
+})();
+</script>
+</body>
+</html>
