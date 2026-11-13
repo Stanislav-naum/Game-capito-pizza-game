@@ -9443,4 +9443,33 @@ function cpV44PerfectResult(score){
 })();
 </script>
 </body>
+
+<style id="capito-v2-preview-css">
+.cp2-box{max-width:440px;margin:12px auto;padding:15px;border:1px solid #c8d6c7;border-radius:18px;background:#f2f6ec;color:#214630;font:600 13px/1.5 system-ui;text-align:left}
+.cp2-box h3{font-size:17px;margin:0 0 8px}.cp2-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.cp2-cell{padding:10px;background:white;border-radius:12px}.cp2-cell strong{display:block;font-size:18px}.cp2-chip{display:inline-block;padding:5px 8px;margin:3px;background:#e0e9d9;border-radius:20px;font-size:11px}
+</style>
+<script id="capito-v2-preview-js">
+(function(){
+const pizzas=["Маргарита","Пепперони","Четыре сыра","Трюфельная"],tasks=["Точность 80%","Скорость до 7 секунд","Пицца-маэстро 90%"];
+const week=Math.floor((Date.now()-new Date(new Date().getFullYear(),0,1).getTime())/604800000),pizza=pizzas[week%4],task=tasks[week%3];
+const make=(tag,cls,t)=>{const n=document.createElement(tag);n.className=cls||"";if(t)n.textContent=t;return n};
+const box=(title)=>{const n=make("section","cp2-box");n.appendChild(make("h3","",title));return n};
+for(const id of ["cp-register","cp-game"]){const n=document.getElementById(id);if(n){const b=box("🍕 ПИЦЦА НЕДЕЛИ · "+pizza);b.appendChild(make("div","","CAPITO 2.0 · тестовое оформление · правила и очки без изменений"));n.insertBefore(b,n.firstChild)}}
+const result=document.getElementById("cp-result"),final=document.getElementById("cp-final");
+const b=box("🏆 CAPITO 2.0 · ТВОИ ДОСТИЖЕНИЯ"),grid=make("div","cp2-grid"),badges=make("div");b.appendChild(grid);b.appendChild(make("p","", "🎯 Испытание недели: "+task));b.appendChild(badges);if(result)result.appendChild(b);
+const f=box("⭐ ЛИЧНЫЕ ДОСТИЖЕНИЯ"),fb=make("div");f.appendChild(fb);if(final)final.appendChild(f);
+function render(){const raw=document.getElementById("cp-score")?.textContent||"",score=Number(raw.replace(",",".").match(/\d+(?:\.\d+)?/)?.[0]||0);
+const timeRaw=document.getElementById("cp-result-time")?.textContent||"",time=Number(timeRaw.replace(",",".").match(/\d+(?:\.\d+)?/)?.[0]||0);
+let a={};try{a=JSON.parse(localStorage.getItem("capito-v2-achievements")||"{}")}catch(e){}
+a.best=Math.max(a.best||0,score);if(score>0)a.first=true;if(score>=80)a.precision=true;if(score>=90)a.gold=true;if(time>0&&time<=7)a.speed=true;
+try{localStorage.setItem("capito-v2-achievements",JSON.stringify(a))}catch(e){}
+const scores=[...document.querySelectorAll("#cp-leaderboard .cp-row-score")].map(n=>Number(n.textContent.match(/\d+(?:\.\d+)?/)?.[0])).filter(Number.isFinite);
+const next=scores.filter(x=>x>score).sort((x,y)=>x-y)[0];grid.replaceChildren();
+for(const [name,value] of [["Результат",score.toFixed(1)+"%"],["Личный рекорд",a.best.toFixed(1)+"%"],["Золотой кусочек",score>=90?"✨ Открыт":"От 90%"],["До соперника",next===undefined?"Нет данных / лидер":(next-score).toFixed(1)+" п.п."]]){const cell=make("div","cp2-cell",name);cell.appendChild(make("strong","",value));grid.appendChild(cell)}
+badges.replaceChildren();fb.replaceChildren();for(const [key,label] of [["first","Первый разрез"],["precision","Точность"],["gold","Золотой кусочек"],["speed","Скорость"]])if(a[key]){badges.appendChild(make("span","cp2-chip","🏅 "+label));fb.appendChild(make("span","cp2-chip","🏅 "+label))}
+}
+if(result){const obs=new MutationObserver(()=>{if(result.classList.contains("active")){render()}});obs.observe(result,{attributes:true,attributeFilter:["class"]})}
+})();
+</script>
+
 </html>
