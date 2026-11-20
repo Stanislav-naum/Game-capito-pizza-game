@@ -12,3 +12,6 @@
 #capito-games .cg-scene{container-type:size}
 #capito-games .cg-board{width:min(92%,calc(100cqh - 180px));left:50%;top:150px;transform:translateX(-50%)}
 }
+
+@media(min-width:651px){#capito-games .cg-scene{container-type:normal}#capito-games .cg-board{width:min(92%,470px)}}
+@media(min-width:651px) and (max-width:950px){#capito-games .cg-board{width:min(115%,440px)}}
