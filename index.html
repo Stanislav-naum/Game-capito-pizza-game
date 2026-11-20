@@ -9471,7 +9471,20 @@ const next=scores.filter(x=>x>score).sort((x,y)=>x-y)[0];grid.replaceChildren();
 for(const [name,value] of [["Результат",score.toFixed(1)+"%"],["Личный рекорд",a.best.toFixed(1)+"%"],["Золотой кусочек",score>=90?"✨ Открыт":"От 90%"],["До соперника",next===undefined?"Нет данных / лидер":(next-score).toFixed(1)+" п.п."]]){const cell=make("div","cp2-cell",name);cell.appendChild(make("strong","",value));grid.appendChild(cell)}
 badges.replaceChildren();fb.replaceChildren();for(const [key,label] of [["first","Первый разрез"],["precision","Точность"],["gold","Золотой кусочек"],["speed","Скорость"]])if(a[key]){badges.appendChild(make("span","cp2-chip","🏅 "+label));fb.appendChild(make("span","cp2-chip","🏅 "+label))}
 }
-if(result){const obs=new MutationObserver(()=>{if(result.classList.contains("active")){render()}});obs.observe(result,{attributes:true,attributeFilter:["class"]})}
+const club=box("🍕 КЛУБ ПИЦЦАЙОЛО"),clubProgress=make("div"),clubNote=make("p","","Участвуй в разные недели, чтобы открывать новые звания. Пока прогресс хранится только на этом устройстве.");club.appendChild(clubProgress);club.appendChild(clubNote);if(result)result.appendChild(club);
+const finalClub=box("🍕 КЛУБ ПИЦЦАЙОЛО"),finalProgress=make("div");finalClub.appendChild(finalProgress);if(final)final.appendChild(finalClub);
+function mondayKey(){const d=new Date(),utc=new Date(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate())),day=utc.getUTCDay()||7;utc.setUTCDate(utc.getUTCDate()-day+1);return utc.toISOString().slice(0,10)}
+function updateClub(){let state={};try{state=JSON.parse(localStorage.getItem("capito-v2-club-preview")||"{}")}catch(e){}
+const weeks=Array.isArray(state.weeks)?state.weeks.filter(x=>/^\\d{4}-\\d{2}-\\d{2}$/.test(x)):[],week=mondayKey();
+if(!weeks.includes(week))weeks.push(week);state.weeks=[...new Set(weeks)];
+try{localStorage.setItem("capito-v2-club-preview",JSON.stringify(state))}catch(e){}
+const count=state.weeks.length,steps=[{n:2,title:"Постоянный гость"},{n:4,title:"Мастер CAPITO"},{n:8,title:"Легенда пиццы"}],next=steps.find(x=>count<x.n),earned=steps.filter(x=>count>=x.n).map(x=>"🏅 "+x.title);
+const info=make("div","",count+" "+(count===1?"неделя":count<5?"недели":"недель")+" участия на этом устройстве");
+const progress=make("div","",next?"До звания «"+next.title+"»: ещё "+(next.n-count)+" нед.":"Все звания открыты!");
+for(const root of [clubProgress,finalProgress]){root.replaceChildren(info.cloneNode(true),progress.cloneNode(true));for(const medal of earned)root.appendChild(make("span","cp2-chip",medal))}
+}
+if(result){let seen=false;const obs=new MutationObserver(()=>{if(result.classList.contains("active")){render();if(!seen){seen=true;updateClub()}}else seen=false});obs.observe(result,{attributes:true,attributeFilter:["class"]})}
+if(final){const obs=new MutationObserver(()=>{if(final.classList.contains("active"))updateClub()});obs.observe(final,{attributes:true,attributeFilter:["class"]})}
 })();
 </script>
 
