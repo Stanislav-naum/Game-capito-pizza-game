@@ -15,3 +15,14 @@
 
 @media(min-width:651px){#capito-games .cg-scene{container-type:normal}#capito-games .cg-board{width:min(92%,470px)}}
 @media(min-width:651px) and (max-width:950px){#capito-games .cg-board{width:min(115%,440px)}}
+
+/* Match the photographic material palette of Junior. */
+#capito-games{background-image:radial-gradient(ellipse at 12% 4%,#fffdf37d,transparent 60%),linear-gradient(100deg,#f7f3e929,#e4dfd024),url('/junior/art/background/limestone.jpg');background-position:center,center,center top;background-size:auto,auto,1200px auto}
+#capito-games .cg-scene{background:linear-gradient(110deg,#ffffff0a,#68441c17),url('/junior/art/background/oak.jpg') center/cover;box-shadow:inset 1px 1px 0 #fffbeb88,inset 0 0 75px #70512e13,0 16px 30px #493b2415;border:1px solid #99795238}
+#capito-games .cg-board{background:linear-gradient(130deg,#fff8d91f,#734b2417),url('/junior/art/background/oak.jpg') center/cover;box-shadow:inset 0 0 0 3px #dbc398,inset 0 0 0 6px #a0784e55,0 15px 25px #4a321b4a}
+#capito-games .cg-stamp{background:#f4ead5ce;box-shadow:0 4px 12px #4d36241a}
+@media(max-width:650px){#capito-games{background-size:auto,auto,800px auto}#capito-games .cg-scene{background:none;border:0;box-shadow:none}}
+
+#capito-games .cg-scene{background-color:#cbbda6;background-blend-mode:normal,luminosity}
+#capito-games .cg-board{background-color:#c2a985;background-blend-mode:normal,luminosity}
+@media(max-width:650px){#capito-games .cg-scene{background:none}}
