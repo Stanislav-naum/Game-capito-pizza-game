@@ -1,12 +1,12 @@
 (()=>{"use strict";
 const $=id=>document.getElementById(id);
-const foods=[["🍅","Томат"],["🧀","Сыр"],["🍃","Базилик"],["🍄","Грибы"],["🫒","Оливки"],["🔴","Пепперони"]];
+const foods=[["🍅","Томат"],["🧀","Сыр"],["🍃","Базилик"],["🍄‍🟫","Грибы"],["🫒","Оливки"],["🔴","Пепперони"]];
 const positions=[[30,30],[68,29],[49,51],[29,70],[70,70]];
 const API="https://betbkhvyejtjqfyuxmql.supabase.co/rest/v1/rpc/";
 const KEY="sb_publishable_AY3okNvvxefclorginvwZQ_fzRXjrYQ";
 let age="4-7",session=null,round=0,picks=[],answers=[],startTime=0,roundTime=0,tick=null,busy=false,finished=false,pending=false,audio=null,sound=false;
 async function rpc(name,body){const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),12000);try{const r=await fetch(API+"capito_junior_preview_"+name,{method:"POST",headers:{"Content-Type":"application/json",apikey:KEY},body:JSON.stringify(body),signal:controller.signal});if(!r.ok)throw Error("Сервис временно недоступен");return await r.json();}finally{clearTimeout(timeout)}}
-function screen(id){["welcome","kitchen","result","board"].forEach(x=>$(x).hidden=x!==id);window.scrollTo(0,0)}
+function screen(id){document.body.classList.toggle("is-playing",id==="kitchen");["welcome","kitchen","result","board"].forEach(x=>$(x).hidden=x!==id);window.scrollTo(0,0)}
 function note(){if(!sound)return;try{audio=audio||new(window.AudioContext||window.webkitAudioContext)();audio.resume();const o=audio.createOscillator(),g=audio.createGain();o.connect(g);g.connect(audio.destination);o.frequency.value=600;g.gain.setValueAtTime(.07,audio.currentTime);g.gain.exponentialRampToValueAtTime(.001,audio.currentTime+.12);o.start();o.stop(audio.currentTime+.12)}catch{}}
 function stats(){try{return JSON.parse(localStorage.getItem("capito-junior-preview-badges-"+age)||"{}")}catch{return {}}}
 function saveStats(result){const s=stats();s.first=true;s.perfect=s.perfect||result.perfect>0;s.master=s.master||result.perfect===session.recipes.length;try{localStorage.setItem("capito-junior-preview-badges-"+age,JSON.stringify(s))}catch{}return s}

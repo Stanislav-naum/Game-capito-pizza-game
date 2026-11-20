@@ -8,3 +8,5 @@ Junior uses only capito_junior_preview_* RPCs and its isolated RLS table. No pla
 4–7: 3 recipes, 3 toppings, visible hints, 90s. 8–12: 5 recipes, 5 toppings, 5s memorization for each, 75s. Tap ingredients in order; undo; bake. Server scores each matching position 100 and each perfect pizza 200. Abandoned attempts are not ranked; elapsed/expired and repeated finish calls are handled server-side. No reward-bearing anti-cheat guarantee: anonymous preview competition has no identity/rate limit and should get server abuse protection before public prize use.
 
 Validation: JavaScript parse; transactional PostgreSQL tests for both age bands, exact score, idempotency, expiry, invalid age, and revoked direct table privileges. Database test data rolled back.
+
+Browser QA: completed 4–7 attempt (1500 points), confirmed Supabase save, weekly leaderboard and all three achievements. Tested 400px responsive screen and 8–12 memory phase. Kitchen layout compacted for small screens to keep toppings and controls in view.
