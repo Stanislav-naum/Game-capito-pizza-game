@@ -12,3 +12,21 @@ body.is-playing main{padding:0}body.is-playing .site-header{display:none}.kitche
 @media(max-width:370px){main{padding:0 16px}.welcome h1{font-size:46px}.hero-board{width:185px;right:-65px;top:92px}.intro{font-size:12px}.age-switch small{font-size:8px}.welcome-links{gap:18px}.kitchen-top{gap:8px;padding:8px 9px}.kitchen-brand img{width:29px;height:29px}.kitchen-brand strong{font-size:10px;max-width:89px}.kitchen-brand span{font-size:5px}.round-group{min-width:62px;font-size:9px}.timer{width:39px;height:39px}.exit{font-size:9px;padding:7px}.order-ticket{padding:8px 9px 12px}.order-ticket h2{font-size:15px}.order-ticket .status{font-size:8px;max-width:105px}.slot{width:30px;height:38px}.slot img{width:27px;height:27px}.recipe{gap:2px}.ingredients{gap:2px 4px}.ingredients button{grid-template-columns:40px 1fr}.ingredients b{width:40px;height:39px}.ingredients .food-name{font-size:8px}.ingredients .food-it{font-size:5px}.oven-area{right:4px;width:50px}.oven{width:50px;height:53px}}
 @media(max-width:600px) and (max-height:690px){.kitchen-top{min-height:58px;padding-top:5px;padding-bottom:5px}.kitchen-world{padding-top:7px;padding-bottom:5px}.board{width:clamp(145px,27dvh,190px)}.prep-area{padding-top:4px}.placement-status{font-size:9px;margin-top:3px}.order-ticket{padding-top:7px;padding-bottom:10px}.ticket-top{padding-bottom:3px;margin-bottom:4px}.order-ticket h2{font-size:15px}.order-ticket .status{min-height:23px}.slot{height:38px}.ingredient-station{padding-top:6px}.ingredients button{min-height:50px}.ingredients b{height:38px}.kitchen-actions{padding-top:7px;padding-bottom:12px}.oven-area{bottom:30px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+/* Final responsive polish after gameplay QA. */
+html,body{overflow-x:clip}
+.ingredients .food-name{font-size:12px}
+@media(max-width:600px){
+.welcome h1{font-size:44px;letter-spacing:-1.8px}
+.hero-board{top:145px;right:-75px;width:220px}
+.intro{max-width:54%;font-size:12px}
+.ingredients{gap:5px 7px}
+.ingredients button{display:flex;flex-direction:column;justify-content:flex-start;min-height:84px;padding:3px 2px;font-size:14px}
+.ingredients b{width:63px;height:54px;max-width:100%;margin:0 0 3px}
+.ingredients .food-name{font-size:14px;text-align:center;align-self:center;line-height:1.2;font-weight:800}
+.ingredients .food-it{display:none}
+.order-ticket .status{font-size:11px}
+.kitchen-actions .undo{font-size:12px}
+.placement-status{font-size:12px}
+}
+@media(max-width:370px){.welcome h1{font-size:39px}.hero-board{width:195px;top:140px;right:-72px}.intro{font-size:11px}.ingredients .food-name{font-size:12px}.ingredients b{width:58px;height:49px}.ingredients button{min-height:77px}.order-ticket .status{font-size:10px}.kitchen-actions .undo{font-size:11px}.placement-status{font-size:11px}}
+@media(max-width:600px) and (max-height:690px){.ingredients b{width:56px;height:45px}.ingredients button{min-height:70px}.ingredients .food-name{font-size:12px}.board{width:clamp(135px,24dvh,165px)}.placement-status{font-size:10px}}
