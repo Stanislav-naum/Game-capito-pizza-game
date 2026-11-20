@@ -272,3 +272,59 @@ body.is-playing .topping:not(.herb-topping){width:23%}
 @media(max-width:370px){body.is-playing .ingredients b{--bowl-size:48px}}
 @media(max-height:650px) and (min-width:601px){body.is-playing .ingredients b{--bowl-size:46px;margin:0}}
 @media(max-width:600px) and (max-height:690px){body.is-playing .ingredients b{--bowl-size:45px;margin:0 0 3px}}
+
+/* Full pizza topping layers: whole pieces across the base, basil in the center. */
+#toppings{position:absolute;inset:0;z-index:2;pointer-events:none}
+.topping-layer{position:absolute;inset:0;pointer-events:none}
+.topping-piece{position:absolute;display:block;aspect-ratio:1;transform:translate(-50%,-50%) rotate(var(--piece-angle,0deg));transform-origin:center}
+.topping-piece img{display:block;width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 1px 1px #4c301626)}
+.topping-layer.fresh .topping-piece{animation:capito-piece-drop .3s both;animation-delay:var(--piece-delay,0s)}
+.oregano-layer .topping-piece img{filter:drop-shadow(0 .4px .3px #22331640)}
+.basil-layer .topping-piece img{filter:drop-shadow(0 2px 1px #3e402136)}
+.sauce-layer{animation:none}
+.sauce-layer.fresh{animation:sauce-spread .35s ease-out}
+@keyframes capito-piece-drop{from{opacity:0;transform:translate(-50%,-85%) rotate(var(--piece-angle,0deg)) scale(1.25)}to{opacity:1;transform:translate(-50%,-50%) rotate(var(--piece-angle,0deg)) scale(1)}}
+/* Twelve full-size tap targets: no horizontal cropping or hidden ingredients. */
+body.is-playing .ingredients{grid-template-columns:repeat(6,minmax(0,1fr));gap:4px 8px}
+body.is-playing .ingredients button{min-height:82px}
+body.is-playing .ingredients b{--bowl-size:52px;margin:0 0 3px}
+body.is-playing .ingredients .food-name{font-size:12px;line-height:1.18}
+body.is-playing .ingredients .food-it{font-size:6px;margin-top:3px}
+body.is-playing .ingredient-station{padding-top:8px;padding-bottom:6px}
+@media(min-width:601px) and (max-width:1000px){
+body.is-playing .ingredients{grid-template-columns:repeat(4,minmax(0,1fr));gap:2px 10px}
+body.is-playing .ingredients button{display:grid;grid-template-columns:47px minmax(0,1fr);grid-template-rows:1fr 1fr;gap:0 5px;min-height:53px;align-items:center;text-align:left}
+body.is-playing .ingredients b{--bowl-size:44px;grid-row:1/3;margin:0}
+body.is-playing .ingredients .food-name{grid-column:2;grid-row:1/3;align-self:center;font-size:11px}
+body.is-playing .ingredients .food-it{display:none}
+}
+@media(min-width:601px) and (max-height:650px){
+body.is-playing .ingredients button{min-height:49px}
+body.is-playing .ingredients b{--bowl-size:43px;margin:0}
+body.is-playing .ingredients .food-name{font-size:11px}
+body.is-playing .ingredients .food-it{display:none}
+body.is-playing .order-ticket .recipe[data-count="6"] .slot{height:32px}
+body.is-playing .order-ticket .recipe[data-count="6"]{min-height:66px}
+}
+@media(max-width:600px){
+body.is-playing .ingredients{grid-template-columns:repeat(4,minmax(0,1fr));gap:3px 4px}
+body.is-playing .ingredients button{display:flex;flex-direction:column;min-height:77px;padding:2px 1px 3px}
+body.is-playing .ingredients b{--bowl-size:47px;margin:0 0 3px}
+body.is-playing .ingredients .food-name{font-size:11px;line-height:1.13;max-width:100%;text-align:center}
+body.is-playing .ingredients .food-it{display:none}
+body.is-playing .ingredient-station{padding:6px 8px 4px}
+body.is-playing .station-title{margin-bottom:4px}
+body.is-playing .order-ticket .recipe[data-count="6"]{display:grid;grid-template-columns:repeat(3,32px);gap:3px;min-height:67px;height:auto}
+body.is-playing .order-ticket .recipe[data-count="6"] .slot{width:32px;height:32px}
+body.is-playing .order-ticket:has(.recipe[data-count="6"]){min-height:100px}
+}
+@media(max-width:600px) and (max-height:690px){
+body.is-playing .ingredients button{min-height:68px}
+body.is-playing .ingredients b{--bowl-size:40px;margin-bottom:2px}
+body.is-playing .ingredients .food-name{font-size:10px;line-height:1.14}
+body.is-playing .ingredient-station{padding-top:5px;padding-bottom:3px}
+body.is-playing .order-ticket .recipe[data-count="6"]{grid-template-columns:repeat(3,29px);min-height:61px}
+body.is-playing .order-ticket .recipe[data-count="6"] .slot{width:29px;height:29px}
+body.is-playing .order-ticket:has(.recipe[data-count="6"]){min-height:94px}
+}
+@media(prefers-reduced-motion:reduce){.topping-layer.fresh .topping-piece,.sauce-layer.fresh{animation:none!important}}
