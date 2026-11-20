@@ -26,3 +26,8 @@
 #capito-games .cg-scene{background-color:#cbbda6;background-blend-mode:normal,luminosity}
 #capito-games .cg-board{background-color:#c2a985;background-blend-mode:normal,luminosity}
 @media(max-width:650px){#capito-games .cg-scene{background:none}}
+
+#capito-games{background-image:radial-gradient(ellipse at 12% 4%,#fffdf252,transparent 60%),linear-gradient(100deg,#faf7edc7,#f4f0e5b8),url('/junior/art/background/limestone.jpg')}
+#capito-games .cg-scene{background-image:linear-gradient(110deg,#f8f0dc73,#f4e8ce52),url('/junior/art/background/oak.jpg');background-blend-mode:normal}
+#capito-games .cg-board{background-image:linear-gradient(130deg,#f4e6c841,#e5d0ab2e),url('/junior/art/background/oak.jpg');background-blend-mode:normal}
+@media(max-width:650px){#capito-games .cg-scene{background:none}}

@@ -241,3 +241,14 @@ body.is-playing .kitchen-world:before{background-position:center,center;backgrou
 body.is-playing .kitchen-world:before{background-color:#c8b18d;background-blend-mode:normal,luminosity}
 body.is-playing .board{background-color:#bca17b;background-blend-mode:normal,luminosity}
 @media(max-width:600px){.welcome-scene{background:none}}
+
+/* Restrained material contrast: readable stone and warm, lightly washed oak. */
+body{background-image:radial-gradient(ellipse at 12% 5%,#fffdf252,transparent 58%),linear-gradient(110deg,#faf7edc7,#f4f0e5b8),var(--capito-stone)}
+.welcome-scene{background-image:linear-gradient(110deg,#f8f0dc73,#f4e8ce52),var(--capito-oak);background-blend-mode:normal}
+.hero-board{background-image:linear-gradient(130deg,#f4e6c841,#e5d0ab2e),var(--capito-oak);background-blend-mode:normal}
+.scene-heading{color:#4e4a32}.scene-heading span{color:#234532}
+.scene-caption{color:#61583d}
+body.is-playing .kitchen-world{background-image:linear-gradient(180deg,#f5f4eba6,#e8ecdf99),var(--capito-stone)}
+body.is-playing .kitchen-world:before{background-image:linear-gradient(120deg,#f6edda59,#e5d3af3b),var(--capito-oak);background-blend-mode:normal}
+body.is-playing .board{background-image:linear-gradient(125deg,#f9edce36,#e8d0a41f),var(--capito-oak);background-blend-mode:normal}
+@media(max-width:600px){.welcome-scene{background:none}}
