@@ -328,3 +328,42 @@ body.is-playing .order-ticket .recipe[data-count="6"] .slot{width:29px;height:29
 body.is-playing .order-ticket:has(.recipe[data-count="6"]){min-height:94px}
 }
 @media(prefers-reduced-motion:reduce){.topping-layer.fresh .topping-piece,.sauce-layer.fresh{animation:none!important}}
+/* FORNO CAPITO — bake, melt and serve */
+.capito-oven-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:48% 48% 5px 5px;box-shadow:0 5px 15px #31180c55}
+.oven:has(.capito-oven-photo){background:none!important;border:0!important;overflow:hidden;isolation:isolate}
+.oven:has(.capito-oven-photo) .oven-arch,.oven:has(.capito-oven-photo) .oven-sill{display:none}
+.oven:has(.capito-oven-photo):after{content:"";position:absolute;inset:15% 5% 8% 35%;background:radial-gradient(ellipse,#ffc54265,transparent 70%);mix-blend-mode:screen;animation:oven-flicker .8s infinite alternate;pointer-events:none}
+.serving{width:100%;max-width:980px;margin:auto;min-height:0;flex:1;display:flex;flex-direction:column;align-items:center;text-align:center;padding:16px 22px;border:1px solid #c8c7b8;border-radius:24px;background:linear-gradient(#f8f5eacc,#f4f0e6e6),var(--capito-stone);box-shadow:0 14px 40px #213e3126;overflow:hidden}
+.serving[hidden]{display:none}.serving-top{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:11px;letter-spacing:2px}
+.serving-top button{min-height:38px;border:1px solid #a4af9b;background:#fff8;border-radius:9px;padding:8px 14px;color:#223f32;font-size:13px;letter-spacing:0}
+.serving h2{font:italic 36px Georgia,serif;color:#223f32;margin:14px 0 6px;line-height:1.1}.serving #serving-hint{font-size:15px;max-width:580px;min-height:38px;margin:4px 0 10px;line-height:1.35}
+.bake-theatre{position:relative;width:min(100%,700px);min-height:0;flex:1;max-height:470px;aspect-ratio:3/2;border-radius:160px 160px 18px 18px;overflow:hidden;background:#30170c;box-shadow:0 14px 28px #49220f40}
+.bake-theatre[hidden]{display:none}.theatre-oven{width:100%;height:100%;object-fit:cover;display:block}.heat-shimmer{position:absolute;inset:0;background:radial-gradient(ellipse at 70% 40%,#ffc35b55,transparent 60%);mix-blend-mode:screen;animation:oven-flicker .65s infinite alternate;pointer-events:none}
+.oven-pizza{position:absolute;width:45%;aspect-ratio:1;left:16%;bottom:-9%;transform:rotateX(52deg);animation:pizza-enter 2.8s ease-in-out both;filter:drop-shadow(0 9px 4px #14090399)}
+.oven-badge{position:absolute;left:22px;top:23px;font:11px Georgia,serif;letter-spacing:3px;color:#fce7bb;text-shadow:0 1px 4px #000}
+.served-pizza.pizza{position:absolute;inset:0!important;width:100%;height:100%;transform:none!important;opacity:1!important;isolation:isolate;transition:none}
+.served-pizza>div:not(.sauce-layer){position:absolute;inset:0;z-index:2;pointer-events:none}
+.served-pizza .topping-layer{animation:none!important}.served-pizza .topping-piece{animation:none!important}
+.cooked>.base-image{filter:saturate(1.12) brightness(.94) contrast(1.08) drop-shadow(0 7px 4px #40200c40)}
+.cooked .sauce-layer{filter:saturate(.87) brightness(.83) contrast(1.1)}
+.cooked [data-ingredient="mushroom"] img{filter:sepia(.38) saturate(.9) brightness(.73) contrast(1.2);transform:scale(.84)}
+.cooked [data-ingredient="pepperoni"] img,.cooked [data-ingredient="pastrami"] img{filter:saturate(.85) brightness(.78) contrast(1.22);transform:scale(.9)}
+.cooked [data-ingredient="tomato"] img,.cooked [data-ingredient="pickles"] img{filter:saturate(.85) brightness(.87) contrast(1.13);transform:scale(.89)}
+.cooked [data-ingredient="basil"] img{filter:saturate(.72) brightness(.86);transform:scale(.94)}
+.cooked [data-ingredient="mortadella"] img{filter:sepia(.18) brightness(.89) contrast(1.08);transform:scale(.92)}
+.cooked [data-ingredient="cheese"] img{filter:drop-shadow(0 1px 1px #7a480b30);transform:scale(1.12)}
+.cooked [data-ingredient="dor-blue"] img{filter:sepia(.18) brightness(.96);transform:scale(1.07,.87)}
+.slice-stage{min-height:0;flex:1;width:100%;display:flex;align-items:center;justify-content:center;padding:10px}.slice-stage[hidden]{display:none}
+.slice-board{position:relative;width:min(430px,50dvh,83vw);aspect-ratio:1;background:var(--capito-oak) center/cover;border-radius:50%;border:9px solid #cbab76;box-shadow:0 12px 28px #40230f33,inset 0 0 0 3px #fff4cc77;touch-action:none;user-select:none;-webkit-user-select:none;cursor:crosshair;flex-shrink:0}
+#slice-pizza{position:absolute;inset:6%;isolation:isolate}.pizza-wedge{position:absolute;inset:0;transition:transform .4s ease;isolation:isolate}
+#cut-lines{position:absolute;inset:6%;width:88%;height:88%;z-index:120;pointer-events:none;overflow:visible}
+#cut-lines line{stroke-linecap:round;vector-effect:non-scaling-stroke}.cut-future{display:none}.cut-guide{stroke:#fff8d8;stroke-width:3;stroke-dasharray:7 7;filter:drop-shadow(0 1px 2px #2a1609);animation:guide-pulse 1s infinite alternate}.cut-done{stroke:#4d2d1c;stroke-width:2.5}
+.slice-actions{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;margin:10px 0 0;width:100%}.slice-actions[hidden]{display:none}.slice-actions>span{font-size:14px;font-weight:700;width:100%;color:#6b785c}.slice-actions button{min-height:50px;padding:12px 22px;font-size:15px}.slice-actions button:disabled{opacity:.45;cursor:default}.serving-foot{font-size:11px;color:#78836b;margin:13px 0 0}
+.steam{position:absolute;top:5%;width:10%;height:26%;border-left:3px solid #ffffff8c;border-radius:50%;z-index:125;filter:blur(3px);animation:steam-rise 2.5s infinite;pointer-events:none}.steam-one{left:40%}.steam-two{left:60%;animation-delay:1s}
+@keyframes oven-flicker{0%{opacity:.3;transform:scale(1)}100%{opacity:.8;transform:scale(1.06)}}
+@keyframes pizza-enter{0%{transform:translateY(35%) rotateX(50deg) scale(1.4);opacity:1}45%{transform:translate(10%,-20%) rotateX(58deg) scale(.68)}100%{transform:translate(10%,-20%) rotateX(58deg) scale(.68);filter:brightness(.8) saturate(1.3)}}
+@keyframes steam-rise{0%{opacity:0;transform:translateY(15px) scaleX(.8)}40%{opacity:.65}100%{opacity:0;transform:translateY(-45px) scaleX(1.5)}}
+@keyframes guide-pulse{from{opacity:.65}to{opacity:1}}
+@media(max-width:600px){.serving{padding:12px 14px;border-radius:0;border:0}.serving-top{font-size:9px;letter-spacing:1px}.serving h2{font-size:29px;margin-top:15px}.serving #serving-hint{font-size:14px;margin-bottom:4px;min-height:40px}.slice-board{width:min(83vw,48dvh)}.slice-actions{gap:8px}.slice-actions button{font-size:13px;padding:10px 13px;flex:1;white-space:nowrap}.serving-foot{font-size:10px}.bake-theatre{flex:0 1 auto;margin:auto 0;width:100%;aspect-ratio:1.1;border-radius:100px 100px 12px 12px}.theatre-oven{object-position:60% center}.oven-pizza{width:55%;left:8%}}
+@media(max-height:600px){.serving{padding-top:8px;padding-bottom:8px}.serving h2{font-size:25px;margin:6px 0 3px}.serving #serving-hint{font-size:12px;min-height:30px;margin:2px 0 4px}.slice-stage{padding:2px}.slice-board{width:min(43dvh,70vw)}.slice-actions{margin-top:4px;gap:6px}.slice-actions>span{font-size:11px}.slice-actions button{min-height:40px;padding:8px 14px;font-size:12px}.serving-foot{margin-top:6px;font-size:10px}}
+@media(prefers-reduced-motion:reduce){.heat-shimmer,.oven-pizza,.steam,.cut-guide,.oven:after{animation:none!important}.pizza-wedge{transition:none}}
