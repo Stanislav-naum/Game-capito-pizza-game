@@ -252,3 +252,23 @@ body.is-playing .kitchen-world{background-image:linear-gradient(180deg,#f5f4eba6
 body.is-playing .kitchen-world:before{background-image:linear-gradient(120deg,#f6edda59,#e5d3af3b),var(--capito-oak);background-blend-mode:normal}
 body.is-playing .board{background-image:linear-gradient(125deg,#f9edce36,#e8d0a41f),var(--capito-oak);background-blend-mode:normal}
 @media(max-width:600px){.welcome-scene{background:none}}
+
+/* Whole ingredient illustrations inside complete, centered bowls. */
+body.is-playing .ingredients b{
+ --bowl-size:64px;width:var(--bowl-size);height:var(--bowl-size);max-width:100%;flex-shrink:0;
+ display:grid;place-items:center;padding:0;overflow:visible;margin:0 0 5px;
+ background:radial-gradient(circle at 50% 50%,#d6dbce 0 44%,#a8b29f 45% 47%,#f5f6ed 49% 52%,#b6bfae 55% 58%,#e4e9dc 60% 63%,transparent 65%);
+ filter:drop-shadow(0 3px 2px #45371c26)
+}
+body.is-playing .ingredients b img{
+ width:72%;height:72%;max-width:72%;max-height:72%;object-fit:contain;object-position:50% 50%;
+ display:block;transform:none;filter:drop-shadow(0 1px 1px #3a29121a)
+}
+body.is-playing .ingredients button:hover:enabled b img{transform:scale(1.035)}
+body.is-playing .slot img{width:76%!important;height:76%!important;max-width:76%;max-height:76%;object-fit:contain;object-position:center}
+body.is-playing .topping:not(.herb-topping){width:23%}
+@media(min-width:601px) and (max-width:1000px){body.is-playing .ingredients b{--bowl-size:50px;margin:0}}
+@media(max-width:600px){body.is-playing .ingredients b{--bowl-size:52px;margin:0 0 4px}}
+@media(max-width:370px){body.is-playing .ingredients b{--bowl-size:48px}}
+@media(max-height:650px) and (min-width:601px){body.is-playing .ingredients b{--bowl-size:46px;margin:0}}
+@media(max-width:600px) and (max-height:690px){body.is-playing .ingredients b{--bowl-size:45px;margin:0 0 3px}}
