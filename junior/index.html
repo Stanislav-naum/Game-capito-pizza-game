@@ -1,29 +1,29 @@
 <!doctype html>
-<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#174c38"><title>CAPITO — PIZZA MAKER JUNIOR</title><link rel="stylesheet" href="/junior/junior.css"><script defer src="/junior/junior.js"></script></head>
-<body><main>
-<header><a href="/?games=1" class="back">Все игры</a><span class="wordmark">CAPITO</span><button id="sound" aria-pressed="false" aria-label="Включить звук">Звук выкл.</button></header>
-<section id="welcome" class="panel">
-<span class="eyebrow">МАЛЕНЬКАЯ КУХНЯ · БОЛЬШИЕ ПОБЕДЫ</span>
-<h1>PIZZA MAKER<br><em>JUNIOR</em></h1>
-<div class="hero-pizza" aria-hidden="true">🍕</div>
-<p class="intro">Надень колпак пиццайоло!<br>Собери пиццу точно по заказу.</p>
-<div class="age-switch" role="group" aria-label="Возраст"><button data-age="4-7" aria-pressed="true">4–7 лет<small>С подсказками · 3 пиццы</small></button><button data-age="8-12" aria-pressed="false">8–12 лет<small>На память · 5 пицц</small></button></div>
-<ol class="instructions"><li>Посмотри на заказ.</li><li>Нажимай ингредиенты по порядку — слева направо.</li><li>Проверь пиццу и отправь её в печь!</li></ol>
-<button id="start" class="primary">Начать готовить</button><p id="start-status" class="status" role="status"></p>
-<p class="privacy">Без имени и телефона. Игровой псевдоним появится автоматически.<br>Тестовый детский турнир: отдельный рейтинг, без призов PIZZA CUT.</p>
-<div class="tabs"><button id="show-rank">🏆 Рейтинг недели</button><button id="show-badges">🏅 Мои достижения</button></div>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#193d31"><meta name="description" content="Маленькая пиццерия CAPITO. Собирай пиццу, запоминай заказы и стань мастером кухни."><title>CAPITO — маленькая пиццерия</title><link rel="stylesheet" href="/junior/junior.css?v=3"><link rel="preload" as="image" href="/junior/art/pizza-base.png"><script defer src="/junior/junior.js?v=3"></script></head>
+<body data-screen="welcome"><main>
+<header class="site-header"><a href="/?games=1" class="back">Все игры</a><a class="brand" href="/junior/" aria-label="CAPITO Junior"><span>CAPITO</span><small>JUNIOR CLUB</small></a><button id="sound" class="sound" aria-pressed="false" aria-label="Включить звук"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 5L5 9H2V15H5L10 19ZM15 8L21 16M21 8L15 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Звук выкл.</span></button></header>
+<section id="welcome" class="welcome">
+<div class="welcome-copy"><span class="eyebrow"><i></i> ТВОЯ ПЕРВАЯ ПИЦЦЕРИЯ</span><h1>Большое дело<br>маленького<br><em>шефа.</em></h1><p class="intro">Собери пиццу по заказу,<br>отправь в печь и удиви всех!</p>
+<div class="age-switch" role="group" aria-label="Возраст"><button data-age="4-7" aria-pressed="true"><strong>4–7 <span>лет</span></strong><small>Готовим с подсказкой</small></button><button data-age="8-12" aria-pressed="false"><strong>8–12 <span>лет</span></strong><small>Готовим по памяти</small></button></div>
+<button id="start" class="primary start-button"><img src="/junior/art/hat.svg" alt="">Надеть колпак</button><p id="start-status" class="status" role="status"></p>
+<div class="welcome-links"><button id="show-rank"><img src="/junior/art/cup.svg" alt="">Рейтинг недели</button><button id="show-badges"><span class="mini-star" aria-hidden="true">✦</span>Мои награды</button></div>
+</div>
+<div class="welcome-scene" aria-hidden="true"><div class="scene-heading">PIZZA MAKER <span>JUNIOR</span></div><div class="hero-check"><span>BUON APPETITO!</span><strong>Один маленький шеф.<br>Много больших побед.</strong></div><div class="hero-board"><div class="hero-pizza"><img class="base-image" src="/junior/art/pizza-base.png" alt=""><img class="hero-top ht1" src="/junior/art/basil.svg" alt=""><img class="hero-top ht2" src="/junior/art/tomato.svg" alt=""><img class="hero-top ht3" src="/junior/art/pepperoni.svg" alt=""><img class="hero-top ht4" src="/junior/art/basil.svg" alt=""><img class="hero-top ht5" src="/junior/art/tomato.svg" alt=""></div></div><div class="flour flour-one"></div><div class="flour flour-two"></div><img class="scene-basil" src="/junior/art/basil.svg" alt=""><div class="chef-stamp"><img src="/junior/art/hat.svg" alt=""><span>FATTO CON AMORE</span></div><div class="scene-caption"><span>Свежие ингредиенты</span><span>Твоя фантазия</span><span>Настоящий азарт</span></div></div>
+<div class="how-to"><div><span class="step">01</span><p><strong>Посмотри заказ</strong><small>Запомни ингредиенты слева направо</small></p></div><div><span class="step">02</span><p><strong>Собери пиццу</strong><small>Нажимай на миски в нужном порядке</small></p></div><div><span class="step">03</span><p><strong>Отправь в печь</strong><small>За точный заказ получишь больше очков</small></p></div></div>
+<p class="privacy">Без имени и телефона. У каждого шефа свой игровой псевдоним.<br>Детский рейтинг отдельно от PIZZA CUT. Награды — игровые, без призов.</p>
 </section>
-<section id="kitchen" class="panel" hidden>
-<div class="hud"><span id="round"></span><strong id="clock" role="timer"></strong><button id="exit">Выйти</button></div>
-<h2 id="order-title">Заказ шефа</h2><p id="hint" class="status" aria-live="polite"></p>
-<div id="recipe" class="recipe" aria-label="Ингредиенты заказа"></div>
-<div class="pizza" id="pizza" aria-label="Собранная пицца"><div id="toppings"></div></div>
-<p id="placement-status" role="status">Выбери первый ингредиент</p>
-<div id="ingredients" class="ingredients" aria-label="Выбрать ингредиент"></div>
-<div class="actions"><button id="undo">Убрать последний</button><button id="bake" class="primary">В печь!</button></div>
-<p class="privacy">Тап по ингредиенту кладёт его на пиццу. Перетаскивать не нужно.</p>
+<section id="kitchen" class="kitchen" hidden>
+<div class="kitchen-top"><div class="kitchen-brand"><img src="/junior/art/hat.svg" alt=""><div><strong>Маленькая пиццерия</strong><span>CAPITO JUNIOR</span></div></div><div class="round-group"><span id="round"></span><div id="round-dots" aria-hidden="true"></div></div><div class="timer"><svg viewBox="0 0 50 50" aria-hidden="true"><circle cx="25" cy="25" r="21"/><circle id="timer-ring" cx="25" cy="25" r="21"/></svg><strong id="clock" role="timer"></strong></div><button id="exit" class="exit">Выйти</button></div>
+<div class="kitchen-world">
+<div class="wall-detail"><span>FATTO CON AMORE</span><i></i><span>CAPITO · PICCOLI CHEF</span></div>
+<div class="order-ticket"><div class="ticket-top"><span>CAPITO</span><span id="ticket-number">ЗАКАЗ 01</span></div><h2 id="order-title">Заказ шефа</h2><p id="hint" class="status" aria-live="polite"></p><div id="recipe" class="recipe" aria-label="Ингредиенты заказа"></div><div id="memory-cover" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a5 5 0 0 1 5 5c3 0 5 3 3 6v4H4v-4C2 11 4 8 7 8a5 5 0 0 1 5-5Z" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span>Ты всё запомнил!</span></div><div class="ticket-bottom"><span>ГОТОВИМ С ЛЮБОВЬЮ</span><div class="barcode"></div></div></div>
+<div class="prep-area"><div class="board"><div class="pizza" id="pizza" aria-label="Собранная пицца"><img class="base-image" src="/junior/art/pizza-base.png" alt="Пицца с томатным соусом и моцареллой"><div id="toppings"></div></div></div><div id="placement-status" class="placement-status" role="status">Выбери первый ингредиент</div><div id="bake-message" class="bake-message" aria-live="polite"></div></div>
+<div class="oven-area" aria-hidden="true"><div class="oven-label">LA PIZZERIA</div><div class="oven"><div class="oven-arch"><div class="oven-glow"></div><div class="fire"><i></i><i></i><i></i></div></div><div class="oven-sill"></div></div><span class="oven-caption">Здесь рождается<br>маленькое чудо</span><div class="oven-tools"></div></div>
+</div>
+<div class="ingredient-station"><div class="station-title"><span>СВЕЖЕЕ НА СТОЛЕ</span><span id="station-hint">Выбирай по порядку</span></div><div id="ingredients" class="ingredients" aria-label="Выбрать ингредиент"></div></div>
+<div class="kitchen-actions"><button id="undo" class="undo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 4L3 9L8 14M3 9H14C22 9 22 20 14 20H10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Убрать последний</button><p>Нажми на ингредиент —<br>он окажется на пицце</p><button id="bake" class="primary bake-button"><img src="/junior/art/oven.svg" alt="">В печь!</button></div>
 </section>
-<section id="result" class="panel" hidden><span class="eyebrow">БРАВО, ПИЦЦАЙОЛО!</span><h2>Заказы готовы!</h2><div class="result-icon">👨‍🍳</div><h3 id="result-score"></h3><p id="result-detail" role="status"></p><div id="earned" class="badges"></div><button id="save-retry" hidden>Повторить сохранение</button><button id="again" class="primary">Готовить ещё</button><button id="result-rank">Рейтинг недели</button><p class="privacy">Это тестовый детский рейтинг. Результаты PIZZA CUT и призы считаются отдельно.</p></section>
-<section id="board" class="panel" hidden><span class="eyebrow">КЛУБ ЮНЫХ ПИЦЦАЙОЛО</span><h2 id="board-title"></h2><p id="board-status" role="status"></p><div id="board-content"></div><button id="home" class="primary">На кухню</button></section>
-<footer>CAPITO · PIZZA MAKER JUNIOR · PREVIEW</footer>
+<section id="result" class="panel result-panel" hidden><span class="eyebrow">BRAVO, PICCOLO CHEF!</span><div class="result-medal"><img src="/junior/art/hat.svg" alt="Колпак шефа"><i>✦</i><i>✦</i><i>✦</i></div><h2>Вот это шеф!</h2><p class="result-subtitle">Кухня CAPITO тобой гордится.</p><h3 id="result-score"></h3><p id="result-detail" role="status"></p><div id="earned" class="badges"></div><button id="save-retry" hidden>Повторить сохранение</button><button id="again" class="primary">Ещё один заказ</button><button id="result-rank" class="text-button">Посмотреть рейтинг недели</button><p class="privacy">Тестовый детский турнир. Результаты и призы PIZZA CUT считаются отдельно.</p></section>
+<section id="board" class="panel board-panel" hidden><img class="board-cup" src="/junior/art/cup.svg" alt=""><span class="eyebrow">КЛУБ МАЛЕНЬКИХ ШЕФОВ</span><h2 id="board-title"></h2><p id="board-status" role="status"></p><div id="board-content"></div><button id="home" class="primary">Вернуться на кухню</button></section>
+<footer><span>CAPITO</span><span>PICCOLI CHEF, GRANDI SOGNI</span><small>ТЕСТОВАЯ ВЕРСИЯ</small></footer>
 </main></body></html>
