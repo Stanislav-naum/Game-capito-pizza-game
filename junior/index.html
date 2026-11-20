@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#174c38"><title>CAPITO — PIZZA MAKER JUNIOR</title><link rel="stylesheet" href="/junior/junior.css"><script defer src="/junior/junior.js"></script></head>
+<body><main>
+<header><a href="/?games=1" class="back">Все игры</a><span class="wordmark">CAPITO</span><button id="sound" aria-pressed="false" aria-label="Включить звук">Звук выкл.</button></header>
+<section id="welcome" class="panel">
+<span class="eyebrow">МАЛЕНЬКАЯ КУХНЯ · БОЛЬШИЕ ПОБЕДЫ</span>
+<h1>PIZZA MAKER<br><em>JUNIOR</em></h1>
+<div class="hero-pizza" aria-hidden="true">🍕</div>
+<p class="intro">Надень колпак пиццайоло!<br>Собери пиццу точно по заказу.</p>
+<div class="age-switch" role="group" aria-label="Возраст"><button data-age="4-7" aria-pressed="true">4–7 лет<small>С подсказками · 3 пиццы</small></button><button data-age="8-12" aria-pressed="false">8–12 лет<small>На память · 5 пицц</small></button></div>
+<ol class="instructions"><li>Посмотри на заказ.</li><li>Нажимай ингредиенты по порядку — слева направо.</li><li>Проверь пиццу и отправь её в печь!</li></ol>
+<button id="start" class="primary">Начать готовить</button><p id="start-status" class="status" role="status"></p>
+<p class="privacy">Без имени и телефона. Игровой псевдоним появится автоматически.<br>Тестовый детский турнир: отдельный рейтинг, без призов PIZZA CUT.</p>
+<div class="tabs"><button id="show-rank">🏆 Рейтинг недели</button><button id="show-badges">🏅 Мои достижения</button></div>
+</section>
+<section id="kitchen" class="panel" hidden>
+<div class="hud"><span id="round"></span><strong id="clock" role="timer"></strong><button id="exit">Выйти</button></div>
+<h2 id="order-title">Заказ шефа</h2><p id="hint" class="status" aria-live="polite"></p>
+<div id="recipe" class="recipe" aria-label="Ингредиенты заказа"></div>
+<div class="pizza" id="pizza" aria-label="Собранная пицца"><div id="toppings"></div></div>
+<p id="placement-status" role="status">Выбери первый ингредиент</p>
+<div id="ingredients" class="ingredients" aria-label="Выбрать ингредиент"></div>
+<div class="actions"><button id="undo">Убрать последний</button><button id="bake" class="primary">В печь!</button></div>
+<p class="privacy">Тап по ингредиенту кладёт его на пиццу. Перетаскивать не нужно.</p>
+</section>
+<section id="result" class="panel" hidden><span class="eyebrow">БРАВО, ПИЦЦАЙОЛО!</span><h2>Заказы готовы!</h2><div class="result-icon">👨‍🍳</div><h3 id="result-score"></h3><p id="result-detail" role="status"></p><div id="earned" class="badges"></div><button id="save-retry" hidden>Повторить сохранение</button><button id="again" class="primary">Готовить ещё</button><button id="result-rank">Рейтинг недели</button><p class="privacy">Это тестовый детский рейтинг. Результаты PIZZA CUT и призы считаются отдельно.</p></section>
+<section id="board" class="panel" hidden><span class="eyebrow">КЛУБ ЮНЫХ ПИЦЦАЙОЛО</span><h2 id="board-title"></h2><p id="board-status" role="status"></p><div id="board-content"></div><button id="home" class="primary">На кухню</button></section>
+<footer>CAPITO · PIZZA MAKER JUNIOR · PREVIEW</footer>
+</main></body></html>
