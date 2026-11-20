@@ -191,3 +191,9 @@ body{background:linear-gradient(90deg,#f7f4ebdb,#ede8dabf),url('/capito-marble.w
 @media(max-width:800px){.welcome h1{font-size:47px;letter-spacing:-1.9px}.welcome-copy>.eyebrow{font-size:8px;letter-spacing:1.8px}}
 @media(max-width:600px){.welcome h1{font-size:46px;line-height:1.05;letter-spacing:-1.7px;margin:20px 0 19px}.welcome h1 br{display:block!important}.welcome h1 em{display:block}.welcome .intro{font-size:12px;max-width:55%;line-height:1.7}.welcome-scene{border-radius:0}.hero-board{top:148px;width:220px;right:-78px}.hero-top{filter:drop-shadow(0 2px 1px #3b281c30)}}
 @media(max-width:370px){.welcome h1{font-size:40px}.welcome .intro{font-size:11px}.hero-board{top:147px;width:195px;right:-73px}}
+
+/* Keep the complete hero pizza inside its photo frame on wide screens. */
+@media(min-width:601px){
+.welcome-scene{container-type:size}
+.hero-board{width:min(91%,calc(100cqh - 145px));left:50%;right:auto;top:125px;transform:translateX(-50%) rotate(-14deg)}
+}

@@ -7,3 +7,8 @@
 #capito-games .cg-stamp{background:#efe7d1df}
 @media(max-width:950px){#capito-games h1{font-size:50px}}
 @media(max-width:650px){#capito-games h1{font-size:45px;letter-spacing:-1.7px}#capito-games .cg-card strong{font-size:23px}}
+
+@media(min-width:651px){
+#capito-games .cg-scene{container-type:size}
+#capito-games .cg-board{width:min(92%,calc(100cqh - 180px));left:50%;top:150px;transform:translateX(-50%)}
+}
