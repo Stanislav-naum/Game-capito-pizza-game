@@ -1,7 +1,7 @@
 (()=>{
 "use strict";
 const $=id=>document.getElementById(id),SIZE=800,KEY="capito-junior-coloring-v1-";
-const pages=[{id:"pizza",name:"Моя пицца"},{id:"chef",name:"Котёнок-повар"},{id:"oven",name:"Дровяная печь"}];
+const pages=[{"id":"pizza","name":"Моя пицца"},{"id":"chef","name":"Котёнок-повар"},{"id":"oven","name":"Дровяная печь"},{"id":"slice","name":"Весёлый кусочек"},{"id":"panda","name":"Панда-пиццайоло"},{"id":"delivery","name":"Пицца едет в гости"},{"id":"rabbit","name":"Зайчик готовит"},{"id":"table","name":"Пицца для друзей"},{"id":"catparty","name":"Праздник в пиццерии"}];
 const colors=[["Красный","#ed6956"],["Оранжевый","#eda04e"],["Жёлтый","#ffd76b"],["Зелёный","#81ad71"],["Тёмно-зелёный","#345f48"],["Голубой","#85bedc"],["Фиолетовый","#ad95d0"],["Розовый","#efa2bd"],["Коричневый","#b78a60"],["Кремовый","#f5dfb0"],["Белый","#ffffff"]];
 const canvas=$("coloring-canvas"),ctx=canvas.getContext("2d",{willReadFrequently:true});
 let current="pizza",selected=colors[0],ready=false,mask=null,base=null,history=[],loadToken=0,saveTimer=null,opened=false,pointer=null,cursor={x:400,y:400},dirty=false;
@@ -62,11 +62,43 @@ function paint(x,y){
  if(!count)return;
  history.push(before);if(history.length>8)history.shift();ctx.putImageData(frame,0,0);updateButtons();queueSave();status("Красиво получается! Можно выбрать ещё один цвет.");
 }
-pages.forEach(p=>{
- const b=document.createElement("button");b.type="button";b.dataset.page=p.id;b.setAttribute("aria-pressed",String(p.id===current));
- const image=document.createElement("img");image.src="/junior/art/coloring/"+p.id+".png";image.alt="";image.loading="lazy";
- const label=document.createElement("span");label.textContent=p.name;b.append(image,label);b.onclick=()=>loadPage(p.id);$("coloring-pages").append(b);
-});
+
+const packs=[
+ {name:"Моя первая пиццерия",ids:["pizza","chef","oven"]},
+ {name:"Пицца отправляется в гости",ids:["slice","panda","delivery"]},
+ {name:"Праздник маленьких поваров",ids:["rabbit","table","catparty"]}
+];
+function weekInfo(now=Date.now()){
+ const day=86400000,week=7*day,moscow=now+3*3600000,epoch=Date.UTC(2026,10,23);
+ const number=Math.floor((moscow-epoch)/week),index=((number%packs.length)+packs.length)%packs.length;
+ const start=epoch+number*week;
+ return {number,index,start,end:start+6*day,next:start+week};
+}
+let activeWeek=null,archiveMode=false;
+const dateLabel=value=>new Intl.DateTimeFormat("ru-RU",{day:"numeric",month:"long",timeZone:"UTC"}).format(new Date(value));
+function savedPages(){return pages.filter(p=>{try{return !!localStorage.getItem(KEY+p.id);}catch{return false;}});}
+function renderPages(){
+ const info=weekInfo(),pack=packs[info.index],available=archiveMode?savedPages():pack.ids.map(id=>pages.find(p=>p.id===id));
+ $("coloring-week-title").textContent="Раскраски недели · "+pack.name;
+ $("coloring-week-dates").textContent=dateLabel(info.start)+" — "+dateLabel(info.end)+". Новый набор — "+dateLabel(info.next)+" (по Москве).";
+ $("coloring-archive").setAttribute("aria-pressed",String(archiveMode));
+ $("coloring-archive").textContent=archiveMode?"К раскраскам недели":"Мои рисунки";
+ $("coloring-pages").setAttribute("aria-label",archiveMode?"Сохранённые рисунки":"Раскраски недели");
+ $("coloring-pages").replaceChildren();
+ available.forEach(p=>{
+  const b=document.createElement("button");b.type="button";b.dataset.page=p.id;b.setAttribute("aria-pressed",String(p.id===current));
+  const image=document.createElement("img");image.src="/junior/art/coloring/"+p.id+".png";image.alt="";image.loading="lazy";
+  const label=document.createElement("span");label.textContent=p.name;b.append(image,label);b.onclick=()=>loadPage(p.id);$("coloring-pages").append(b);
+ });
+ if(!available.length){const empty=document.createElement("p");empty.className="coloring-archive-empty";empty.textContent="Здесь появятся твои раскрашенные картинки. Выбери рисунок недели и добавь цвет!";$("coloring-pages").append(empty);}
+ return available;
+}
+function refreshWeek(){
+ const info=weekInfo(),changed=activeWeek!==info.number;
+ if(changed){persist();archiveMode=false;activeWeek=info.number;const available=renderPages();loadPage(available[0].id);}
+ else{renderPages();loadPage(current);}
+}
+$("coloring-archive").onclick=()=>{persist();archiveMode=!archiveMode;const available=renderPages();if(available.length&&!available.some(p=>p.id===current))loadPage(available[0].id);};
 colors.forEach(([name,hex],index)=>{
  const b=document.createElement("button");b.type="button";b.className="coloring-swatch";b.style.setProperty("--swatch",hex);b.setAttribute("aria-label",name);b.setAttribute("aria-pressed",String(index===0));b.title=name;
  const dot=document.createElement("span");dot.setAttribute("aria-hidden","true");b.append(dot);
@@ -99,8 +131,9 @@ $("coloring-download").onclick=()=>{
  }catch{status("Не получилось скачать рисунок. Попробуй ещё раз.");}
 };
 $("coloring-print").onclick=()=>{if(ready){persist();window.print();}};
-window.addEventListener("capito-coloring-open",()=>{opened=true;loadPage(current);});
+window.addEventListener("capito-coloring-open",()=>{opened=true;refreshWeek();});
 window.addEventListener("capito-coloring-close",()=>{opened=false;persist();pointer=null;});
+setInterval(()=>{if(opened&&!document.hidden&&activeWeek!==weekInfo().number)refreshWeek();},60000);
 window.addEventListener("pagehide",persist);
-document.addEventListener("visibilitychange",()=>{if(document.hidden&&opened)persist();});
+document.addEventListener("visibilitychange",()=>{if(document.hidden&&opened)persist();else if(opened&&activeWeek!==weekInfo().number)refreshWeek();});
 })();
