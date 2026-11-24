@@ -145,13 +145,27 @@ function renderOrderGuest(){
  image.src="/junior/art/guests/"+g.key+".png";image.alt=g.description;$("order-guest-name").textContent=g.name;
  $("order-voice-status").textContent="";
 }
+
+function selectFriendlyVoice(voices){
+ const russian=voices.filter(v=>/^ru(?:[-_]|$)/i.test(v.lang));
+ const score=v=>(/milena|милена|irina|ирина|svetlana|светлана|natal|натал|alena|ал[её]на|tatyana|татьяна|katerina|катерина|katya|катя|dariya|дарья|female/i.test(v.name)?30:0)+(/enhanced|premium|natural|neural|улучш/i.test(v.name)?20:0)+(v.localService?3:0)+(v.default?2:0);
+ return russian.slice().sort((a,b)=>score(b)-score(a))[0]||null;
+}
+function friendlyVoice(utterance,kind="order"){
+ utterance.lang="ru-RU";
+ // A gentle, youthful storyteller: a modest pitch lift and clear, unhurried delivery.
+ utterance.pitch=1.2;utterance.rate=kind==="story"?.88:age==="4-7"?.86:.92;utterance.volume=1;
+ const voice=selectFriendlyVoice(window.speechSynthesis.getVoices());if(voice)utterance.voice=voice;
+ return utterance;
+}
+
 function stopGuestVoice(message=""){
  if(!guestVoiceActive)return;
  guestVoiceToken++;guestVoiceActive=false;clearTimeout(guestVoiceTimeout);
  if(guestVoicePausedTimer&&session&&!finished)startTime+=Date.now()-guestVoiceStarted;
  guestVoicePausedTimer=false;
  if("speechSynthesis" in window)window.speechSynthesis.cancel();
- if(guestVoiceButton){guestVoiceButton.textContent=guestVoiceButton.id==="listen-order"?"Послушать заказ":"Послушать гостя";guestVoiceButton.setAttribute("aria-pressed","false");}
+ if(guestVoiceButton){guestVoiceButton.textContent=guestVoiceButton.id==="listen-order"?"Послушать заказ":guestVoiceButton.id==="preview-voice"?"Послушать голос":"Послушать гостя";guestVoiceButton.setAttribute("aria-pressed","false");}
  if(guestVoiceStatus)guestVoiceStatus.textContent=message;
 }
 function playGuestVoice(text,button,status){
@@ -159,15 +173,15 @@ function playGuestVoice(text,button,status){
  if(guestVoiceActive&&guestVoiceButton===button){stopGuestVoice("Озвучка остановлена");return;}
  stopGuestVoice();stopStory();
  guestVoiceToken++;const token=guestVoiceToken;
- guestVoiceActive=true;guestVoiceButton=button;guestVoiceStatus=status;guestVoiceStarted=Date.now();guestVoicePausedTimer=stage==="assembly";
+ guestVoiceActive=true;guestVoiceButton=button;guestVoiceStatus=status;guestVoiceStarted=Date.now();guestVoicePausedTimer=!!session&&!finished&&document.body.dataset.screen==="kitchen"&&stage==="assembly";
  button.textContent="Остановить";button.setAttribute("aria-pressed","true");status.textContent=guestVoicePausedTimer?"Слушаем заказ · таймер на паузе":"Слушаем гостя";
- guestVoice=new SpeechSynthesisUtterance(text);guestVoice.lang="ru-RU";guestVoice.rate=age==="4-7"?.83:.9;
- const voice=window.speechSynthesis.getVoices().find(v=>/^ru[-_]/i.test(v.lang));if(voice)guestVoice.voice=voice;
+ guestVoice=friendlyVoice(new SpeechSynthesisUtterance(text),"order");
  guestVoice.onend=()=>{if(token===guestVoiceToken)stopGuestVoice("Можно послушать ещё раз");};
  guestVoice.onerror=()=>{if(token===guestVoiceToken)stopGuestVoice("Не получилось включить голос. Текст остаётся на экране.");};
  guestVoiceTimeout=setTimeout(()=>{if(token===guestVoiceToken)stopGuestVoice("Нажми, чтобы послушать ещё раз");},35000);
  try{window.speechSynthesis.speak(guestVoice);}catch{stopGuestVoice("Не получилось включить голос. Текст остаётся на экране.");}
 }
+$("preview-voice").onclick=()=>playGuestVoice("Привет, маленький шеф! Давай приготовим вкусную пиццу. Выбирай начинку, разгадывай загадки и угощай наших гостей. У тебя всё получится!",$("preview-voice"),$("preview-voice-status"));
 $("listen-order").onclick=()=>{
  if(!session||finished||stage!=="assembly")return;
  const g=guestForRecipe(session.recipes[round],round);
@@ -254,8 +268,7 @@ function stopStory(){storyToken++;if(canNarrate)window.speechSynthesis.cancel();
 function narratePart(token){
  if(token!==storyToken)return;
  if(storyPart>=storyParagraphs.length){storyPlaying=false;storyPart=0;listen.textContent="Послушать ещё раз";listen.setAttribute("aria-pressed","false");$("story-audio-status").textContent="А теперь ответь на вопрос под историей!";return;}
- narration=new SpeechSynthesisUtterance(storyParagraphs[storyPart]);narration.lang="ru-RU";narration.rate=.88;
- const voices=window.speechSynthesis.getVoices(),voice=voices.find(v=>/^ru[-_]/i.test(v.lang));if(voice)narration.voice=voice;
+ narration=friendlyVoice(new SpeechSynthesisUtterance(storyParagraphs[storyPart]),"story");
  narration.onend=()=>{if(token===storyToken){storyPart++;narratePart(token);}};
  narration.onerror=()=>{if(token!==storyToken)return;stopStory();$("story-audio-status").textContent="Не удалось включить голос. Историю можно прочитать ниже.";};
  window.speechSynthesis.speak(narration);
