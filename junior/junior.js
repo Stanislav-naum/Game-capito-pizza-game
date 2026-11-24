@@ -232,10 +232,14 @@ $("bake").onclick=()=>{
 };
 
 function stopOvenGame(){if(ovenFrame){cancelAnimationFrame(ovenFrame);ovenFrame=0;}}
+function ovenProgress(elapsed,period,reduced){
+ const phase=((elapsed%period)+period)%period/period;
+ const position=phase<.5?phase*200:200-phase*200;
+ return reduced?Math.round(position/10)*10:position;
+}
 function ovenPosition(){
- if(window.matchMedia("(prefers-reduced-motion: reduce)").matches)return 50;
- const period=age==="4-7"?4400:3400,phase=((Date.now()-ovenReadyAt)%period)/period;
- return phase<.5?phase*200:200-phase*200;
+ const reduced=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+ return ovenProgress(Date.now()-ovenReadyAt,reduced?6000:age==="4-7"?4400:3400,reduced);
 }
 function animateOven(){
  if(stage!=="oven-game"||finished){stopOvenGame();return;}
