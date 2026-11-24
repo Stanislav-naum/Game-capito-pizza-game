@@ -31,3 +31,5 @@
 #capito-games .cg-scene{background-image:linear-gradient(110deg,#f8f0dc73,#f4e8ce52),url('/junior/art/background/oak.jpg');background-blend-mode:normal}
 #capito-games .cg-board{background-image:linear-gradient(130deg,#f4e6c841,#e5d0ab2e),url('/junior/art/background/oak.jpg');background-blend-mode:normal}
 @media(max-width:650px){#capito-games .cg-scene{background:none}}
+
+#capito-games .cg-header .capito-logo{display:block;width:210px;height:auto;object-fit:contain}#capito-games .cg-footer .capito-logo{display:block;width:125px;height:auto;object-fit:contain}@media(max-width:600px){#capito-games .cg-header .capito-logo{width:145px}#capito-games .cg-footer .capito-logo{width:105px}}

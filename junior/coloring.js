@@ -3,6 +3,7 @@
 const $=id=>document.getElementById(id),SIZE=800,KEY="capito-junior-coloring-v1-";
 const pages=[{"id":"pizza","name":"Моя пицца"},{"id":"chef","name":"Котёнок-повар"},{"id":"oven","name":"Дровяная печь"},{"id":"slice","name":"Весёлый кусочек"},{"id":"panda","name":"Панда-пиццайоло"},{"id":"delivery","name":"Пицца едет в гости"},{"id":"rabbit","name":"Зайчик готовит"},{"id":"table","name":"Пицца для друзей"},{"id":"catparty","name":"Праздник в пиццерии"}];
 const colors=[["Красный","#ed6956"],["Оранжевый","#eda04e"],["Жёлтый","#ffd76b"],["Зелёный","#81ad71"],["Тёмно-зелёный","#345f48"],["Голубой","#85bedc"],["Фиолетовый","#ad95d0"],["Розовый","#efa2bd"],["Коричневый","#b78a60"],["Кремовый","#f5dfb0"],["Белый","#ffffff"]];
+const brandLogoPromise=imageAt("/junior/art/brand/capito-logo.png").then(image=>image,()=>null);
 const canvas=$("coloring-canvas"),ctx=canvas.getContext("2d",{willReadFrequently:true});
 let current="pizza",selected=colors[0],ready=false,mask=null,base=null,history=[],loadToken=0,saveTimer=null,opened=false,pointer=null,cursor={x:400,y:400},dirty=false;
 const status=text=>$("coloring-status").textContent=text;
@@ -121,11 +122,12 @@ canvas.addEventListener("keydown",e=>{
 canvas.addEventListener("blur",()=>$("coloring-cursor").hidden=true);
 $("coloring-undo").onclick=()=>{if(!ready||!history.length)return;ctx.putImageData(history.pop(),0,0);updateButtons();queueSave();status("Последний цвет отменён. Попробуем другой?");};
 $("coloring-clear").onclick=()=>{if(!ready)return;pushUndo();ctx.putImageData(base,0,0);updateButtons();queueSave();status("Снова чистый лист! Если передумал, нажми «Отменить».");};
-$("coloring-download").onclick=()=>{
+$("coloring-download").onclick=async()=>{
  if(!ready)return;persist();
+ const logo=await brandLogoPromise;
  try{
   const output=document.createElement("canvas");output.width=1000;output.height=1130;const paint=output.getContext("2d");
-  paint.fillStyle="#ffffff";paint.fillRect(0,0,1000,1130);paint.fillStyle="#234433";paint.font="bold 34px Georgia,serif";paint.textAlign="center";paint.fillText("CAPITO · маленький художник",500,60);
+  paint.fillStyle="#ffffff";paint.fillRect(0,0,1000,1130);paint.fillStyle="#234433";paint.font="bold 34px Georgia,serif";paint.textAlign="center";if(logo){paint.drawImage(logo,40,20,205,60);paint.font="24px sans-serif";paint.textAlign="right";paint.fillText("Маленький художник",960,57);paint.textAlign="center";}else{paint.fillText("Маленький художник",500,60);}
   paint.drawImage(canvas,40,90,920,920);paint.font="25px sans-serif";paint.fillText(pageInfo().name,500,1060);paint.font="15px sans-serif";paint.fillStyle="#78866d";paint.fillText("FATTO CON AMORE",500,1100);
   const a=document.createElement("a");a.download="capito-coloring-"+current+".png";a.href=output.toDataURL("image/png");document.body.append(a);a.click();a.remove();status("Картинка готова к сохранению. Покажи её своим близким!");
  }catch{status("Не получилось скачать рисунок. Попробуй ещё раз.");}
