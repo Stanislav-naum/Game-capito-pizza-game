@@ -1,5 +1,6 @@
 (()=>{"use strict";
 const $=id=>document.getElementById(id);
+if(location.hostname==="game-capito-pizza-game.vercel.app"){document.querySelector("footer small").textContent="КЛУБ МАЛЕНЬКИХ ШЕФОВ";const privacy=document.querySelector("#result .privacy");privacy.textContent=privacy.textContent.replace("Тестовый детский турнир.","Детский клуб CAPITO.");}
 const foods=[["tomato","Томат","POMODORO"],["cheese","Моцарелла","MOZZARELLA"],["basil","Базилик","BASILICO"],["mushroom","Грибы","FUNGHI"],["oregano","Орегано","ORIGANO"],["pepperoni","Пепперони","SALAME"],["cream-sauce","Соус сливочный","SALSA BIANCA"],["tomato-sauce","Соус томатный","SALSA DI POMODORO"],["pickles","Огурцы маринованные","CETRIOLINI"],["mortadella","Мортаделла","MORTADELLA"],["dor-blue","Дорблю","DOR BLUE"],["pastrami","Пастрами","PASTRAMI"]];
 
 const API="https://betbkhvyejtjqfyuxmql.supabase.co/rest/v1/rpc/";
