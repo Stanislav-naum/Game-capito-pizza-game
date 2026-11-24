@@ -37,7 +37,7 @@
 body.capito-games-open> :not(#capito-games):not(script):not(style):not(link){visibility:hidden!important;pointer-events:none!important}#capito-games{background-color:#f5f1e7!important;isolation:isolate}#capito-games .cg-card:focus-visible{outline:3px solid #cf793a;outline-offset:4px}
 
 /* CAPITO facade: the original welcome illustration behind the game selector. */
-#capito-games{background-color:#f5f0e6!important;background-image:linear-gradient(100deg,rgba(247,243,233,.86),rgba(247,243,233,.50)),url('/capito-facade-new.jpg');background-repeat:no-repeat;background-size:100% 100%,100% auto;background-position:center,center 125px;background-attachment:fixed}
+#capito-games{background-color:#f5f0e6!important;background-image:linear-gradient(100deg,rgba(247,243,233,.86),rgba(247,243,233,.50)),url('/junior/art/brand/capito-facade-original.jpg');background-repeat:no-repeat;background-size:100% 100%,100% auto;background-position:center,center 125px;background-attachment:fixed}
 #capito-games .cg-junior{background:rgba(255,253,247,.94)}
 #capito-games .cg-header,#capito-games .cg-footer{background:rgba(247,243,233,.45)}
-@media(max-width:650px){#capito-games{background-image:linear-gradient(180deg,rgba(247,243,233,.44) 0,rgba(247,243,233,.78) 340px,#f7f3e9 600px),url('/capito-facade-new.jpg');background-size:100% 100%,auto 300px;background-position:center,center 105px}#capito-games .cg-copy>p{color:#55614f}#capito-games .cg-kicker{color:#56634e}}
+@media(max-width:650px){#capito-games{background-image:linear-gradient(180deg,rgba(247,243,233,.44) 0,rgba(247,243,233,.78) 340px,#f7f3e9 600px),url('/junior/art/brand/capito-facade-original.jpg');background-size:100% 100%,100% auto;background-position:center,center 105px}#capito-games .cg-copy>p{color:#55614f}#capito-games .cg-kicker{color:#56634e}}
