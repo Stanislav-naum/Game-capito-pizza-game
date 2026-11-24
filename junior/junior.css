@@ -419,3 +419,31 @@ body[data-screen=serving] .theatre-oven{object-fit:cover;object-position:center}
 
 /* Keep the pizza on the hot hearth instead of above the fire. */
 @keyframes pizza-enter{0%{transform:translateY(35%) rotateX(50deg) scale(1.4);opacity:1}45%{transform:translate(10%,8%) rotateX(58deg) scale(.68)}100%{transform:translate(10%,8%) rotateX(58deg) scale(.68);filter:brightness(.8) saturate(1.3)}}
+
+/* CAPITO's little guests */
+.guest-order{display:flex;align-items:center;gap:7px;min-width:0;text-align:left}
+.guest-order img{width:43px;height:43px;object-fit:contain;flex-shrink:0;filter:drop-shadow(0 2px 2px #68471a20)}
+.guest-order>div{min-width:0}.guest-order small{display:block;font-size:6px;letter-spacing:1.6px;color:#879175;margin-bottom:3px}.guest-order strong{display:block;font-size:13px;color:#234433;font-family:var(--font-title);letter-spacing:0}
+.order-ticket .ticket-top{gap:5px;padding-bottom:7px}.order-ticket #ticket-number{font-size:7px;white-space:nowrap;letter-spacing:.6px}
+.order-ticket .riddle-tools{gap:6px}.order-ticket #listen-order{background:#234433;color:#fff8e5;border:1px solid #234433;min-height:33px}
+.order-ticket #listen-order[aria-pressed=true]{background:#c36d35;border-color:#c36d35}
+.order-voice-status{font-size:10px;line-height:1.35;color:#8c6c3f;margin:4px 0 0;min-height:0}
+.order-voice-status:empty{display:none}
+.guest-delivery{flex:1;min-height:0;width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:13px;padding:5px 0}
+.guest-delivery[hidden]{display:none}.guest-celebration{display:flex;align-items:center;justify-content:center;gap:20px;max-width:100%;flex-shrink:1;min-height:0}
+.guest-celebration>img{width:min(220px,29dvh);height:min(220px,29dvh);object-fit:contain;filter:drop-shadow(0 9px 9px #5c4a1b22);animation:guest-hello .65s ease both}
+.guest-celebration>span{font-size:30px;color:#cc9841;animation:guest-sparkle 1.6s ease-in-out infinite alternate}.guest-celebration>span:last-child{font-size:22px;animation-delay:.4s}
+.guest-bubble{position:relative;max-width:560px;border:1px solid #d3d9c5;background:#fffdf2;border-radius:22px;padding:15px 23px;box-shadow:0 6px 16px #32412b0d}
+.guest-bubble:before{content:"";position:absolute;width:15px;height:15px;background:#fffdf2;border-top:1px solid #d3d9c5;border-left:1px solid #d3d9c5;top:-8px;left:calc(50% - 8px);transform:rotate(45deg)}
+.guest-bubble>span{font-size:10px;letter-spacing:2px;color:#a07536;text-transform:uppercase;font-weight:800}
+.guest-bubble>p{font-size:17px;line-height:1.45;color:#2c4b37;margin:7px 0 0}
+.guest-delivery-actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;width:100%;margin-top:3px}
+.guest-delivery-actions button{min-height:46px;padding:11px 20px;font-size:14px}
+.guest-result{margin:17px 0;padding:15px;background:#edf0e2;border:1px solid #d4dcc6;border-radius:14px}.guest-result[hidden]{display:none}.guest-result>strong{font-size:13px;color:#536c47}
+.guest-result-row{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-top:10px}.guest-result-row>div{display:flex;flex-direction:column;align-items:center;gap:4px}.guest-result-row img{height:57px;width:57px;object-fit:contain}.guest-result-row span{font-size:11px;color:#45603b}
+@keyframes guest-hello{0%{opacity:0;transform:translateY(12px) scale(.9)}65%{transform:translateY(-4px) scale(1.03)}100%{opacity:1;transform:none}}
+@keyframes guest-sparkle{from{opacity:.5;transform:scale(.8) rotate(-8deg)}to{opacity:1;transform:scale(1.05) rotate(8deg)}}
+@media(max-width:1000px) and (min-width:601px){.guest-order{gap:4px}.guest-order img{width:34px;height:34px}.guest-order strong{font-size:11px}.guest-order small{font-size:5px;letter-spacing:1px}.order-ticket #ticket-number{font-size:6px}.order-ticket .riddle-tools button{font-size:9px;padding:5px 7px}}
+@media(max-width:600px){.guest-order{gap:5px}.guest-order img{width:31px;height:31px}.guest-order small{font-size:6px;letter-spacing:1px;margin-bottom:1px}.guest-order strong{font-size:12px}body.is-playing .order-ticket .ticket-top{padding-bottom:3px;margin-bottom:3px}body.is-playing .order-ticket .riddle-tools{justify-content:flex-start;gap:4px;align-items:center}body.is-playing .order-ticket .riddle-tools>span{font-size:9px;margin-right:auto}body.is-playing .order-ticket .riddle-tools button{font-size:9px;padding:5px 6px;min-height:29px}.order-voice-status{font-size:9px;margin-top:2px}body.is-playing .order-ticket .recipe{top:60px}.guest-delivery{gap:11px;padding:3px 0}.guest-celebration{gap:15px}.guest-celebration>img{width:min(190px,29dvh);height:min(190px,29dvh)}.guest-celebration>span{font-size:23px}.guest-bubble{padding:13px 16px;border-radius:17px}.guest-bubble>p{font-size:15px;line-height:1.4}.guest-delivery-actions{gap:8px}.guest-delivery-actions button{padding:10px 12px;font-size:12px;min-height:43px;flex:1}.guest-result-row{gap:12px}.guest-result-row img{width:48px;height:48px}}
+@media(max-height:600px){.guest-delivery{gap:7px}.guest-celebration>img{width:min(140px,26dvh);height:min(140px,26dvh)}.guest-bubble{padding:9px 16px}.guest-bubble>p{font-size:14px;margin-top:4px}.guest-bubble>span{font-size:9px}.guest-delivery-actions button{min-height:38px;padding:8px 15px;font-size:12px}}
+@media(prefers-reduced-motion:reduce){.guest-celebration>img,.guest-celebration>span{animation:none!important}}
