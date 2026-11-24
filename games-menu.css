@@ -33,3 +33,5 @@
 @media(max-width:650px){#capito-games .cg-scene{background:none}}
 
 #capito-games .cg-header .capito-logo{display:block;width:210px;height:auto;object-fit:contain}#capito-games .cg-footer .capito-logo{display:block;width:125px;height:auto;object-fit:contain}@media(max-width:600px){#capito-games .cg-header .capito-logo{width:145px}#capito-games .cg-footer .capito-logo{width:105px}}
+
+body.capito-games-open> :not(#capito-games):not(script):not(style):not(link){visibility:hidden!important;pointer-events:none!important}#capito-games{background-color:#f5f1e7!important;isolation:isolate}#capito-games .cg-card:focus-visible{outline:3px solid #cf793a;outline-offset:4px}
