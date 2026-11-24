@@ -136,10 +136,9 @@ const guests=[
 ];
 function guestForRecipe(recipe,index){
  if(mode==="free")return guests[index%guests.length];
- if(recipe.includes(5)||recipe.includes(11))return guests[2];
- if(recipe.includes(9)||recipe.includes(8))return guests[1];
- if(recipe.includes(1))return guests[0];
- return guests[index%guests.length];
+ const preferred=recipe.includes(5)||recipe.includes(11)?guests[2]:recipe.includes(9)||recipe.includes(8)?guests[1]:recipe.includes(1)?guests[0]:guests[index%guests.length];
+ const visited=new Set(servedGuests.map(g=>g.key));
+ return !visited.has(preferred.key)?preferred:guests.find(g=>!visited.has(g.key))||preferred;
 }
 function renderOrderGuest(){
  const g=guestForRecipe(session.recipes[round],round),image=$("order-guest-image");
