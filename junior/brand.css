@@ -144,3 +144,22 @@ body[data-screen=welcome] .start-button{padding:9px 16px;min-height:48px}
  .coloring-save-note{display:none}
  .coloring-status{font-size:9px;line-height:1.3}
 }
+
+@media(max-width:600px) and (max-height:690px){
+ body.is-playing .ingredients{grid-template-columns:repeat(5,minmax(0,1fr))!important;gap:2px!important}
+ body.is-playing .ingredients button{min-height:60px!important;padding:1px!important}
+ body.is-playing .ingredients .food-name{font-size:9px!important;line-height:1.12}
+ body.is-playing .ingredient-station{padding:5px 6px}
+ body.is-playing .order-ticket{min-height:0!important;padding:6px 8px 8px!important}
+ body.is-playing .order-ticket .ticket-top{margin-bottom:3px}
+ body.is-playing .order-ticket #hint{font-size:9px;line-height:1.3;min-height:34px!important;margin:3px 0!important;max-width:calc(100% - 92px)!important}
+ body.is-playing .order-ticket .riddle-tools{margin:2px 0!important;gap:3px}
+ body.is-playing .order-ticket .riddle-tools button{min-height:26px;font-size:8px;padding:4px}
+ body.is-playing .order-ticket .recipe{top:48px}
+ body.is-playing .kitchen-world{min-height:235px}
+ body.is-playing .prep-area{min-height:100px;padding-top:3px}
+ body.is-playing .board{width:min(51vw,calc(100cqh - 125px));min-width:95px}
+ body.is-playing .placement-status{display:none}
+ body.is-playing .kitchen-actions{min-height:58px;padding:6px 9px 8px}
+ body.is-playing .oven-area{width:45px;max-width:45px;bottom:12px}
+}
