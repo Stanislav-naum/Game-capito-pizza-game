@@ -43,3 +43,9 @@ body.capito-games-open> :not(#capito-games):not(script):not(style):not(link){vis
 @media(max-width:650px){#capito-games{background-image:linear-gradient(180deg,rgba(247,243,233,.44) 0,rgba(247,243,233,.78) 340px,#f7f3e9 600px),url('/junior/art/brand/capito-facade-original.jpg');background-size:100% 100%,100% auto;background-position:center,center 105px}#capito-games .cg-copy>p{color:#55614f}#capito-games .cg-kicker{color:#56634e}}
 
 #capito-games .cg-card strong{font-size:clamp(23px,3vw,30px);letter-spacing:-.5px;line-height:1.2}#capito-games .cg-card strong em{font-style:normal}@media(max-width:650px){#capito-games .cg-card strong{font-size:25px}}
+
+/* Keep the start screen anchored horizontally, including mobile edge overscroll. */
+html:has(#capito-games),body.capito-games-open{overflow-x:clip!important;overscroll-behavior-x:none!important;max-width:100%}
+body.capito-games-open{width:100%;touch-action:pan-y pinch-zoom}
+#capito-games{box-sizing:border-box;width:100%;max-width:100%;left:0;right:0;overflow-x:hidden!important;overscroll-behavior-x:none;touch-action:pan-y pinch-zoom}
+#capito-games .cg-main,#capito-games .cg-copy,#capito-games .cg-header,#capito-games .cg-footer{min-width:0;max-width:100%}
