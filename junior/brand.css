@@ -163,3 +163,13 @@ body[data-screen=welcome] .start-button{padding:9px 16px;min-height:48px}
  body.is-playing .kitchen-actions{min-height:58px;padding:6px 9px 8px}
  body.is-playing .oven-area{width:45px;max-width:45px;bottom:12px}
 }
+
+@media(max-width:700px){
+ .coloring-palette-box{grid-row:2!important}
+ .coloring-paper-column{display:block}
+ body[data-screen=coloring] footer{display:none}
+}
+@media(max-width:700px) and (max-height:650px){
+ .coloring-paper-column{max-width:min(100%,calc(100dvh - 390px))}
+ .coloring-week-banner strong{display:block;font-size:12px;line-height:1.2}
+}
