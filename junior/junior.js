@@ -5,7 +5,7 @@ const foods=[["tomato","Томат","POMODORO"],["cheese","Моцарелла","
 
 const API="https://betbkhvyejtjqfyuxmql.supabase.co/rest/v1/rpc/";
 const KEY="sb_publishable_AY3okNvvxefclorginvwZQ_fzRXjrYQ";
-let age="4-7",session=null,round=0,picks=[],answers=[],startTime=0,roundTime=0,tick=null,busy=false,finished=false,pending=false,stage="assembly",pauseStarted=0,wallStart=0,cuts=0,pointerStart=null,audio=null,sound=false,mode="riddle",revealed=false,ovenFrame=0,ovenReadyAt=0,ovenStars=0,ovenPlayed=0,servedGuests=[],lastGolden=false,guestVoice=null,guestVoiceToken=0,guestVoiceActive=false,guestVoiceStarted=0,guestVoicePausedTimer=false,guestVoiceButton=null,guestVoiceStatus=null,guestVoiceTimeout=null;
+let age="4-7",session=null,round=0,picks=[],answers=[],startTime=0,roundTime=0,tick=null,busy=false,finished=false,pending=false,stage="assembly",pauseStarted=0,wallStart=0,cuts=0,pointerStart=null,audio=null,sound=false,mode="riddle",revealed=false,ovenFrame=0,ovenReadyAt=0,ovenStars=0,ovenPlayed=0,servedGuests=[],lastGolden=false,guestVoice=null,guestVoiceToken=0,guestVoiceActive=false,guestVoiceStarted=0,guestVoicePausedTimer=false,guestVoiceButton=null,guestVoiceStatus=null,guestVoiceTimeout=null,ovenDeadline=0,ovenDeadlineTimer=null;
 const foodImage=id=>"/junior/art/photo/"+foods[id][0]+".png";
 const artMarkup=(name,alt="")=>"<picture class='food-photo'><source type='image/png' srcset='/junior/art/photo/"+name+".png'><img src='/junior/art/photo/"+name+".png' alt='"+alt+"' decoding='async'></picture>";
 async function rpc(name,body){const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),12000);try{const r=await fetch(API+"capito_junior_preview_"+name,{method:"POST",headers:{"Content-Type":"application/json",apikey:KEY},body:JSON.stringify(body),signal:controller.signal});if(!r.ok)throw Error("Сервис временно недоступен");return await r.json();}finally{clearTimeout(timeout)}}
@@ -69,7 +69,7 @@ function order(){
 $("reveal-recipe").onclick=()=>{revealed=!revealed;$("recipe").hidden=!revealed;$("reveal-recipe").setAttribute("aria-expanded",String(revealed));$("reveal-recipe").textContent=revealed?"Скрыть подсказку":"Показать подсказку";};
 function update(){
  if(!session||finished)return;
- if(mode!=="free"&&Date.now()-wallStart>295000){finish();return;}if(stage!=="assembly")return;
+ if(mode!=="free"&&Date.now()-wallStart>295000){finish();return;}if(stage==="oven-game"){if(!ovenRemaining())burnPizza();return;}if(stage!=="assembly")return;
  const remaining=mode==="free"?session.seconds:Math.max(0,session.seconds-Math.floor(((guestVoiceActive&&guestVoicePausedTimer?guestVoiceStarted:Date.now())-startTime)/1000));
  $("clock").textContent=mode==="free"?"∞":remaining+" с";$("clock").parentElement.classList.toggle("urgent",mode!=="free"&&remaining<=15);
  $("timer-ring").style.setProperty("--timer-offset",String(132*(1-remaining/session.seconds)));
@@ -218,38 +218,63 @@ function renderGuestResult(){
 
 $("bake").onclick=()=>{
  if(!session||busy||finished||picks.length<1||picks.length>6)return;
- busy=true;stage="baking";pauseStarted=Date.now();answers[round]=picks.slice();renderPizza();
+ document.querySelector(".serving-foot").textContent="Пицца печётся · готовься её достать";busy=true;stage="baking";pauseStarted=Date.now();answers[round]=picks.slice();renderPizza();
  const activeSession=session.id,activeRound=round;cuts=0;
  $("serving-title").textContent="В нашей дровяной печи";$("serving-hint").textContent="Огонь румянит бортики и плавит сыр…";
- stopOvenGame();$("guest-delivery").hidden=true;$("oven-challenge").hidden=true;$("bake-award").hidden=true;$("take-pizza").disabled=true;$("take-pizza").textContent="Пицца выпекается…";$("bake-theatre").hidden=false;$("slice-stage").hidden=true;$("slice-actions").hidden=true;
+ stopOvenGame();$("oven-burned").hidden=true;$("bake-theatre").classList.remove("pizza-burned");$("oven-warning").textContent="";$("guest-delivery").hidden=true;$("oven-challenge").hidden=true;$("bake-award").hidden=true;$("take-pizza").disabled=true;$("take-pizza").textContent="Пицца выпекается…";$("bake-theatre").hidden=false;$("slice-stage").hidden=true;$("slice-actions").hidden=true;
  $("oven-pizza").replaceChildren(pizzaCopy());screen("serving");note("bake");
  setTimeout(()=>{
   if(finished||session.id!==activeSession||round!==activeRound||stage!=="baking")return;
-  stage="oven-game";ovenReadyAt=Date.now();$("oven-challenge").hidden=false;$("oven-challenge").classList.toggle("wide-zone",age==="4-7");
+  document.querySelector(".serving-foot").textContent="Следи за печью — пицца может подгореть";stage="oven-game";ovenReadyAt=performance.now();ovenDeadline=Date.now()+(age==="4-7"?20000:14000);$("oven-countdown").classList.remove("urgent");$("doneness-runner").style.transform="translate3d(0,0,0)";updateOvenClock();ovenDeadlineTimer=setTimeout(burnPizza,age==="4-7"?20000:14000);$("oven-challenge").hidden=false;$("oven-challenge").classList.toggle("wide-zone",age==="4-7");
   $("serving-title").textContent="Поймай золотую корочку";$("serving-hint").textContent="Один точный момент — и ты мастер дровяной печи!";
   $("take-pizza").disabled=false;$("take-pizza").textContent="Достать пиццу";animateOven();
  },2800);
 };
 
-function stopOvenGame(){if(ovenFrame){cancelAnimationFrame(ovenFrame);ovenFrame=0;}}
-function ovenProgress(elapsed,period,reduced){
- const phase=((elapsed%period)+period)%period/period;
- const position=phase<.5?phase*200:200-phase*200;
- return reduced?Math.round(position/10)*10:position;
+function stopOvenGame(){
+ if(ovenFrame){cancelAnimationFrame(ovenFrame);ovenFrame=0;}
+ clearTimeout(ovenDeadlineTimer);ovenDeadlineTimer=null;
+}
+function ovenProgress(elapsed,period){
+ return 50-50*Math.cos(Math.max(0,elapsed)*Math.PI*2/period);
 }
 function ovenPosition(){
  const reduced=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
- return ovenProgress(Date.now()-ovenReadyAt,reduced?6000:age==="4-7"?4400:3400,reduced);
+ return ovenProgress(performance.now()-ovenReadyAt,reduced?6000:age==="4-7"?4400:3400);
+}
+function ovenRemaining(now=Date.now()){return Math.max(0,Math.ceil((ovenDeadline-now)/1000));}
+function updateOvenClock(){
+ const seconds=ovenRemaining(),clock=$("oven-clock");
+ if(clock.textContent!==seconds+" с")clock.textContent=seconds+" с";
+ $("oven-countdown").classList.toggle("urgent",seconds<=5);
+ if(seconds<=5&&seconds>0)$("oven-warning").textContent="Пора доставать! Пицца скоро подгорит.";
 }
 function animateOven(){
  if(stage!=="oven-game"||finished){stopOvenGame();return;}
- $("doneness-pointer").style.left=ovenPosition()+"%";ovenFrame=requestAnimationFrame(animateOven);
+ if(!ovenRemaining()){burnPizza();return;}
+ $("doneness-runner").style.transform="translate3d("+ovenPosition()+"%,0,0)";
+ updateOvenClock();ovenFrame=requestAnimationFrame(animateOven);
 }
+function burnPizza(){
+ if(stage!=="oven-game"||finished)return;
+ stage="burned";document.querySelector(".serving-foot").textContent="Таймер заказа на паузе · можно испечь заново";stopOvenGame();lastGolden=false;ovenPlayed++;answers[round]=[];
+ $("oven-clock").textContent="0 с";$("oven-challenge").hidden=true;
+ $("bake-theatre").classList.add("pizza-burned");
+ $("oven-pizza").replaceChildren(pizzaCopy(true));
+ $("serving-title").textContent="Ой, пицца подгорела!";
+ $("serving-hint").textContent="Бывает даже у шефов. Давай попробуем ещё раз!";
+ $("oven-burned").hidden=false;$("retry-oven").focus({preventScroll:true});note("bake");
+}
+$("retry-oven").onclick=()=>{
+ if(stage!=="burned"||finished)return;
+ startTime+=Date.now()-pauseStarted;busy=false;stage="assembly";$("bake").onclick();
+};
 $("take-pizza").onclick=()=>{
  if(stage!=="oven-game"||finished||busy===false)return;
+ if(!ovenRemaining()){burnPizza();return;}
  const position=ovenPosition(),margin=age==="4-7"?20:13,golden=Math.abs(position-50)<=margin;
  stopOvenGame();lastGolden=golden;ovenPlayed++;if(golden)ovenStars++;
- stage="cutting";$("oven-challenge").hidden=true;$("bake-theatre").hidden=true;$("slice-stage").hidden=false;$("slice-actions").hidden=false;
+ document.querySelector(".serving-foot").textContent="Таймер заказа на паузе · нарежь и подай пиццу";stage="cutting";$("oven-challenge").hidden=true;$("bake-theatre").hidden=true;$("slice-stage").hidden=false;$("slice-actions").hidden=false;
  $("slice-pizza").replaceChildren(pizzaCopy(true));$("serving-title").textContent="С пылу, с жару!";showRecipeReview();
  $("bake-award").hidden=false;$("bake-award").classList.toggle("golden",golden);
  $("bake-award").textContent=golden?"✦ Золотая корочка! Отличный момент, шеф!":"Твоя пицца готова! За золотой корочкой — в следующем заказе.";
