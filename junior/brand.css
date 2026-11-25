@@ -209,3 +209,40 @@ body[data-screen=welcome] .start-button{padding:9px 16px;min-height:48px}
  body[data-screen=welcome] .hero-check{right:12px;top:15%;padding:12px;font-size:10px}
  body[data-screen=welcome] .hero-check strong{font-size:10px}
 }
+
+/* Content-based canvas sizing: account for browser chrome and the actual controls. */
+@media screen{
+ body[data-screen=coloring] .coloring-paper-column{display:flex;flex-direction:column;align-items:center;width:100%;max-width:none;min-width:0;gap:0}
+ body[data-screen=coloring] .coloring-paper{width:min(100%,calc(var(--coloring-size,260px) + 16px));padding:7px;flex-shrink:0}
+ body[data-screen=coloring] .coloring-canvas-wrap{width:100%;aspect-ratio:1}
+ body[data-screen=coloring] .coloring-status,body[data-screen=coloring] .coloring-export-actions,body[data-screen=coloring] .coloring-save-note{width:100%}
+ body[data-screen=coloring] .coloring-paper-bottom{display:none}
+ body[data-screen=coloring] .coloring-paper-top{min-height:26px;height:26px;padding:0 0 5px}
+ body[data-screen=coloring] .coloring-paper-top .capito-logo{width:65px}
+ body[data-screen=coloring] .coloring-paper-top strong{font-size:10px}
+}
+@media(max-width:600px){
+ body.is-playing .kitchen-world{min-height:0!important;display:flex;flex-direction:column;padding:6px 9px}
+ body.is-playing .order-ticket{min-height:0!important;flex:0 0 auto;padding:6px 8px 8px!important;transform:none;filter:drop-shadow(0 2px 2px #34536d12)}
+ body.is-playing .order-ticket .ticket-top{padding-bottom:3px;margin-bottom:3px}
+ body.is-playing .guest-order img{width:24px;height:24px}
+ body.is-playing .guest-order strong{font-size:10px}
+ body.is-playing .guest-order small{font-size:5px}
+ body.is-playing .order-ticket h2{font-size:14px;margin:3px 0}
+ body.is-playing .order-ticket #hint{font-size:9px!important;line-height:1.3;min-height:0!important;max-width:calc(100% - 94px)!important;margin:3px 0!important}
+ body.is-playing .order-ticket .recipe{top:37px!important;gap:2px}
+ body.is-playing .order-ticket .slot{width:27px;height:27px}
+ body.is-playing .order-ticket .riddle-tools{margin:4px 0 0!important;gap:4px}
+ body.is-playing .order-ticket #listen-order,body.is-playing .order-ticket #reveal-recipe{font-size:8px;padding:4px 6px;min-height:25px}
+ body.is-playing .prep-area{container-type:size;flex:1 1 0;min-height:0!important;padding:4px 0;overflow:visible}
+ body.is-playing .board{width:min(68vw,calc(100cqh - 6px));min-width:0!important;max-height:100%;aspect-ratio:1}
+ body.is-playing .placement-status{display:none}
+ body.is-playing .oven-area{bottom:12px;right:9px}
+}
+#slice-board{cursor:url("/junior/art/pizza-cutter.svg") 29 58,crosshair}
+.pizza-cutter{position:absolute;width:64px;height:78px;max-width:none;z-index:150;pointer-events:none;transform:translate(-40%,-68%);filter:drop-shadow(0 3px 2px #243f5440)}
+.pizza-cutter.rolling{animation:knife-roll .16s ease-in-out infinite alternate}
+@keyframes knife-roll{to{transform:translate(-40%,-68%) rotate(9deg)}}
+@media(hover:hover){#slice-board:has(.pizza-cutter:not([hidden])){cursor:none}}
+#slice-pizza>.served-pizza{clip-path:none!important}
+@media(prefers-reduced-motion:reduce){.pizza-cutter.rolling{animation:none}}
