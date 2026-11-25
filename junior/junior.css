@@ -463,3 +463,7 @@ body[data-screen=serving] .theatre-oven{object-fit:cover;object-position:center}
 @media(max-width:600px){.oven-countdown{padding:6px 10px;font-size:11px}.oven-countdown strong{font-size:21px}.oven-warning{font-size:11px!important}.oven-burned{padding:12px;margin:9px 0}.oven-burned>strong{font-size:19px}.oven-burned p{font-size:12px}.oven-burned .primary{font-size:14px}}
 @media(max-height:600px){.oven-countdown{padding:4px 8px}.oven-countdown strong{font-size:18px}.oven-burned{padding:9px;margin:6px 0}.oven-burned p{margin:5px 0 8px;font-size:11px}}
 @media(prefers-reduced-motion:reduce){.pizza-burned:after{animation:none!important}}
+
+.cut-preview{stroke:#efb555;stroke-width:3;stroke-dasharray:4 3;filter:drop-shadow(0 1px 1px #392412)}#cut-lines{overflow:hidden}.pizza-wedge{will-change:transform}.cooked [data-ingredient=parmesan]{filter:sepia(.18) saturate(1.15) brightness(.96)}
+.scene-heading{font-size:12px;letter-spacing:3px}.scene-heading span{font-size:clamp(21px,3vw,32px);letter-spacing:3px}
+@media(max-width:600px){body.is-playing .food-name{font-size:10px!important}body.is-playing .ingredients{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:4px!important}body.is-playing .ingredients button{min-height:52px!important}body.is-playing .ingredients button>b{width:34px!important;height:34px!important}}
