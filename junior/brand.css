@@ -246,3 +246,16 @@ body[data-screen=welcome] .start-button{padding:9px 16px;min-height:48px}
 @media(hover:hover){#slice-board:has(.pizza-cutter:not([hidden])){cursor:none}}
 #slice-pizza>.served-pizza{clip-path:none!important}
 @media(prefers-reduced-motion:reduce){.pizza-cutter.rolling{animation:none}}
+
+@media screen{
+ body[data-screen=coloring] footer{display:none}
+ .coloring-swatch{padding:3px}
+}
+@media(min-width:701px){
+ .coloring-palette{grid-template-columns:repeat(4,minmax(0,1fr));gap:4px}
+ .coloring-swatch{min-height:38px;min-width:0}
+ .coloring-swatch span{width:28px;height:28px}
+ .coloring-palette-box{padding:10px}
+ .coloring-palette-box h3{font-size:16px;margin:0 0 6px}
+ .coloring-palette-box p{margin:6px 0 0;font-size:10px;min-height:14px}
+}
