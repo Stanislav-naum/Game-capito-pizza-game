@@ -1,11 +1,11 @@
 (()=>{"use strict";
 const $=id=>document.getElementById(id);
 if(location.hostname==="game-capito-pizza-game.vercel.app"){document.querySelector("footer small").textContent="КЛУБ МАЛЕНЬКИХ ШЕФОВ";const privacy=document.querySelector("#result .privacy");privacy.textContent=privacy.textContent.replace("Тестовый детский турнир.","Детский клуб CAPITO.");}
-const foods=[["tomato","Томат","POMODORO"],["cheese","Моцарелла","MOZZARELLA"],["basil","Базилик","BASILICO"],["mushroom","Грибы","FUNGHI"],["oregano","Орегано","ORIGANO"],["pepperoni","Пепперони","SALAME"],["cream-sauce","Соус сливочный","SALSA BIANCA"],["tomato-sauce","Соус томатный","SALSA DI POMODORO"],["pickles","Огурцы маринованные","CETRIOLINI"],["mortadella","Мортаделла","MORTADELLA"],["dor-blue","Дорблю","DOR BLUE"],["pastrami","Пастрами","PASTRAMI"]];
+const foods=[["tomato","Томат","POMODORO"],["cheese","Моцарелла","MOZZARELLA"],["basil","Базилик","BASILICO"],["mushroom","Грибы","FUNGHI"],["oregano","Орегано","ORIGANO"],["pepperoni","Пепперони","SALAME"],["cream-sauce","Соус сливочный","SALSA BIANCA"],["tomato-sauce","Соус томатный","SALSA DI POMODORO"],["pickles","Огурцы маринованные","CETRIOLINI"],["mortadella","Мортаделла","MORTADELLA"],["dor-blue","Дорблю","DOR BLUE"],["pastrami","Пастрами","PASTRAMI"],["parmesan","Пармезан","PARMIGIANO"],["stracciatella","Страчателла","STRACCIATELLA"]];
 
 const API="https://betbkhvyejtjqfyuxmql.supabase.co/rest/v1/rpc/";
 const KEY="sb_publishable_AY3okNvvxefclorginvwZQ_fzRXjrYQ";
-let age="4-7",session=null,round=0,picks=[],answers=[],startTime=0,roundTime=0,tick=null,busy=false,finished=false,pending=false,stage="assembly",pauseStarted=0,wallStart=0,cuts=0,pointerStart=null,audio=null,sound=false,mode="riddle",revealed=false,ovenFrame=0,ovenReadyAt=0,ovenStars=0,ovenPlayed=0,servedGuests=[],lastGolden=false,guestVoice=null,guestVoiceToken=0,guestVoiceActive=false,guestVoiceStarted=0,guestVoicePausedTimer=false,guestVoiceButton=null,guestVoiceStatus=null,guestVoiceTimeout=null,ovenDeadline=0,ovenDeadlineTimer=null;
+let age="4-7",session=null,round=0,picks=[],answers=[],startTime=0,roundTime=0,tick=null,busy=false,finished=false,pending=false,stage="assembly",pauseStarted=0,wallStart=0,cuts=0,pointerStart=null,audio=null,sound=false,mode="riddle",revealed=false,ovenFrame=0,ovenReadyAt=0,ovenStars=0,ovenPlayed=0,servedGuests=[],lastGolden=false,guestVoice=null,guestVoiceToken=0,guestVoiceActive=false,guestVoiceStarted=0,guestVoicePausedTimer=false,guestVoiceButton=null,guestVoiceStatus=null,guestVoiceTimeout=null,ovenDeadline=0,ovenDeadlineTimer=null,pizzaPieces=[],cutPaths=[];
 const foodImage=id=>"/junior/art/photo/"+foods[id][0]+".png";
 const artMarkup=(name,alt="")=>"<picture class='food-photo'><source type='image/png' srcset='/junior/art/photo/"+name+".png'><img src='/junior/art/photo/"+name+".png' alt='"+alt+"' decoding='async'></picture>";
 async function rpc(name,body){const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),12000);try{const r=await fetch(API+"capito_junior_preview_"+name,{method:"POST",headers:{"Content-Type":"application/json",apikey:KEY},body:JSON.stringify(body),signal:controller.signal});if(!r.ok)throw Error("Сервис временно недоступен");return await r.json();}finally{clearTimeout(timeout)}}
@@ -21,8 +21,8 @@ foods.forEach(([icon,label,it],i)=>{const b=document.createElement("button");b.i
 function spreadPieces(id){
  if(id===2)return [{x:50,y:50,width:26,angle:-12}];
  if(id===4)return [{x:50,y:50,width:88,angle:0},{x:50,y:50,width:85,angle:137}];
- const count=({0:7,1:8,3:8,5:7,8:7,9:6,10:8,11:7})[id]||7;
- const width=({0:19,1:18,3:19,5:20,8:18,9:22,10:17,11:21})[id]||19;
+ const count=({0:7,1:8,3:8,5:7,8:7,9:6,10:8,11:7,12:12,13:7})[id]||7;
+ const width=({0:19,1:18,3:19,5:20,8:18,9:22,10:17,11:21,12:15,13:19})[id]||19;
  return Array.from({length:count},(_,j)=>{
   const angle=(j*137.508+id*43)*Math.PI/180;
   const radius=26*Math.sqrt((j+.5)/count);
@@ -76,13 +76,13 @@ function update(){
  Array.from($("ingredients").children).forEach((b,i)=>b.disabled=busy||picks.includes(i)||picks.length>=6);
  if(mode!=="free"&&!remaining)finish();
 }
-$("start").onclick=async()=>{if(pending)return;pending=true;$("start").disabled=true;$("start-status").textContent="Шеф уже готовит твой первый заказ…";try{session=mode==="free"?{id:"free-"+Date.now(),recipes:[[],[],[]],seconds:90}:await rpc("start_v5",{p_age:age});round=0;answers=[];ovenStars=0;ovenPlayed=0;servedGuests=[];lastGolden=false;finished=false;busy=false;startTime=Date.now();wallStart=startTime;screen("kitchen");order();clearInterval(tick);tick=setInterval(update,200);note()}catch{$("start-status").textContent="Не удалось открыть кухню. Проверь интернет и попробуй ещё раз."}finally{pending=false;$("start").disabled=false}};
+$("start").onclick=async()=>{if(pending)return;pending=true;$("start").disabled=true;$("start-status").textContent="Шеф уже готовит твой первый заказ…";try{session=mode==="free"?{id:"free-"+Date.now(),recipes:[[],[],[]],seconds:90}:await rpc("start_v6",{p_age:age});round=0;answers=[];ovenStars=0;ovenPlayed=0;servedGuests=[];lastGolden=false;finished=false;busy=false;startTime=Date.now();wallStart=startTime;screen("kitchen");order();clearInterval(tick);tick=setInterval(update,200);note()}catch{$("start-status").textContent="Не удалось открыть кухню. Проверь интернет и попробуй ещё раз."}finally{pending=false;$("start").disabled=false}};
 $("undo").onclick=()=>{if(!busy&&!finished){picks.pop();renderPizza();update();note()}};
 function showRecipeReview(){
- if(mode==="free"){$("serving-hint").textContent="Твой авторский рецепт готов. Разрежь на шесть кусочков!";return;}
+ if(mode==="free"){$("serving-hint").textContent="Твой авторский рецепт готов. Проведи три разреза пальцем — как тебе нравится!";return;}
  const expected=session.recipes[round],correct=picks.length===expected.length&&expected.every(id=>picks.includes(id));
  $("serving-title").textContent=correct?"Рецепт угадан!":"Сравним с рецептом";
- $("serving-hint").textContent=(correct?"Молодец! ":"В рецепте «"+session.riddles[round].title+"»: ")+(correct?"Теперь разрежь пиццу на 6 кусочков.":expected.map(id=>foods[id][1]).join(", ")+". Попробуй снова в следующем заказе!");
+ $("serving-hint").textContent=(correct?"Молодец! ":"В рецепте «"+session.riddles[round].title+"»: ")+(correct?"Теперь проведи три разреза в любом направлении.":expected.map(id=>foods[id][1]).join(", ")+". Попробуй снова в следующем заказе!");
 }
 function pizzaCopy(cooked=false){
  const copy=$("pizza").cloneNode(true);copy.removeAttribute("id");
@@ -92,43 +92,84 @@ function pizzaCopy(cooked=false){
  if(cooked)copy.querySelectorAll('[data-ingredient="cheese"] picture').forEach(p=>{p.querySelector("source").srcset="/junior/art/photo/cheese-baked.png";p.querySelector("img").src="/junior/art/photo/cheese-baked.png";});
  return copy;
 }
-function drawCuts(){
- const svg=$("cut-lines");svg.replaceChildren();
- for(let i=0;i<3;i++){
-  const angle=i*Math.PI/3,dx=Math.cos(angle)*46,dy=Math.sin(angle)*46;
-  const line=document.createElementNS("http://www.w3.org/2000/svg","line");
-  line.setAttribute("x1",50-dx);line.setAttribute("y1",50-dy);line.setAttribute("x2",50+dx);line.setAttribute("y2",50+dy);
-  line.setAttribute("class",i<cuts?"cut-done":i===cuts?"cut-guide":"cut-future");svg.append(line);
+function initialPizzaPolygon(){return Array.from({length:72},(_,i)=>{const a=i*Math.PI/36;return {x:50+48*Math.cos(a),y:50+48*Math.sin(a)};});}
+function polygonArea(points){return Math.abs(points.reduce((sum,p,i)=>{const q=points[(i+1)%points.length];return sum+p.x*q.y-q.x*p.y;},0))/2;}
+function clipCutPolygon(points,a,b,side){
+ const cross=p=>((b.x-a.x)*(p.y-a.y)-(b.y-a.y)*(p.x-a.x))*side,result=[];
+ for(let i=0;i<points.length;i++){
+  const p=points[i],q=points[(i+1)%points.length],dp=cross(p),dq=cross(q);
+  if(dp>=-0.00001)result.push(p);
+  if((dp>0.00001&&dq<-.00001)||(dp<-.00001&&dq>.00001)){
+   const t=dp/(dp-dq);result.push({x:p.x+t*(q.x-p.x),y:p.y+t*(q.y-p.y)});
+  }
  }
+ return result;
+}
+function dividePizza(polygons,a,b){
+ const output=[];let changed=false;
+ for(const polygon of polygons){
+  const left=clipCutPolygon(polygon,a,b,1),right=clipCutPolygon(polygon,a,b,-1);
+  if(left.length>=3&&right.length>=3&&polygonArea(left)>30&&polygonArea(right)>30){output.push(left,right);changed=true;}else output.push(polygon);
+ }
+ return {pieces:output,changed};
+}
+function cutLine(a,b){
+ const dx=b.x-a.x,dy=b.y-a.y,length=Math.hypot(dx,dy);
+ if(length<30)return null;
+ const ux=dx/length,uy=dy/length,t=(50-a.x)*ux+(50-a.y)*uy,cx=a.x+t*ux,cy=a.y+t*uy;
+ const distance=Math.hypot(cx-50,cy-50);if(distance>=47)return null;
+ const reach=Math.sqrt(48*48-distance*distance);
+ return {a:{x:cx-ux*reach,y:cy-uy*reach},b:{x:cx+ux*reach,y:cy+uy*reach}};
+}
+function appendCutLine(a,b,cls){
+ const line=document.createElementNS("http://www.w3.org/2000/svg","line");
+ for(const [key,value]of Object.entries({x1:a.x,y1:a.y,x2:b.x,y2:b.y}))line.setAttribute(key,value);
+ line.setAttribute("class",cls);$("cut-lines").append(line);return line;
+}
+function drawCuts(){
+ $("cut-lines").replaceChildren();cutPaths.forEach(line=>appendCutLine(line.a,line.b,"cut-done"));
 }
 function showSlices(){
  const host=$("slice-pizza");host.replaceChildren();
- for(let i=0;i<6;i++){
-  const wedge=document.createElement("div");wedge.className="pizza-wedge";
-  const points=["50% 50%"];for(let d=i*60;d<=i*60+60;d+=3)points.push((50+50*Math.cos(d*Math.PI/180))+"% "+(50+50*Math.sin(d*Math.PI/180))+"%");
-  wedge.style.clipPath="polygon("+points.join(",")+")";
-  const a=(i*60+30)*Math.PI/180;wedge.style.transform="translate("+Math.cos(a)*5+"px,"+Math.sin(a)*5+"px)";
-  wedge.append(pizzaCopy(true));host.append(wedge);
- }
+ pizzaPieces.forEach(polygon=>{
+  const piece=document.createElement("div");piece.className="pizza-wedge";piece.style.clipPath="polygon("+polygon.map(p=>p.x+"% "+p.y+"%").join(",")+")";
+  const center=polygon.reduce((s,p)=>({x:s.x+p.x/polygon.length,y:s.y+p.y/polygon.length}),{x:0,y:0});
+  const distance=Math.hypot(center.x-50,center.y-50)||1,gap=cuts===3?6:2;
+  piece.style.transform="translate("+(center.x-50)/distance*gap+"px,"+(center.y-50)/distance*gap+"px)";
+  piece.append(pizzaCopy(true));host.append(piece);
+ });
 }
-function cut(){
- if(stage!=="cutting"||cuts>=3)return;cuts++;note();drawCuts();$("cut-count").textContent=cuts+" / 3 разрезов";
- $("cut-button").disabled=cuts===3;$("cut-button").textContent=cuts===3?"Готово — 6 кусочков!":"Сделать разрез";
+function cut(a,b){
+ if(stage!=="cutting"||cuts>=3)return;
+ const line=cutLine(a,b);if(!line){$("serving-hint").textContent="Проведи подлиннее через пиццу — от одного края к другому.";return;}
+ const split=dividePizza(pizzaPieces,line.a,line.b);
+ if(!split.changed){$("serving-hint").textContent="Здесь разрез уже есть. Попробуй провести в другом месте.";drawCuts();return;}
+ pizzaPieces=split.pieces;cutPaths.push(line);cuts++;note();drawCuts();showSlices();
+ $("cut-count").textContent=cuts+" / 3 разрезов · кусочков: "+pizzaPieces.length;
+ $("cut-button").disabled=cuts===3;$("cut-button").textContent=cuts===3?"Пицца нарезана!":"Помочь разрезать";
  $("serve-button").disabled=cuts<3;
- $("serving-hint").textContent=cuts===3?"Шесть горячих кусочков. Можно подавать!":"Проведи по пунктиру через центр или нажми «Сделать разрез».";
- if(cuts===3){showSlices();note("win");}
+ $("serving-hint").textContent=cuts===3?"Твои кусочки готовы. Можно подавать!":"Режь в любом направлении. Твои движения — твои кусочки!";
+ if(cuts===3)note("win");
 }
-$("cut-button").onclick=cut;
-$("slice-board").addEventListener("pointerdown",e=>{if(stage!=="cutting"||cuts>=3)return;e.preventDefault();const r=$("slice-board").getBoundingClientRect();pointerStart={x:e.clientX-r.left,y:e.clientY-r.top,w:r.width,h:r.height,id:e.pointerId};$("slice-board").setPointerCapture(e.pointerId);});
-$("slice-board").addEventListener("pointerup",e=>{
- if(!pointerStart||e.pointerId!==pointerStart.id)return;const s=pointerStart;pointerStart=null;
- const r=$("slice-board").getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top,dx=x-s.x,dy=y-s.y,length=Math.hypot(dx,dy);
- if(length<s.w*.45)return;
- const distance=Math.abs(dx*(s.h/2-s.y)-dy*(s.w/2-s.x))/length;
- let angle=((Math.atan2(dy,dx)*180/Math.PI)%180+180)%180,diff=Math.abs(angle-cuts*60);diff=Math.min(diff,180-diff);
- if(distance<s.w*.15&&diff<24)cut();else $("serving-hint").textContent="Проведи по пунктиру через центр пиццы. Или нажми «Сделать разрез».";
+$("cut-button").onclick=()=>{
+ if(stage!=="cutting"||cuts>=3)return;
+ for(let angle=0;angle<180;angle+=30){
+  const dx=48*Math.cos(angle*Math.PI/180),dy=48*Math.sin(angle*Math.PI/180),a={x:50-dx,y:50-dy},b={x:50+dx,y:50+dy};
+  if(dividePizza(pizzaPieces,a,b).changed){cut(a,b);return;}
+ }
+};
+function cutPoint(e){const r=$("slice-board").getBoundingClientRect();return {x:(e.clientX-r.left-r.width*.06)/(r.width*.88)*100,y:(e.clientY-r.top-r.height*.06)/(r.height*.88)*100};}
+$("slice-board").addEventListener("pointerdown",e=>{
+ if(stage!=="cutting"||cuts>=3||e.button!==0)return;e.preventDefault();
+ pointerStart={...cutPoint(e),id:e.pointerId};$("slice-board").setPointerCapture(e.pointerId);drawCuts();
 });
-$("slice-board").addEventListener("pointercancel",()=>pointerStart=null);
+$("slice-board").addEventListener("pointermove",e=>{
+ if(!pointerStart||pointerStart.id!==e.pointerId)return;drawCuts();appendCutLine(pointerStart,cutPoint(e),"cut-preview");
+});
+$("slice-board").addEventListener("pointerup",e=>{
+ if(!pointerStart||pointerStart.id!==e.pointerId)return;const a=pointerStart;pointerStart=null;cut(a,cutPoint(e));drawCuts();
+});
+$("slice-board").addEventListener("pointercancel",()=>{pointerStart=null;drawCuts();});
 
 const guests=[
  {key:"basilio",name:"Базилио",description:"Котёнок — любитель сыра",thanks:"Мур-р-р! Как вкусно! Ты угадал мой любимый рецепт.",creative:"Мур-р-р! Вот это фантазия! Спасибо за твою особенную пиццу."},
@@ -219,7 +260,7 @@ function renderGuestResult(){
 $("bake").onclick=()=>{
  if(!session||busy||finished||picks.length<1||picks.length>6)return;
  document.querySelector(".serving-foot").textContent="Пицца печётся · готовься её достать";busy=true;stage="baking";pauseStarted=Date.now();answers[round]=picks.slice();renderPizza();
- const activeSession=session.id,activeRound=round;cuts=0;
+ const activeSession=session.id,activeRound=round;cuts=0;cutPaths=[];pizzaPieces=[initialPizzaPolygon()];pointerStart=null;
  $("serving-title").textContent="В нашей дровяной печи";$("serving-hint").textContent="Огонь румянит бортики и плавит сыр…";
  stopOvenGame();$("oven-burned").hidden=true;$("bake-theatre").classList.remove("pizza-burned");$("oven-warning").textContent="";$("guest-delivery").hidden=true;$("oven-challenge").hidden=true;$("bake-award").hidden=true;$("take-pizza").disabled=true;$("take-pizza").textContent="Пицца выпекается…";$("bake-theatre").hidden=false;$("slice-stage").hidden=true;$("slice-actions").hidden=true;
  $("oven-pizza").replaceChildren(pizzaCopy());screen("serving");note("bake");
@@ -278,7 +319,7 @@ $("take-pizza").onclick=()=>{
  $("slice-pizza").replaceChildren(pizzaCopy(true));$("serving-title").textContent="С пылу, с жару!";showRecipeReview();
  $("bake-award").hidden=false;$("bake-award").classList.toggle("golden",golden);
  $("bake-award").textContent=golden?"✦ Золотая корочка! Отличный момент, шеф!":"Твоя пицца готова! За золотой корочкой — в следующем заказе.";
- $("cut-count").textContent="0 / 3 разрезов";$("cut-button").disabled=false;$("cut-button").textContent="Сделать разрез";$("serve-button").disabled=true;drawCuts();note(golden?"win":"bake");
+ $("cut-count").textContent="0 / 3 разрезов";$("cut-button").disabled=false;$("cut-button").textContent="Помочь разрезать";$("serve-button").disabled=true;drawCuts();note(golden?"win":"bake");
 };
 
 async function finish(){if(finished)return;finished=true;busy=true;clearInterval(tick);$("kitchen").classList.remove("baking");screen("result");renderGuestResult();$("oven-result").hidden=ovenPlayed===0;$("oven-result").textContent="✦ Золотых корочек: "+ovenStars+" из "+ovenPlayed+" · маленький мастер печи";$("result-score").textContent="Считаем очки…";$("result-detail").textContent="Записываем результат в клуб маленьких шефов";$("earned").replaceChildren();$("save-retry").hidden=true;if(mode==="free"){$("result-score").textContent="Твоя пиццерия!";$("result-detail").textContent="Ты приготовил "+answers.filter(Boolean).length+" авторские пиццы. Свободная кухня — без рейтинга.";$("result-rank").hidden=true;note("win");}else{$("result-rank").hidden=false;await submit();}}

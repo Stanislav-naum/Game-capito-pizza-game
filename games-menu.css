@@ -41,3 +41,5 @@ body.capito-games-open> :not(#capito-games):not(script):not(style):not(link){vis
 #capito-games .cg-junior{background:rgba(255,253,247,.94)}
 #capito-games .cg-header,#capito-games .cg-footer{background:rgba(247,243,233,.45)}
 @media(max-width:650px){#capito-games{background-image:linear-gradient(180deg,rgba(247,243,233,.44) 0,rgba(247,243,233,.78) 340px,#f7f3e9 600px),url('/junior/art/brand/capito-facade-original.jpg');background-size:100% 100%,100% auto;background-position:center,center 105px}#capito-games .cg-copy>p{color:#55614f}#capito-games .cg-kicker{color:#56634e}}
+
+#capito-games .cg-card strong{font-size:clamp(23px,3vw,30px);letter-spacing:-.5px;line-height:1.2}#capito-games .cg-card strong em{font-style:normal}@media(max-width:650px){#capito-games .cg-card strong{font-size:25px}}
