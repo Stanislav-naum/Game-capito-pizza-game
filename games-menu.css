@@ -1,51 +1,45 @@
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Nunito:wght@800;900;1000&display=swap');#capito-games{position:fixed;inset:0;z-index:2147483647;overflow:auto;background:#f5f1e7;color:#203e31;font-family:Manrope,system-ui,sans-serif;text-align:left;padding:0 max(28px,calc((100vw - 1180px)/2));line-height:1.5}#capito-games *{box-sizing:border-box}#capito-games .cg-header{height:100px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #203e3122}#capito-games .cg-header>span{font-family:Georgia,serif;font-size:37px;letter-spacing:5px;font-weight:700}#capito-games .cg-header small{font-size:9px;letter-spacing:2px;color:#8b947c}#capito-games .cg-main{display:grid;grid-template-columns:1fr 1fr;gap:60px;padding:45px 0 30px;align-items:center}#capito-games .cg-kicker{font-size:10px;letter-spacing:2px;font-weight:800;color:#929c80}#capito-games h1{font-family:Nunito,ui-rounded,system-ui,sans-serif;font-size:56px;line-height:1.05;font-weight:1000;letter-spacing:-2px;margin:18px 0}#capito-games .cg-copy>p{font-size:15px;color:#8a927b;line-height:1.7;margin-bottom:30px}#capito-games .cg-card{display:block;color:inherit;text-decoration:none;border:1px solid #d8ddca;border-radius:19px;padding:20px 25px;margin:15px 0;position:relative;box-shadow:0 4px 0 #203e3108;transition:transform .2s,box-shadow .2s}#capito-games .cg-card:hover{transform:translateY(-3px);box-shadow:0 8px 12px #203e3115}#capito-games .cg-cut{background:#203e31;color:#fff6e2;border-color:#203e31}#capito-games .cg-junior{background:#fffcf1}#capito-games .cg-card-top{display:flex;justify-content:space-between;align-items:center;font-size:8px;letter-spacing:1.4px;font-weight:700;opacity:.7}#capito-games .cg-card-top small{font-family:Georgia,serif;font-size:18px}#capito-games .cg-card strong{font-family:Nunito,ui-rounded,sans-serif;font-size:27px;line-height:1.1;font-weight:1000;display:block;letter-spacing:-.8px;margin:10px 0}#capito-games .cg-card strong em{font-style:normal;color:#c86d3b}#capito-games .cg-desc{font-size:11px;line-height:1.7;display:block;opacity:.7}#capito-games .cg-play{display:inline-block;font-size:10px;margin-top:15px;border-bottom:1px solid currentColor;padding-bottom:3px;font-weight:800}#capito-games .cg-junior .cg-play{color:#bc6134}#capito-games a:focus-visible{outline:3px solid #cb7d47;outline-offset:5px}#capito-games .cg-scene{position:relative;border-radius:180px 180px 25px 25px;min-height:650px;background:repeating-linear-gradient(96deg,#83532a09 0 2px,transparent 3px 14px),linear-gradient(120deg,#d6b992,#e6cdab 50%,#ceac83);overflow:hidden;align-self:stretch;box-shadow:inset 0 0 65px #845c3422}#capito-games .cg-scene-label{position:absolute;top:65px;width:100%;text-align:center;font-size:10px;letter-spacing:3px;color:#6c654b}#capito-games .cg-board{position:absolute;left:4%;top:150px;width:92%;aspect-ratio:1;border-radius:50%;background:repeating-radial-gradient(ellipse at 15% 45%,#915d2b10 0 2px,transparent 3px 9px),linear-gradient(130deg,#b57c47,#ddb47f,#b58856);box-shadow:inset 0 0 0 4px #e3bd8c,inset 0 0 0 12px #94663a33,0 17px 23px #72502c40}#capito-games .cg-pizza{position:absolute;inset:4%;width:92%;height:92%;object-fit:contain;filter:drop-shadow(0 8px 5px #56351d44)}#capito-games .cg-top{position:absolute;width:22%;filter:drop-shadow(0 2px 1px #663a1a55)}#capito-games .cg-top.a{left:27%;top:28%;transform:rotate(-25deg)}#capito-games .cg-top.b{left:56%;top:33%}#capito-games .cg-top.c{left:30%;top:57%;transform:rotate(45deg)}#capito-games .cg-top.d{left:56%;top:60%;transform:rotate(90deg)}#capito-games .cg-stamp{position:absolute;left:15px;bottom:65px;width:115px;height:115px;border-radius:50%;border:1px solid #34523966;background:#efe7d1cc;display:flex;flex-direction:column;align-items:center;justify-content:center;transform:rotate(-15deg)}#capito-games .cg-stamp img{width:60px;height:60px}#capito-games .cg-stamp span{font-size:7px;letter-spacing:1px;margin-top:5px}#capito-games .cg-scene>p{position:absolute;bottom:26px;right:22px;font-family:Georgia,serif;font-style:italic;font-size:13px;color:#786344;text-align:right;line-height:1.6}#capito-games .cg-footer{padding:23px 0;display:flex;justify-content:space-between;border-top:1px solid #203e3120;font-size:8px;letter-spacing:1.5px;color:#919b82}#capito-games .cg-footer small{font-size:8px}@media(max-width:950px){#capito-games .cg-main{gap:28px}#capito-games h1{font-size:48px}#capito-games .cg-scene{min-height:620px}#capito-games .cg-board{width:115%;left:-8%;top:190px}#capito-games .cg-card{padding:18px 20px}#capito-games .cg-card strong{font-size:23px}#capito-games .cg-stamp{width:95px;height:95px;bottom:85px}}@media(max-width:650px){#capito-games{padding:0 22px}#capito-games .cg-header{height:75px}#capito-games .cg-header>span{font-size:30px;letter-spacing:4px}#capito-games .cg-header small{font-size:7px;max-width:110px;text-align:right;line-height:1.7;letter-spacing:1px}#capito-games .cg-main{grid-template-columns:1fr;padding:28px 0 15px;gap:0}#capito-games h1{font-size:44px;max-width:80%;position:relative;z-index:1}#capito-games .cg-kicker{font-size:8px}#capito-games .cg-copy>p{font-size:13px;margin-bottom:22px;max-width:65%;position:relative;z-index:1}#capito-games .cg-scene{position:absolute;pointer-events:none;top:125px;right:-75px;width:220px;min-height:220px;height:220px;border-radius:50%;background:none;box-shadow:none;opacity:.8}#capito-games .cg-scene-label,#capito-games .cg-stamp,#capito-games .cg-scene>p{display:none}#capito-games .cg-board{top:0;left:0;width:100%}#capito-games .cg-card{position:relative;z-index:2;margin:14px 0;padding:20px 22px}#capito-games .cg-card strong{font-size:26px}#capito-games .cg-card-top{font-size:7px}#capito-games .cg-desc{font-size:11px}#capito-games .cg-play{font-size:11px}#capito-games .cg-footer{margin-top:6px}}@media(prefers-reduced-motion:reduce){#capito-games *{transition:none!important}}#capito-games{overflow-x:hidden}#capito-games .cg-desc{font-size:13px}#capito-games .cg-play{font-size:13px}
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
+html:has(#capito-games),body.capito-games-open{overflow:hidden!important;overscroll-behavior:none!important;width:100%;max-width:100%;height:100%}
+body.capito-games-open>:not(#capito-games):not(script):not(style):not(link){visibility:hidden!important;pointer-events:none!important}
+#capito-games{--brand:#34536d;position:fixed;inset:0;z-index:2147483647;box-sizing:border-box;width:100%;height:100dvh;max-width:100%;overflow:hidden!important;overscroll-behavior:none;touch-action:pinch-zoom;display:grid;grid-template-rows:72px minmax(0,1fr) 42px;padding:0 max(28px,calc((100vw - 1180px)/2));font-family:Manrope,system-ui,sans-serif;color:var(--brand);line-height:1.45;text-align:left;isolation:isolate;background-color:#f5f0e6!important;background-image:linear-gradient(110deg,#f7f3e9b8,#f7f3e970),url('/junior/art/brand/capito-facade-original.jpg');background-repeat:no-repeat;background-size:100% 100%,100% auto;background-position:center,center 120px}
+#capito-games *{box-sizing:border-box;min-width:0}
+#capito-games .cg-header{display:flex;justify-content:space-between;align-items:center;gap:20px;border-bottom:1px solid #34536d24}
+#capito-games .capito-logo{display:block;object-fit:contain;height:auto}
+#capito-games .cg-header .capito-logo{width:180px}
+#capito-games .cg-header small{font-size:8px;letter-spacing:1.5px;max-width:200px;text-align:right;color:#34536d9c}
+#capito-games .cg-main{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;padding:20px 0;min-height:0;align-items:center}
+#capito-games .cg-copy{display:flex;flex-direction:column;gap:12px;min-height:0;max-height:100%}
+#capito-games .cg-kicker{font-size:9px;letter-spacing:1.8px;font-weight:800;color:#34536da6}
+#capito-games h1{font:500 clamp(32px,5.5vh,59px)/1.04 Georgia,'Times New Roman',serif;letter-spacing:-1.3px;margin:0}
+#capito-games .cg-copy>p{font-size:13px;color:#34536db8;line-height:1.5;margin:0 0 2px}
+#capito-games .cg-card{display:block;text-decoration:none;color:var(--brand);border:1px solid #34536d42;border-radius:20px;padding:16px 20px;margin:0;box-shadow:0 5px 16px #34536d0a;background:rgba(52,83,109,.13);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);transition:background .18s,border-color .18s}
+#capito-games .cg-junior{background:rgba(255,255,255,.39)}
+#capito-games .cg-card:hover{background:rgba(52,83,109,.19);border-color:#34536d80}
+#capito-games .cg-card:focus-visible{outline:3px solid #34536d;outline-offset:3px}
+#capito-games .cg-card-top{font-size:8px;letter-spacing:1.2px;font-weight:800;color:#34536db3}
+#capito-games .cg-card strong{display:block;font-size:25px;line-height:1.12;letter-spacing:-.6px;font-weight:800;margin:7px 0;color:var(--brand)}
+#capito-games .cg-card strong em{font-style:normal;color:inherit}
+#capito-games .cg-desc{display:block;font-size:12px;line-height:1.5;color:#34536dd6}
+#capito-games .cg-play{display:inline-block;font-size:11px;font-weight:800;margin-top:11px;padding:6px 12px;border:1px solid #34536d26;border-radius:9px;color:var(--brand);background:#ffffff4d}
+#capito-games .cg-scene{position:relative;align-self:stretch;max-height:650px;min-height:0;overflow:hidden;border:1px solid #34536d24;border-radius:160px 160px 24px 24px;background:#ffffff29;box-shadow:inset 0 0 50px #f7f0df55}
+#capito-games .cg-scene-label{position:absolute;top:7%;width:100%;text-align:center;font-size:9px;letter-spacing:3px;color:#34536d99}
+#capito-games .cg-board{position:absolute;left:4%;top:19%;width:92%;aspect-ratio:1;border-radius:50%;background:linear-gradient(#ffffff66,#ffffff33),url('/junior/art/background/oak.jpg') center/cover;box-shadow:inset 0 0 0 3px #dfc79b99,0 12px 25px #34536d1a}
+#capito-games .cg-pizza{position:absolute;inset:4%;width:92%;height:92%;object-fit:contain;filter:drop-shadow(0 7px 5px #56351d33)}
 #capito-games .food-photo{display:contents}
-#capito-games{background:linear-gradient(90deg,#f7f4ebef,#f2eee4dc),url('/capito-marble.webp') center/760px auto repeat}
-#capito-games h1{font-family:Georgia,'Times New Roman',serif;font-size:59px;font-weight:500;letter-spacing:-2px;line-height:1.05}
-#capito-games .cg-card strong{font-family:Manrope,system-ui,sans-serif;font-size:25px;letter-spacing:-.8px;font-weight:800}
-#capito-games .cg-top{width:25%;filter:drop-shadow(0 3px 2px #663a1a35)}
-#capito-games .cg-stamp{background:#efe7d1df}
-@media(max-width:950px){#capito-games h1{font-size:50px}}
-@media(max-width:650px){#capito-games h1{font-size:45px;letter-spacing:-1.7px}#capito-games .cg-card strong{font-size:23px}}
-
-@media(min-width:651px){
-#capito-games .cg-scene{container-type:size}
-#capito-games .cg-board{width:min(92%,calc(100cqh - 180px));left:50%;top:150px;transform:translateX(-50%)}
-}
-
-@media(min-width:651px){#capito-games .cg-scene{container-type:normal}#capito-games .cg-board{width:min(92%,470px)}}
-@media(min-width:651px) and (max-width:950px){#capito-games .cg-board{width:min(115%,440px)}}
-
-/* Match the photographic material palette of Junior. */
-#capito-games{background-image:radial-gradient(ellipse at 12% 4%,#fffdf37d,transparent 60%),linear-gradient(100deg,#f7f3e929,#e4dfd024),url('/junior/art/background/limestone.jpg');background-position:center,center,center top;background-size:auto,auto,1200px auto}
-#capito-games .cg-scene{background:linear-gradient(110deg,#ffffff0a,#68441c17),url('/junior/art/background/oak.jpg') center/cover;box-shadow:inset 1px 1px 0 #fffbeb88,inset 0 0 75px #70512e13,0 16px 30px #493b2415;border:1px solid #99795238}
-#capito-games .cg-board{background:linear-gradient(130deg,#fff8d91f,#734b2417),url('/junior/art/background/oak.jpg') center/cover;box-shadow:inset 0 0 0 3px #dbc398,inset 0 0 0 6px #a0784e55,0 15px 25px #4a321b4a}
-#capito-games .cg-stamp{background:#f4ead5ce;box-shadow:0 4px 12px #4d36241a}
-@media(max-width:650px){#capito-games{background-size:auto,auto,800px auto}#capito-games .cg-scene{background:none;border:0;box-shadow:none}}
-
-#capito-games .cg-scene{background-color:#cbbda6;background-blend-mode:normal,luminosity}
-#capito-games .cg-board{background-color:#c2a985;background-blend-mode:normal,luminosity}
-@media(max-width:650px){#capito-games .cg-scene{background:none}}
-
-#capito-games{background-image:radial-gradient(ellipse at 12% 4%,#fffdf252,transparent 60%),linear-gradient(100deg,#faf7edc7,#f4f0e5b8),url('/junior/art/background/limestone.jpg')}
-#capito-games .cg-scene{background-image:linear-gradient(110deg,#f8f0dc73,#f4e8ce52),url('/junior/art/background/oak.jpg');background-blend-mode:normal}
-#capito-games .cg-board{background-image:linear-gradient(130deg,#f4e6c841,#e5d0ab2e),url('/junior/art/background/oak.jpg');background-blend-mode:normal}
-@media(max-width:650px){#capito-games .cg-scene{background:none}}
-
-#capito-games .cg-header .capito-logo{display:block;width:210px;height:auto;object-fit:contain}#capito-games .cg-footer .capito-logo{display:block;width:125px;height:auto;object-fit:contain}@media(max-width:600px){#capito-games .cg-header .capito-logo{width:145px}#capito-games .cg-footer .capito-logo{width:105px}}
-
-body.capito-games-open> :not(#capito-games):not(script):not(style):not(link){visibility:hidden!important;pointer-events:none!important}#capito-games{background-color:#f5f1e7!important;isolation:isolate}#capito-games .cg-card:focus-visible{outline:3px solid #cf793a;outline-offset:4px}
-
-/* CAPITO facade: the original welcome illustration behind the game selector. */
-#capito-games{background-color:#f5f0e6!important;background-image:linear-gradient(100deg,rgba(247,243,233,.86),rgba(247,243,233,.50)),url('/junior/art/brand/capito-facade-original.jpg');background-repeat:no-repeat;background-size:100% 100%,100% auto;background-position:center,center 125px;background-attachment:fixed}
-#capito-games .cg-junior{background:rgba(255,253,247,.94)}
-#capito-games .cg-header,#capito-games .cg-footer{background:rgba(247,243,233,.45)}
-@media(max-width:650px){#capito-games{background-image:linear-gradient(180deg,rgba(247,243,233,.44) 0,rgba(247,243,233,.78) 340px,#f7f3e9 600px),url('/junior/art/brand/capito-facade-original.jpg');background-size:100% 100%,100% auto;background-position:center,center 105px}#capito-games .cg-copy>p{color:#55614f}#capito-games .cg-kicker{color:#56634e}}
-
-#capito-games .cg-card strong{font-size:clamp(23px,3vw,30px);letter-spacing:-.5px;line-height:1.2}#capito-games .cg-card strong em{font-style:normal}@media(max-width:650px){#capito-games .cg-card strong{font-size:25px}}
-
-/* Keep the start screen anchored horizontally, including mobile edge overscroll. */
-html:has(#capito-games),body.capito-games-open{overflow-x:clip!important;overscroll-behavior-x:none!important;max-width:100%}
-body.capito-games-open{width:100%;touch-action:pan-y pinch-zoom}
-#capito-games{box-sizing:border-box;width:100%;max-width:100%;left:0;right:0;overflow-x:hidden!important;overscroll-behavior-x:none;touch-action:pan-y pinch-zoom}
-#capito-games .cg-main,#capito-games .cg-copy,#capito-games .cg-header,#capito-games .cg-footer{min-width:0;max-width:100%}
+#capito-games .cg-top{position:absolute;width:25%;filter:drop-shadow(0 2px 1px #663a1a33)}
+#capito-games .cg-top.a{left:27%;top:28%;transform:rotate(-25deg)}
+#capito-games .cg-top.b{left:56%;top:33%}
+#capito-games .cg-top.c{left:30%;top:57%;transform:rotate(45deg)}
+#capito-games .cg-top.d{left:56%;top:60%;transform:rotate(90deg)}
+#capito-games .cg-stamp{position:absolute;bottom:7%;left:18px;width:85px;height:85px;border:1px solid #34536d26;border-radius:50%;background:#fffcf173;display:flex;flex-direction:column;align-items:center;justify-content:center;transform:rotate(-12deg)}
+#capito-games .cg-stamp img{width:43px;height:43px}
+#capito-games .cg-stamp span{font-size:5px;letter-spacing:.8px;margin-top:4px}
+#capito-games .cg-scene>p{position:absolute;bottom:5%;right:18px;text-align:right;font:italic 12px/1.6 Georgia,serif;color:#34536db8}
+#capito-games .cg-footer{display:flex;justify-content:space-between;align-items:center;gap:16px;border-top:1px solid #34536d24}
+#capito-games .cg-footer .capito-logo{width:88px}
+#capito-games .cg-footer small{font-size:7px;letter-spacing:1.4px;color:#34536d9c}
+@media(max-width:950px){#capito-games .cg-main{gap:25px}#capito-games .cg-card{padding:14px 16px}#capito-games .cg-card strong{font-size:23px}#capito-games .cg-scene>p{font-size:10px;max-width:125px}#capito-games .cg-stamp{width:65px;height:65px;left:10px}}
+@media(max-width:650px){#capito-games{grid-template-rows:62px minmax(0,1fr) 32px;padding:0 18px;background-position:center,center 85px;background-size:100% 100%,100% auto}#capito-games .cg-header{gap:14px}#capito-games .cg-header .capito-logo{width:142px}#capito-games .cg-header small{font-size:6px;max-width:112px;letter-spacing:1px}#capito-games .cg-main{grid-template-columns:minmax(0,1fr);padding:12px 0;align-items:center}#capito-games .cg-copy{gap:10px}#capito-games .cg-kicker{font-size:8px;letter-spacing:1.4px}#capito-games h1{font-size:clamp(28px,5.2dvh,40px);letter-spacing:-1px}#capito-games .cg-copy>p{font-size:11px;line-height:1.4}#capito-games .cg-card{padding:13px 16px;border-radius:17px}#capito-games .cg-card-top{font-size:7px;letter-spacing:1px}#capito-games .cg-card strong{font-size:23px;margin:6px 0;line-height:1.08}#capito-games .cg-desc{font-size:11px;line-height:1.4}#capito-games .cg-play{font-size:10px;margin-top:9px;padding:6px 10px}#capito-games .cg-scene{display:none}#capito-games .cg-footer .capito-logo{width:74px}#capito-games .cg-footer small{font-size:6px;letter-spacing:1px}}
+@media(max-width:650px) and (max-height:700px){#capito-games{grid-template-rows:54px minmax(0,1fr) 28px}#capito-games .cg-copy{gap:8px}#capito-games h1{font-size:30px}#capito-games .cg-copy>p{font-size:10px}#capito-games .cg-card{padding:10px 14px}#capito-games .cg-card strong{font-size:21px;margin:5px 0}#capito-games .cg-desc{font-size:10px}#capito-games .cg-play{margin-top:7px;padding:5px 10px}}
+@media(max-height:520px){#capito-games{grid-template-rows:45px minmax(0,1fr) 24px;padding:0 20px}#capito-games .cg-main{grid-template-columns:1fr;padding:8px 0}#capito-games .cg-scene,#capito-games .cg-copy>p,#capito-games .cg-kicker{display:none}#capito-games .cg-copy{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:stretch}#capito-games h1{grid-column:1/-1;font-size:26px;line-height:1.05}#capito-games h1 br{display:none}#capito-games .cg-card{padding:10px 12px;border-radius:14px}#capito-games .cg-card-top{font-size:6px}#capito-games .cg-card strong{font-size:19px;margin:5px 0}#capito-games .cg-desc{font-size:10px;line-height:1.35}#capito-games .cg-play{font-size:9px;margin-top:6px;padding:4px 8px}#capito-games .cg-header .capito-logo{width:125px}#capito-games .cg-header small{font-size:6px}#capito-games .cg-footer .capito-logo{width:65px}}
+@media(prefers-reduced-motion:reduce){#capito-games *{transition:none!important}}
