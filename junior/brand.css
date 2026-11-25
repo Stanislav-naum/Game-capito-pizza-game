@@ -173,3 +173,27 @@ body[data-screen=welcome] .start-button{padding:9px 16px;min-height:48px}
  .coloring-paper-column{max-width:min(100%,calc(100dvh - 390px))}
  .coloring-week-banner strong{display:block;font-size:12px;line-height:1.2}
 }
+
+@media(max-width:700px) and (max-height:650px){
+ body[data-screen=coloring] .site-header{height:44px}
+ .coloring-heading{margin-bottom:5px}
+ .coloring-week-banner p{display:none}
+ .coloring-pages button{min-height:40px;padding:3px}
+ .coloring-palette-box{padding:3px 5px}
+ .coloring-swatch{min-height:25px;min-width:24px;padding:1px}
+ .coloring-swatch span{width:21px;height:21px}
+ .coloring-paper-top{height:23px;min-height:23px}
+ .coloring-paper-bottom{display:none}
+ .coloring-status{line-height:1.2}
+ .coloring-export-actions button{padding:5px;font-size:9px!important;min-height:36px}
+}
+@media(max-width:600px) and (max-height:690px){
+ body.is-playing .kitchen-top{min-height:54px;padding:4px 9px}
+ body.is-playing .kitchen-brand>img{width:28px;height:28px}
+ body.is-playing .kitchen-brand .kitchen-logo{width:70px;padding:2px 4px;margin-top:2px}
+ body.is-playing .kitchen-brand strong{font-size:10px;line-height:1.1}
+ body.is-playing .order-ticket #listen-order{min-height:25px;padding:4px;font-size:8px}
+ body.is-playing .order-ticket #hint{min-height:27px!important}
+ body.is-playing .guest-order img{width:25px;height:25px}
+ body.is-playing .guest-order strong{font-size:11px}
+}
